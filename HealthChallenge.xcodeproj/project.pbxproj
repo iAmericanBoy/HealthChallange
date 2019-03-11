@@ -21,6 +21,10 @@
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
 		B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C42236B8680088D6FF /* LaunchScreen.storyboard */; };
+		B6E332D42236C0280088D6FF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332D32236C0280088D6FF /* User.swift */; };
+		B6E332D62236C15C0088D6FF /* User+MagicString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332D52236C15C0088D6FF /* User+MagicString.swift */; };
+		B6E332DA2236C6D20088D6FF /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332D92236C6D20088D6FF /* UserController.swift */; };
+		B6E332DE2236C9E80088D6FF /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332DD2236C9E80088D6FF /* CloudKitController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		B6E332C22236B8680088D6FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6E332C52236B8680088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6E332C72236B8680088D6FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6E332D32236C0280088D6FF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B6E332D52236C15C0088D6FF /* User+MagicString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+MagicString.swift"; sourceTree = "<group>"; };
+		B6E332D92236C6D20088D6FF /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		B6E332DD2236C9E80088D6FF /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,10 +81,16 @@
 		62D067B42236FD6200D5410B /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+
 				62D067AE2236D90900D5410B /* SignUpParentViewController.swift */,
 				62D067B02236DBDF00D5410B /* OnboardingViewController.swift */,
 				62D067A02236D1C400D5410B /* SignUpViewController.swift */,
 				62D067A42236D1FB00D5410B /* HealthKitAccessViewController.swift */,
+				B6E332D82236C54C0088D6FF /* Model */,
+				B6E332DC2236C6E80088D6FF /* Controller */,
+				B6E332CE2236B8910088D6FF /* View */,
+				B6E332BB2236B8650088D6FF /* AppDelegate.swift */,
+				B6E332CD2236B87E0088D6FF /* Resources */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -137,6 +151,38 @@
 				B6E332BF2236B8650088D6FF /* Main.storyboard */,
 			);
 			path = View;
+		B6E332D72236C1600088D6FF /* MagicStrings */ = {
+			isa = PBXGroup;
+			children = (
+				B6E332D52236C15C0088D6FF /* User+MagicString.swift */,
+			);
+			path = MagicStrings;
+			sourceTree = "<group>";
+		};
+		B6E332D82236C54C0088D6FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B6E332D32236C0280088D6FF /* User.swift */,
+				B6E332D72236C1600088D6FF /* MagicStrings */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B6E332DB2236C6D60088D6FF /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+				B6E332D92236C6D20088D6FF /* UserController.swift */,
+			);
+			path = ModelController;
+			sourceTree = "<group>";
+		};
+		B6E332DC2236C6E80088D6FF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B6E332DB2236C6D60088D6FF /* ModelController */,
+				B6E332DD2236C9E80088D6FF /* CloudKitController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +264,10 @@
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,
+				B6E332D42236C0280088D6FF /* User.swift in Sources */,
+				B6E332D62236C15C0088D6FF /* User+MagicString.swift in Sources */,
+				B6E332DE2236C9E80088D6FF /* CloudKitController.swift in Sources */,
+				B6E332DA2236C6D20088D6FF /* UserController.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
