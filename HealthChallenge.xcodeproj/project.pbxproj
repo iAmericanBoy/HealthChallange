@@ -17,6 +17,10 @@
 		62D067B12236DBDF00D5410B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067B02236DBDF00D5410B /* OnboardingViewController.swift */; };
 		62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067B22236FD4800D5410B /* NewChallengeParentViewController.swift */; };
 		62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067B62236FDCB00D5410B /* ChallengeOnboardingViewController.swift */; };
+		62D067BD2237182300D5410B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067BC2237182300D5410B /* User.swift */; };
+		62D067C0223718BD00D5410B /* MagicSrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067BF223718BD00D5410B /* MagicSrings.swift */; };
+		62D067C3223718F600D5410B /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067C2223718F600D5410B /* UserController.swift */; };
+		62D067C8223719A700D5410B /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067C7223719A700D5410B /* CloudKitController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
@@ -34,6 +38,10 @@
 		62D067B02236DBDF00D5410B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		62D067B22236FD4800D5410B /* NewChallengeParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeParentViewController.swift; sourceTree = "<group>"; };
 		62D067B62236FDCB00D5410B /* ChallengeOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeOnboardingViewController.swift; sourceTree = "<group>"; };
+		62D067BC2237182300D5410B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		62D067BF223718BD00D5410B /* MagicSrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicSrings.swift; sourceTree = "<group>"; };
+		62D067C2223718F600D5410B /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		62D067C7223719A700D5410B /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6E332C02236B8650088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -65,6 +73,8 @@
 		62D067A32236D1D700D5410B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				62D067C7223719A700D5410B /* CloudKitController.swift */,
+				62D067C4223718FB00D5410B /* ModelControllers */,
 				62D067A22236D1CC00D5410B /* ViewControllers */,
 			);
 			path = Controllers;
@@ -94,6 +104,31 @@
 			path = NewChallenge;
 			sourceTree = "<group>";
 		};
+		62D067BE2237182900D5410B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				62D067BC2237182300D5410B /* User.swift */,
+				62D067C1223718D400D5410B /* MagicStrings */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		62D067C1223718D400D5410B /* MagicStrings */ = {
+			isa = PBXGroup;
+			children = (
+				62D067BF223718BD00D5410B /* MagicSrings.swift */,
+			);
+			path = MagicStrings;
+			sourceTree = "<group>";
+		};
+		62D067C4223718FB00D5410B /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				62D067C2223718F600D5410B /* UserController.swift */,
+			);
+			path = ModelControllers;
+			sourceTree = "<group>";
+		};
 		B6E332AF2236B8650088D6FF = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +148,7 @@
 		B6E332BA2236B8650088D6FF /* HealthChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				62D067BE2237182900D5410B /* Model */,
 				62D067A32236D1D700D5410B /* Controllers */,
 				B6E332CE2236B8910088D6FF /* View */,
 				B6E332BB2236B8650088D6FF /* AppDelegate.swift */,
@@ -214,10 +250,14 @@
 				62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */,
 				62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */,
 				62D067A92236D23800D5410B /* WeeklyGoalsViewController.swift in Sources */,
+				62D067C3223718F600D5410B /* UserController.swift in Sources */,
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
+				62D067C8223719A700D5410B /* CloudKitController.swift in Sources */,
+				62D067C0223718BD00D5410B /* MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,
+				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
