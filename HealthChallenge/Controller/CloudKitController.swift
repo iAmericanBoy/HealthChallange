@@ -23,18 +23,18 @@ class CloudKitController {
     
     //MARK: - INIT
     init() {
-//        createZone(withName: Purchase.privateRecordZoneName) { (isSuccess, newZone) in
-//            if !isSuccess {
-//                print("Could not create new zone.")
-//            }
-//        }
+        //        createZone(withName: Purchase.privateRecordZoneName) { (isSuccess, newZone) in
+        //            if !isSuccess {
+        //                print("Could not create new zone.")
+        //            }
+        //        }
     }
     
     //MARK: - CRUD
     /// Creates new Record in CloudKit.
     /// - parameter record: The record to be created.
     /// - parameter dataBase: The dataBase the record should be created in.
-    /// - parameter completion: Handler for when the purchase has been created.
+    /// - parameter completion: Handler for when the record has been created.
     /// - parameter isSuccess: Confirms the new purchase was created.
     /// - parameter newRecord: The new Record or nil.
     func create(record: CKRecord, inDataBase dataBase: CKDatabase, completion: @escaping (_ isSuccess: Bool, _ newRecord: CKRecord?) -> Void) {
@@ -49,6 +49,42 @@ class CloudKitController {
             } else {
                 completion(false, nil)
             }
+        }
+    }
+    
+    ///Fetches the UserRecordID.
+    /// - parameter completion: Handler for when the UserRecord could be found.
+    /// - parameter isSuccess: Confirms the record could be found.
+    /// - parameter newRecord: The recordID or nil.
+    func fetchUserRecordID(_ completion: @escaping (_ isSuccess:Bool, _ userRecordID: CKRecord.ID?) -> Void) {
+        CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
+            if let error = error {
+                print("There was an error fetching users appleID from cloudkit: \(error)")
+                completion(false,appleUserRecordID)
+                return
+            }
+            guard let appleUserRef = appleUserRecordID else {completion(false,appleUserRecordID); return}
+            
+            completion(true,appleUserRef)
+        }
+    }
+    
+    ///Performs a Query on the given Database.
+    /// - parameter query: The Query to be performed.
+    /// - parameter dataBase: The dataBase the record should be created in.
+    /// - parameter completion: Handler for when the query could be found.
+    /// - parameter isSuccess: Confirms the query found records.
+    /// - parameter records: The array of found records or empty array.
+    func findRecords(withQuery query: CKQuery, inDataBase dataBase: CKDatabase, _ completion: @escaping (_ isSuccess:Bool, _ records: [CKRecord]) -> Void) {
+        
+        dataBase.perform(query, inZoneWith: nil) { (foundRecords, error) in
+            if let error = error {
+                print("There was an error performing the query in cloudkit: \(error)")
+                completion(false,[])
+                return
+            }
+            guard let records = foundRecords else {return}
+            completion(true,records)
         }
     }
     

@@ -42,6 +42,32 @@ class UserController {
             })
         }
     }
+    
+    ///Fetches the Logged in User
+    /// - parameter completion: Handler for when
+    /// - parameter isSuccess: Confirms that the change has synced to CloudKit.
+    func fetchUser(completion: @escaping (_ isSuccess:Bool) -> Void) {
+        
+        CloudKitController.shared.fetchUserRecordID { (isSuccess, appleUserRef) in
+            if isSuccess {
+                //load logged in users name and image
+                guard let userRef = appleUserRef else {completion(false);return}
+                
+                let reference = CKRecord.Reference(recordID: userRef, action: .deleteSelf)
+                let predicate = NSPredicate(format: "%K == %@", argumentArray: [User.appleUserRefKey,reference])
+                let query = CKQuery(recordType: User.typeKey, predicate: predicate)
+                CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (isSuccess, records) in
+                    if isSuccess {
+                        //set logged in User to found record
+                        guard let record = records.first else {completion(false); return }
+                        self.loggedInUser = User(record: record)
+                        completion(true)
+                    } else {
+                        //no public user found
+                        completion(false)
+                    }
+                })
+            }
+        }
+    }
 }
-
-
