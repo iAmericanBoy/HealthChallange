@@ -16,6 +16,12 @@ class UserController {
     //MARK: - SourceOfTruth
     var loggedInUser: User?
     
+    //MARK: - init
+    init() {
+        fetchUserLoggedInUser { (_) in
+        }
+    }
+    
     //MARK: - CRUD
     ///Creates a User With userName and Profile Picture
     /// - parameter name: UserName of the user.
@@ -91,6 +97,7 @@ class UserController {
             }
         }
     }
+    
     ///Sets the monthly goal for a particular challenge of a user.
     /// - parameter goal: The goal that will be the new monthly challange of the user.
     /// - parameter challenge: the Challange the montly goal is getting set for.
