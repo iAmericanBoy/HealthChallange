@@ -44,7 +44,7 @@ class ChallengeController {
         let currentDay = Date()
         let olderThenStart = NSPredicate(format: "%@ >= %@ ", argumentArray: [Challenge.startDayKey,currentDay])
         let youngerThenFinish = NSPredicate(format: "%@ <= %@ ", argumentArray: [Challenge.finishDayKey,currentDay])
-
+        
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart,youngerThenFinish])
         
         let query = CKQuery(recordType: Challenge.typeKey, predicate: predicate)
@@ -89,7 +89,7 @@ class ChallengeController {
         challenge.weekGoalsReference = goalReference
         
         let record = CKRecord(challenge: challenge)
-
+        
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
@@ -101,11 +101,21 @@ class ChallengeController {
         }
     }
     
-    func add(monthlyGoal goal: Goal, forChallenge challenge: Challenge, ofParticipent user: User) {
+    ///Deletes the given Challenge.
+    /// - parameter challenge: The challenge to delete.
+    /// - parameter completion: Handler for when the challenge was deleted
+    /// - parameter isSuccess: Confirms that the challenge was deleted.
+    func delete(challenge: Challenge, completion: @escaping (_ isSuccess:Bool) -> Void) {
+        let recordID = CKRecord(challenge: challenge).recordID
         
-    }
-    
-    func delete(challenge: Challenge) {
-        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [], purchasesToDelete: [recordID]) { (isSuccess, _, deletedRecords) in
+            if isSuccess {
+                guard let deletedRecordID = deletedRecords?.first, deletedRecordID == recordID else {completion(false); return}
+                self.currentChallenge = nil
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
 }
