@@ -37,8 +37,26 @@ class ChallengeController {
         }
     }
     
-    func fetchCurrentChallenge() {
+    ///Fetches the current Challenge from CK and assigns the current Challenge to the property.
+    /// - parameter completion: Handler for when the challenge was created.
+    /// - parameter isSuccess: Confirms that the challenge was created.
+    func fetchCurrentChallenge(_ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let currentDay = Date()
+        let olderThenStart = NSPredicate(format: "%@ >= %@ ", argumentArray: [Challenge.startDayKey,currentDay])
+        let youngerThenFinish = NSPredicate(format: "%@ <= %@ ", argumentArray: [Challenge.finishDayKey,currentDay])
+
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart,youngerThenFinish])
         
+        let query = CKQuery(recordType: Challenge.typeKey, predicate: predicate)
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.privateDB) { (isSuccess, foundRecords) in
+            if isSuccess {
+                guard let foundRecord = foundRecords.first, let currentChallenge = Challenge(record: foundRecord) else {completion(false);return}
+                self.currentChallenge = currentChallenge
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
     
     func update(challenge: Challenge, withNewStartDate date: Date) {
