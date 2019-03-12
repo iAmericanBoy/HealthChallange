@@ -21,6 +21,8 @@
 		62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067BF223718BD00D5410B /* User+MagicSrings.swift */; };
 		62D067C3223718F600D5410B /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067C2223718F600D5410B /* UserController.swift */; };
 		62D067C8223719A700D5410B /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067C7223719A700D5410B /* CloudKitController.swift */; };
+		62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067CB2238220700D5410B /* PhotoSelectorViewController.swift */; };
+		62D067CE2238302800D5410B /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067CD2238302800D5410B /* CalendarController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 		62D067BF223718BD00D5410B /* User+MagicSrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+MagicSrings.swift"; sourceTree = "<group>"; };
 		62D067C2223718F600D5410B /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		62D067C7223719A700D5410B /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
+		62D067CB2238220700D5410B /* PhotoSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorViewController.swift; sourceTree = "<group>"; };
+		62D067CD2238302800D5410B /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6E332C02236B8650088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				62D067C7223719A700D5410B /* CloudKitController.swift */,
+				62D067CF223836CA00D5410B /* CallendarControlls */,
 				62D067C4223718FB00D5410B /* ModelControllers */,
 				62D067A22236D1CC00D5410B /* ViewControllers */,
 			);
@@ -97,6 +102,7 @@
 				62D067B02236DBDF00D5410B /* OnboardingViewController.swift */,
 				62D067A02236D1C400D5410B /* SignUpViewController.swift */,
 				62D067A42236D1FB00D5410B /* HealthKitAccessViewController.swift */,
+				62D067CB2238220700D5410B /* PhotoSelectorViewController.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -142,6 +148,14 @@
 				B6EBA607223822810001F5BF /* GoalController.swift */,
 			);
 			path = ModelControllers;
+			sourceTree = "<group>";
+		};
+		62D067CF223836CA00D5410B /* CallendarControlls */ = {
+			isa = PBXGroup;
+			children = (
+				62D067CD2238302800D5410B /* CalendarController.swift */,
+			);
+			path = CallendarControlls;
 			sourceTree = "<group>";
 		};
 		B6E332AF2236B8650088D6FF = {
@@ -281,6 +295,8 @@
 				B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
+				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
+				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
