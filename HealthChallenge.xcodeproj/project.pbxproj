@@ -18,13 +18,18 @@
 		62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067B22236FD4800D5410B /* NewChallengeParentViewController.swift */; };
 		62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067B62236FDCB00D5410B /* ChallengeOnboardingViewController.swift */; };
 		62D067BD2237182300D5410B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067BC2237182300D5410B /* User.swift */; };
-		62D067C0223718BD00D5410B /* MagicSrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067BF223718BD00D5410B /* MagicSrings.swift */; };
+		62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067BF223718BD00D5410B /* User+MagicSrings.swift */; };
 		62D067C3223718F600D5410B /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067C2223718F600D5410B /* UserController.swift */; };
 		62D067C8223719A700D5410B /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067C7223719A700D5410B /* CloudKitController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
 		B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C42236B8680088D6FF /* LaunchScreen.storyboard */; };
+		B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA5FB22380F970001F5BF /* Challenge.swift */; };
+		B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA5FD22380FE10001F5BF /* Goal.swift */; };
+		B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */; };
+		B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */; };
+		B6EBA608223822810001F5BF /* GoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA607223822810001F5BF /* GoalController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +44,7 @@
 		62D067B22236FD4800D5410B /* NewChallengeParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeParentViewController.swift; sourceTree = "<group>"; };
 		62D067B62236FDCB00D5410B /* ChallengeOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeOnboardingViewController.swift; sourceTree = "<group>"; };
 		62D067BC2237182300D5410B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		62D067BF223718BD00D5410B /* MagicSrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicSrings.swift; sourceTree = "<group>"; };
+		62D067BF223718BD00D5410B /* User+MagicSrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+MagicSrings.swift"; sourceTree = "<group>"; };
 		62D067C2223718F600D5410B /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		62D067C7223719A700D5410B /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +53,11 @@
 		B6E332C22236B8680088D6FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6E332C52236B8680088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6E332C72236B8680088D6FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6EBA5FB22380F970001F5BF /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		B6EBA5FD22380FE10001F5BF /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+MagicStrings.swift"; sourceTree = "<group>"; };
+		B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+MagicStreaks.swift"; sourceTree = "<group>"; };
+		B6EBA607223822810001F5BF /* GoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				62D067BC2237182300D5410B /* User.swift */,
+				B6EBA5FB22380F970001F5BF /* Challenge.swift */,
+				B6EBA5FD22380FE10001F5BF /* Goal.swift */,
 				62D067C1223718D400D5410B /* MagicStrings */,
 			);
 			path = Model;
@@ -116,7 +128,9 @@
 		62D067C1223718D400D5410B /* MagicStrings */ = {
 			isa = PBXGroup;
 			children = (
-				62D067BF223718BD00D5410B /* MagicSrings.swift */,
+				62D067BF223718BD00D5410B /* User+MagicSrings.swift */,
+				B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */,
+				B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */,
 			);
 			path = MagicStrings;
 			sourceTree = "<group>";
@@ -125,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				62D067C2223718F600D5410B /* UserController.swift */,
+				B6EBA607223822810001F5BF /* GoalController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -247,6 +262,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				62D067B12236DBDF00D5410B /* OnboardingViewController.swift in Sources */,
+				B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */,
+				B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */,
 				62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */,
 				62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */,
 				62D067A92236D23800D5410B /* WeeklyGoalsViewController.swift in Sources */,
@@ -254,11 +271,14 @@
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
 				62D067C8223719A700D5410B /* CloudKitController.swift in Sources */,
-				62D067C0223718BD00D5410B /* MagicSrings.swift in Sources */,
+				B6EBA608223822810001F5BF /* GoalController.swift in Sources */,
+				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
+				B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */,
+				B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
 			);
