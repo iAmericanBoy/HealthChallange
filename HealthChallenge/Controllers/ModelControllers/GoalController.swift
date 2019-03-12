@@ -16,6 +16,7 @@ class GoalController {
     //MARK: - Properties
     ///All the goals a user created.
     var usersGoals: [Goal] = []
+    
     ///All the publicly availabel Goals.
     var allPublicGoals: [Goal] = []
     
@@ -82,6 +83,7 @@ class GoalController {
             }
         }
     }
+    
     ///finds all the goals that are public.
     /// - parameter completion: Handler for when the goals where found.
     /// - parameter isSuccess: Confirms the found goals where appended to allPublicGoals.
@@ -122,7 +124,7 @@ class GoalController {
     }
     
     ///Delete the given Goal.
-    /// - parameter goal: The goal to update.
+    /// - parameter goal: The goal to delete.
     /// - parameter completion: Handler for when the goal was deleted
     /// - parameter isSuccess: Confirms that the goal was deleted.
     func delete(goal: Goal, completion: @escaping (_ isSuccess:Bool) -> Void) {
@@ -131,7 +133,13 @@ class GoalController {
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [], purchasesToDelete: [recordID]) { (isSuccess, _, deletedRecords) in
             if isSuccess {
                 guard let deletedRecordID = deletedRecords?.first, deletedRecordID == recordID else {completion(false); return}
-                completion(true)
+                self.fetchUsersGoals(completion: { (isSuccess) in
+                    if isSuccess {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
             } else {
                 completion(false)
             }
