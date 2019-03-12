@@ -91,6 +91,25 @@ class UserController {
             }
         }
     }
+    ///Sets the monthly goal for a particular challenge of a user.
+    /// - parameter goal: The goal that will be the new monthly challange of the user.
+    /// - parameter challenge: the Challange the montly goal is getting set for.
+    /// - parameter user: The uset that will have a new montly goal
+    /// - parameter completion: Handler for when the user was updated.
+    /// - parameter isSuccess: Confirms that the update has synced to CloudKit.
+    func set(monthlyGoal goal: Goal, inChallenge challenge: Challenge, forUser user: User,_ completion: @escaping (_ isSuccess:Bool) -> Void) {
+        user.monthlyChallanges[CKRecord.Reference(recordID: challenge.recordID, action: .none)] = CKRecord.Reference(recordID: goal.recordID, action: .none)
+        let record = CKRecord(user: user)
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID else {completion(false); return}
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
     
     ///Deletes the user from CK.
     func delete(User user: User , _ completion: @escaping (_ isSuccess:Bool) -> Void) {

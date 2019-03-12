@@ -18,4 +18,6 @@ extension User {
     static let photoKey = "photo"
     /// "strengthValue"
     static let strengthValueKey = "strengthValue"
+    /// "monthlyChallenges"
+    static let monthlyChallengesKey = "monthlyChallenges"
 }
