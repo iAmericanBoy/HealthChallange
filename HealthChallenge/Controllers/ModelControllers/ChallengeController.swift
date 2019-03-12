@@ -80,8 +80,25 @@ class ChallengeController {
         }
     }
     
-    func add(weeklyGoals goals: [Goal], toChallange challenge: Challenge) {
+    ///Adds Weekly Goals to Challenge
+    /// - parameter goals: The weekly goals for the Challenge.
+    /// - parameter completion: Handler for when the challenge was updated
+    /// - parameter isSuccess: Confirms that the challenge was updated.
+    func add(weeklyGoals goals: [Goal], toChallange challenge: Challenge, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let goalReference = goals.compactMap({ CKRecord.Reference(recordID: $0.recordID, action: .none)})
+        challenge.weekGoalsReference = goalReference
         
+        let record = CKRecord(challenge: challenge)
+
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
+                self.currentChallenge = updatedChallenge
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
     
     func add(monthlyGoal goal: Goal, forChallenge challenge: Challenge, ofParticipent user: User) {
