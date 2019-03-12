@@ -11,8 +11,8 @@ import CloudKit
 
 class Challenge {
     var startDay: Date
-    var weekGoals: [Goal] = []
-    var monthlyGoal: Goal?
+    var weekGoalsReference: [CKRecord.Reference] = []
+    var monthlyGoalReference: CKRecord.Reference?
     var name: String
     var recordID: CKRecord.ID
     
@@ -33,12 +33,12 @@ class Challenge {
     init?(record: CKRecord) {
         guard let name = record[Challenge.nameKey] as? String,
             let startDay = record[Challenge.startDayKey] as? Date,
-            let weekGoals = record[Challenge.weekGoalsKey] as? [Goal],
-            let monthlyGoal = record[Challenge.montlyGoalKey] as? Goal else {return nil}
+            let weekGoals = record[Challenge.weekGoalsKey] as? [CKRecord.Reference],
+            let monthlyGoal = record[Challenge.montlyGoalKey] as? CKRecord.Reference else {return nil}
         
         self.name = name
-        self.monthlyGoal = monthlyGoal
-        self.weekGoals = weekGoals
+        self.monthlyGoalReference = monthlyGoal
+        self.weekGoalsReference = weekGoals
         self.startDay = startDay
         self.recordID = record.recordID
     }
@@ -51,7 +51,7 @@ extension CKRecord {
         
         self.setValue(challenge.name, forKey: Challenge.nameKey)
         self.setValue(challenge.startDay, forKey: Challenge.startDayKey)
-        self.setValue(challenge.weekGoals, forKey: Challenge.weekGoalsKey)
-        self.setValue(challenge.monthlyGoal!, forKey: Challenge.montlyGoalKey)
+        self.setValue(challenge.weekGoalsReference, forKey: Challenge.weekGoalsKey)
+        self.setValue(challenge.monthlyGoalReference!, forKey: Challenge.montlyGoalKey)
     }
 }
