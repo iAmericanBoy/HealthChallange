@@ -17,4 +17,6 @@ extension Challenge {
     static let weekGoalsKey = "weekGoals"
     /// "startDay"
     static let startDayKey = "startDay"
+    /// "finishDay"
+    static let finishDayKey = "finishDay"
 }
