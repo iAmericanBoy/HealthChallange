@@ -8,13 +8,15 @@
 
 import Foundation
 
-extension WeeklyGoal {
-    /// "WeeklyGoal"
-    static let typeKey = "WeeklyGoal"
+extension Goal {
+    /// "Goal"
+    static let typeKey = "Goal"
     /// "name"
     static let nameKey = "name"
     /// "isPublic"
     static let isPublicKey = "isPublic"
     /// "reviewForPublic"
     static let reviewForPublicKey = "reviewForPublic"
+    /// "strengthValue"
+    static let strengthValueKey = "strengthValue"
 }
