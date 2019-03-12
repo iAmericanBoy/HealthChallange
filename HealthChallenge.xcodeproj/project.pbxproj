@@ -30,6 +30,7 @@
 		B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */; };
 		B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */; };
 		B6EBA608223822810001F5BF /* GoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA607223822810001F5BF /* GoalController.swift */; };
+		B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA60922384F6E0001F5BF /* ChallengeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+MagicStrings.swift"; sourceTree = "<group>"; };
 		B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+MagicStreaks.swift"; sourceTree = "<group>"; };
 		B6EBA607223822810001F5BF /* GoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalController.swift; sourceTree = "<group>"; };
+		B6EBA60922384F6E0001F5BF /* ChallengeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			children = (
 				62D067C2223718F600D5410B /* UserController.swift */,
 				B6EBA607223822810001F5BF /* GoalController.swift */,
+				B6EBA60922384F6E0001F5BF /* ChallengeController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */,
 				62D067A92236D23800D5410B /* WeeklyGoalsViewController.swift in Sources */,
 				62D067C3223718F600D5410B /* UserController.swift in Sources */,
+				B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */,
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
 				62D067C8223719A700D5410B /* CloudKitController.swift in Sources */,
