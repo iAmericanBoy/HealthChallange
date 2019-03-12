@@ -19,4 +19,6 @@ extension Goal {
     static let reviewForPublicKey = "reviewForPublic"
     /// "strengthValue"
     static let strengthValueKey = "strengthValue"
+    /// "creatorReference"
+    static let creatorReferenceKey = "creatorReference"
 }

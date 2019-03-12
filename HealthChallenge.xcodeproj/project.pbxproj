@@ -29,6 +29,7 @@
 		B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA5FD22380FE10001F5BF /* Goal.swift */; };
 		B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */; };
 		B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */; };
+		B6EBA608223822810001F5BF /* GoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA607223822810001F5BF /* GoalController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		B6EBA5FD22380FE10001F5BF /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+MagicStrings.swift"; sourceTree = "<group>"; };
 		B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+MagicStreaks.swift"; sourceTree = "<group>"; };
+		B6EBA607223822810001F5BF /* GoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				62D067C2223718F600D5410B /* UserController.swift */,
+				B6EBA607223822810001F5BF /* GoalController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
 				62D067C8223719A700D5410B /* CloudKitController.swift in Sources */,
+				B6EBA608223822810001F5BF /* GoalController.swift in Sources */,
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,

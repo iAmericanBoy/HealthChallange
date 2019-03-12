@@ -15,13 +15,15 @@ class Goal {
     var isPublic: Bool
     var reviewForPublic: Bool
     var strengthValue: Int
+    var creatorReference: CKRecord.Reference?
     
-    init(name: String, isPublic: Bool = false, reviewForPublic: Bool = false, strengthValue: Int = 1,recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(name: String, creator: CKRecord.Reference? ,isPublic: Bool = false, reviewForPublic: Bool = false, strengthValue: Int = 1,recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.name = name
         self.isPublic = isPublic
         self.reviewForPublic = reviewForPublic
         self.recordID = recordID
         self.strengthValue = strengthValue
+        self.creatorReference = creator
     }
     
     init?(record: CKRecord) {
@@ -35,6 +37,7 @@ class Goal {
         self.isPublic = isPublic
         self.reviewForPublic = reviewForPublic
         self.strengthValue = strengthValue
+        self.creatorReference = record[Goal.creatorReferenceKey] as? CKRecord.Reference
 
     }
 }
@@ -44,6 +47,7 @@ extension CKRecord {
         self.init(recordType: Goal.typeKey, recordID: goal.recordID)
         
         self.setValue(goal.name, forKey: Goal.nameKey)
+        self.setValue(goal.creatorReference, forKey: Goal.creatorReferenceKey)
         self.setValue(goal.isPublic, forKey: Goal.isPublicKey)
         self.setValue(goal.reviewForPublic, forKey: Goal.reviewForPublicKey)
     }
