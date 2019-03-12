@@ -13,8 +13,6 @@ extension Challenge {
     static let typeKey = "Challenge"
     /// "name"
     static let nameKey = "name"
-    /// "montlyGoal"
-    static let montlyGoalKey = "montlyGoal"
     /// "weekGoals"
     static let weekGoalsKey = "weekGoals"
     /// "startDay"
