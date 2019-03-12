@@ -29,7 +29,7 @@ class UserController {
     /// - parameter photo: UserPhoto of the user.
     /// - parameter completion: Handler for when the user was created and uploaded.
     /// - parameter isSuccess: Confirms that the user was created and uploaded.
-    func createUserWith(userName name: String, userPhoto photo: UIImage, strengthValue: Int, completion: @escaping (Bool) -> Void) {
+    func createUserWith(userName name: String, userPhoto photo: UIImage, strengthValue: Int, completion: @escaping (_ isSuccess:Bool) -> Void) {
         CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
             if let error = error {
                 print("There was an error fetching users appleID from cloudkit: \(error)")
