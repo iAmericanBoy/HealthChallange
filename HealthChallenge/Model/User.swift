@@ -2,7 +2,7 @@
 //  User.swift
 //  HealthChallenge
 //
-//  Created by RYAN GREENBURG on 3/11/19.
+//  Created by Dominic Lanzillotta on 3/11/19.
 //  Copyright © 2019 Dominic Lanzillotta. All rights reserved.
 //
 
