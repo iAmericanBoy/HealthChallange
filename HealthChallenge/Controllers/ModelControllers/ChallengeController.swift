@@ -59,7 +59,25 @@ class ChallengeController {
         }
     }
     
-    func update(challenge: Challenge, withNewStartDate date: Date) {
+    ///Updates the challenge with a new date.
+    /// - parameter challenge: The challenge to update.
+    /// - parameter date: The new date of the challenge.
+    /// - parameter completion: Handler for when the challenge was updated
+    /// - parameter isSuccess: Confirms that the challenge was updated.
+    func update(challenge: Challenge, withNewStartDate date: Date, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        challenge.startDay = date
+        
+        let record = CKRecord(challenge: challenge)
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
+                self.currentChallenge = updatedChallenge
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
     
     func add(weeklyGoals goals: [Goal], toChallange challenge: Challenge) {
