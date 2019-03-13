@@ -18,10 +18,6 @@ class SignUpViewController: UIViewController, PhotoSelectorViewControllerDelegat
     @IBOutlet weak var lifestyleSegmentedControl: UISegmentedControl!
     
     var profilePhoto: UIImage?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
