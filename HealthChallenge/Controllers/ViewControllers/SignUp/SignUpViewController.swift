@@ -28,8 +28,7 @@ class SignUpViewController: UIViewController, PhotoSelectorViewControllerDelegat
         guard let name = usernameTextField.text, !name.isEmpty,
             let photo = profilePhoto else { return }
         let strengthValue = lifestyleSegmentedControl.selectedSegmentIndex
-        UserController.shared.createUserWith(userName: name, userPhoto: photo, strengthValue: strengthValue) { (success) in
-            // navigate to healthkit access
+        UserController.shared.createUserWith(userName: name, userPhoto: photo, strengthValue: strengthValue) { (_) in
         }
     }
     

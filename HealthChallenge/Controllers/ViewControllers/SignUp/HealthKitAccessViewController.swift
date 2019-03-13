@@ -10,6 +10,8 @@ import UIKit
 
 class HealthKitAccessViewController: UIViewController {
     
+    let challengeController = ChallengeController()
+    
     // MARK: - Outlets
     @IBOutlet weak var allowAccessLabel: UILabel!
     @IBOutlet weak var paragraphLabel: UILabel!
@@ -20,7 +22,10 @@ class HealthKitAccessViewController: UIViewController {
         super.viewDidLoad()
         UserController.shared.fetchUserLoggedInUser { (success) in
             if success {
-                // Add statement to check if User has an active challenge.
+                self.challengeController.fetchCurrentChallenge({ (success) in
+                    // Show tab bar
+                })
+            } else {
                 self.showNewChallengeVC()
             }
         }

@@ -10,6 +10,9 @@ import UIKit
 
 class WeeklyGoalsViewController: UIViewController {
     
+    let challengeController = ChallengeController()
+    var goals: [Goal] = []
+    
     // MARK: - Outlets
     @IBOutlet weak var weeklyGoalsLabel: UILabel!
     @IBOutlet weak var customGoalTextField: UITextField!
@@ -35,7 +38,7 @@ class WeeklyGoalsViewController: UIViewController {
 extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Manage number of rows
-        return 0
+        return GoalController.shared.allPublicGoals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
