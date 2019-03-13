@@ -19,12 +19,12 @@ class CalendarController {
     var presentYear = 0
     var todaysDate = 0
     var firstWeekDayOfMonth = 0
-    var cal = Calendar.current
+    var currentCalendar = Calendar.current
     
-    func initializeCal() {
-        currentMonthIndex = cal.component(.month, from: Date())
-        currentYear = cal.component(.year, from: Date())
-        todaysDate = cal.component(.day, from: Date())
+    func initializeCurrentCalendar() {
+        currentMonthIndex = currentCalendar.component(.month, from: Date())
+        currentYear = currentCalendar.component(.year, from: Date())
+        todaysDate = currentCalendar.component(.day, from: Date())
         firstWeekDayOfMonth = getFirstWeekDay()
         
         if currentMonthIndex == 2 && currentYear % 4 == 0 {

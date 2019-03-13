@@ -10,7 +10,7 @@ import UIKit
 
 class StartDateViewController: UIViewController {
     
-    let calendar = CalendarController()
+    let calendarController = CalendarController()
     
     // MARK: - Outlets
     @IBOutlet weak var startDateLabel: UILabel!
@@ -26,68 +26,77 @@ class StartDateViewController: UIViewController {
     @IBOutlet weak var satLabel: UILabel!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     
-
+    //MARK: - Properties
+    var challengeStartDate: Date?
+    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        calendar.initializeCal()
+        calendarController.initializeCurrentCalendar()
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         previousMonthButton.isHidden = true
-        monthLabel.text = "\(calendar.monthsArray[calendar.currentMonthIndex - 1]) \(calendar.currentYear)"
+        monthLabel.text = "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 0])
     }
     
+    //MARK: - Private Functions
     func updateViews() {
         DispatchQueue.main.async {
             self.calendarCollectionView.reloadData()
         }
-        monthLabel.text = "\(calendar.monthsArray[calendar.currentMonthIndex - 1]) \(calendar.currentYear)"
+        monthLabel.text = "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
     }
 
     // MARK: - Actions
     @IBAction func previousMonthButtonTapped(_ sender: Any) {
-        let monthIndex = calendar.currentMonthIndex
-        let year = calendar.currentYear
-        calendar.didChangeMonthDown(monthIndex: monthIndex, year: year)
-        if monthIndex == calendar.currentMonthIndex {
+        let monthIndex = calendarController.currentMonthIndex
+        let year = calendarController.currentYear
+        calendarController.didChangeMonthDown(monthIndex: monthIndex, year: year)
+        if monthIndex == calendarController.currentMonthIndex {
             previousMonthButton.isHidden = true
         }
         updateViews()
     }
     
     @IBAction func nextMonthButtonTapped(_ sender: Any) {
-        let monthIndex = calendar.currentMonthIndex
-        let year = calendar.currentYear
-        calendar.didChangeMonthUp(monthIndex: monthIndex, year: year)
+        let monthIndex = calendarController.currentMonthIndex
+        let year = calendarController.currentYear
+        calendarController.didChangeMonthUp(monthIndex: monthIndex, year: year)
         previousMonthButton.isHidden = false
         updateViews()
     }
 } // end class
 
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let sectionItems = calendar.numOfDaysInMonth[calendar.currentMonthIndex - 1] + calendar.firstWeekDayOfMonth - 1
+        let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 1
         return sectionItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
             else { return UICollectionViewCell() }
-        let firstDay = calendar.firstWeekDayOfMonth
-        let today = calendar.todaysDate
-        let year = calendar.currentYear
-        let month = calendar.currentMonthIndex
+        let firstDay = calendarController.firstWeekDayOfMonth
+        let today = calendarController.todaysDate
+        let year = calendarController.currentYear
+        let month = calendarController.currentMonthIndex
         cell.backgroundColor = .white
         cell.dateLabel.textColor = .black
+        
         
         if indexPath.item <= firstDay - 2 {
             cell.isHidden = true
         } else {
             let calcDate = indexPath.row - firstDay + 2
+            
+            print(calcDate,month, year)
+            
             cell.isHidden = false
             cell.dateLabel.text = "\(calcDate)"
-            if calcDate < today && year == calendar.presentYear && month == calendar.presentMonthIndex {
+            if calcDate < today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
                 cell.isUserInteractionEnabled = false
                 cell.dateLabel.textColor = UIColor.lightGray
             } else {
@@ -98,8 +107,17 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = UIColor.green
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DateCollectionViewCell else {return}
+        
+        cell.backgroundColor = UIColor.green
+        
+        print(cell.dateLabel.text)
+        if let currentChallenge = ChallengeController.shared.currentChallenge {
+            //update the date
+        } else {
+            // create new Challenge with date
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
