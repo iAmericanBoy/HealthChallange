@@ -11,8 +11,8 @@ import UIKit
 class OnboardingViewController: UIPageViewController {
     
     let onboardingViewControllers = [
-        UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUp"),
-        UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HealthKitAccess")
+        UIStoryboard(name: "HealthKitAccess", bundle: nil).instantiateViewController(withIdentifier: "HealthKitAccess"),
+        UIStoryboard(name: "SignUp", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
     ]
 
     override func viewDidLoad() {

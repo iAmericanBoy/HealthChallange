@@ -18,6 +18,12 @@ class HealthKitAccessViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UserController.shared.fetchUserLoggedInUser { (success) in
+            if success {
+                // Add statement to check if User has an active challenge.
+                self.showNewChallengeVC()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,4 +39,11 @@ class HealthKitAccessViewController: UIViewController {
     @IBAction func dontAllowButtonTapped(_ sender: Any) {
     }
     
+    func showNewChallengeVC() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengePageView")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
 } // end class

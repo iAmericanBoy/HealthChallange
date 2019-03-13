@@ -18,10 +18,6 @@ class SignUpViewController: UIViewController, PhotoSelectorViewControllerDelegat
     @IBOutlet weak var lifestyleSegmentedControl: UISegmentedControl!
     
     var profilePhoto: UIImage?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -29,7 +25,8 @@ class SignUpViewController: UIViewController, PhotoSelectorViewControllerDelegat
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let name = usernameLabel.text, let photo = profilePhoto else { return }
+        guard let name = usernameTextField.text, !name.isEmpty,
+            let photo = profilePhoto else { return }
         let strengthValue = lifestyleSegmentedControl.selectedSegmentIndex
         UserController.shared.createUserWith(userName: name, userPhoto: photo, strengthValue: strengthValue) { (success) in
             // navigate to healthkit access

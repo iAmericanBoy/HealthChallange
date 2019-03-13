@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Monthly Goals View Controller-->
+        <scene sceneID="TV8-RH-SOc">
+            <objects>
+                <viewController storyboardIdentifier="MonthlyGoals" id="lq7-XY-LZR" customClass="MonthlyGoalsViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ptA-9O-Y5g">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Montly Goals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5L-7W-jDf">
+                                <rect key="frame" x="50" y="70" width="100" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2fB-Gn-ZU3">
+                                <rect key="frame" x="50" y="103" width="220" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g20-UB-ujQ">
+                                <rect key="frame" x="282" y="103" width="43" height="30"/>
+                                <state key="normal" title="(save)"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="lq7-XY-LZR" eventType="touchUpInside" id="2Lj-L7-U7r"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cwq-jd-BjK">
+                                <rect key="frame" x="12" y="145" width="351" height="510"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="goalCell" textLabel="jmA-YW-E1G" style="IBUITableViewCellStyleDefault" id="kem-16-YiH">
+                                        <rect key="frame" x="0.0" y="28" width="351" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kem-16-YiH" id="5uU-JV-lwy">
+                                            <rect key="frame" x="0.0" y="0.0" width="312" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jmA-YW-E1G">
+                                                    <rect key="frame" x="15" y="0.0" width="297" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="v5L-7W-jDf" firstAttribute="leading" secondItem="2fB-Gn-ZU3" secondAttribute="leading" id="1JO-HG-YcI"/>
+                            <constraint firstItem="g20-UB-ujQ" firstAttribute="centerY" secondItem="2fB-Gn-ZU3" secondAttribute="centerY" id="3fj-IP-u6B"/>
+                            <constraint firstItem="fpF-Tt-HXi" firstAttribute="trailing" secondItem="cwq-jd-BjK" secondAttribute="trailing" constant="12" id="LBB-GI-ckh"/>
+                            <constraint firstItem="cwq-jd-BjK" firstAttribute="top" secondItem="2fB-Gn-ZU3" secondAttribute="bottom" constant="12" id="LIC-Nf-nSa"/>
+                            <constraint firstItem="v5L-7W-jDf" firstAttribute="top" secondItem="fpF-Tt-HXi" secondAttribute="top" constant="50" id="NYq-c0-z3P"/>
+                            <constraint firstItem="fpF-Tt-HXi" firstAttribute="bottom" secondItem="cwq-jd-BjK" secondAttribute="bottom" constant="12" id="OTy-OV-cFc"/>
+                            <constraint firstItem="g20-UB-ujQ" firstAttribute="leading" secondItem="2fB-Gn-ZU3" secondAttribute="trailing" constant="12" id="TOd-Nk-CIm"/>
+                            <constraint firstItem="2fB-Gn-ZU3" firstAttribute="top" secondItem="v5L-7W-jDf" secondAttribute="bottom" constant="12" id="VI8-3i-Ed5"/>
+                            <constraint firstItem="cwq-jd-BjK" firstAttribute="leading" secondItem="fpF-Tt-HXi" secondAttribute="leading" constant="12" id="fOq-ZV-a6n"/>
+                            <constraint firstItem="2fB-Gn-ZU3" firstAttribute="leading" secondItem="fpF-Tt-HXi" secondAttribute="leading" constant="50" id="gey-5R-5gf"/>
+                            <constraint firstItem="fpF-Tt-HXi" firstAttribute="trailing" secondItem="g20-UB-ujQ" secondAttribute="trailing" constant="50" id="kGw-OC-wf7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fpF-Tt-HXi"/>
+                    </view>
+                    <connections>
+                        <outlet property="customGoalTextField" destination="2fB-Gn-ZU3" id="T5I-Ag-Fpj"/>
+                        <outlet property="monthlyGoalsLabel" destination="v5L-7W-jDf" id="kCk-Iz-yAP"/>
+                        <outlet property="saveButton" destination="g20-UB-ujQ" id="etG-ek-QOd"/>
+                        <outlet property="tableView" destination="cwq-jd-BjK" id="oc6-gY-7BE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LAg-cp-Ho7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2746" y="797"/>
+        </scene>
+    </scenes>
+</document>

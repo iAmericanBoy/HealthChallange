@@ -25,6 +25,7 @@ class CalendarController {
         currentMonthIndex = cal.component(.month, from: Date())
         currentYear = cal.component(.year, from: Date())
         todaysDate = cal.component(.day, from: Date())
+        firstWeekDayOfMonth = getFirstWeekDay()
         
         if currentMonthIndex == 2 && currentYear % 4 == 0 {
             numOfDaysInMonth[currentMonthIndex - 1] = 29
@@ -35,11 +36,11 @@ class CalendarController {
     }
     
     func getFirstWeekDay() -> Int {
-        guard let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday) else { return 0 }
-        return day
+        let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday)!
+        return day == 7 ? 1 : day
     }
     
-    func didChangeMonth(monthIndex: Int, year: Int) {
+    func didChangeMonthUp(monthIndex: Int, year: Int) {
         currentMonthIndex = monthIndex + 1
         currentYear = year
         
@@ -50,10 +51,22 @@ class CalendarController {
                 numOfDaysInMonth[monthIndex] = 28
             }
         }
-        
         firstWeekDayOfMonth = getFirstWeekDay()
     }
     
+    func didChangeMonthDown(monthIndex: Int, year: Int) {
+        currentMonthIndex = monthIndex - 1
+        currentYear = year
+        
+        if monthIndex == 1 {
+            if currentYear % 4 == 0 {
+                numOfDaysInMonth[monthIndex] = 29
+            } else {
+                numOfDaysInMonth[monthIndex] = 28
+            }
+        }
+        firstWeekDayOfMonth = getFirstWeekDay()
+    }
 }
 
 extension Date {
@@ -61,7 +74,7 @@ extension Date {
         return Calendar.current.component(.weekday, from: self)
     }
     var firstDayOfTheMonth: Date {
-        guard let day = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self)) else { return Date() }
+        let day = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self))!
         return day
     }
 }
