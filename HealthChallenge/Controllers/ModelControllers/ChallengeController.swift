@@ -11,7 +11,7 @@ import CloudKit
 
 class ChallengeController {
     //MARK: - Singleton
-    static let shared = UserController()
+    static let shared = ChallengeController()
     
     //MARK: - Properties
     ///The current Challenge

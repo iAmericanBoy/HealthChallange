@@ -10,21 +10,23 @@ import UIKit
 
 class HealthKitAccessViewController: UIViewController {
     
-    let challengeController = ChallengeController()
-    
     // MARK: - Outlets
     @IBOutlet weak var allowAccessLabel: UILabel!
     @IBOutlet weak var paragraphLabel: UILabel!
     @IBOutlet weak var allowButton: UIButton!
     @IBOutlet weak var dontAllowButton: UIButton!
 
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         UserController.shared.fetchUserLoggedInUser { (success) in
             if success {
-                self.challengeController.fetchCurrentChallenge({ (success) in
-                    // Show tab bar
-                })
+                if let currentChallenge = ChallengeController.shared.currentChallenge {
+                    //TODO: EditCurrent Challenge if before the startDate
+                } else {
+                    self.showNewChallengeVC()
+                }
             } else {
                 self.showNewChallengeVC()
             }
