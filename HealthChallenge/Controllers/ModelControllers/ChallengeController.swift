@@ -48,8 +48,8 @@ class ChallengeController {
     /// - parameter isSuccess: Confirms that the challenge was created.
     func fetchCurrentChallenge(_ completion: @escaping (_ isSuccess: Bool) -> Void) {
         let currentDay = Date()
-        let olderThenStart = NSPredicate(format: "%@ >= %@ ", argumentArray: [Challenge.startDayKey,currentDay])
-        let youngerThenFinish = NSPredicate(format: "%@ <= %@ ", argumentArray: [Challenge.finishDayKey,currentDay])
+        let olderThenStart = NSPredicate(format: "%K >= %@ ", argumentArray: [Challenge.startDayKey,currentDay])
+        let youngerThenFinish = NSPredicate(format: "%K <= %@ ", argumentArray: [Challenge.finishDayKey,currentDay])
         
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart,youngerThenFinish])
         
