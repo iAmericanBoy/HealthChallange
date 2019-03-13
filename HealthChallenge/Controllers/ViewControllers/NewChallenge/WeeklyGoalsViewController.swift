@@ -54,7 +54,28 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
         cell.textLabel?.text = GoalController.shared.allPublicGoals[indexPath.row].name
+        
+        if goals.contains(GoalController.shared.allPublicGoals[indexPath.row]) {
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else {
+            cell.accessoryType = UITableViewCell.AccessoryType.none
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedGoal = GoalController.shared.allPublicGoals[indexPath.row]
+        if goals.index(of: selectedGoal) == nil {
+            goals.append(selectedGoal)
+        } else {
+            guard let index = goals.index(of: selectedGoal) else {return}
+            goals.remove(at: index)
+        }
+        
+        //Animating the change
+        tableView.beginUpdates()
+        tableView.reloadRows(at: [indexPath], with: .none)
+        tableView.endUpdates()
     }
 }
 

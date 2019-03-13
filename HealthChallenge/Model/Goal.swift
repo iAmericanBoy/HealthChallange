@@ -41,6 +41,13 @@ class Goal {
 
     }
 }
+
+extension Goal: Equatable {
+    static func == (lhs: Goal, rhs: Goal) -> Bool {
+        return lhs.recordID == rhs.recordID
+    }
+}
+
 extension CKRecord {
     
     convenience init(goal: Goal) {
