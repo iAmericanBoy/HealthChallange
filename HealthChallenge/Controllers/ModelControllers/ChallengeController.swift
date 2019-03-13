@@ -17,6 +17,12 @@ class ChallengeController {
     ///The current Challenge
     var currentChallenge: Challenge?
     
+    //MARK: - init
+    init() {
+        fetchCurrentChallenge { (_) in
+        }
+    }
+    
     //MARK: - CRUD
     ///Creates a new Challenge with a start date.
     /// - parameter date: The start date of the challenge.

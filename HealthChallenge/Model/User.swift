@@ -2,7 +2,7 @@
 //  User.swift
 //  HealthChallenge
 //
-//  Created by RYAN GREENBURG on 3/11/19.
+//  Created by Dominic Lanzillotta on 3/11/19.
 //  Copyright © 2019 Dominic Lanzillotta. All rights reserved.
 //
 
@@ -81,7 +81,7 @@ extension CKRecord {
         
         self.setValue(user.userName, forKey: User.usernameKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
-        self.setValue(user.monthlyChallanges, forKey: User.monthlyChallengesKey)
+//        self.setValue(user.monthlyChallanges, forKey: User.monthlyChallengesKey)
         self.setValue(user.imageAsset, forKey: User.photoKey)
     }
 }
