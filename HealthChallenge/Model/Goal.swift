@@ -47,6 +47,7 @@ extension CKRecord {
         self.init(recordType: Goal.typeKey, recordID: goal.recordID)
         
         self.setValue(goal.name, forKey: Goal.nameKey)
+        self.setValue(goal.strengthValue, forKey: Goal.strengthValueKey)
         self.setValue(goal.creatorReference, forKey: Goal.creatorReferenceKey)
         self.setValue(goal.isPublic, forKey: Goal.isPublicKey)
         self.setValue(goal.reviewForPublic, forKey: Goal.reviewForPublicKey)

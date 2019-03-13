@@ -25,21 +25,23 @@ class WeeklyGoalsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        customGoalTextField.delegate = self
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 1])
     }
 
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
-        GoalController.shared.createGoalWith(goalName: goalName, reviewForPublic: reviewForPublicSwitch.isOn) { (isSuccess) in
+        GoalController.shared.createGoalWith(goalName: goalName, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
             if isSuccess {
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
+                    self?.customGoalTextField.resignFirstResponder()
+                    self?.customGoalTextField.text = ""
                 }
             }
         }
     }
-    
 } // end class
 
 
@@ -58,4 +60,8 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
 
 //MARK: -
 extension WeeklyGoalsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

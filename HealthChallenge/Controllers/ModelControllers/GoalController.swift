@@ -95,7 +95,7 @@ class GoalController {
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
             if isSuccess {
                 let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
-                self.usersGoals = foundGoals
+                self.allPublicGoals = foundGoals
                 completion(true)
             } else {
                 completion(false)
