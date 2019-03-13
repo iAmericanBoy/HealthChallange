@@ -128,14 +128,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jk-aU-67m">
+                                <rect key="frame" x="166" y="492" width="43" height="30"/>
+                                <state key="normal" title="(save)"/>
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="Qxc-du-j74" eventType="touchUpInside" id="m8c-Ec-EXn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OjB-W3-f5k" firstAttribute="leading" secondItem="6pK-Yl-i5L" secondAttribute="leading" constant="50" id="7Rd-Oh-pkF"/>
                             <constraint firstItem="DGC-yf-pZg" firstAttribute="centerX" secondItem="oJT-vt-3HA" secondAttribute="centerX" id="9Vo-UT-MaE"/>
+                            <constraint firstItem="6jk-aU-67m" firstAttribute="centerX" secondItem="oJT-vt-3HA" secondAttribute="centerX" id="I6b-Vr-wFD"/>
                             <constraint firstItem="lN6-3z-Mke" firstAttribute="centerX" secondItem="O68-Yk-Ip7" secondAttribute="centerX" id="NkD-e6-SIR"/>
                             <constraint firstItem="O68-Yk-Ip7" firstAttribute="top" secondItem="lN6-3z-Mke" secondAttribute="bottom" constant="12" id="Qie-MI-li2"/>
                             <constraint firstItem="O68-Yk-Ip7" firstAttribute="leading" secondItem="6pK-Yl-i5L" secondAttribute="leading" constant="24" id="Uea-iB-HAr"/>
+                            <constraint firstItem="6jk-aU-67m" firstAttribute="top" secondItem="DGC-yf-pZg" secondAttribute="bottom" constant="34.5" id="Z1Z-pp-IvP"/>
                             <constraint firstItem="DGC-yf-pZg" firstAttribute="top" secondItem="O68-Yk-Ip7" secondAttribute="bottom" constant="24" id="csH-dB-5RN"/>
                             <constraint firstItem="lN6-3z-Mke" firstAttribute="top" secondItem="OjB-W3-f5k" secondAttribute="bottom" constant="32.5" id="ko2-2t-Bof"/>
                             <constraint firstItem="6pK-Yl-i5L" firstAttribute="trailing" secondItem="O68-Yk-Ip7" secondAttribute="trailing" constant="24" id="olC-ls-neL"/>
