@@ -34,6 +34,7 @@
 		62D067F02238947F00D5410B /* WorkoutTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067EE2238947F00D5410B /* WorkoutTab.storyboard */; };
 		62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F1223894A100D5410B /* GoalsTab.storyboard */; };
 		62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F3223894D500D5410B /* LeaderboardTab.storyboard */; };
+		62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FC22397F3600D5410B /* HealthKitController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		62D067EF2238947F00D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/WorkoutTab.storyboard; sourceTree = "<group>"; };
 		62D067F1223894A100D5410B /* GoalsTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoalsTab.storyboard; sourceTree = "<group>"; };
 		62D067F4223894D500D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/LeaderboardTab.storyboard; sourceTree = "<group>"; };
+		62D067FC22397F3600D5410B /* HealthKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6E332C02236B8650088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		62D067A32236D1D700D5410B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				62D067FC22397F3600D5410B /* HealthKitController.swift */,
 				62D067C7223719A700D5410B /* CloudKitController.swift */,
 				62D067CF223836CA00D5410B /* CallendarControlls */,
 				62D067C4223718FB00D5410B /* ModelControllers */,
@@ -380,6 +383,7 @@
 				62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */,
 				62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */,
 				62D067A92236D23800D5410B /* WeeklyGoalsViewController.swift in Sources */,
+				62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */,
 				62D067C3223718F600D5410B /* UserController.swift in Sources */,
 				B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */,
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
@@ -593,13 +597,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J6B8ZX28ZW;
+				DEVELOPMENT_TEAM = H8C27D6HU3;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = oskman.HealthChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = RG.HealthChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -612,13 +616,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J6B8ZX28ZW;
+				DEVELOPMENT_TEAM = H8C27D6HU3;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = oskman.HealthChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = RG.HealthChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

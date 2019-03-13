@@ -61,7 +61,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="PYh-Wl-MEq">
             <objects>
-                <tabBarController id="b55-gH-Rl5" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ActiveChallengeController" id="b55-gH-Rl5" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="suM-Xu-QUu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
