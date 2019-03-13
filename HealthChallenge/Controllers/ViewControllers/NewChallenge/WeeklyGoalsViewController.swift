@@ -18,6 +18,7 @@ class WeeklyGoalsViewController: UIViewController {
     @IBOutlet weak var customGoalTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var reviewForPublicSwitch: UISwitch!
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -29,7 +30,14 @@ class WeeklyGoalsViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
-        
+        guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
+        GoalController.shared.createGoalWith(goalName: goalName, reviewForPublic: reviewForPublicSwitch.isOn) { (isSuccess) in
+            if isSuccess {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
 } // end class

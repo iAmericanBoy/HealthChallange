@@ -116,6 +116,7 @@
                     </view>
                     <connections>
                         <outlet property="customGoalTextField" destination="msX-Lo-Tuz" id="6LA-QE-Zfo"/>
+                        <outlet property="reviewForPublicSwitch" destination="1lT-O7-Zti" id="M8r-9s-feS"/>
                         <outlet property="saveButton" destination="gUG-Fk-8tn" id="IOr-KK-A6Y"/>
                         <outlet property="tableView" destination="fc6-5s-VpC" id="jkA-eV-7oQ"/>
                         <outlet property="weeklyGoalsLabel" destination="Oq6-Aa-lI7" id="Qmo-3c-MYV"/>

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         _ = UserController.shared.loggedInUser
-//        _ = GoalController.shared.usersGoals
+        _ = GoalController.shared.usersGoals
         _ = ChallengeController.shared.currentChallenge
         return true
     }
