@@ -91,11 +91,9 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.isHidden = true
         } else {
             let calcDate = indexPath.row - firstDay + 2
-            
-            print(calcDate,month, year)
-            
             cell.isHidden = false
             cell.dateLabel.text = "\(calcDate)"
+            cell.cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))
             if calcDate < today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
                 cell.isUserInteractionEnabled = false
                 cell.dateLabel.textColor = UIColor.lightGray
@@ -110,13 +108,25 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCollectionViewCell else {return}
         
         cell.backgroundColor = UIColor.green
+        challengeStartDate = cell.cellDate
+        collectionView.reloadData()
         
-        print(cell.dateLabel.text)
+        guard let date = cell.cellDate else {return}
+        
         if let currentChallenge = ChallengeController.shared.currentChallenge {
             //update the date
+            ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
+                if isSuccess {
+                    //TODO: Pop to next screen
+                }
+            }
         } else {
             // create new Challenge with date
-            
+            ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
+                if isSuccess {
+                    //TODO: Pop to next screen
+                }
+            }
         }
     }
     

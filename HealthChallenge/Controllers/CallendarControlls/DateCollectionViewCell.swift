@@ -10,7 +10,10 @@ import UIKit
 
 class DateCollectionViewCell: UICollectionViewCell {
     
-    
+    //MARK: - Outlets
     @IBOutlet weak var dateLabel: UILabel!
     
+    //MARK: - Properties
+    ///The Date accociated with the cell.
+    var cellDate: Date?
 }
