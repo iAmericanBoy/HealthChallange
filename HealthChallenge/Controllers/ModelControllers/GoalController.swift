@@ -66,7 +66,7 @@ class GoalController {
             if isSuccess {
                 guard let userRecordID = userRecordID else {completion(false); return}
                 
-                let predicate = NSPredicate(format: "%@ == %@", argumentArray: [Goal.creatorReferenceKey,userRecordID])
+                let predicate = NSPredicate(format: "%K == %@", argumentArray: [Goal.creatorReferenceKey,userRecordID])
                 let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
                 
                 CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
@@ -89,7 +89,7 @@ class GoalController {
     /// - parameter isSuccess: Confirms the found goals where appended to allPublicGoals.
     func fetchAllPublicGoals(completion: @escaping (_ isSuccess:Bool) -> Void) {
         
-        let predicate = NSPredicate(format: "%@ == %@", argumentArray: [Goal.isPublicKey,true])
+        let predicate = NSPredicate(format: "%K == %@", argumentArray: [Goal.isPublicKey,true])
         let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
         
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
