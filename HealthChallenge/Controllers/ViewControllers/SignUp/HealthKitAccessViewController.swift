@@ -20,16 +20,15 @@ class HealthKitAccessViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserController.shared.fetchUserLoggedInUser { (success) in
-            if success {
-                if let currentChallenge = ChallengeController.shared.currentChallenge {
-                    //TODO: EditCurrent Challenge if before the startDate
-                } else {
-                    self.showNewChallengeVC()
-                }
+        if let user = UserController.shared.loggedInUser {
+            if let currentChallenge = ChallengeController.shared.currentChallenge {
+                //TODO: EditCurrent Challenge if before the startDate
             } else {
                 self.showNewChallengeVC()
             }
+        } else {
+            //TODO: Add logic to deal with not having a logged in user
+            self.showNewChallengeVC()
         }
     }
     
