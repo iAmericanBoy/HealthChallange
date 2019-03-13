@@ -27,7 +27,7 @@ class StartDateViewController: UIViewController {
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     
     //MARK: - Properties
-    var challengeStartDate: Date?
+    var challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -93,12 +93,22 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             let calcDate = indexPath.row - firstDay + 2
             cell.isHidden = false
             cell.dateLabel.text = "\(calcDate)"
-            cell.cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))
+            let cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))
+            cell.cellDate = cellDate
             if calcDate < today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
                 cell.isUserInteractionEnabled = false
                 cell.dateLabel.textColor = UIColor.lightGray
             } else {
                 cell.isUserInteractionEnabled = true
+            }
+        }
+        
+        //logic to color cells of the selected date and the 30 days in the challenge
+        if let challengeStartDate = challengeStartDate {
+            if cell.cellDate! == challengeStartDate {
+                cell.backgroundColor = .green
+            } else if cell.cellDate! <= challengeStartDate.addingTimeInterval(2592000) && cell.cellDate! >= challengeStartDate {
+                cell.backgroundColor = UIColor.green.withAlphaComponent(0.1)
             }
         }
         return cell
@@ -113,21 +123,21 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         
         guard let date = cell.cellDate else {return}
         
-        if let currentChallenge = ChallengeController.shared.currentChallenge {
-            //update the date
-            ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
-                if isSuccess {
-                    //TODO: Pop to next screen
-                }
-            }
-        } else {
-            // create new Challenge with date
-            ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
-                if isSuccess {
-                    //TODO: Pop to next screen
-                }
-            }
-        }
+//        if let currentChallenge = ChallengeController.shared.currentChallenge {
+//            //update the date
+//            ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
+//                if isSuccess {
+//                    //TODO: Pop to next screen
+//                }
+//            }
+//        } else {
+//            // create new Challenge with date
+//            ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
+//                if isSuccess {
+//                    //TODO: Pop to next screen
+//                }
+//            }
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
