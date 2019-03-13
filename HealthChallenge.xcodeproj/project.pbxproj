@@ -33,6 +33,8 @@
 		B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */; };
 		B6EBA608223822810001F5BF /* GoalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA607223822810001F5BF /* GoalController.swift */; };
 		B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA60922384F6E0001F5BF /* ChallengeController.swift */; };
+		B6EBA60E22386CD30001F5BF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60D22386CD30001F5BF /* CloudKit.framework */; };
+		B6EBA61022396D730001F5BF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60F22396D730001F5BF /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,9 @@
 		B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+MagicStreaks.swift"; sourceTree = "<group>"; };
 		B6EBA607223822810001F5BF /* GoalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalController.swift; sourceTree = "<group>"; };
 		B6EBA60922384F6E0001F5BF /* ChallengeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeController.swift; sourceTree = "<group>"; };
+		B6EBA60B22386CCE0001F5BF /* HealthChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthChallenge.entitlements; sourceTree = "<group>"; };
+		B6EBA60D22386CD30001F5BF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		B6EBA60F22396D730001F5BF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6EBA60E22386CD30001F5BF /* CloudKit.framework in Frameworks */,
+				B6EBA61022396D730001F5BF /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +173,7 @@
 			children = (
 				B6E332BA2236B8650088D6FF /* HealthChallenge */,
 				B6E332B92236B8650088D6FF /* Products */,
+				B6EBA60C22386CD30001F5BF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +188,7 @@
 		B6E332BA2236B8650088D6FF /* HealthChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				B6EBA60B22386CCE0001F5BF /* HealthChallenge.entitlements */,
 				62D067BE2237182900D5410B /* Model */,
 				62D067A32236D1D700D5410B /* Controllers */,
 				B6E332CE2236B8910088D6FF /* View */,
@@ -205,6 +214,15 @@
 				B6E332BF2236B8650088D6FF /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B6EBA60C22386CD30001F5BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6EBA60F22396D730001F5BF /* HealthKit.framework */,
+				B6EBA60D22386CD30001F5BF /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +257,17 @@
 				TargetAttributes = {
 					B6E332B72236B8650088D6FF = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -446,6 +475,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J6B8ZX28ZW;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
@@ -464,6 +494,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J6B8ZX28ZW;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
