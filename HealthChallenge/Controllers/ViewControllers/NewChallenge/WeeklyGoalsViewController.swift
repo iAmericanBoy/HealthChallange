@@ -28,7 +28,12 @@ class WeeklyGoalsViewController: UIViewController {
         customGoalTextField.delegate = self
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 1])
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
@@ -65,7 +70,7 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedGoal = GoalController.shared.allPublicGoals[indexPath.row]
-        if goals.index(of: selectedGoal) == nil {
+        if goals.index(of: selectedGoal) == nil && goals.count < 4 {
             goals.append(selectedGoal)
         } else {
             guard let index = goals.index(of: selectedGoal) else {return}
@@ -74,8 +79,15 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
         
         //Animating the change
         tableView.beginUpdates()
-        tableView.reloadRows(at: [indexPath], with: .none)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
+        
+        if goals.count == 4 {
+            guard let currentChallenge = ChallengeController.shared.currentChallenge else {return}
+            ChallengeController.shared.add(weeklyGoals: goals, toChallange: currentChallenge) { (isSuccess) in
+                //TODO: Pop to next VC
+            }
+        }
     }
 }
 
