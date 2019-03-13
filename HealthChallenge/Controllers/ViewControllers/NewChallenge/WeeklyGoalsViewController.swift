@@ -19,6 +19,7 @@ class WeeklyGoalsViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -37,13 +38,16 @@ class WeeklyGoalsViewController: UIViewController {
 // MARK: - TableView DataSource/Delegate
 extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Manage number of rows
         return GoalController.shared.allPublicGoals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
-        
+        cell.textLabel?.text = GoalController.shared.allPublicGoals[indexPath.row].name
         return cell
     }
+}
+
+//MARK: -
+extension WeeklyGoalsViewController: UITextFieldDelegate {
 }
