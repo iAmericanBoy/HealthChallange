@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Invite Others View Controller-->
+        <scene sceneID="8J3-yZ-zoF">
+            <objects>
+                <viewController storyboardIdentifier="InviteOthers" id="XEB-4f-Phb" customClass="InviteOthersViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H0X-pH-Jbw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Others" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wJG-v8-SBY">
+                                <rect key="frame" x="50" y="70" width="98" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltQ-bV-dyk">
+                                <rect key="frame" x="160" y="65.5" width="49" height="30"/>
+                                <state key="normal" title="(share)"/>
+                                <connections>
+                                    <action selector="shareButtonTapped:" destination="XEB-4f-Phb" eventType="touchUpInside" id="664-aQ-lka"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8uk-W4-dYG">
+                                <rect key="frame" x="12" y="141" width="351" height="514"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DUh-Yf-tRE">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bi7-9d-NNy">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8uk-W4-dYG" firstAttribute="leading" secondItem="eMT-cu-2uP" secondAttribute="leading" constant="12" id="3Pq-gs-DbI"/>
+                            <constraint firstItem="8uk-W4-dYG" firstAttribute="top" secondItem="wJG-v8-SBY" secondAttribute="bottom" constant="50" id="4JB-UY-7S9"/>
+                            <constraint firstItem="eMT-cu-2uP" firstAttribute="bottom" secondItem="8uk-W4-dYG" secondAttribute="bottom" constant="12" id="63e-z7-uQT"/>
+                            <constraint firstItem="ltQ-bV-dyk" firstAttribute="leading" secondItem="wJG-v8-SBY" secondAttribute="trailing" constant="12" id="IyW-2o-1q1"/>
+                            <constraint firstItem="eMT-cu-2uP" firstAttribute="trailing" secondItem="8uk-W4-dYG" secondAttribute="trailing" constant="12" id="LMJ-2F-sFa"/>
+                            <constraint firstItem="ltQ-bV-dyk" firstAttribute="centerY" secondItem="wJG-v8-SBY" secondAttribute="centerY" id="dOO-Xc-wfF"/>
+                            <constraint firstItem="wJG-v8-SBY" firstAttribute="top" secondItem="eMT-cu-2uP" secondAttribute="top" constant="50" id="nai-hP-JWv"/>
+                            <constraint firstItem="wJG-v8-SBY" firstAttribute="leading" secondItem="eMT-cu-2uP" secondAttribute="leading" constant="50" id="vBA-kG-pCO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eMT-cu-2uP"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="8uk-W4-dYG" id="hWr-La-KK9"/>
+                        <outlet property="inviteOthersLabel" destination="wJG-v8-SBY" id="yPc-fY-otw"/>
+                        <outlet property="shareButton" destination="ltQ-bV-dyk" id="WpE-T0-j6U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XO3-t8-vM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3401" y="797"/>
+        </scene>
+        <!--SignUp-->
+        <scene sceneID="jJw-Tc-M9N">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="SignUp" storyboardName="SignUp" referencedIdentifier="SignUp" id="lom-LN-WOH" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7ag-aa-dBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1186" y="-164"/>
+        </scene>
+        <!--HealthKitAccess-->
+        <scene sceneID="EiW-Ve-qjg">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="HealthKitAccess" storyboardName="HealthKitAccess" referencedIdentifier="HealthKitAccess" id="zC9-Wp-Ldd" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xJl-0V-lpc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1378" y="-165"/>
+        </scene>
+        <!--StartDate-->
+        <scene sceneID="irY-sN-aK4">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="StartDate" storyboardName="StartDate" referencedIdentifier="StartDate" id="WpB-K2-oNa" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LvT-YZ-TUX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1198" y="-112"/>
+        </scene>
+        <!--WeeklyGoals-->
+        <scene sceneID="9bZ-ht-iEa">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="WeeklyGoals" storyboardName="WeeklyGoals" referencedIdentifier="WeeklyGoals" id="gNk-kP-Qjv" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9kf-sd-rnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1395" y="-112"/>
+        </scene>
+        <!--MonthlyGoals-->
+        <scene sceneID="fPN-iq-OWW">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="MonthlyGoals" storyboardName="MonthlyGoals" referencedIdentifier="MonthlyGoals" id="bCh-ZE-2f4" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qMS-Ig-S0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1594" y="-112"/>
+        </scene>
+    </scenes>
+</document>
