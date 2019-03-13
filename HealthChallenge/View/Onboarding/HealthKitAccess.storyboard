@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Health Kit Access View Controller-->
+        <scene sceneID="aK7-TU-UY1">
+            <objects>
+                <viewController storyboardIdentifier="HealthKitAccess" id="Ct1-Hw-pVe" customClass="HealthKitAccessViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DBa-wi-iMu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow HealthKit Access" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZM6-Vh-u8E">
+                                <rect key="frame" x="50" y="221" width="175.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="VM3-jr-hRv">
+                                <rect key="frame" x="114.5" y="318.5" width="146" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyv-aE-wXG">
+                                        <rect key="frame" x="0.0" y="0.0" width="37" height="30"/>
+                                        <state key="normal" title="Allow"/>
+                                        <connections>
+                                            <action selector="allowButtonTapped:" destination="Ct1-Hw-pVe" eventType="touchUpInside" id="uAB-bn-FX3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9U-gs-hBK">
+                                        <rect key="frame" x="72" y="0.0" width="74" height="30"/>
+                                        <state key="normal" title="Dont Allow"/>
+                                        <connections>
+                                            <action selector="dontAllowButtonTapped:" destination="Ct1-Hw-pVe" eventType="touchUpInside" id="CHh-Pn-eHF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HealKit info and why we are using it." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIM-38-3Ap">
+                                <rect key="frame" x="50" y="253.5" width="275" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZM6-Vh-u8E" firstAttribute="leading" secondItem="lIM-38-3Ap" secondAttribute="leading" id="2le-GR-hyG"/>
+                            <constraint firstItem="oQB-i7-Bc9" firstAttribute="trailing" secondItem="lIM-38-3Ap" secondAttribute="trailing" constant="50" id="9MJ-Xz-67V"/>
+                            <constraint firstItem="ZM6-Vh-u8E" firstAttribute="bottom" secondItem="lIM-38-3Ap" secondAttribute="top" constant="-12" id="T4F-8W-KPd"/>
+                            <constraint firstItem="VM3-jr-hRv" firstAttribute="centerY" secondItem="DBa-wi-iMu" secondAttribute="centerY" id="b2a-IK-a9d"/>
+                            <constraint firstItem="lIM-38-3Ap" firstAttribute="bottom" secondItem="VM3-jr-hRv" secondAttribute="top" constant="-24" id="jTq-9S-h6U"/>
+                            <constraint firstItem="VM3-jr-hRv" firstAttribute="centerX" secondItem="DBa-wi-iMu" secondAttribute="centerX" id="uCn-mt-4lh"/>
+                            <constraint firstItem="lIM-38-3Ap" firstAttribute="leading" secondItem="oQB-i7-Bc9" secondAttribute="leading" constant="50" id="ulb-MK-CZ0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oQB-i7-Bc9"/>
+                    </view>
+                    <connections>
+                        <outlet property="allowAccessLabel" destination="ZM6-Vh-u8E" id="LtS-du-OOT"/>
+                        <outlet property="allowButton" destination="Xyv-aE-wXG" id="hVM-nr-vVS"/>
+                        <outlet property="dontAllowButton" destination="X9U-gs-hBK" id="fce-q8-N0m"/>
+                        <outlet property="paragraphLabel" destination="lIM-38-3Ap" id="9yn-Sl-pPJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nry-7C-EYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2090" y="124"/>
+        </scene>
+    </scenes>
+</document>

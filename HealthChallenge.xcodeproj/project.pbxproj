@@ -23,6 +23,17 @@
 		62D067C8223719A700D5410B /* CloudKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067C7223719A700D5410B /* CloudKitController.swift */; };
 		62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067CB2238220700D5410B /* PhotoSelectorViewController.swift */; };
 		62D067CE2238302800D5410B /* CalendarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067CD2238302800D5410B /* CalendarController.swift */; };
+		62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067D22238474700D5410B /* DateCollectionViewCell.swift */; };
+		62D067D62238911200D5410B /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067D42238911200D5410B /* SignUp.storyboard */; };
+		62D067D82238914400D5410B /* HealthKitAccess.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067D72238914400D5410B /* HealthKitAccess.storyboard */; };
+		62D067E22238921B00D5410B /* StartDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067E02238921B00D5410B /* StartDate.storyboard */; };
+		62D067E52238924E00D5410B /* WeeklyGoals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067E32238924E00D5410B /* WeeklyGoals.storyboard */; };
+		62D067E72238928700D5410B /* MonthlyGoals.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067E62238928700D5410B /* MonthlyGoals.storyboard */; };
+		62D067EA223892A400D5410B /* InviteOthers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067E8223892A400D5410B /* InviteOthers.storyboard */; };
+		62D067EC2238943B00D5410B /* FoodTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067EB2238943B00D5410B /* FoodTab.storyboard */; };
+		62D067F02238947F00D5410B /* WorkoutTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067EE2238947F00D5410B /* WorkoutTab.storyboard */; };
+		62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F1223894A100D5410B /* GoalsTab.storyboard */; };
+		62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F3223894D500D5410B /* LeaderboardTab.storyboard */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
@@ -52,6 +63,17 @@
 		62D067C7223719A700D5410B /* CloudKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitController.swift; sourceTree = "<group>"; };
 		62D067CB2238220700D5410B /* PhotoSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorViewController.swift; sourceTree = "<group>"; };
 		62D067CD2238302800D5410B /* CalendarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarController.swift; sourceTree = "<group>"; };
+		62D067D22238474700D5410B /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		62D067D52238911200D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/SignUp.storyboard; sourceTree = "<group>"; };
+		62D067D72238914400D5410B /* HealthKitAccess.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HealthKitAccess.storyboard; sourceTree = "<group>"; };
+		62D067E12238921B00D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/StartDate.storyboard; sourceTree = "<group>"; };
+		62D067E42238924E00D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/WeeklyGoals.storyboard; sourceTree = "<group>"; };
+		62D067E62238928700D5410B /* MonthlyGoals.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MonthlyGoals.storyboard; sourceTree = "<group>"; };
+		62D067E9223892A400D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/InviteOthers.storyboard; sourceTree = "<group>"; };
+		62D067EB2238943B00D5410B /* FoodTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FoodTab.storyboard; sourceTree = "<group>"; };
+		62D067EF2238947F00D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/WorkoutTab.storyboard; sourceTree = "<group>"; };
+		62D067F1223894A100D5410B /* GoalsTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoalsTab.storyboard; sourceTree = "<group>"; };
+		62D067F4223894D500D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/LeaderboardTab.storyboard; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6E332C02236B8650088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,8 +179,40 @@
 			isa = PBXGroup;
 			children = (
 				62D067CD2238302800D5410B /* CalendarController.swift */,
+				62D067D22238474700D5410B /* DateCollectionViewCell.swift */,
 			);
 			path = CallendarControlls;
+			sourceTree = "<group>";
+		};
+		62D067DC2238918500D5410B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				62D067D72238914400D5410B /* HealthKitAccess.storyboard */,
+				62D067D42238911200D5410B /* SignUp.storyboard */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		62D067DF223891FF00D5410B /* NewChallenge */ = {
+			isa = PBXGroup;
+			children = (
+				62D067E02238921B00D5410B /* StartDate.storyboard */,
+				62D067E32238924E00D5410B /* WeeklyGoals.storyboard */,
+				62D067E62238928700D5410B /* MonthlyGoals.storyboard */,
+				62D067E8223892A400D5410B /* InviteOthers.storyboard */,
+			);
+			path = NewChallenge;
+			sourceTree = "<group>";
+		};
+		62D067ED2238944700D5410B /* TabBarViews */ = {
+			isa = PBXGroup;
+			children = (
+				62D067EB2238943B00D5410B /* FoodTab.storyboard */,
+				62D067EE2238947F00D5410B /* WorkoutTab.storyboard */,
+				62D067F1223894A100D5410B /* GoalsTab.storyboard */,
+				62D067F3223894D500D5410B /* LeaderboardTab.storyboard */,
+			);
+			path = TabBarViews;
 			sourceTree = "<group>";
 		};
 		B6E332AF2236B8650088D6FF = {
@@ -203,6 +257,9 @@
 			isa = PBXGroup;
 			children = (
 				B6E332BF2236B8650088D6FF /* Main.storyboard */,
+				62D067ED2238944700D5410B /* TabBarViews */,
+				62D067DF223891FF00D5410B /* NewChallenge */,
+				62D067DC2238918500D5410B /* Onboarding */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -265,9 +322,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62D067D82238914400D5410B /* HealthKitAccess.storyboard in Resources */,
 				B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */,
 				B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */,
+				62D067D62238911200D5410B /* SignUp.storyboard in Resources */,
+				62D067F02238947F00D5410B /* WorkoutTab.storyboard in Resources */,
 				B6E332C12236B8650088D6FF /* Main.storyboard in Resources */,
+				62D067E52238924E00D5410B /* WeeklyGoals.storyboard in Resources */,
+				62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */,
+				62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */,
+				62D067EC2238943B00D5410B /* FoodTab.storyboard in Resources */,
+				62D067EA223892A400D5410B /* InviteOthers.storyboard in Resources */,
+				62D067E22238921B00D5410B /* StartDate.storyboard in Resources */,
+				62D067E72238928700D5410B /* MonthlyGoals.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +362,7 @@
 				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
+				62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */,
 				B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */,
 				B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
@@ -307,6 +375,54 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		62D067D42238911200D5410B /* SignUp.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62D067D52238911200D5410B /* Base */,
+			);
+			name = SignUp.storyboard;
+			sourceTree = "<group>";
+		};
+		62D067E02238921B00D5410B /* StartDate.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62D067E12238921B00D5410B /* Base */,
+			);
+			name = StartDate.storyboard;
+			sourceTree = "<group>";
+		};
+		62D067E32238924E00D5410B /* WeeklyGoals.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62D067E42238924E00D5410B /* Base */,
+			);
+			name = WeeklyGoals.storyboard;
+			sourceTree = "<group>";
+		};
+		62D067E8223892A400D5410B /* InviteOthers.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62D067E9223892A400D5410B /* Base */,
+			);
+			name = InviteOthers.storyboard;
+			sourceTree = "<group>";
+		};
+		62D067EE2238947F00D5410B /* WorkoutTab.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62D067EF2238947F00D5410B /* Base */,
+			);
+			name = WorkoutTab.storyboard;
+			sourceTree = "<group>";
+		};
+		62D067F3223894D500D5410B /* LeaderboardTab.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				62D067F4223894D500D5410B /* Base */,
+			);
+			name = LeaderboardTab.storyboard;
+			sourceTree = "<group>";
+		};
 		B6E332BF2236B8650088D6FF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
