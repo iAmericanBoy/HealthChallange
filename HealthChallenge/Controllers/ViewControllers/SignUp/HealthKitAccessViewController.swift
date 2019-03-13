@@ -39,7 +39,9 @@ class HealthKitAccessViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func allowButtonTapped(_ sender: Any) {
-        
+        HealthKitController.shared.authorizeHK { (success) in
+            //handle 
+        }
     }
     
     @IBAction func dontAllowButtonTapped(_ sender: Any) {
