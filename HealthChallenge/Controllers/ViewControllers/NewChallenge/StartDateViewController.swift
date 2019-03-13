@@ -123,21 +123,21 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         
         guard let date = cell.cellDate else {return}
         
-//        if let currentChallenge = ChallengeController.shared.currentChallenge {
-//            //update the date
-//            ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
-//                if isSuccess {
-//                    //TODO: Pop to next screen
-//                }
-//            }
-//        } else {
-//            // create new Challenge with date
-//            ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
-//                if isSuccess {
-//                    //TODO: Pop to next screen
-//                }
-//            }
-//        }
+        if let currentChallenge = ChallengeController.shared.currentChallenge {
+            //update the date
+            ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
+                if isSuccess {
+                    //TODO: Pop to next screen
+                }
+            }
+        } else {
+            // create new Challenge with date
+            ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
+                if isSuccess {
+                    //TODO: Pop to next screen
+                }
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
