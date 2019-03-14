@@ -94,7 +94,7 @@ class ChallengeController {
         goals.forEach { (reference) in
             guard let goalReference = reference else {completion(false);return}
             
-            let predicate = NSPredicate(format: "%K == %@", argumentArray: [CKRecord.ID.self, goalReference.recordID])
+            let predicate = NSPredicate(format: "%K == %@", argumentArray: ["recordName", goalReference.recordID.recordName])
             let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
             CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (isSuccess, foundRecords) in
                 if isSuccess {

@@ -10,8 +10,8 @@ import UIKit
 
 class WeeklyGoalsViewController: UIViewController {
     
-    let challengeController = ChallengeController()
-    var goals: [Goal] = []
+    //MARK: - Properties
+    var selectedGoals: [Goal] = []
     
     // MARK: - Outlets
     @IBOutlet weak var weeklyGoalsLabel: UILabel!
@@ -52,29 +52,50 @@ class WeeklyGoalsViewController: UIViewController {
 
 // MARK: - TableView DataSource/Delegate
 extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return GoalController.shared.allGoalsFromCK.count
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "User" : "Public"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GoalController.shared.allPublicGoals.count
+        return GoalController.shared.allGoalsFromCK[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
-        cell.textLabel?.text = GoalController.shared.allPublicGoals[indexPath.row].name
         
-        if goals.contains(GoalController.shared.allPublicGoals[indexPath.row]) {
+        cell.textLabel?.text = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name
+        
+        if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
             cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         return cell
     }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedGoal = GoalController.shared.allPublicGoals[indexPath.row]
-        if goals.index(of: selectedGoal) == nil && goals.count < 4 {
-            goals.append(selectedGoal)
+        if selectedGoals.index(of: selectedGoal) == nil && selectedGoals.count < 4 {
+            selectedGoals.append(selectedGoal)
         } else {
-            guard let index = goals.index(of: selectedGoal) else {return}
-            goals.remove(at: index)
+            guard let index = selectedGoals.index(of: selectedGoal) else {return}
+            selectedGoals.remove(at: index)
         }
         
         //Animating the change
@@ -82,9 +103,9 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
         tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
         
-        if goals.count == 4 {
+        if selectedGoals.count == 4 {
             guard let currentChallenge = ChallengeController.shared.currentChallenge else {return}
-            ChallengeController.shared.add(weeklyGoals: goals, toChallange: currentChallenge) { (isSuccess) in
+            ChallengeController.shared.add(weeklyGoals: selectedGoals, toChallange: currentChallenge) { (isSuccess) in
                 //TODO: Pop to next VC
             }
         }
