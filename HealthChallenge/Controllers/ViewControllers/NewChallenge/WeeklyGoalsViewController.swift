@@ -86,11 +86,18 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
+        if editingStyle == .delete {
+            let goalToDelete = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
+            GoalController.shared.delete(goal: goalToDelete) { (isSuccess) in
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedGoal = GoalController.shared.allPublicGoals[indexPath.row]
+        let selectedGoal = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
         if selectedGoals.index(of: selectedGoal) == nil && selectedGoals.count < 4 {
             selectedGoals.append(selectedGoal)
         } else {
