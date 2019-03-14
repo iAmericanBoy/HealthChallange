@@ -12,8 +12,21 @@ class DateCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var button: UIButton!
     
     //MARK: - Properties
     ///The Date associated with the cell.
     var cellDate: Date?
+    
+    // Delegate Property
+    weak var delegate: DateCollectionViewCellDelegate?
+    
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        self.delegate?.collectionViewCell(self, buttonTapped: button)
+    }
+}
+// Delegate function to segue off cell selection
+protocol DateCollectionViewCellDelegate: class {
+    func collectionViewCell(_ cell: UICollectionViewCell, buttonTapped: UIButton)
 }

@@ -35,6 +35,11 @@
 		62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F1223894A100D5410B /* GoalsTab.storyboard */; };
 		62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F3223894D500D5410B /* LeaderboardTab.storyboard */; };
 		62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FC22397F3600D5410B /* HealthKitController.swift */; };
+		62D067FF223AB68100D5410B /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FE223AB68100D5410B /* FoodViewController.swift */; };
+		62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06800223AB68E00D5410B /* WorkoutViewController.swift */; };
+		62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06802223AB69900D5410B /* GoalsViewController.swift */; };
+		62D06805223AB6A900D5410B /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06804223AB6A900D5410B /* LeaderboardViewController.swift */; };
+		62D06808223AC65A00D5410B /* AddWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
@@ -79,6 +84,11 @@
 		62D067F1223894A100D5410B /* GoalsTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoalsTab.storyboard; sourceTree = "<group>"; };
 		62D067F4223894D500D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/LeaderboardTab.storyboard; sourceTree = "<group>"; };
 		62D067FC22397F3600D5410B /* HealthKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
+		62D067FE223AB68100D5410B /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
+		62D06800223AB68E00D5410B /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		62D06802223AB69900D5410B /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
+		62D06804223AB6A900D5410B /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutsViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6E332C02236B8650088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +125,7 @@
 			children = (
 				62D067B42236FD6200D5410B /* SignUp */,
 				62D067B52236FD9F00D5410B /* NewChallenge */,
+				62D06806223AB6B200D5410B /* ActiveChallege */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -225,6 +236,18 @@
 				62D067F3223894D500D5410B /* LeaderboardTab.storyboard */,
 			);
 			path = TabBarViews;
+			sourceTree = "<group>";
+		};
+		62D06806223AB6B200D5410B /* ActiveChallege */ = {
+			isa = PBXGroup;
+			children = (
+				62D067FE223AB68100D5410B /* FoodViewController.swift */,
+				62D06800223AB68E00D5410B /* WorkoutViewController.swift */,
+				62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */,
+				62D06802223AB69900D5410B /* GoalsViewController.swift */,
+				62D06804223AB6A900D5410B /* LeaderboardViewController.swift */,
+			);
+			path = ActiveChallege;
 			sourceTree = "<group>";
 		};
 		B6E332AF2236B8650088D6FF = {
@@ -396,13 +419,18 @@
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
+				62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
 				62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */,
 				B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */,
+				62D06808223AC65A00D5410B /* AddWorkoutsViewController.swift in Sources */,
+				62D06805223AB6A900D5410B /* LeaderboardViewController.swift in Sources */,
 				B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */,
+				62D067FF223AB68100D5410B /* FoodViewController.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
+				62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
