@@ -95,7 +95,6 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.backgroundColor = .white
         cell.dateLabel.textColor = .black
         
-        
         if indexPath.item <= firstDay - 2 {
             cell.isHidden = true
         } else {

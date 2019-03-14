@@ -110,7 +110,7 @@
                                     <action selector="changePhotoButtonTapped:" destination="HG6-nC-OYI" eventType="touchUpInside" id="Ne5-CA-HS7"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IFM-5q-X5l">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stockPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="IFM-5q-X5l">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="202.5"/>
                             </imageView>
                         </subviews>
@@ -137,4 +137,7 @@
             <point key="canvasLocation" x="2005" y="124"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="stockPhoto" width="512" height="512"/>
+    </resources>
 </document>
