@@ -39,6 +39,11 @@ class StartDateViewController: UIViewController {
         monthLabel.text = "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 0])
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
+        calendarCollectionView.reloadData()
+    }
     
     //MARK: - Private Functions
     func updateViews() {

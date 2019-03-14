@@ -45,17 +45,13 @@ class Challenge {
     
     init?(record: CKRecord) {
         guard let name = record[Challenge.nameKey] as? String,
-            let startDay = record[Challenge.startDayKey] as? Date,
-            let weekOneGoal = record[Challenge.weekOneGoalKey] as? CKRecord.Reference,
-            let weekTwoGoal = record[Challenge.weekTwoGoalKey] as? CKRecord.Reference,
-            let weekThreeGoal = record[Challenge.weekThreeGoalKey] as? CKRecord.Reference,
-            let weekFourGoal = record[Challenge.weekFourGoalKey] as? CKRecord.Reference else {return nil}
+            let startDay = record[Challenge.startDayKey] as? Date else {return nil}
         
         self.name = name
-        self.weekOneGoal = weekOneGoal
-        self.weekTwoGoal = weekTwoGoal
-        self.weekThreeGoal = weekThreeGoal
-        self.weekFourGoal = weekFourGoal
+        self.weekOneGoal = record[Challenge.weekOneGoalKey] as? CKRecord.Reference
+        self.weekTwoGoal = record[Challenge.weekTwoGoalKey] as? CKRecord.Reference
+        self.weekThreeGoal = record[Challenge.weekThreeGoalKey] as? CKRecord.Reference
+        self.weekFourGoal = record[Challenge.weekFourGoalKey] as? CKRecord.Reference
         self.startDay = startDay
         self.recordID = record.recordID
     }
@@ -68,6 +64,7 @@ extension CKRecord {
         
         self.setValue(challenge.name, forKey: Challenge.nameKey)
         self.setValue(challenge.startDay, forKey: Challenge.startDayKey)
+        self.setValue(challenge.finishDay, forKey: Challenge.finishDayKey)
         self.setValue(challenge.weekOneGoal, forKey: Challenge.weekOneGoalKey)
         self.setValue(challenge.weekTwoGoal, forKey: Challenge.weekTwoGoalKey)
         self.setValue(challenge.weekThreeGoal, forKey: Challenge.weekThreeGoalKey)

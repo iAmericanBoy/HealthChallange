@@ -49,9 +49,9 @@ class ChallengeController {
     func fetchCurrentChallenge(_ completion: @escaping (_ isSuccess: Bool) -> Void) {
         let currentDay = Date()
         let olderThenStart = NSPredicate(format: "%K >= %@ ", argumentArray: [Challenge.startDayKey,currentDay])
-        let youngerThenFinish = NSPredicate(format: "%K <= %@ ", argumentArray: [Challenge.finishDayKey,currentDay])
+//        let youngerThenFinish = NSPredicate(format: "%K <= %@ ", argumentArray: [Challenge.finishDayKey,currentDay.addingTimeInterval(2592000)])
         
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart,youngerThenFinish])
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart])
         
         let query = CKQuery(recordType: Challenge.typeKey, predicate: predicate)
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.privateDB) { (isSuccess, foundRecords) in
