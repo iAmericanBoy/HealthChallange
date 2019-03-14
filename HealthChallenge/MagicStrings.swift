@@ -14,3 +14,8 @@ class NotificationStrings {
     /// "weekGoalsOfChallengeFound"
     static let weekGoalsFound = "weekGoalsOfChallengeFound"
 }
+
+class UserDefaultStrings {
+    ///"reviewForPubicSwitch"
+    static let reviewForPublic = "reviewForPubicSwitch"
+}

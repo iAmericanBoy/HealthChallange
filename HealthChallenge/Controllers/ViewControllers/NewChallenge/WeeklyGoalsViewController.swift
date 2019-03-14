@@ -50,8 +50,14 @@ class WeeklyGoalsViewController: UIViewController {
         }
     }
     
+    @IBAction func reviewForPublicSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaultStrings.reviewForPublic)
+    }
+    
     //MARK: - Private Functions
     func updateViews() {
+        reviewForPublicSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultStrings.reviewForPublic)
+
         reviewForPublicSwitch.isHidden = true
         reviewForPublicLabel.isHidden = true
     }
