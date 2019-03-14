@@ -14,6 +14,6 @@ class DateCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     
     //MARK: - Properties
-    ///The Date accociated with the cell.
+    ///The Date associated with the cell.
     var cellDate: Date?
 }

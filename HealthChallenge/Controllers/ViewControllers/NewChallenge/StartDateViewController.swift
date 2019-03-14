@@ -91,6 +91,7 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         let today = calendarController.todaysDate
         let year = calendarController.currentYear
         let month = calendarController.currentMonthIndex
+        cell.layer.cornerRadius = 20
         cell.backgroundColor = .white
         cell.dateLabel.textColor = .black
         
