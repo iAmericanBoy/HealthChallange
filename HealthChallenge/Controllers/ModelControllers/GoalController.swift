@@ -17,8 +17,15 @@ class GoalController {
     ///All the goals a user created.
     var usersGoals: [Goal] = []
     
-    ///All the publicly availabel Goals.
+    ///All the publicly available Goals.
     var allPublicGoals: [Goal] = []
+    
+    ///All Goals from CK
+    var allGoalsFromCK: [[Goal]] {
+        get {
+            return [usersGoals,allPublicGoals]
+        }
+    }
     
     //MARK: - init
     init() {

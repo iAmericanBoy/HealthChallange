@@ -56,6 +56,9 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1lT-O7-Zti">
                                                 <rect key="frame" x="313" y="5" width="44" height="31"/>
+                                                <connections>
+                                                    <action selector="reviewForPublicSwitchChanged:" destination="PC0-fm-jlC" eventType="valueChanged" id="nII-sM-sxd"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
@@ -65,25 +68,8 @@
                                 <rect key="frame" x="0.0" y="197" width="375" height="470"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userGoalCell" textLabel="1Cn-1B-oKs" style="IBUITableViewCellStyleDefault" id="tYz-zX-y9p">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tYz-zX-y9p" id="tqr-Dk-PI4">
-                                            <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Cn-1B-oKs">
-                                                    <rect key="frame" x="15" y="0.0" width="321" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="goalCell" textLabel="Dwq-t8-fCf" style="IBUITableViewCellStyleDefault" id="6DK-RK-4SE">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6DK-RK-4SE" id="TRU-B7-gM7">
                                             <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
@@ -116,6 +102,7 @@
                     </view>
                     <connections>
                         <outlet property="customGoalTextField" destination="msX-Lo-Tuz" id="6LA-QE-Zfo"/>
+                        <outlet property="reviewForPublicLabel" destination="WFC-jn-gnY" id="Cvf-TC-h9z"/>
                         <outlet property="reviewForPublicSwitch" destination="1lT-O7-Zti" id="M8r-9s-feS"/>
                         <outlet property="saveButton" destination="gUG-Fk-8tn" id="IOr-KK-A6Y"/>
                         <outlet property="tableView" destination="fc6-5s-VpC" id="jkA-eV-7oQ"/>
