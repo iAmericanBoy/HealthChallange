@@ -38,19 +38,22 @@ class StartDateViewController: UIViewController {
         previousMonthButton.isHidden = true
         monthLabel.text = "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 0])
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.challengeFoundNotification), object: nil, queue: nil) { [weak self] (_) in
+            self?.updateViews()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
-        calendarCollectionView.reloadData()
+        updateViews()
     }
     
     //MARK: - Private Functions
     func updateViews() {
         DispatchQueue.main.async {
+            self.challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
             self.calendarCollectionView.reloadData()
+            self.monthLabel.text = "\(self.calendarController.monthsArray[self.calendarController.currentMonthIndex - 1]) \(self.calendarController.currentYear)"
         }
-        monthLabel.text = "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
     }
 
     // MARK: - Actions

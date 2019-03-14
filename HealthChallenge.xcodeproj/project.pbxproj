@@ -46,6 +46,7 @@
 		B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA60922384F6E0001F5BF /* ChallengeController.swift */; };
 		B6EBA60E22386CD30001F5BF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60D22386CD30001F5BF /* CloudKit.framework */; };
 		B6EBA61022396D730001F5BF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60F22396D730001F5BF /* HealthKit.framework */; };
+		B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA6112239DA400001F5BF /* MagicStrings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		B6EBA60B22386CCE0001F5BF /* HealthChallenge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthChallenge.entitlements; sourceTree = "<group>"; };
 		B6EBA60D22386CD30001F5BF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B6EBA60F22396D730001F5BF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		B6EBA6112239DA400001F5BF /* MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicStrings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 				62D067A32236D1D700D5410B /* Controllers */,
 				B6E332CE2236B8910088D6FF /* View */,
 				B6E332BB2236B8650088D6FF /* AppDelegate.swift */,
+				B6EBA6112239DA400001F5BF /* MagicStrings.swift */,
 				B6E332CD2236B87E0088D6FF /* Resources */,
 			);
 			path = HealthChallenge;
@@ -388,6 +391,7 @@
 				B6EBA608223822810001F5BF /* GoalController.swift in Sources */,
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
+				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
 				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,

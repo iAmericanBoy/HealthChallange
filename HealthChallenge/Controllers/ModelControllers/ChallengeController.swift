@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+import NotificationCenter
 
 class ChallengeController {
     //MARK: - Singleton
@@ -19,7 +20,11 @@ class ChallengeController {
     
     //MARK: - init
     init() {
-        fetchCurrentChallenge { (_) in
+        fetchCurrentChallenge { (isSuccess) in
+            if isSuccess {
+                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFoundNotification), object: nil, userInfo: nil)
+                NotificationCenter.default.post(challengeFound)
+            }
         }
     }
     
