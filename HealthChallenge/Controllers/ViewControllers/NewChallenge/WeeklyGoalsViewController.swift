@@ -19,6 +19,7 @@ class WeeklyGoalsViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var reviewForPublicSwitch: UISwitch!
+    @IBOutlet weak var reviewForPublicLabel: UILabel!
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ class WeeklyGoalsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateViews()
         tableView.reloadData()
     }
     
@@ -47,6 +49,13 @@ class WeeklyGoalsViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: - Private Functions
+    func updateViews() {
+        reviewForPublicSwitch.isHidden = true
+        reviewForPublicLabel.isHidden = true
+    }
+    
 } // end class
 
 
@@ -124,5 +133,15 @@ extension WeeklyGoalsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        reviewForPublicSwitch.isHidden = false
+        reviewForPublicLabel.isHidden = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        reviewForPublicSwitch.isHidden = true
+        reviewForPublicLabel.isHidden = true
     }
 }
