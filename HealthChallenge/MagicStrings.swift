@@ -10,5 +10,7 @@ import Foundation
 
 class NotificationStrings {
     /// "challengeFound"
-    static let challengeFoundNotification = "challengeFound"
+    static let challengeFound = "challengeFound"
+    /// "weekGoalsOfChallengeFound"
+    static let weekGoalsFound = "weekGoalsOfChallengeFound"
 }

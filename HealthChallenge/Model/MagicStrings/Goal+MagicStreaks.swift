@@ -11,6 +11,8 @@ import Foundation
 extension Goal {
     /// "Goal"
     static let typeKey = "Goal"
+    /// "recordID"
+    static let recordIDKey = "recordID"
     /// "name"
     static let nameKey = "name"
     /// "isPublic"

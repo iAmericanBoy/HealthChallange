@@ -38,7 +38,7 @@ class StartDateViewController: UIViewController {
         previousMonthButton.isHidden = true
         monthLabel.text = "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 0])
-        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.challengeFoundNotification), object: nil, queue: nil) { [weak self] (_) in
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, queue: nil) { [weak self] (_) in
             self?.updateViews()
         }
     }

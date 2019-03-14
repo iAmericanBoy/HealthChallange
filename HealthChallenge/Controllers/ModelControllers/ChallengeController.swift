@@ -18,12 +18,22 @@ class ChallengeController {
     ///The current Challenge
     var currentChallenge: Challenge?
     
+    ///The weekGoals of the current Challenge
+    var currentChallengeWeekGoals: [Goal] = []
+
     //MARK: - init
     init() {
         fetchCurrentChallenge { (isSuccess) in
             if isSuccess {
-                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFoundNotification), object: nil, userInfo: nil)
+                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                 NotificationCenter.default.post(challengeFound)
+                
+                self.fetchGoals(ofChallenge: self.currentChallenge!, { (isSuccess) in
+                    if isSuccess {
+                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
+                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
+                    }
+                })
             }
         }
     }
@@ -67,6 +77,39 @@ class ChallengeController {
             } else {
                 completion(false)
             }
+        }
+    }
+    
+    ///fetches the goals of a Challenge
+    /// - parameter challenge: The challenge.
+    /// - parameter completion: Handler for when the challenge was created.
+    /// - parameter isSuccess: Confirms that the challenge was created.
+    func fetchGoals(ofChallenge challenge: Challenge, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        var goals: [CKRecord.Reference?] = []
+        goals.append(challenge.weekOneGoal)
+        goals.append(challenge.weekTwoGoal)
+        goals.append(challenge.weekThreeGoal)
+        goals.append(challenge.weekFourGoal)
+        
+        goals.forEach { (reference) in
+            guard let goalReference = reference else {completion(false);return}
+            
+            let predicate = NSPredicate(format: "%K == %@", argumentArray: [CKRecord.ID.self, goalReference.recordID])
+            let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+            CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (isSuccess, foundRecords) in
+                if isSuccess {
+                    let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
+                    guard let goal = foundGoals.first else {completion(false);return}
+                    self.currentChallengeWeekGoals.append(goal)
+                } else {
+                    completion(false)
+                }
+            })
+        }
+        if currentChallengeWeekGoals.count == 4 {
+            completion(true)
+        } else {
+            completion(false)
         }
     }
     
