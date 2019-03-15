@@ -62,6 +62,7 @@ class WorkoutViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         workouts = HealthKitController.shared.readWorkoutsFrom(date: challenge.startDay, toDate: challenge.finishDay)
+        print(workouts)
     }
     
     // MARK: - Actions
@@ -94,6 +95,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
             else { return UICollectionViewCell() }
         cell.delegate = self
+        cell.layer.cornerRadius = 20
         guard let date = dateRange[indexPath.row] else { return UICollectionViewCell() }
         let today = Date()
         let monthIndex = calendarController.currentMonthIndex - 1
@@ -114,15 +116,15 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.backgroundColor = .green
         }
         // Allows users to only edit workouts for past week.
-//        if indexPath.item < day - 6 && monthIndex == calendarController.presentMonthIndex {
-//            cell.isUserInteractionEnabled = false
-//            cell.dayLabel.textColor = UIColor.lightGray
-//        } else if indexPath.item > day && monthIndex == calendarController.presentMonthIndex {
-//            cell.isUserInteractionEnabled = false
-//            cell.dayLabel.textColor = UIColor.lightGray
-//        } else {
-//            cell.isUserInteractionEnabled = true
-//        }
+        if date.day < today.day && monthIndex == calendarController.presentMonthIndex - 1{
+            cell.isUserInteractionEnabled = false
+            cell.dayLabel.textColor = UIColor.lightGray
+        } else if date.day > today.day && monthIndex == calendarController.presentMonthIndex - 1 {
+            cell.isUserInteractionEnabled = false
+            cell.dayLabel.textColor = UIColor.lightGray
+        } else {
+            cell.isUserInteractionEnabled = true
+        }
         return cell
     }
     
