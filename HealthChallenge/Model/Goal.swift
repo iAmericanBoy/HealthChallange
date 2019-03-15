@@ -16,14 +16,18 @@ class Goal {
     var reviewForPublic: Bool
     var strengthValue: Int
     var creatorReference: CKRecord.Reference?
+    var usersMonthlyGoals: [CKRecord.Reference]
+    var challengesWeeklyGoals: [CKRecord.Reference]
     
-    init(name: String, creator: CKRecord.Reference? ,isPublic: Bool = false, reviewForPublic: Bool = false, strengthValue: Int = 1,recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(name: String, creator: CKRecord.Reference? ,isPublic: Bool = false, reviewForPublic: Bool = false, challenge: Challenge, strengthValue: Int = 1,recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.name = name
         self.isPublic = isPublic
         self.reviewForPublic = reviewForPublic
         self.recordID = recordID
         self.strengthValue = strengthValue
         self.creatorReference = creator
+        self.usersMonthlyGoals = [CKRecord.Reference(recordID: challenge.recordID, action: .none)]
+        self.challengesWeeklyGoals = []
     }
     
     init?(record: CKRecord) {
@@ -37,6 +41,8 @@ class Goal {
         self.isPublic = isPublic
         self.reviewForPublic = reviewForPublic
         self.strengthValue = strengthValue
+        self.challengesWeeklyGoals = record[Goal.challengeReferencesKey] as? [CKRecord.Reference] ?? []
+        self.usersMonthlyGoals = record[Goal.userReferencesKey] as? [CKRecord.Reference] ?? []
         self.creatorReference = record[Goal.creatorReferenceKey] as? CKRecord.Reference
 
     }
@@ -55,6 +61,10 @@ extension CKRecord {
         
         self.setValue(goal.name, forKey: Goal.nameKey)
         self.setValue(goal.strengthValue, forKey: Goal.strengthValueKey)
+        
+        self.setValue(goal.challengesWeeklyGoals, forKey: Goal.challengeReferencesKey)
+        self.setValue(goal.usersMonthlyGoals, forKey: Goal.userReferencesKey)
+        
         self.setValue(goal.creatorReference, forKey: Goal.creatorReferenceKey)
         self.setValue(goal.isPublic, forKey: Goal.isPublicKey)
         self.setValue(goal.reviewForPublic, forKey: Goal.reviewForPublicKey)

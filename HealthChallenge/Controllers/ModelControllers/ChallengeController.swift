@@ -28,7 +28,8 @@ class ChallengeController {
                 let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                 NotificationCenter.default.post(challengeFound)
                 
-                self.fetchGoals(ofChallenge: self.currentChallenge!, { (isSuccess) in
+                let challengeReference = CKRecord.Reference(recordID: self.currentChallenge!.recordID, action: .none)
+                GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
                     if isSuccess {
                         let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(weekGoalsOfChallengeFound)
@@ -90,26 +91,32 @@ class ChallengeController {
         goals.append(challenge.weekTwoGoal)
         goals.append(challenge.weekThreeGoal)
         goals.append(challenge.weekFourGoal)
-        
+        let dispatchGroup = DispatchGroup()
         goals.forEach { (reference) in
             guard let goalReference = reference else {completion(false);return}
             
-            let predicate = NSPredicate(format: "%K == %@", argumentArray: ["recordName", goalReference.recordID.recordName])
+            let predicate = NSPredicate(format: "%K == %@", argumentArray: ["recordID", goalReference.recordID])
             let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+            dispatchGroup.enter()
             CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (isSuccess, foundRecords) in
                 if isSuccess {
                     let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
                     guard let goal = foundGoals.first else {completion(false);return}
                     self.currentChallengeWeekGoals.append(goal)
+                    dispatchGroup.leave()
                 } else {
-                    completion(false)
+                    dispatchGroup.leave()
                 }
             })
         }
-        if currentChallengeWeekGoals.count == 4 {
-            completion(true)
-        } else {
-            completion(false)
+        
+        dispatchGroup.notify(queue: .main) {
+            if self.currentChallengeWeekGoals.count == 4 {
+                print(self.currentChallengeWeekGoals)
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
     }
     

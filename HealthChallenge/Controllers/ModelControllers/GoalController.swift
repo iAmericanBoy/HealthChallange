@@ -20,6 +20,9 @@ class GoalController {
     ///All the publicly available Goals.
     var allPublicGoals: [Goal] = []
     
+    ///The weekly goals of the current Challenge
+    var weeklyGoals: [Goal] = []
+    
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
@@ -38,13 +41,14 @@ class GoalController {
     //MARK: - CRUD
     ///Creates a Goal with name and a boolean indicating if the goal should be available publicly. After the Goal was created it will be appended to the usersGoals.
     /// - parameter name: name of the goal.
+    /// - parameter challenge: The challenge of the goal.
     /// - parameter reviewForPublic: Boolean to indicate if the goal should be reviewed for Public
     /// - parameter completion: Handler for when the goal was created and appended.
     /// - parameter isSuccess: Confirms that the goal was created and appended.
-    func createGoalWith(goalName name: String, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
+    func createGoalWith(goalName name: String,currentChallenge challenge: Challenge, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
 
         CloudKitController.shared.fetchUserRecordID { (isSuccess, userRecordID) in
-            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic)
+            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic, challenge: challenge)
 
             if isSuccess {
                 guard let userRecordID = userRecordID else {completion(false); return}
@@ -110,11 +114,34 @@ class GoalController {
         }
     }
     
+    ///Fetches the Weekly goals of a Challenge
+    func fetchGoals(withChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
+        
+        let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.challengeReferencesKey,challengeReference])
+        let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
+            if isSuccess {
+                if isSuccess {
+                    let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
+                    self.weeklyGoals = foundGoals
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    ///Fetches the Monthly goal
+    func fetchUsersGoal(withUserReference userReference: CKRecord.Reference, andChallengeReference challengeReference: CKRecord.Reference) {
+        
+    }
+    
     ///Updates the goal with a new Name
     /// - parameter goal: The goal to update.
     /// - parameter name: The new name of the Goal.
     /// - parameter completion: Handler for when the goal was updated
-    /// - parameter isSuccess: Confirms that the goal was created.
+    /// - parameter isSuccess: Confirms that the goal was updated.
     /// - parameter updatedGoal: The updated Goal or nil.
     func update(goal: Goal, withName name: String, completion: @escaping (_ isSuccess:Bool, _ updatedGoal: Goal?) -> Void) {
         goal.name = name
@@ -126,6 +153,83 @@ class GoalController {
                 completion(true, Goal(record: updatedRecord))
             } else {
                 completion(false,nil)
+            }
+        }
+    }
+    ///Adds a Challenge Reference to the challengeReferenceArray of the given goal
+    /// - parameter goal: The goal to update.
+    /// - parameter challenge: The challenge to reference.
+    /// - parameter completion: Handler for when the goal was updated
+    /// - parameter isSuccess: Confirms that the goal was updated.
+    func add(newChallenge challenge: Challenge, toGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let challengeReference = CKRecord.Reference(recordID: challenge.recordID, action: .none)
+        goal.challengesWeeklyGoals.append(challengeReference)
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    ///removes the reference from a Challenge in the challengeReferenceArray of the given goal
+    /// - parameter goal: The goal to update.
+    /// - parameter challenge: The challenge to remove the reference of.
+    /// - parameter completion: Handler for when the goal was updated
+    /// - parameter isSuccess: Confirms that the goal was updated.
+    func remove(challenge: Challenge, fromGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let challengeReference = CKRecord.Reference(recordID: challenge.recordID, action: .none)
+        guard let index = goal.challengesWeeklyGoals.index(of: challengeReference) else {return}
+        goal.challengesWeeklyGoals.remove(at: index)
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    ///Adds a user Reference to the userreference Array of the given goal
+    /// - parameter goal: The goal to update.
+    /// - parameter user: The User to reference.
+    /// - parameter completion: Handler for when the goal was updated
+    /// - parameter isSuccess: Confirms that the goal was updated.
+    func add(newUser user: User, toGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let userReference = CKRecord.Reference(recordID: user.appleUserRef.recordID, action: .none)
+        goal.usersMonthlyGoals.append(userReference)
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    ///removes the reference from a user in the userReferenceArray of the given goal
+    /// - parameter goal: The goal to update.
+    /// - parameter user: The User to remove the reference of.
+    /// - parameter completion: Handler for when the goal was updated
+    /// - parameter isSuccess: Confirms that the goal was updated.
+    func remove(user: User, fromGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let userReference = CKRecord.Reference(recordID: user.appleUserRef.recordID, action: .none)
+        guard let index = goal.usersMonthlyGoals.index(of: userReference) else {return}
+        goal.usersMonthlyGoals.remove(at: index)
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                completion(true)
+            } else {
+                completion(false)
             }
         }
     }

@@ -23,11 +23,18 @@ class WeeklyGoalsViewController: UIViewController {
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
+        selectedGoals += GoalController.shared.weeklyGoals
+
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         customGoalTextField.delegate = self
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 1])
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(NotificationStrings.weekGoalsFound), object: nil, queue: .main) { (_) in
+            self.selectedGoals += GoalController.shared.weeklyGoals
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +46,7 @@ class WeeklyGoalsViewController: UIViewController {
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
-        GoalController.shared.createGoalWith(goalName: goalName, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
+        GoalController.shared.createGoalWith(goalName: goalName, currentChallenge: ChallengeController.shared.currentChallenge!, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
             if isSuccess {
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
@@ -57,7 +64,7 @@ class WeeklyGoalsViewController: UIViewController {
     //MARK: - Private Functions
     func updateViews() {
         reviewForPublicSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultStrings.reviewForPublic)
-
+        
         reviewForPublicSwitch.isHidden = true
         reviewForPublicLabel.isHidden = true
     }
@@ -127,12 +134,23 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
         
         if selectedGoals.count == 4 {
             guard let currentChallenge = ChallengeController.shared.currentChallenge else {return}
-            ChallengeController.shared.add(weeklyGoals: selectedGoals, toChallange: currentChallenge) { (isSuccess) in
-                //TODO: Pop to next VC
+            //remove old references
+            GoalController.shared.weeklyGoals.forEach { (goal) in
+                GoalController.shared.remove(challenge: currentChallenge, fromGoal: goal, { (isSuccess) in
+                    
+                })
             }
+            
+            selectedGoals.forEach { (goal) in
+                GoalController.shared.add(newChallenge: currentChallenge, toGoal: goal, { (isSuccess) in
+                    
+                })
+            }
+            //TODO: Pop to next VC
         }
     }
 }
+
 
 //MARK: -
 extension WeeklyGoalsViewController: UITextFieldDelegate {
