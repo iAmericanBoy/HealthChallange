@@ -53,6 +53,12 @@
 		B6EBA60E22386CD30001F5BF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60D22386CD30001F5BF /* CloudKit.framework */; };
 		B6EBA61022396D730001F5BF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60F22396D730001F5BF /* HealthKit.framework */; };
 		B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA6112239DA400001F5BF /* MagicStrings.swift */; };
+		CEB299AF223C08D30089DA63 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299AE223C08D30089DA63 /* Food.swift */; };
+		CEB299B1223C09250089DA63 /* Nutrients.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B0223C09250089DA63 /* Nutrients.swift */; };
+		CEB299B3223C09740089DA63 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B2223C09740089DA63 /* Dish.swift */; };
+		CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B4223C0AAB0089DA63 /* FoodController.swift */; };
+		CEB299B7223C0B240089DA63 /* NutrientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B6223C0B240089DA63 /* NutrientsController.swift */; };
+		CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +111,12 @@
 		B6EBA60D22386CD30001F5BF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B6EBA60F22396D730001F5BF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B6EBA6112239DA400001F5BF /* MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicStrings.swift; sourceTree = "<group>"; };
+		CEB299AE223C08D30089DA63 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		CEB299B0223C09250089DA63 /* Nutrients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nutrients.swift; sourceTree = "<group>"; };
+		CEB299B2223C09740089DA63 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
+		CEB299B4223C0AAB0089DA63 /* FoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodController.swift; sourceTree = "<group>"; };
+		CEB299B6223C0B240089DA63 /* NutrientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientsController.swift; sourceTree = "<group>"; };
+		CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +182,9 @@
 		62D067BE2237182900D5410B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEB299B2223C09740089DA63 /* Dish.swift */,
+				CEB299B0223C09250089DA63 /* Nutrients.swift */,
+				CEB299AE223C08D30089DA63 /* Food.swift */,
 				62D067BC2237182300D5410B /* User.swift */,
 				B6EBA5FB22380F970001F5BF /* Challenge.swift */,
 				B6EBA5FD22380FE10001F5BF /* Goal.swift */,
@@ -194,6 +209,8 @@
 				62D067C2223718F600D5410B /* UserController.swift */,
 				B6EBA607223822810001F5BF /* GoalController.swift */,
 				B6EBA60922384F6E0001F5BF /* ChallengeController.swift */,
+				CEB299B4223C0AAB0089DA63 /* FoodController.swift */,
+				CEB299B6223C0B240089DA63 /* NutrientsController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -234,6 +251,7 @@
 				62D067EE2238947F00D5410B /* WorkoutTab.storyboard */,
 				62D067F1223894A100D5410B /* GoalsTab.storyboard */,
 				62D067F3223894D500D5410B /* LeaderboardTab.storyboard */,
+				CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */,
 			);
 			path = TabBarViews;
 			sourceTree = "<group>";
@@ -404,10 +422,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				62D067B12236DBDF00D5410B /* OnboardingViewController.swift in Sources */,
+				CEB299B3223C09740089DA63 /* Dish.swift in Sources */,
+				CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */,
 				B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */,
 				B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */,
 				62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */,
+				CEB299B1223C09250089DA63 /* Nutrients.swift in Sources */,
 				62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */,
+				CEB299B7223C0B240089DA63 /* NutrientsController.swift in Sources */,
 				62D067A92236D23800D5410B /* WeeklyGoalsViewController.swift in Sources */,
 				62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */,
 				62D067C3223718F600D5410B /* UserController.swift in Sources */,
@@ -416,6 +438,7 @@
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
 				62D067C8223719A700D5410B /* CloudKitController.swift in Sources */,
 				B6EBA608223822810001F5BF /* GoalController.swift in Sources */,
+				CEB299AF223C08D30089DA63 /* Food.swift in Sources */,
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
@@ -432,6 +455,7 @@
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
+				CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */,
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
 			);
