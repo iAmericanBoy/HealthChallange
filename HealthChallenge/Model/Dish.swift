@@ -7,13 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
 
 class Dish {
     
+    var dishName: String
     var dish: [Food]?
+    var photo: UIImage?
     
-    init(dish: [Food]) {
+    init(dishName: String,dish: [Food], photo: UIImage?) {
+        self.dishName = dishName
         self.dish = dish
+        self.photo = photo
     }
 }
+// dish model
+//name
+// array of ingredients
+//photo ?
