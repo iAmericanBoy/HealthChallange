@@ -20,6 +20,9 @@ class GoalController {
     ///All the publicly available Goals.
     var allPublicGoals: [Goal] = []
     
+    ///The weekly goals of the current Challenge
+    var weeklyGoals: [Goal] = []
+    
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
@@ -111,13 +114,19 @@ class GoalController {
     }
     
     ///Fetches the Weekly goals of a Challenge
-    func fetchGoals(withChallengeReference challengeReference: CKRecord.Reference) {
+    func fetchGoals(withChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
         
         let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.challengeReferencesKey,challengeReference])
         let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
             if isSuccess {
-                print(foundRecords)
+                if isSuccess {
+                    let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
+                    self.weeklyGoals = foundGoals
+                    completion(true)
+                } else {
+                    completion(false)
+                }
             }
         }
     }
