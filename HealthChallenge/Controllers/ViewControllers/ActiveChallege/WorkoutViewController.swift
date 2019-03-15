@@ -17,23 +17,22 @@ class WorkoutViewController: UIViewController {
     // Properties
     var selectedDay: Date = Date().stripTimestamp()
     var workouts: [HKWorkout] = []
-    var dayRange: [Int] {
+    var dateRange: [Date?] {
         let startDate = challenge.startDay
-        var dayRange = [challenge.startDay.day]
+        var dayRange = [challenge.startDay]
         var previousDate = startDate
         let emptyCells = challenge.startDay.weekday - 1
         
         while dayRange.count != 30 {
             let date = previousDate.addingTimeInterval(86400)
-            dayRange.append(date.day)
+            dayRange.append(date)
             previousDate = date
         }
-        
         if emptyCells == 0 {
             return dayRange
         } else {
             for _ in 1...emptyCells {
-                dayRange.insert(0, at: 0)
+                dayRange.insert(Date(timeIntervalSince1970: 0), at: 0)
             }
         }
         return dayRange
@@ -88,33 +87,31 @@ class WorkoutViewController: UIViewController {
 extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dayRange.count
+        return dateRange.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
             else { return UICollectionViewCell() }
         cell.delegate = self
-        let day = dayRange[indexPath.row]
+        guard let date = dateRange[indexPath.row] else { return UICollectionViewCell() }
+        let today = Date()
         let monthIndex = calendarController.currentMonthIndex - 1
         var month = calendarController.shortMonthNames[monthIndex]
-        let cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: calendarController.currentYear, month: monthIndex + 1, day: day))
         
         // Set cell text label and date value.
-        if day == 0 {
+        if date == Date(timeIntervalSince1970: 0) {
             cell.dayLabel.text = ""
         } else {
-            cell.dayLabel.text = "\(day)"
-            // Check month value and set month short string.
-            if dayRange[day] < dayRange[day + 1] {
-                cell.monthLabel.text = "\(month)"
-                cell.cellDate = cellDate
-            } else {
-                let newMonthIndex = monthIndex + 1
-                month = calendarController.shortMonthNames[newMonthIndex]
-                cell.monthLabel.text = "\(month)"
-                cell.cellDate = cellDate
-            }
+            cell.dayLabel.text = "\(date.day)"
+            cell.cellDate = dateRange[indexPath.row]
+            let index = date.month
+            month = calendarController.shortMonthNames[index - 1]
+            cell.monthLabel.text = "\(month)"
+        }
+        
+        if date.stripTimestamp() == today.stripTimestamp() {
+            cell.backgroundColor = .green
         }
         // Allows users to only edit workouts for past week.
 //        if indexPath.item < day - 6 && monthIndex == calendarController.presentMonthIndex {
