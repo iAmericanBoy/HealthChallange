@@ -16,8 +16,8 @@ class AddWorkoutsViewController: UIViewController {
     var sourceDate: Date?
     
     // MARK: - Properties
-    var date: Date = Date()
-    let today = Date()
+    var date: Date = Date().stripTimestamp()
+    let today = Date().stripTimestamp()
     
     
     @IBOutlet weak var currentDayLabel: UILabel!
@@ -45,6 +45,10 @@ class AddWorkoutsViewController: UIViewController {
         let newWorkouts = HealthKitController.shared.readWorkoutsFrom(date: date, toDate: date)
         workouts = newWorkouts
         updateViews()
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     
     func updateViews() {

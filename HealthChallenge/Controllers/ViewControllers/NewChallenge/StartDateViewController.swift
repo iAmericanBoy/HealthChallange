@@ -93,19 +93,19 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         let month = calendarController.currentMonthIndex
         cell.layer.cornerRadius = 20
         cell.backgroundColor = .white
-        cell.dateLabel.textColor = .black
+        cell.dayLabel.textColor = .black
         
         if indexPath.item <= firstDay - 2 {
             cell.isHidden = true
         } else {
             let calcDate = indexPath.row - firstDay + 2
             cell.isHidden = false
-            cell.dateLabel.text = "\(calcDate)"
+            cell.dayLabel.text = "\(calcDate)"
             let cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))
             cell.cellDate = cellDate
             if calcDate < today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
                 cell.isUserInteractionEnabled = false
-                cell.dateLabel.textColor = UIColor.lightGray
+                cell.dayLabel.textColor = UIColor.lightGray
             } else {
                 cell.isUserInteractionEnabled = true
             }

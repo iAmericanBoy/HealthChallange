@@ -11,8 +11,9 @@ import UIKit
 class DateCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var monthLabel: UILabel!
     
     //MARK: - Properties
     ///The Date associated with the cell.
