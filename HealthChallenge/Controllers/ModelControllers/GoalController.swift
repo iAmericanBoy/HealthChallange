@@ -41,13 +41,14 @@ class GoalController {
     //MARK: - CRUD
     ///Creates a Goal with name and a boolean indicating if the goal should be available publicly. After the Goal was created it will be appended to the usersGoals.
     /// - parameter name: name of the goal.
+    /// - parameter challenge: The challenge of the goal.
     /// - parameter reviewForPublic: Boolean to indicate if the goal should be reviewed for Public
     /// - parameter completion: Handler for when the goal was created and appended.
     /// - parameter isSuccess: Confirms that the goal was created and appended.
-    func createGoalWith(goalName name: String, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
+    func createGoalWith(goalName name: String,currentChallenge challenge: Challenge, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
 
         CloudKitController.shared.fetchUserRecordID { (isSuccess, userRecordID) in
-            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic)
+            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic, challenge: challenge)
 
             if isSuccess {
                 guard let userRecordID = userRecordID else {completion(false); return}

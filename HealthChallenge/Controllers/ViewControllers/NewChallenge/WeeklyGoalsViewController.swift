@@ -23,6 +23,8 @@ class WeeklyGoalsViewController: UIViewController {
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
+        selectedGoals += GoalController.shared.weeklyGoals
+
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
@@ -30,7 +32,7 @@ class WeeklyGoalsViewController: UIViewController {
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 1])
         
         NotificationCenter.default.addObserver(forName: Notification.Name(NotificationStrings.weekGoalsFound), object: nil, queue: .main) { (_) in
-            self.selectedGoals = GoalController.shared.weeklyGoals
+            self.selectedGoals += GoalController.shared.weeklyGoals
             self.tableView.reloadData()
         }
     }
@@ -44,7 +46,7 @@ class WeeklyGoalsViewController: UIViewController {
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
-        GoalController.shared.createGoalWith(goalName: goalName, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
+        GoalController.shared.createGoalWith(goalName: goalName, currentChallenge: ChallengeController.shared.currentChallenge!, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
             if isSuccess {
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
