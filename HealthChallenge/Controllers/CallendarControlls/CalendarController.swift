@@ -13,6 +13,7 @@ class CalendarController {
     
     var numOfDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     var monthsArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    var shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     var currentMonthIndex = 0
     var currentYear = 0
     var presentMonthIndex = 0
@@ -73,9 +74,28 @@ extension Date {
     var weekday: Int {
         return Calendar.current.component(.weekday, from: self)
     }
+    
+    var day: Int {
+        return Calendar.current.component(.day, from: self)
+    }
+    
+    var month: Int {
+        return Calendar.current.component(.month, from: self)
+    }
+    
+    var ignoreDate: Date {
+        return Date(timeIntervalSince1970: 0)
+    }
+    
     var firstDayOfTheMonth: Date {
         let day = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self))!
         return day
+    }
+    
+    func stripTimestamp() -> Date {
+        let components = Calendar.current.dateComponents([.day, .month, .year], from: self)
+        let date = Calendar.current.date(from: components)
+        return date!
     }
 }
 

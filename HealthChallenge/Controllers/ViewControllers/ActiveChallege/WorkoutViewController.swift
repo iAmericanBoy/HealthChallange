@@ -7,14 +7,39 @@
 //
 
 import UIKit
+import HealthKit
 
 class WorkoutViewController: UIViewController {
     
-    // Calendar isntance
+    // Calendar instance
     let calendarController = CalendarController()
     
     // Properties
-    var selectedDay: Date = Date()
+    var selectedDay: Date = Date().stripTimestamp()
+    var workouts: [HKWorkout] = []
+    var dateRange: [Date?] {
+        let startDate = challenge.startDay
+        var dayRange = [challenge.startDay]
+        var previousDate = startDate
+        let emptyCells = challenge.startDay.weekday - 1
+        
+        while dayRange.count != 30 {
+            let date = previousDate.addingTimeInterval(86400)
+            dayRange.append(date)
+            previousDate = date
+        }
+        if emptyCells == 0 {
+            return dayRange
+        } else {
+            for _ in 1...emptyCells {
+                dayRange.insert(Date(timeIntervalSince1970: 0), at: 0)
+            }
+        }
+        return dayRange
+    }
+    
+    // MARK: - MOCK DATA
+    var challenge = Challenge(startDay: Date())
 
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
@@ -23,14 +48,21 @@ class WorkoutViewController: UIViewController {
     @IBOutlet weak var nextMonthButton: UIButton!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarController.initializeCurrentCalendar()
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         previousMonthButton.isHidden = true
-        monthLabel.text = "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
+        monthLabel.text = "\(challenge.name)"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        workouts = HealthKitController.shared.readWorkoutsFrom(date: challenge.startDay, toDate: challenge.finishDay)
+        print(workouts)
     }
     
     // MARK: - Actions
@@ -56,45 +88,42 @@ class WorkoutViewController: UIViewController {
 extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 1
-        return sectionItems
+        return dateRange.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
             else { return UICollectionViewCell() }
-        let firstDay = calendarController.firstWeekDayOfMonth
-        let today = calendarController.todaysDate
-        let year = calendarController.currentYear
-        let month = calendarController.currentMonthIndex
         cell.delegate = self
         cell.layer.cornerRadius = 20
-        cell.backgroundColor = .white
-        cell.dateLabel.textColor = .black
+        guard let date = dateRange[indexPath.row] else { return UICollectionViewCell() }
+        let today = Date()
+        let monthIndex = calendarController.currentMonthIndex - 1
+        var month = calendarController.shortMonthNames[monthIndex]
         
-        // Set background color for current day.
-        if indexPath.item == today + 4 {
-            cell.backgroundColor = .green
+        // Set cell text label and date value.
+        if date == Date(timeIntervalSince1970: 0) {
+            cell.dayLabel.text = ""
+        } else {
+            cell.dayLabel.text = "\(date.day)"
+            cell.cellDate = dateRange[indexPath.row]
+            let index = date.month
+            month = calendarController.shortMonthNames[index - 1]
+            cell.monthLabel.text = "\(month)"
         }
         
-        if indexPath.item <= firstDay - 2 {
-            cell.isHidden = true
+        if date.stripTimestamp() == today.stripTimestamp() {
+            cell.backgroundColor = .green
+        }
+        // Allows users to only edit workouts for past week.
+        if date.day < today.day && monthIndex == calendarController.presentMonthIndex - 1{
+            cell.isUserInteractionEnabled = false
+            cell.dayLabel.textColor = UIColor.lightGray
+        } else if date.day > today.day && monthIndex == calendarController.presentMonthIndex - 1 {
+            cell.isUserInteractionEnabled = false
+            cell.dayLabel.textColor = UIColor.lightGray
         } else {
-            let calcDate = indexPath.row - firstDay + 2
-            cell.isHidden = false
-            cell.dateLabel.text = "\(calcDate)"
-            let cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))!
-            cell.cellDate = cellDate
-            // Allow for edititing for one week in past.
-            if calcDate < today - 6 && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
-                cell.isUserInteractionEnabled = false
-                cell.dateLabel.textColor = UIColor.lightGray
-            } else if calcDate > today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
-                cell.isUserInteractionEnabled = false
-                cell.dateLabel.textColor = UIColor.lightGray
-            } else {
-                cell.isUserInteractionEnabled = true
-            }
+            cell.isUserInteractionEnabled = true
         }
         return cell
     }
@@ -112,8 +141,6 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension WorkoutViewController: DateCollectionViewCellDelegate {
     func collectionViewCell(_ cell: UICollectionViewCell, buttonTapped: UIButton) {
         let dateCell = cell as! DateCollectionViewCell
-        let indexPath = self.calendarCollectionView.indexPath(for: cell)
         self.selectedDay = dateCell.cellDate!
-        self.performSegue(withIdentifier: "toWorkoutsVC", sender: nil)
     }
 }
