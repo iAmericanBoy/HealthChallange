@@ -23,4 +23,8 @@ extension Goal {
     static let strengthValueKey = "strengthValue"
     /// "creatorReference"
     static let creatorReferenceKey = "creatorReference"
+    /// "userReferences"
+    static let userReferencesKey = "userReferences"
+    /// "challengeReferences"
+    static let challengeReferencesKey = "challengeReferences"
 }
