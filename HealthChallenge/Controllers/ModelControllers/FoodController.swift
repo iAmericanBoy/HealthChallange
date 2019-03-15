@@ -14,8 +14,8 @@ class FoodController {
     static var food: [Food] = []
     static let sharedInstance = FoodController()
     static let format = "json"
-    static let sort = "r"
-    static let max = 50
+    static let sort = "r"   // n 
+    static let max = 20
     static var offset = 0
     static let ds = "Standard Reference"
     static let apiKey = "GpyZeJCsTfea56Jcwwkd5lXGYyqpG2nFC0MQNtZx"
@@ -77,12 +77,12 @@ class FoodController {
             {  print("got items"); return}
             
             for item in items {
-                print(items)
+               // print(items)
                 
                 if let newFood = Food(dictionary: item) {
                     
                     foodFromJson.append(newFood)
-                    print(food)
+                    //print(food)
                 }
             }
             self.food = foodFromJson

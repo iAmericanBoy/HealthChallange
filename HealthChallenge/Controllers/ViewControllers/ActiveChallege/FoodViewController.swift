@@ -103,7 +103,8 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
 //MARK: - dispatchGroup - submit multiple work items track when complete
 //MARK: - SearchBar
 extension FoodViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
         FoodController.getFood(query: searchTerm) { (success) in
             if success {
