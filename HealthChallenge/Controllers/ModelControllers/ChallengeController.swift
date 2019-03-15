@@ -28,12 +28,14 @@ class ChallengeController {
                 let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                 NotificationCenter.default.post(challengeFound)
                 
-                self.fetchGoals(ofChallenge: self.currentChallenge!, { (isSuccess) in
-                    if isSuccess {
-                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
-                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
-                    }
-                })
+                let challengeReference = CKRecord.Reference(recordID: self.currentChallenge!.recordID, action: .none)
+                GoalController.shared.fetchGoals(withChallengeReference: challengeReference)
+//                self.fetchGoals(ofChallenge: self.currentChallenge!, { (isSuccess) in
+//                    if isSuccess {
+//                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
+//                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
+//                    }
+//                })
             }
         }
     }

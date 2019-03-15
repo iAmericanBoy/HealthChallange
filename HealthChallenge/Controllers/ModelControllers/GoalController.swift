@@ -148,6 +148,23 @@ class GoalController {
         }
     }
     
+    ///Fetches the Weekly goals of a Challenge
+    func fetchGoals(withChallengeReference challengeReference: CKRecord.Reference) {
+        
+        let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.challengeReferencesKey,challengeReference])
+        let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
+            if isSuccess {
+                print(foundRecords)
+            }
+        }
+    }
+    
+    ///Fetches the Monthly goal
+    func fetchUsersGoal(withUserReference userReference: CKRecord.Reference, andChallengeReference challengeReference: CKRecord.Reference) {
+        
+    }
+    
     ///removes the reference from a Challenge in the challengeReferenceArray of the given goal
     /// - parameter goal: The goal to update.
     /// - parameter challenge: The challenge to remove the reference of.
