@@ -34,8 +34,6 @@ class Goal {
         guard let name = record[Goal.nameKey] as? String,
             let isPublic = record[Goal.isPublicKey] as? Bool,
             let strengthValue = record[Goal.strengthValueKey] as? Int,
-            let challengeReferences = record[Goal.challengeReferencesKey] as? [CKRecord.Reference],
-            let userReferences = record[Goal.userReferencesKey] as? [CKRecord.Reference],
             let reviewForPublic = record[Goal.reviewForPublicKey] as? Bool else {return nil}
         
         self.name = name
@@ -43,8 +41,8 @@ class Goal {
         self.isPublic = isPublic
         self.reviewForPublic = reviewForPublic
         self.strengthValue = strengthValue
-        self.challengesWeeklyGoals = challengeReferences
-        self.usersMonthlyGoals = userReferences
+        self.challengesWeeklyGoals = record[Goal.challengeReferencesKey] as? [CKRecord.Reference] ?? []
+        self.usersMonthlyGoals = record[Goal.userReferencesKey] as? [CKRecord.Reference] ?? []
         self.creatorReference = record[Goal.creatorReferenceKey] as? CKRecord.Reference
 
     }
@@ -63,8 +61,14 @@ extension CKRecord {
         
         self.setValue(goal.name, forKey: Goal.nameKey)
         self.setValue(goal.strengthValue, forKey: Goal.strengthValueKey)
-        self.setValue(goal.challengesWeeklyGoals, forKey: Goal.challengeReferencesKey)
-        self.setValue(goal.usersMonthlyGoals, forKey: Goal.userReferencesKey)
+        
+        if goal.challengesWeeklyGoals.count != 0 {
+             self.setValue(goal.challengesWeeklyGoals, forKey: Goal.challengeReferencesKey)
+        }
+        if goal.usersMonthlyGoals.count != 0 {
+            self.setValue(goal.usersMonthlyGoals, forKey: Goal.userReferencesKey)
+        }
+        
         self.setValue(goal.creatorReference, forKey: Goal.creatorReferenceKey)
         self.setValue(goal.isPublic, forKey: Goal.isPublicKey)
         self.setValue(goal.reviewForPublic, forKey: Goal.reviewForPublicKey)

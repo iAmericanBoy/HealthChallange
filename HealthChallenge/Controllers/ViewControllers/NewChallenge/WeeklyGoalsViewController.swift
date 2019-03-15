@@ -57,7 +57,7 @@ class WeeklyGoalsViewController: UIViewController {
     //MARK: - Private Functions
     func updateViews() {
         reviewForPublicSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultStrings.reviewForPublic)
-
+        
         reviewForPublicSwitch.isHidden = true
         reviewForPublicLabel.isHidden = true
     }
@@ -127,12 +127,16 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
         
         if selectedGoals.count == 4 {
             guard let currentChallenge = ChallengeController.shared.currentChallenge else {return}
-            ChallengeController.shared.add(weeklyGoals: selectedGoals, toChallange: currentChallenge) { (isSuccess) in
-                //TODO: Pop to next VC
+            selectedGoals.forEach { (goal) in
+                GoalController.shared.add(newChallenge: currentChallenge, toGoal: goal, { (isSuccess) in
+                    
+                })
             }
+            //TODO: Pop to next VC
         }
     }
 }
+
 
 //MARK: -
 extension WeeklyGoalsViewController: UITextFieldDelegate {
