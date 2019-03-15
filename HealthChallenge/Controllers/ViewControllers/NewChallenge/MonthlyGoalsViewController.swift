@@ -10,35 +10,125 @@ import UIKit
 
 class MonthlyGoalsViewController: UIViewController {
     
+    //MARK: - Properties
+    
     // MARK: - Outlets
-    @IBOutlet weak var monthlyGoalsLabel: UILabel!
+    @IBOutlet weak var monthGoalsLabel: UILabel!
     @IBOutlet weak var customGoalTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var reviewForPublicSwitch: UISwitch!
+    @IBOutlet weak var reviewForPublicLabel: UILabel!
     
-
+    //MARK: - LifeCycle
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 2])
+        customGoalTextField.delegate = self
+        NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 1])
+        
+
     }
     
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateViews()
+        tableView.reloadData()
     }
-} // End Class
+    
+    // MARK: - Actions
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
+        GoalController.shared.createGoalWith(goalName: goalName, currentChallenge: ChallengeController.shared.currentChallenge!, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
+            if isSuccess {
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.customGoalTextField.resignFirstResponder()
+                    self?.customGoalTextField.text = ""
+                }
+            }
+        }
+    }
+    
+    @IBAction func reviewForPublicSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaultStrings.reviewForPublic)
+    }
+    
+    //MARK: - Private Functions
+    func updateViews() {
+        reviewForPublicSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultStrings.reviewForPublic)
+        
+        reviewForPublicSwitch.isHidden = true
+        reviewForPublicLabel.isHidden = true
+    }
+    
+} // end class
+
 
 // MARK: - TableView DataSource/Delegate
-extension MonthlyGoalsViewController: UITableViewDataSource, UITableViewDelegate {
+extension MonthlyGoalsViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return GoalController.shared.allGoalsFromCK.count
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "User" : "Public"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Manage number of rows
-        return 0
+        return GoalController.shared.allGoalsFromCK[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
         
+        cell.textLabel?.text = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name
+        
+
         return cell
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let goalToDelete = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
+            GoalController.shared.delete(goal: goalToDelete) { (isSuccess) in
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    }
+}
+
+
+//MARK: -
+extension MonthlyGoalsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        reviewForPublicSwitch.isHidden = false
+        reviewForPublicLabel.isHidden = false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        reviewForPublicSwitch.isHidden = true
+        reviewForPublicLabel.isHidden = true
     }
 }
