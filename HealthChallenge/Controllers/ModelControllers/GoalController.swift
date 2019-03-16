@@ -59,6 +59,7 @@ class GoalController {
             CloudKitController.shared.create(record: record, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, newRecord) in
                 if isSuccess {
                     guard let newRecord = newRecord, newRecord.recordID == record.recordID else {completion(false); return}
+                    self.weeklyGoals.append(newGoal)
                     self.usersGoals.append(newGoal)
                     completion(true)
                 } else {
@@ -168,6 +169,7 @@ class GoalController {
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                self.weeklyGoals.append(goal)
                 completion(true)
             } else {
                 completion(false)
@@ -188,6 +190,8 @@ class GoalController {
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                guard let index = self.weeklyGoals.index(of: goal) else {completion(false);return}
+                self.weeklyGoals.remove(at: index)
                 completion(true)
             } else {
                 completion(false)
@@ -244,13 +248,10 @@ class GoalController {
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [], purchasesToDelete: [recordID]) { (isSuccess, _, deletedRecords) in
             if isSuccess {
                 guard let deletedRecordID = deletedRecords?.first, deletedRecordID == recordID else {completion(false); return}
-                self.fetchUsersGoals(completion: { (isSuccess) in
-                    if isSuccess {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                })
+                guard let userGoalIndex = self.usersGoals.index(of: goal), let weeklyGoalIndex = self.usersGoals.index(of: goal) else {completion(false); return}
+                
+                self.usersGoals.remove(at: userGoalIndex)
+                self.usersGoals.remove(at: weeklyGoalIndex)
             } else {
                 completion(false)
             }
