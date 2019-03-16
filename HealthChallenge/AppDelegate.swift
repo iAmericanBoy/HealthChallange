@@ -34,9 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         dg.notify(queue: .main) {
             //If the user and the User and a currentChallenge exist
-            guard let user = UserController.shared.loggedInUser, let challenge = ChallengeController.shared.currentChallenge else {return}
+            guard let userID = UserController.shared.appleUserID, let challenge = ChallengeController.shared.currentChallenge else {return}
             
-            GoalController.shared.fetchUsersMonthGoal(withUserReference: CKRecord.Reference(recordID: user.recordID, action: .none), andChallengeReference: CKRecord.Reference(recordID: challenge.recordID, action: .none)) { (isSuccess) in
+            GoalController.shared.fetchUsersMonthGoal(withUserReference: CKRecord.Reference(recordID: userID, action: .none), andChallengeReference: CKRecord.Reference(recordID: challenge.recordID, action: .none)) { (isSuccess) in
+                if isSuccess {
+                    //post Notification
+                }
             }
         }
         

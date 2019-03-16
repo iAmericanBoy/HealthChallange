@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CloudKit
 
 class MonthlyGoalsViewController: UIViewController {
     
     //MARK: - Properties
+    var selectedWeekGoals: [Goal] = []
+    
+    var seleted: Goal?
     
     // MARK: - Outlets
     @IBOutlet weak var monthGoalsLabel: UILabel!
@@ -22,13 +26,20 @@ class MonthlyGoalsViewController: UIViewController {
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
-        
+        selectedWeekGoals += GoalController.shared.weeklyGoals
+        seleted = GoalController.shared.monthGoal
+
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         customGoalTextField.delegate = self
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 1])
         
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(NotificationStrings.weekGoalsFound), object: nil, queue: .main) { (_) in
+            self.selectedWeekGoals += GoalController.shared.weeklyGoals
+            self.tableView.reloadData()
+        }
 
     }
     
@@ -95,7 +106,17 @@ extension MonthlyGoalsViewController: UITableViewDelegate, UITableViewDataSource
         
         cell.textLabel?.text = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name
         
-
+        
+        if selectedWeekGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
+            cell.textLabel?.textColor = .gray
+        }
+        
+        if seleted == GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row] {
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else {
+            cell.accessoryType = UITableViewCell.AccessoryType.none
+        }
+        
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -110,7 +131,28 @@ extension MonthlyGoalsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        guard let userID = UserController.shared.appleUserID else {return}
+        if !selectedWeekGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
+            let selectedGoal = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
+            if seleted == nil {
+                seleted = selectedGoal
+                //SAVE
+                GoalController.shared.add(newUserReference: CKRecord.Reference(recordID: userID, action: .none), toGoal: selectedGoal) { (isSuccess) in
+                }
+            } else {
+                //REMOVE
+                seleted = nil
+                GoalController.shared.remove(userRef: CKRecord.Reference(recordID: userID, action: .none), fromGoal: GoalController.shared.monthGoal!) { (isSuccess) in
+                    
+                }
+            }
+            
+            //Animating the change
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+            
+        }
     }
 }
 
