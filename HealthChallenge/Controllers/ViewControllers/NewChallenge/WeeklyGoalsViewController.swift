@@ -46,7 +46,7 @@ class WeeklyGoalsViewController: UIViewController {
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
-        GoalController.shared.createGoalWith(goalName: goalName, currentChallenge: ChallengeController.shared.currentChallenge!, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
+        GoalController.shared.createGoalWith(goalName: goalName, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
             if isSuccess {
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()

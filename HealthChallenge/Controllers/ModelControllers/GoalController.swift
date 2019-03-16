@@ -23,6 +23,9 @@ class GoalController {
     ///The weekly goals of the current Challenge
     var weeklyGoals: [Goal] = []
     
+    ///The month goal of the current Challenge for the current User
+    var monthGoal: [Goal] = []
+    
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
@@ -45,10 +48,10 @@ class GoalController {
     /// - parameter reviewForPublic: Boolean to indicate if the goal should be reviewed for Public
     /// - parameter completion: Handler for when the goal was created and appended.
     /// - parameter isSuccess: Confirms that the goal was created and appended.
-    func createGoalWith(goalName name: String,currentChallenge challenge: Challenge, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
+    func createGoalWith(goalName name: String, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
 
         CloudKitController.shared.fetchUserRecordID { (isSuccess, userRecordID) in
-            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic, challenge: challenge)
+            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic)
 
             if isSuccess {
                 guard let userRecordID = userRecordID else {completion(false); return}
@@ -59,7 +62,6 @@ class GoalController {
             CloudKitController.shared.create(record: record, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, newRecord) in
                 if isSuccess {
                     guard let newRecord = newRecord, newRecord.recordID == record.recordID else {completion(false); return}
-                    self.weeklyGoals.append(newGoal)
                     self.usersGoals.append(newGoal)
                     completion(true)
                 } else {
