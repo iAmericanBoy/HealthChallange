@@ -14,7 +14,11 @@ class UserController {
     static let shared = UserController()
     
     //MARK: - SourceOfTruth
+    ///The current logged in user
     var loggedInUser: User?
+    
+    ///The ID of the icloudUser
+    var appleUserID: CKRecord.ID?
     
     //MARK: - init
     init() {
@@ -36,9 +40,10 @@ class UserController {
                 completion(false)
                 return
             }
-            guard let appleUserRef = appleUserRecordID else {completion(false); return}
+            guard let appleUserID = appleUserRecordID else {completion(false); return}
             
-            let reference = CKRecord.Reference(recordID: appleUserRef, action: .deleteSelf)
+            self.appleUserID = appleUserID
+            let reference = CKRecord.Reference(recordID: appleUserID, action: .deleteSelf)
             let newUser = User(userName: name, photo: photo, strengthValue: strengthValue, appleUserRef: reference)
             
             CloudKitController.shared.create(record: CKRecord(user: newUser), inDataBase: CloudKitController.shared.publicDB, completion: { (isSuccess, newRecord) in
@@ -58,12 +63,13 @@ class UserController {
     /// - parameter isSuccess: Confirms that the user was found and added to the property.
     func fetchUserLoggedInUser(completion: @escaping (_ isSuccess:Bool) -> Void) {
         
-        CloudKitController.shared.fetchUserRecordID { (isSuccess, appleUserRef) in
+        CloudKitController.shared.fetchUserRecordID { (isSuccess, appleUserRecordID) in
             if isSuccess {
                 //load logged in users name and image
-                guard let userRef = appleUserRef else {completion(false);return}
-                
-                let reference = CKRecord.Reference(recordID: userRef, action: .deleteSelf)
+                guard let appleUserID = appleUserRecordID else {completion(false);return}
+                self.appleUserID = appleUserID
+
+                let reference = CKRecord.Reference(recordID: appleUserID, action: .deleteSelf)
                 let predicate = NSPredicate(format: "%K == %@", argumentArray: [User.appleUserRefKey,reference])
                 let query = CKQuery(recordType: User.typeKey, predicate: predicate)
                 CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (isSuccess, records) in

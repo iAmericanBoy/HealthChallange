@@ -219,9 +219,9 @@ class GoalController {
     /// - parameter user: The User to reference.
     /// - parameter completion: Handler for when the goal was updated
     /// - parameter isSuccess: Confirms that the goal was updated.
-    func add(newUser user: User, toGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
-        let userReference = CKRecord.Reference(recordID: user.appleUserRef.recordID, action: .none)
-        goal.usersMonthlyGoals.append(userReference)
+    func add(newUserReference userRef: CKRecord.Reference, toGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        
+        goal.usersMonthlyGoals.append(userRef)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
@@ -239,9 +239,9 @@ class GoalController {
     /// - parameter user: The User to remove the reference of.
     /// - parameter completion: Handler for when the goal was updated
     /// - parameter isSuccess: Confirms that the goal was updated.
-    func remove(user: User, fromGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
-        let userReference = CKRecord.Reference(recordID: user.appleUserRef.recordID, action: .none)
-        guard let index = goal.usersMonthlyGoals.index(of: userReference) else {return}
+    func remove(userRef: CKRecord.Reference, fromGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        
+        guard let index = goal.usersMonthlyGoals.index(of: userRef) else {return}
         goal.usersMonthlyGoals.remove(at: index)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
