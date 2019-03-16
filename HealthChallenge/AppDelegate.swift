@@ -38,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             GoalController.shared.fetchUsersMonthGoal(withUserReference: CKRecord.Reference(recordID: userID, action: .none), andChallengeReference: CKRecord.Reference(recordID: challenge.recordID, action: .none)) { (isSuccess) in
                 if isSuccess {
-                    //post Notification
+                    let notification = Notification(name: Notification.Name(rawValue: NotificationStrings.monthGoalFound))
+                    NotificationCenter.default.post(notification)
                 }
             }
         }

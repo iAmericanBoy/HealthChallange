@@ -40,6 +40,11 @@ class MonthlyGoalsViewController: UIViewController {
             self.selectedWeekGoals += GoalController.shared.weeklyGoals
             self.tableView.reloadData()
         }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.monthGoalFound), object: nil, queue: .main) { (_) in
+            self.seleted = GoalController.shared.monthGoal
+            self.tableView.reloadData()
+        }
 
     }
     
