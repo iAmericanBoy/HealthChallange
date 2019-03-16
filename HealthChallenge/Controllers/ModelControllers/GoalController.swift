@@ -136,7 +136,7 @@ class GoalController {
     }
     
     ///Fetches the Monthly goal
-    func fetchUsersGoal(withUserReference userReference: CKRecord.Reference, andChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
+    func fetchUsersMonthGoal(withUserReference userReference: CKRecord.Reference, andChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
         
         let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.userReferencesKey,userReference])
         let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
