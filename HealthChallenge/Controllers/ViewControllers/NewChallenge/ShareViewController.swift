@@ -8,7 +8,8 @@
 
 import UIKit
 
-class InviteOthersViewController: UIViewController {
+
+class ShareViewController: UIViewController {
     
     @IBOutlet weak var inviteOthersLabel: UILabel!
     @IBOutlet weak var shareButton: UIButton!
@@ -19,6 +20,7 @@ class InviteOthersViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 3])
     }
+    
     @IBAction func shareButtonTapped(_ sender: Any) {
         
     }

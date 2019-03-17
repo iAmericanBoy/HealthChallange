@@ -12,7 +12,7 @@
 		62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A62236D22000D5410B /* StartDateViewController.swift */; };
 		62D067A92236D23800D5410B /* WeeklyGoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A82236D23800D5410B /* WeeklyGoalsViewController.swift */; };
 		62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067AA2236D24A00D5410B /* MonthlyGoalsViewController.swift */; };
-		62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067AC2236D25F00D5410B /* InviteOthersViewController.swift */; };
+		62D067AD2236D25F00D5410B /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067AC2236D25F00D5410B /* ShareViewController.swift */; };
 		62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067AE2236D90900D5410B /* SignUpParentViewController.swift */; };
 		62D067B12236DBDF00D5410B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067B02236DBDF00D5410B /* OnboardingViewController.swift */; };
 		62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067B22236FD4800D5410B /* NewChallengeParentViewController.swift */; };
@@ -67,7 +67,7 @@
 		62D067A62236D22000D5410B /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
 		62D067A82236D23800D5410B /* WeeklyGoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyGoalsViewController.swift; sourceTree = "<group>"; };
 		62D067AA2236D24A00D5410B /* MonthlyGoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyGoalsViewController.swift; sourceTree = "<group>"; };
-		62D067AC2236D25F00D5410B /* InviteOthersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteOthersViewController.swift; sourceTree = "<group>"; };
+		62D067AC2236D25F00D5410B /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		62D067AE2236D90900D5410B /* SignUpParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpParentViewController.swift; sourceTree = "<group>"; };
 		62D067B02236DBDF00D5410B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		62D067B22236FD4800D5410B /* NewChallengeParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChallengeParentViewController.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 				62D067A62236D22000D5410B /* StartDateViewController.swift */,
 				62D067A82236D23800D5410B /* WeeklyGoalsViewController.swift */,
 				62D067AA2236D24A00D5410B /* MonthlyGoalsViewController.swift */,
-				62D067AC2236D25F00D5410B /* InviteOthersViewController.swift */,
+				62D067AC2236D25F00D5410B /* ShareViewController.swift */,
 			);
 			path = NewChallenge;
 			sourceTree = "<group>";
@@ -443,7 +443,7 @@
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
 				62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */,
-				62D067AD2236D25F00D5410B /* InviteOthersViewController.swift in Sources */,
+				62D067AD2236D25F00D5410B /* ShareViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
 				62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */,
