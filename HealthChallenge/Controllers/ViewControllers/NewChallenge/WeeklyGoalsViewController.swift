@@ -16,10 +16,11 @@ class WeeklyGoalsViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var weeklyGoalsLabel: UILabel!
     @IBOutlet weak var customGoalTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var reviewForPublicSwitch: UISwitch!
     @IBOutlet weak var reviewForPublicLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -28,12 +29,13 @@ class WeeklyGoalsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         customGoalTextField.delegate = self
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 1])
         
         NotificationCenter.default.addObserver(forName: Notification.Name(NotificationStrings.weekGoalsFound), object: nil, queue: .main) { (_) in
             self.selectedGoals += GoalController.shared.weeklyGoals
-            self.tableView.reloadData()
+            self.updateViews()
         }
     }
     
@@ -44,14 +46,17 @@ class WeeklyGoalsViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func saveButtonTapped(_ sender: Any) {
+    @IBAction func addButtonTapped(_ sender: Any) {
         guard let goalName = customGoalTextField.text, !goalName.isEmpty else {return}
-        GoalController.shared.createGoalWith(goalName: goalName, currentChallenge: ChallengeController.shared.currentChallenge!, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
+        GoalController.shared.createGoalWith(goalName: goalName, reviewForPublic: reviewForPublicSwitch.isOn) { [weak self] (isSuccess) in
             if isSuccess {
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                     self?.customGoalTextField.resignFirstResponder()
                     self?.customGoalTextField.text = ""
+                    self?.reviewForPublicSwitch.isHidden = true
+                    self?.reviewForPublicLabel.isHidden = true
+                    self?.addButton.isHidden = true
                 }
             }
         }
@@ -61,12 +66,50 @@ class WeeklyGoalsViewController: UIViewController {
         UserDefaults.standard.set(sender.isOn, forKey: UserDefaultStrings.reviewForPublic)
     }
     
+    
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        guard let currentChallenge = ChallengeController.shared.currentChallenge else {return}
+        //remove old references
+        GoalController.shared.weeklyGoals.forEach { (goal) in
+            GoalController.shared.remove(challenge: currentChallenge, fromGoal: goal, { (isSuccess) in
+                
+            })
+        }
+        
+        selectedGoals.forEach { (goal) in
+            GoalController.shared.add(newChallenge: currentChallenge, toGoal: goal, { (isSuccess) in
+                
+            })
+        }
+        //TODO: Pop to next VC
+    }
+    
     //MARK: - Private Functions
     func updateViews() {
         reviewForPublicSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultStrings.reviewForPublic)
         
         reviewForPublicSwitch.isHidden = true
         reviewForPublicLabel.isHidden = true
+        addButton.isHidden = true
+        
+        self.tableView.reloadData()
+
+        
+        if selectedGoals.count == 4 {
+            saveButton.setTitle("save", for: .normal)
+            saveButton.setTitleColor(UIColor(red: (62/255),green: (168/255),blue: (59/255),alpha: 1.0), for: .normal)
+            saveButton.isEnabled = true
+        } else if selectedGoals.count == 3 {
+                let selectedCount = selectedGoals.count
+                saveButton.setTitle("SELECT \(4 - selectedCount) GOAL", for: .normal)
+                saveButton.setTitleColor(UIColor.purple, for: .normal)
+                saveButton.isEnabled = false
+        } else {
+            let selectedCount = selectedGoals.count
+            saveButton.setTitle("SELECT \(4 - selectedCount) GOALS", for: .normal)
+            saveButton.setTitleColor(UIColor.purple, for: .normal)
+            saveButton.isEnabled = false
+        }
     }
     
 } // end class
@@ -87,9 +130,6 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "User" : "Public"
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return GoalController.shared.allGoalsFromCK[section].count
@@ -101,8 +141,12 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
         cell.textLabel?.text = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name
         
         if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
+            cell.backgroundColor = UIColor(red: (62/255),green: (168/255),blue: (59/255),alpha: 0.05)
+            cell.textLabel?.textColor = UIColor(red: (62/255),green: (168/255),blue: (59/255),alpha: 1.0)
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
+            cell.backgroundColor = .white
+            cell.textLabel?.textColor = .black
             cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         return cell
@@ -127,27 +171,13 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
             selectedGoals.remove(at: index)
         }
         
+        updateViews()
+        
         //Animating the change
         tableView.beginUpdates()
         tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
-        
-        if selectedGoals.count == 4 {
-            guard let currentChallenge = ChallengeController.shared.currentChallenge else {return}
-            //remove old references
-            GoalController.shared.weeklyGoals.forEach { (goal) in
-                GoalController.shared.remove(challenge: currentChallenge, fromGoal: goal, { (isSuccess) in
-                    
-                })
-            }
-            
-            selectedGoals.forEach { (goal) in
-                GoalController.shared.add(newChallenge: currentChallenge, toGoal: goal, { (isSuccess) in
-                    
-                })
-            }
-            //TODO: Pop to next VC
-        }
+    
     }
 }
 
@@ -162,10 +192,14 @@ extension WeeklyGoalsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         reviewForPublicSwitch.isHidden = false
         reviewForPublicLabel.isHidden = false
+        addButton.isHidden = false
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        reviewForPublicSwitch.isHidden = true
-        reviewForPublicLabel.isHidden = true
+        if textField.text?.isEmpty ?? true {
+            reviewForPublicSwitch.isHidden = true
+            reviewForPublicLabel.isHidden = true
+            addButton.isHidden = true
+        }
     }
 }

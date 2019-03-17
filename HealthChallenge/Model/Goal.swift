@@ -19,15 +19,15 @@ class Goal {
     var usersMonthlyGoals: [CKRecord.Reference]
     var challengesWeeklyGoals: [CKRecord.Reference]
     
-    init(name: String, creator: CKRecord.Reference? ,isPublic: Bool = false, reviewForPublic: Bool = false, challenge: Challenge, strengthValue: Int = 1,recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(name: String, creator: CKRecord.Reference? ,isPublic: Bool = false, reviewForPublic: Bool = false, strengthValue: Int = 1,recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.name = name
         self.isPublic = isPublic
         self.reviewForPublic = reviewForPublic
         self.recordID = recordID
         self.strengthValue = strengthValue
         self.creatorReference = creator
-        self.usersMonthlyGoals = [CKRecord.Reference(recordID: challenge.recordID, action: .none)]
-        self.challengesWeeklyGoals = []
+        self.usersMonthlyGoals = [CKRecord.Reference(recordID: CKRecord.ID(recordName: "123"), action: .none)]
+        self.challengesWeeklyGoals = [CKRecord.Reference(recordID: CKRecord.ID(recordName: "123"), action: .none)]
     }
     
     init?(record: CKRecord) {

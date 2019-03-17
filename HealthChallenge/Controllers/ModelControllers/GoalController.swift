@@ -23,6 +23,9 @@ class GoalController {
     ///The weekly goals of the current Challenge
     var weeklyGoals: [Goal] = []
     
+    ///The month goal of the current Challenge for the current User
+    var monthGoal: Goal?
+    
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
@@ -45,10 +48,10 @@ class GoalController {
     /// - parameter reviewForPublic: Boolean to indicate if the goal should be reviewed for Public
     /// - parameter completion: Handler for when the goal was created and appended.
     /// - parameter isSuccess: Confirms that the goal was created and appended.
-    func createGoalWith(goalName name: String,currentChallenge challenge: Challenge, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
+    func createGoalWith(goalName name: String, reviewForPublic: Bool = false, completion: @escaping (_ isSuccess:Bool) -> Void) {
 
         CloudKitController.shared.fetchUserRecordID { (isSuccess, userRecordID) in
-            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic, challenge: challenge)
+            let newGoal = Goal(name: name, creator: nil, reviewForPublic: reviewForPublic)
 
             if isSuccess {
                 guard let userRecordID = userRecordID else {completion(false); return}
@@ -133,8 +136,20 @@ class GoalController {
     }
     
     ///Fetches the Monthly goal
-    func fetchUsersGoal(withUserReference userReference: CKRecord.Reference, andChallengeReference challengeReference: CKRecord.Reference) {
+    func fetchUsersMonthGoal(withUserReference userReference: CKRecord.Reference, andChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
         
+        let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.userReferencesKey,userReference])
+        let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
+            
+            if isSuccess {
+                guard let foundRecord = foundRecords.first, let foundGoal = Goal(record: foundRecord) else {completion(false); return}
+                self.monthGoal = foundGoal
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
     
     ///Updates the goal with a new Name
@@ -156,6 +171,7 @@ class GoalController {
             }
         }
     }
+    
     ///Adds a Challenge Reference to the challengeReferenceArray of the given goal
     /// - parameter goal: The goal to update.
     /// - parameter challenge: The challenge to reference.
@@ -168,6 +184,7 @@ class GoalController {
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                self.weeklyGoals.append(goal)
                 completion(true)
             } else {
                 completion(false)
@@ -188,6 +205,8 @@ class GoalController {
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                guard let index = self.weeklyGoals.index(of: goal) else {completion(false);return}
+                self.weeklyGoals.remove(at: index)
                 completion(true)
             } else {
                 completion(false)
@@ -200,13 +219,14 @@ class GoalController {
     /// - parameter user: The User to reference.
     /// - parameter completion: Handler for when the goal was updated
     /// - parameter isSuccess: Confirms that the goal was updated.
-    func add(newUser user: User, toGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
-        let userReference = CKRecord.Reference(recordID: user.appleUserRef.recordID, action: .none)
-        goal.usersMonthlyGoals.append(userReference)
+    func add(newUserReference userRef: CKRecord.Reference, toGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        
+        goal.usersMonthlyGoals.append(userRef)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                self.monthGoal = goal
                 completion(true)
             } else {
                 completion(false)
@@ -219,14 +239,15 @@ class GoalController {
     /// - parameter user: The User to remove the reference of.
     /// - parameter completion: Handler for when the goal was updated
     /// - parameter isSuccess: Confirms that the goal was updated.
-    func remove(user: User, fromGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
-        let userReference = CKRecord.Reference(recordID: user.appleUserRef.recordID, action: .none)
-        guard let index = goal.usersMonthlyGoals.index(of: userReference) else {return}
+    func remove(userRef: CKRecord.Reference, fromGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        
+        guard let index = goal.usersMonthlyGoals.index(of: userRef) else {return}
         goal.usersMonthlyGoals.remove(at: index)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == goal.recordID else {completion(false); return}
+                self.monthGoal = nil
                 completion(true)
             } else {
                 completion(false)
@@ -244,13 +265,16 @@ class GoalController {
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [], purchasesToDelete: [recordID]) { (isSuccess, _, deletedRecords) in
             if isSuccess {
                 guard let deletedRecordID = deletedRecords?.first, deletedRecordID == recordID else {completion(false); return}
-                self.fetchUsersGoals(completion: { (isSuccess) in
-                    if isSuccess {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                })
+                if let userGoalIndex = self.usersGoals.index(of: goal) {
+                    self.usersGoals.remove(at: userGoalIndex)
+                }
+                if let weeklyGoalIndex = self.weeklyGoals.index(of: goal) {
+                    self.weeklyGoals.remove(at: weeklyGoalIndex)
+                }
+                if self.monthGoal?.recordID == goal.recordID {
+                    self.monthGoal = nil
+                }
+                completion(true)
             } else {
                 completion(false)
             }
