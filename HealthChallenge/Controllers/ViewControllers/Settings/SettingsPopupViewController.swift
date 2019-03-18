@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsPopupViewController: UIViewController {
     
-    var user: User?
+    var user: User? = UserController.shared.loggedInUser
     
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -18,7 +18,7 @@ class SettingsPopupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
     }
     
@@ -30,6 +30,12 @@ class SettingsPopupViewController: UIViewController {
             } else {
                 // pop up no active challenge error?
             }
+        }
+    }
+    
+    func updateViews() {
+        if let user = UserController.shared.loggedInUser {
+//            photoImageView.image = user?.photo
         }
     }
     

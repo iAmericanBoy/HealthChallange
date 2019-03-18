@@ -83,6 +83,10 @@ extension Date {
         return Calendar.current.component(.month, from: self)
     }
     
+    var year: Int {
+        return Calendar.current.component(.year, from: self)
+    }
+    
     var ignoreDate: Date {
         return Date(timeIntervalSince1970: 0)
     }

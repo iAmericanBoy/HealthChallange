@@ -10,9 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="OstrichSans-Bold.otf">
-            <string>OstrichSans-Bold</string>
-        </array>
         <array key="ostrich-regular.ttf">
             <string>OstrichSans-Medium</string>
         </array>
@@ -21,7 +18,7 @@
         <!--Workouts-->
         <scene sceneID="NaC-Nf-r7z">
             <objects>
-                <viewController id="web-Kx-5uf" customClass="WorkoutViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="web-Kx-5uf" customClass="WorkoutViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5tv-gw-mNU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -44,8 +41,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSf-Jj-SxJ">
-                                                    <rect key="frame" x="12.5" y="23" width="41" height="25"/>
-                                                    <fontDescription key="fontDescription" name="OstrichSans-Medium" family="Ostrich Sans" pointSize="25"/>
+                                                    <rect key="frame" x="7.5" y="18.5" width="51" height="34.5"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -58,7 +55,7 @@
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8X-ae-IdT">
                                                     <rect key="frame" x="33" y="71" width="0.0" height="0.0"/>
-                                                    <fontDescription key="fontDescription" name="OstrichSans-Medium" family="Ostrich Sans" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -130,9 +127,9 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqV-II-fuy">
-                                <rect key="frame" x="158.5" y="125" width="58" height="36"/>
-                                <fontDescription key="fontDescription" name="OstrichSans-Bold" family="Ostrich Sans" pointSize="30"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="155" y="122.5" width="65.5" height="41"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="30"/>
+                                <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxQ-uQ-6K6">
@@ -169,18 +166,35 @@
                         <viewLayoutGuide key="safeArea" id="4Rz-Mw-4zy"/>
                     </view>
                     <navigationItem key="navigationItem" title="Workouts" largeTitleDisplayMode="always" id="eC1-yT-0Sl">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="MBU-VR-h9u"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="MBU-VR-h9u">
+                            <color key="tintColor" red="0.24313725490196078" green="0.6588235294117647" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="optionsButtonTapped:" destination="web-Kx-5uf" id="m6L-bK-NI1"/>
+                                <segue destination="fdQ-9V-p7n" kind="show" id="gPn-2x-oWO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="calendarCollectionView" destination="fxM-Zu-PAx" id="2uc-Z9-MCH"/>
                         <outlet property="monthLabel" destination="hqV-II-fuy" id="924-MF-0bj"/>
                         <outlet property="nextMonthButton" destination="wxQ-uQ-6K6" id="csc-76-A5b"/>
+                        <outlet property="optionsButton" destination="MBU-VR-h9u" id="NKW-D4-JiM"/>
                         <outlet property="previousMonthButton" destination="CcH-Aa-rc3" id="d1m-A3-JDo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jze-QG-kaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3680.8000000000002" y="653.52323838080963"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="MhE-Io-bBW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="fdQ-9V-p7n" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="b3j-PR-aFJ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nir-h1-Qm5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4164" y="252"/>
         </scene>
         <!--Add Workouts View Controller-->
         <scene sceneID="GPH-4K-ter">
@@ -288,6 +302,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="60"/>
+                            <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

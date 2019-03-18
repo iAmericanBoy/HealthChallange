@@ -13,7 +13,7 @@
         <!--Leaderboard-->
         <scene sceneID="wez-zF-M7N">
             <objects>
-                <viewController id="3AZ-aG-QXG" sceneMemberID="viewController">
+                <viewController id="3AZ-aG-QXG" customClass="LeaderboardViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4lN-d0-r9e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,8 +21,16 @@
                         <viewLayoutGuide key="safeArea" id="Gsq-f0-PHn"/>
                     </view>
                     <navigationItem key="navigationItem" title="Leaderboard" id="q3k-W9-D1D">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="ntQ-vm-GwP"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="ntQ-vm-GwP">
+                            <color key="tintColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="optionsButtonTapped:" destination="3AZ-aG-QXG" id="Do3-xm-dhC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="optionsButton" destination="ntQ-vm-GwP" id="bW2-uC-Tw3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="djc-w1-83V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -39,6 +47,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="60"/>
+                            <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

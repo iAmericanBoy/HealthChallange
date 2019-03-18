@@ -11,8 +11,10 @@ import UIKit
 class StartDateViewController: UIViewController {
     
     let calendarController = CalendarController()
+    var dateRange: [Date] = []
     
     // MARK: - Outlets
+    
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var previousMonthButton: UIButton!
@@ -33,6 +35,7 @@ class StartDateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarController.initializeCurrentCalendar()
+        findDateRange(from: Date())
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         previousMonthButton.isHidden = true
@@ -74,6 +77,27 @@ class StartDateViewController: UIViewController {
         previousMonthButton.isHidden = false
         updateViews()
     }
+    
+    func findDateRange(from startDate: Date) {
+        var dayRange = [startDate]
+        var previousDate = startDate
+        let emptyCells = startDate.weekday - 1
+        
+        while dayRange.count != 35 {
+            let date = previousDate.addingTimeInterval(86400)
+            dayRange.append(date)
+            previousDate = date
+        }
+        
+        if emptyCells == 0 {
+            dateRange = dayRange
+        } else {
+            for _ in 1...emptyCells {
+                dayRange.insert(Date().ignoreDate, at: 0)
+            }
+        }
+        dateRange = dayRange
+    }
 } // end class
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -87,29 +111,42 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
             else { return UICollectionViewCell() }
-        let firstDay = calendarController.firstWeekDayOfMonth
-        let today = calendarController.todaysDate
-        let year = calendarController.currentYear
-        let month = calendarController.currentMonthIndex
-        cell.layer.cornerRadius = 20
+        let monthIndex = calendarController.currentMonthIndex - 1
+        var month = calendarController.shortMonthNames[monthIndex]
+        cell.isHidden = false
+        
+        let date = dateRange[indexPath.row]
+        cell.layer.cornerRadius = cell.frame.width / 2
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.black.cgColor
         cell.backgroundColor = .white
         cell.dayLabel.textColor = .black
         
-        if indexPath.item <= firstDay - 2 {
+        if date == Date().ignoreDate {
             cell.isHidden = true
         } else {
-            let calcDate = indexPath.row - firstDay + 2
-            cell.isHidden = false
-            cell.dayLabel.text = "\(calcDate)"
-            let cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))
-            cell.cellDate = cellDate
-            if calcDate < today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
-                cell.isUserInteractionEnabled = false
-                cell.dayLabel.textColor = UIColor.lightGray
-            } else {
-                cell.isUserInteractionEnabled = true
-            }
+            cell.dayLabel.text = "\(date.day)"
+            cell.cellDate = dateRange[indexPath.row]
+            let index = date.month
+            month = calendarController.shortMonthNames[index - 1]
+            cell.monthLabel.text = "\(month)"
         }
+        
+//        if indexPath.item <= firstDay - 2 {
+//            cell.isHidden = true
+//        } else {
+//            let calcDate = indexPath.row - firstDay + 2
+//            cell.isHidden = false
+//            cell.dayLabel.text = "\(calcDate)"
+//            let cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))
+//            cell.cellDate = cellDate
+//            if calcDate < today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
+//                cell.isUserInteractionEnabled = false
+//                cell.dayLabel.textColor = UIColor.lightGray
+//            } else {
+//                cell.isUserInteractionEnabled = true
+//            }
+//        }
         
         //logic to color cells of the selected date and the 30 days in the challenge
         if let challengeStartDate = challengeStartDate {
@@ -155,10 +192,10 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 7, height: 40)
+        return CGSize(width: (collectionView.frame.width / 7) - 2, height: (collectionView.frame.width / 7) - 2)
     }
 }
