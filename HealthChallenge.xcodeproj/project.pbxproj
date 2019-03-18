@@ -40,6 +40,15 @@
 		62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06802223AB69900D5410B /* GoalsViewController.swift */; };
 		62D06805223AB6A900D5410B /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06804223AB6A900D5410B /* LeaderboardViewController.swift */; };
 		62D06808223AC65A00D5410B /* AddWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */; };
+		62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A17223E94A3009240C6 /* ColorController.swift */; };
+		62FE5A20223EAAFC009240C6 /* ostrich-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A1F223EAAF1009240C6 /* ostrich-regular.ttf */; };
+		62FE5A26223EABAA009240C6 /* OstrichSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A25223EABA6009240C6 /* OstrichSans-Black.otf */; };
+		62FE5A27223EABAF009240C6 /* OstrichSans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A22223EABA6009240C6 /* OstrichSans-Bold.otf */; };
+		62FE5A28223EABB3009240C6 /* OstrichSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A23223EABA6009240C6 /* OstrichSans-Light.otf */; };
+		62FE5A29223EABB6009240C6 /* OstrichSans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A24223EABA6009240C6 /* OstrichSans-Medium.otf */; };
+		62FE5A2B223EBE76009240C6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A2A223EBE76009240C6 /* Settings.storyboard */; };
+		62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */; };
+		62FE5A33223FE450009240C6 /* SettingsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
@@ -95,6 +104,15 @@
 		62D06802223AB69900D5410B /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		62D06804223AB6A900D5410B /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutsViewController.swift; sourceTree = "<group>"; };
+		62FE5A17223E94A3009240C6 /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
+		62FE5A1F223EAAF1009240C6 /* ostrich-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ostrich-regular.ttf"; sourceTree = "<group>"; };
+		62FE5A22223EABA6009240C6 /* OstrichSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Bold.otf"; path = "../../../../ostrich-sans/OstrichSans-Bold.otf"; sourceTree = "<group>"; };
+		62FE5A23223EABA6009240C6 /* OstrichSans-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Light.otf"; path = "../../../../ostrich-sans/OstrichSans-Light.otf"; sourceTree = "<group>"; };
+		62FE5A24223EABA6009240C6 /* OstrichSans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Medium.otf"; path = "../../../../ostrich-sans/OstrichSans-Medium.otf"; sourceTree = "<group>"; };
+		62FE5A25223EABA6009240C6 /* OstrichSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Black.otf"; path = "../../../../ostrich-sans/OstrichSans-Black.otf"; sourceTree = "<group>"; };
+		62FE5A2A223EBE76009240C6 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopupViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6E332C02236B8650088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +156,7 @@
 				62D067B42236FD6200D5410B /* SignUp */,
 				62D067B52236FD9F00D5410B /* NewChallenge */,
 				62D06806223AB6B200D5410B /* ActiveChallege */,
+				62FE5A2F223EC1CC009240C6 /* Settings */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -145,6 +164,7 @@
 		62D067A32236D1D700D5410B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				62FE5A17223E94A3009240C6 /* ColorController.swift */,
 				62D067FC22397F3600D5410B /* HealthKitController.swift */,
 				62D067C7223719A700D5410B /* CloudKitController.swift */,
 				62D067CF223836CA00D5410B /* CallendarControlls */,
@@ -268,6 +288,35 @@
 			path = ActiveChallege;
 			sourceTree = "<group>";
 		};
+		62FE5A21223EAB5F009240C6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				62FE5A25223EABA6009240C6 /* OstrichSans-Black.otf */,
+				62FE5A22223EABA6009240C6 /* OstrichSans-Bold.otf */,
+				62FE5A23223EABA6009240C6 /* OstrichSans-Light.otf */,
+				62FE5A24223EABA6009240C6 /* OstrichSans-Medium.otf */,
+				62FE5A1F223EAAF1009240C6 /* ostrich-regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		62FE5A2C223EBE7F009240C6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				62FE5A2A223EBE76009240C6 /* Settings.storyboard */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		62FE5A2F223EC1CC009240C6 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */,
+				62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		B6E332AF2236B8650088D6FF = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +351,7 @@
 		B6E332CD2236B87E0088D6FF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				62FE5A21223EAB5F009240C6 /* Fonts */,
 				B6E332C22236B8680088D6FF /* Assets.xcassets */,
 				B6E332C42236B8680088D6FF /* LaunchScreen.storyboard */,
 				B6E332C72236B8680088D6FF /* Info.plist */,
@@ -316,6 +366,7 @@
 				62D067ED2238944700D5410B /* TabBarViews */,
 				62D067DF223891FF00D5410B /* NewChallenge */,
 				62D067DC2238918500D5410B /* Onboarding */,
+				62FE5A2C223EBE7F009240C6 /* Settings */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -398,18 +449,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62FE5A26223EABAA009240C6 /* OstrichSans-Black.otf in Resources */,
+				62FE5A2B223EBE76009240C6 /* Settings.storyboard in Resources */,
 				62D067D82238914400D5410B /* HealthKitAccess.storyboard in Resources */,
+				62FE5A29223EABB6009240C6 /* OstrichSans-Medium.otf in Resources */,
 				B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */,
 				B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */,
 				62D067D62238911200D5410B /* SignUp.storyboard in Resources */,
 				62D067F02238947F00D5410B /* WorkoutTab.storyboard in Resources */,
+				62FE5A20223EAAFC009240C6 /* ostrich-regular.ttf in Resources */,
 				B6E332C12236B8650088D6FF /* Main.storyboard in Resources */,
 				62D067E52238924E00D5410B /* WeeklyGoals.storyboard in Resources */,
 				62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */,
+				62FE5A27223EABAF009240C6 /* OstrichSans-Bold.otf in Resources */,
 				62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */,
 				62D067EC2238943B00D5410B /* FoodTab.storyboard in Resources */,
 				62D067EA223892A400D5410B /* InviteOthers.storyboard in Resources */,
 				62D067E22238921B00D5410B /* StartDate.storyboard in Resources */,
+				62FE5A28223EABB3009240C6 /* OstrichSans-Light.otf in Resources */,
 				62D067E72238928700D5410B /* MonthlyGoals.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,13 +492,16 @@
 				62D067C3223718F600D5410B /* UserController.swift in Sources */,
 				B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */,
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
+				62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
+				62FE5A33223FE450009240C6 /* SettingsPopupViewController.swift in Sources */,
 				62D067C8223719A700D5410B /* CloudKitController.swift in Sources */,
 				B6EBA608223822810001F5BF /* GoalController.swift in Sources */,
 				CEB299AF223C08D30089DA63 /* Food.swift in Sources */,
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
+				62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */,
 				62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* ShareViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,

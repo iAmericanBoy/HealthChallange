@@ -49,5 +49,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ostrich-regular.ttf</string>
+		<string>OstrichSans-Black.otf</string>
+		<string>OstrichSans-Bold.otf</string>
+		<string>OstrichSans-Light.otf</string>
+		<string>OstrichSans-Medium.otf</string>
+	</array>
 </dict>
 </plist>

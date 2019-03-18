@@ -53,7 +53,6 @@ class AddWorkoutsViewController: UIViewController {
     
     func updateViews() {
         DispatchQueue.main.async {
-            // NOT WORKING DUE TO TIME STAMP
             if self.date == self.today {
                 self.nextDayButton.isEnabled = false
             } else {
