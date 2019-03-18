@@ -17,6 +17,7 @@ class Goal {
     var strengthValue: Int
     var creatorReference: CKRecord.Reference?
     var usersMonthlyGoals: [CKRecord.Reference]
+    var challengeMonthGoals: [CKRecord.Reference]
     var challengesWeeklyGoals: [CKRecord.Reference]
     
     init(name: String, creator: CKRecord.Reference? ,isPublic: Bool = false, reviewForPublic: Bool = false, strengthValue: Int = 1,recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
@@ -28,6 +29,7 @@ class Goal {
         self.creatorReference = creator
         self.usersMonthlyGoals = [CKRecord.Reference(recordID: CKRecord.ID(recordName: "123"), action: .none)]
         self.challengesWeeklyGoals = [CKRecord.Reference(recordID: CKRecord.ID(recordName: "123"), action: .none)]
+        self.challengeMonthGoals = [CKRecord.Reference(recordID: CKRecord.ID(recordName: "123"), action: .none)]
     }
     
     init?(record: CKRecord) {
@@ -44,6 +46,7 @@ class Goal {
         self.challengesWeeklyGoals = record[Goal.challengeReferencesKey] as? [CKRecord.Reference] ?? []
         self.usersMonthlyGoals = record[Goal.userReferencesKey] as? [CKRecord.Reference] ?? []
         self.creatorReference = record[Goal.creatorReferenceKey] as? CKRecord.Reference
+        self.challengeMonthGoals = record[Goal.challengeMonthGoalsKey] as? [CKRecord.Reference] ?? []
 
     }
 }
@@ -64,7 +67,8 @@ extension CKRecord {
         
         self.setValue(goal.challengesWeeklyGoals, forKey: Goal.challengeReferencesKey)
         self.setValue(goal.usersMonthlyGoals, forKey: Goal.userReferencesKey)
-        
+        self.setValue(goal.challengeMonthGoals, forKey: Goal.challengeMonthGoalsKey)
+
         self.setValue(goal.creatorReference, forKey: Goal.creatorReferenceKey)
         self.setValue(goal.isPublic, forKey: Goal.isPublicKey)
         self.setValue(goal.reviewForPublic, forKey: Goal.reviewForPublicKey)

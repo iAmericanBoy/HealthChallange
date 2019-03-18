@@ -64,7 +64,9 @@
                         <viewLayoutGuide key="safeArea" id="ZNj-rt-7p4"/>
                     </view>
                     <navigationItem key="navigationItem" title="Food" largeTitleDisplayMode="always" id="jWk-gf-a8A">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="sEp-NK-2dV"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="sEp-NK-2dV">
+                            <color key="tintColor" red="0.24313725490196078" green="0.6588235294117647" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -81,7 +83,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sOe-4c-XX2">
-                                <rect key="frame" x="0.0" y="137" width="375" height="260"/>
+                                <rect key="frame" x="0.0" y="137" width="375" height="94"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="jYb-vw-VJa">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -102,8 +104,8 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4Oc-zU-P0N">
-                                        <rect key="frame" x="0.0" y="38" width="375" height="29"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4Oc-zU-P0N">
+                                        <rect key="frame" x="0.0" y="38" width="375" height="1"/>
                                         <segments>
                                             <segment title="Breakfast"/>
                                             <segment title="Lunch"/>
@@ -114,8 +116,8 @@
                                             <action selector="mealSegmentControl:" destination="CV6-Gf-aeX" eventType="valueChanged" id="jfv-R3-0Z5"/>
                                         </connections>
                                     </segmentedControl>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-Vb-X9s">
-                                        <rect key="frame" x="0.0" y="74" width="375" height="122"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-Vb-X9s">
+                                        <rect key="frame" x="0.0" y="46" width="375" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishCell" textLabel="heD-gh-saq" detailTextLabel="TFI-kR-sgw" style="IBUITableViewCellStyleSubtitle" id="4Qv-6y-llw">
@@ -144,8 +146,8 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <searchBar contentMode="redraw" placeholder="Add Ingredient..." translatesAutoresizingMaskIntoConstraints="NO" id="uzo-pV-TT1">
-                                        <rect key="frame" x="0.0" y="204" width="375" height="56"/>
+                                    <searchBar contentMode="redraw" ambiguous="YES" placeholder="Add Ingredient..." translatesAutoresizingMaskIntoConstraints="NO" id="uzo-pV-TT1">
+                                        <rect key="frame" x="0.0" y="94" width="375" height="0.0"/>
                                         <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </searchBar>
@@ -157,10 +159,10 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7sS-6k-YBn">
-                                <rect key="frame" x="0.0" y="397" width="375" height="221"/>
+                                <rect key="frame" x="0.0" y="231" width="375" height="387"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6FO-PJ-iUO">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="221"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="387"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="foodCell" rowHeight="134" id="NjN-1d-5ZH" customClass="FoodTableViewCell" customModule="HealthChallenge" customModuleProvider="target">
@@ -380,6 +382,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="60"/>
+                            <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

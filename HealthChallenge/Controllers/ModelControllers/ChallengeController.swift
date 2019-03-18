@@ -70,7 +70,7 @@ class ChallengeController {
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart])
         
         let query = CKQuery(recordType: Challenge.typeKey, predicate: predicate)
-        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.privateDB) { (isSuccess, foundRecords) in
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.privateDB, inZoneWith: CKRecordZone.ID(zoneName: "private")){ (isSuccess, foundRecords) in
             if isSuccess {
                 guard let foundRecord = foundRecords.first, let currentChallenge = Challenge(record: foundRecord) else {completion(false);return}
                 self.currentChallenge = currentChallenge
@@ -80,46 +80,7 @@ class ChallengeController {
             }
         }
     }
-    
-    ///fetches the goals of a Challenge
-    /// - parameter challenge: The challenge.
-    /// - parameter completion: Handler for when the challenge was created.
-    /// - parameter isSuccess: Confirms that the challenge was created.
-    func fetchGoals(ofChallenge challenge: Challenge, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
-        var goals: [CKRecord.Reference?] = []
-        goals.append(challenge.weekOneGoal)
-        goals.append(challenge.weekTwoGoal)
-        goals.append(challenge.weekThreeGoal)
-        goals.append(challenge.weekFourGoal)
-        let dispatchGroup = DispatchGroup()
-        goals.forEach { (reference) in
-            guard let goalReference = reference else {completion(false);return}
-            
-            let predicate = NSPredicate(format: "%K == %@", argumentArray: ["recordID", goalReference.recordID])
-            let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
-            dispatchGroup.enter()
-            CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (isSuccess, foundRecords) in
-                if isSuccess {
-                    let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
-                    guard let goal = foundGoals.first else {completion(false);return}
-                    self.currentChallengeWeekGoals.append(goal)
-                    dispatchGroup.leave()
-                } else {
-                    dispatchGroup.leave()
-                }
-            })
-        }
         
-        dispatchGroup.notify(queue: .main) {
-            if self.currentChallengeWeekGoals.count == 4 {
-                print(self.currentChallengeWeekGoals)
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
     ///Updates the challenge with a new date.
     /// - parameter challenge: The challenge to update.
     /// - parameter date: The new date of the challenge.
@@ -140,31 +101,7 @@ class ChallengeController {
             }
         }
     }
-    
-    ///Adds Weekly Goals to Challenge. goals[0] will be challenge for week 1 and so on...
-    /// - parameter goals: The weekly goals for the Challenge.
-    /// - parameter completion: Handler for when the challenge was updated
-    /// - parameter isSuccess: Confirms that the challenge was updated.
-    func add(weeklyGoals goals: [Goal], toChallange challenge: Challenge, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
-        let goalReference = goals.compactMap({ CKRecord.Reference(recordID: $0.recordID, action: .none)})
-        challenge.weekOneGoal = goalReference[0]
-        challenge.weekTwoGoal = goalReference[1]
-        challenge.weekThreeGoal = goalReference[2]
-        challenge.weekFourGoal = goalReference[3]
-
-        let record = CKRecord(challenge: challenge)
         
-        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
-            if isSuccess {
-                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
-                self.currentChallenge = updatedChallenge
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
     ///Deletes the given Challenge.
     /// - parameter challenge: The challenge to delete.
     /// - parameter completion: Handler for when the challenge was deleted

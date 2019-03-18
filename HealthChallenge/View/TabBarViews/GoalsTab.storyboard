@@ -21,8 +21,16 @@
                         <viewLayoutGuide key="safeArea" id="SFo-PL-vcj"/>
                     </view>
                     <navigationItem key="navigationItem" title="Goals" largeTitleDisplayMode="always" id="WTV-Y0-jPr">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="swa-cp-Wa7"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="swa-cp-Wa7">
+                            <color key="tintColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="optionsButtonTapped:" destination="P4n-DL-MRE" id="3JI-dv-xLa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="optionsButton" destination="swa-cp-Wa7" id="qR4-Dn-Iwd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xlu-yo-6ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -39,6 +47,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="60"/>
+                            <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>

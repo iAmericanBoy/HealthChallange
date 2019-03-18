@@ -27,4 +27,6 @@ extension Goal {
     static let userReferencesKey = "userReferences"
     /// "challengeReferences"
     static let challengeReferencesKey = "challengeReferences"
+    /// "challengeMonthReferences"
+    static let challengeMonthGoalsKey = "challengeMonthReferences"
 }

@@ -11,10 +11,10 @@ import UIKit
 class ChallengeOnboardingViewController: UIPageViewController {
 
     let onboardingViewControllers = [
-        UIStoryboard(name: "StartDate", bundle: nil).instantiateViewController(withIdentifier: "StartDate"),
-        UIStoryboard(name: "WeeklyGoals", bundle: nil).instantiateViewController(withIdentifier: "WeeklyGoals"),
-        UIStoryboard(name: "MonthlyGoals", bundle: nil).instantiateViewController(withIdentifier: "MonthlyGoals"),
-        UIStoryboard(name: "InviteOthers", bundle: nil).instantiateViewController(withIdentifier: "InviteOthers")
+        UIStoryboard(name: "StartDate", bundle: nil).instantiateViewController(withIdentifier: "startDateNav"),
+        UIStoryboard(name: "WeeklyGoals", bundle: nil).instantiateViewController(withIdentifier: "weeklyGoalsNav"),
+        UIStoryboard(name: "MonthlyGoals", bundle: nil).instantiateViewController(withIdentifier: "monthlyGoalsNav"),
+        UIStoryboard(name: "InviteOthers", bundle: nil).instantiateViewController(withIdentifier: "shareNav")
     ]
     
     override func viewDidLoad() {
