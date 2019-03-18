@@ -88,6 +88,27 @@ class CloudKitController {
         }
     }
     
+    //MARK: - Share
+    /// Shares the RootRecord and save it to the privateDataBase.
+    /// - parameter record: The RootRecord to share.
+    /// - parameter completion: Handler for when the rootrecord has been shared.
+    /// - parameter container: The RootRecord to share.
+
+    func share(rootRecord record: CKRecord, _ completion: @escaping (_ sharedRecord: CKShare?, _ container: CKContainer?, _ error: Error?) -> Void) {
+        
+        let shareRecord = CKShare(rootRecord: record)
+        let container = CKContainer.default()
+
+        
+        saveChangestoCK(inDataBase: privateDB, recordsToUpdate: [record, shareRecord], purchasesToDelete: []) { (isSuccess, savedRecords, _) in
+            if isSuccess {
+                completion(shareRecord, container, nil)
+            } else {
+                completion(nil, nil, nil)
+            }
+        }
+    }
+    
     //MARK: - Save
     /// Updates and Deletes changes to CloudKit.
     /// - parameter database: The database where the records should be deleted or updated in.
