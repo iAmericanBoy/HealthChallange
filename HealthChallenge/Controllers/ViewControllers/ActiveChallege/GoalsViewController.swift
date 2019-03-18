@@ -9,11 +9,18 @@
 import UIKit
 
 class GoalsViewController: UIViewController {
+    
+    @IBOutlet weak var optionsButton: UIBarButtonItem!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func optionsButtonTapped(_ sender: Any) {
+        
     }
     
 

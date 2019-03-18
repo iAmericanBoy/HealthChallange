@@ -121,7 +121,7 @@
         <!--Sign Up Parent View Controller-->
         <scene sceneID="cb2-YW-Q01">
             <objects>
-                <viewController id="iya-QT-8rm" customClass="SignUpParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="iya-QT-8rm" customClass="SignUpParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KWw-HN-bhr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -166,7 +166,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="z1e-O7-sQP" customClass="OnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhY-ZQ-Smm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2140" y="958"/>
+            <point key="canvasLocation" x="2174" y="958"/>
         </scene>
         <!--New Challenge Parent View Controller-->
         <scene sceneID="acq-aT-oYI">
