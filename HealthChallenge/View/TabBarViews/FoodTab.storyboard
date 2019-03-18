@@ -112,10 +112,39 @@
                                             <segment title="Dinner"/>
                                             <segment title="Snack"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="mealSegmentControl:" destination="CV6-Gf-aeX" eventType="valueChanged" id="jfv-R3-0Z5"/>
+                                        </connections>
                                     </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-Vb-X9s">
                                         <rect key="frame" x="0.0" y="46" width="375" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishCell" textLabel="heD-gh-saq" detailTextLabel="TFI-kR-sgw" style="IBUITableViewCellStyleSubtitle" id="4Qv-6y-llw">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Qv-6y-llw" id="uIp-be-62J">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="heD-gh-saq">
+                                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TFI-kR-sgw">
+                                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
                                     </tableView>
                                     <searchBar contentMode="redraw" ambiguous="YES" placeholder="Add Ingredient..." translatesAutoresizingMaskIntoConstraints="NO" id="uzo-pV-TT1">
                                         <rect key="frame" x="0.0" y="94" width="375" height="0.0"/>
@@ -177,6 +206,9 @@
                                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m05-wJ-YTI">
                                                                             <rect key="frame" x="330" y="0.0" width="37" height="67.5"/>
                                                                             <state key="normal" title="Add"/>
+                                                                            <connections>
+                                                                                <action selector="ingredientCheckTapped1:" destination="NjN-1d-5ZH" eventType="touchUpInside" id="LOL-8J-F2b"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                 </stackView>
@@ -321,16 +353,23 @@
                         <viewLayoutGuide key="safeArea" id="bud-4u-PaG"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Food" id="bZ9-pu-D0P">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="FM8-sZ-Zug"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="FM8-sZ-Zug">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="CV6-Gf-aeX" id="H3A-uH-gCE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dishName" destination="oFL-aL-UEU" id="RO2-x5-NbW"/>
+                        <outlet property="dishTableView" destination="aKD-Vb-X9s" id="49j-EP-8jk"/>
+                        <outlet property="ingredientTableView" destination="6FO-PJ-iUO" id="PFC-y8-A0J"/>
+                        <outlet property="mealSegment" destination="4Oc-zU-P0N" id="aqZ-Pg-ai7"/>
                         <outlet property="searchBar" destination="uzo-pV-TT1" id="lpW-Xz-Qcs"/>
-                        <outlet property="tableView" destination="6FO-PJ-iUO" id="PFC-y8-A0J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iL-I0-4Xm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4388" y="0.0"/>
+            <point key="canvasLocation" x="4388" y="-0.44977511244377816"/>
         </scene>
         <!--Food-->
         <scene sceneID="L7v-fY-d3L">

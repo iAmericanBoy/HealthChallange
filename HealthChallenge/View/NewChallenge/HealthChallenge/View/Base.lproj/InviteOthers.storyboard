@@ -87,7 +87,7 @@
         <!--Navigation Controller-->
         <scene sceneID="NW5-iY-SC7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pyc-be-6sQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="shareNav" automaticallyAdjustsScrollViewInsets="NO" id="pyc-be-6sQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="FZZ-v4-mIc">
                         <rect key="frame" x="0.0" y="20" width="375" height="117"/>

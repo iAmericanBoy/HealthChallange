@@ -14,7 +14,7 @@ class ChallengeOnboardingViewController: UIPageViewController {
         UIStoryboard(name: "StartDate", bundle: nil).instantiateViewController(withIdentifier: "startDateNav"),
         UIStoryboard(name: "WeeklyGoals", bundle: nil).instantiateViewController(withIdentifier: "weeklyGoalsNav"),
         UIStoryboard(name: "MonthlyGoals", bundle: nil).instantiateViewController(withIdentifier: "monthlyGoalsNav"),
-        UIStoryboard(name: "InviteOthers", bundle: nil).instantiateViewController(withIdentifier: "InviteOthers")
+        UIStoryboard(name: "InviteOthers", bundle: nil).instantiateViewController(withIdentifier: "shareNav")
     ]
     
     var isPresentingMonthGoalVC = false
