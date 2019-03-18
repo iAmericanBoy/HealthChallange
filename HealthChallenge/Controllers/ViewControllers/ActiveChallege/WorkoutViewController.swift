@@ -51,6 +51,8 @@ class WorkoutViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.textColor = Color.darkText.value
+        calendarCollectionView.backgroundColor = .clear
         calendarController.initializeCurrentCalendar()
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
@@ -85,6 +87,7 @@ class WorkoutViewController: UIViewController {
     }
 }
 
+// MARK: - DataSource
 extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,7 +98,13 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
             else { return UICollectionViewCell() }
         cell.delegate = self
-        cell.layer.cornerRadius = 20
+        cell.layer.cornerRadius = cell.frame.width / 2
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 2)
+        cell.layer.shadowRadius = 0.5
+        cell.layer.shadowOpacity = 0.5
+        cell.layer.masksToBounds = false
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.layer.cornerRadius).cgPath
         guard let date = dateRange[indexPath.row] else { return UICollectionViewCell() }
         let today = Date()
         let monthIndex = calendarController.currentMonthIndex - 1
@@ -106,22 +115,28 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.dayLabel.text = ""
         } else {
             cell.dayLabel.text = "\(date.day)"
+            cell.dayLabel.textColor = Color.lightText.value
             cell.cellDate = dateRange[indexPath.row]
             let index = date.month
             month = calendarController.shortMonthNames[index - 1]
             cell.monthLabel.text = "\(month)"
+            cell.monthLabel.textColor = Color.lightBackground.value
         }
         
         if date.stripTimestamp() == today.stripTimestamp() {
-            cell.backgroundColor = .green
+            cell.backgroundColor = Color.affirmation.value
+            cell.dayLabel.textColor = Color.darkText.value
+            cell.monthLabel.textColor = Color.darkText.value
         }
         // Allows users to only edit workouts for past week.
         if date.day < today.day && monthIndex == calendarController.presentMonthIndex - 1{
             cell.isUserInteractionEnabled = false
-            cell.dayLabel.textColor = UIColor.lightGray
+            cell.dayLabel.textColor = Color.lightBackground.value
+            cell.backgroundColor = Color.intermediateBackground.value
         } else if date.day > today.day && monthIndex == calendarController.presentMonthIndex - 1 {
             cell.isUserInteractionEnabled = false
-            cell.dayLabel.textColor = UIColor.lightGray
+            cell.dayLabel.textColor = Color.lightBackground.value
+            cell.backgroundColor = Color.intermediateBackground.value
         } else {
             cell.isUserInteractionEnabled = true
         }
@@ -133,7 +148,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 7, height: 40)
+        return CGSize(width: collectionView.frame.width / 7, height: 55)
     }
 }
 
