@@ -11,7 +11,6 @@ import UIKit
 class SettingsPopupViewController: UIViewController {
     
     var user: User?
-    var challenge: Challenge?
     
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -24,7 +23,7 @@ class SettingsPopupViewController: UIViewController {
     }
     
     @IBAction func endChallengeButtonTapped(_ sender: Any) {
-        guard let challenge = challenge else { return }
+        guard let challenge = ChallengeController.shared.currentChallenge else { return }
         ChallengeController.shared.delete(challenge: challenge) { (success) in
             if success {
                 // relaunch the app
