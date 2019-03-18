@@ -51,7 +51,6 @@ class WorkoutViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.textColor = Color.darkText.value
         calendarCollectionView.backgroundColor = .clear
         calendarController.initializeCurrentCalendar()
         calendarCollectionView.delegate = self
@@ -62,7 +61,6 @@ class WorkoutViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
         workouts = HealthKitController.shared.readWorkoutsFrom(date: challenge.startDay, toDate: challenge.finishDay)
         print(workouts)
     }
