@@ -70,7 +70,7 @@ class ChallengeController {
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart])
         
         let query = CKQuery(recordType: Challenge.typeKey, predicate: predicate)
-        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.privateDB) { (isSuccess, foundRecords) in
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.privateDB, inZoneWith: CKRecordZone.ID(zoneName: "private")){ (isSuccess, foundRecords) in
             if isSuccess {
                 guard let foundRecord = foundRecords.first, let currentChallenge = Challenge(record: foundRecord) else {completion(false);return}
                 self.currentChallenge = currentChallenge

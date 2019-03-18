@@ -75,9 +75,9 @@ class CloudKitController {
     /// - parameter completion: Handler for when the query could be found.
     /// - parameter isSuccess: Confirms the query found records.
     /// - parameter records: The array of found records or empty array.
-    func findRecords(withQuery query: CKQuery, inDataBase dataBase: CKDatabase, _ completion: @escaping (_ isSuccess:Bool, _ records: [CKRecord]) -> Void) {
+    func findRecords(withQuery query: CKQuery, inDataBase dataBase: CKDatabase, inZoneWith zoneID: CKRecordZone.ID? = nil , _ completion: @escaping (_ isSuccess:Bool, _ records: [CKRecord]) -> Void) {
         
-        dataBase.perform(query, inZoneWith: nil) { (foundRecords, error) in
+        dataBase.perform(query, inZoneWith: zoneID) { (foundRecords, error) in
             if let error = error {
                 print("There was an error performing the query in cloudkit: \(error)")
                 completion(false,[])

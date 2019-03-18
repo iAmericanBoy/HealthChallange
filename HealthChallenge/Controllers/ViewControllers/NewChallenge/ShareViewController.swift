@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 
 class ShareViewController: UIViewController {
@@ -22,7 +23,7 @@ class ShareViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        
+        CKContainer.default().sharedCloudDatabase
     }
     
 } // end class
