@@ -52,8 +52,16 @@ class ShareViewController: UIViewController {
 } // end class
 
 extension ShareViewController: UICloudSharingControllerDelegate {
+    func cloudSharingControllerDidSaveShare(_ csc: UICloudSharingController) {
+        print("saved successfully")
+    }
+    
     func cloudSharingController(_ csc: UICloudSharingController, failedToSaveShareWithError error: Error) {
-        
+        print("failed to save: \(error.localizedDescription)")
+    }
+    
+    func itemThumbnailData(for csc: UICloudSharingController) -> Data? {
+        return nil //You can set a hero image in your share sheet. Nil uses the default.
     }
     
     func itemTitle(for csc: UICloudSharingController) -> String? {
