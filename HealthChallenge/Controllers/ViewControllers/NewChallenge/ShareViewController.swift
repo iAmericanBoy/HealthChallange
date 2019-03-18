@@ -23,7 +23,6 @@ class ShareViewController: UIViewController {
     }
     
     @IBAction func shareButtonTapped(_ sender: Any) {
-        CKContainer.default().sharedCloudDatabase
     }
     
 } // end class
