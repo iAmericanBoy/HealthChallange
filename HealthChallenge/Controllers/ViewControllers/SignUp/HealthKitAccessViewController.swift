@@ -20,16 +20,6 @@ class HealthKitAccessViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let user = UserController.shared.loggedInUser {
-            if let currentChallenge = ChallengeController.shared.currentChallenge {
-                //TODO: EditCurrent Challenge if before the startDate
-            } else {
-                self.showNewChallengeVC()
-            }
-        } else {
-            //TODO: Add logic to deal with not having a logged in user
-            self.showNewChallengeVC()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +30,8 @@ class HealthKitAccessViewController: UIViewController {
     // MARK: - Actions
     @IBAction func allowButtonTapped(_ sender: Any) {
         HealthKitController.shared.authorizeHK { (success) in
-            //handle 
+            //handle
+            self.showNewChallengeVC()
         }
     }
     
@@ -50,7 +41,7 @@ class HealthKitAccessViewController: UIViewController {
     func showNewChallengeVC() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengePageView")
+            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
             self.present(viewController, animated: true, completion: nil)
         }
     }

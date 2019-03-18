@@ -27,6 +27,13 @@ class ShareViewController: UIViewController {
     @IBAction func shareButtonTapped(_ sender: Any) {
         shareCurrentChallenge()
     }
+    @IBAction func goToMainViewButtonTapped(_ sender: UIButton) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "ActiveChallengeController")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
     
     
     //MARK: - Private Functions
