@@ -10,18 +10,15 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="OstrichSans-Black.otf">
-            <string>OstrichSans-Black</string>
-        </array>
         <array key="OstrichSans-Bold.otf">
             <string>OstrichSans-Bold</string>
         </array>
-        <array key="OstrichSans-Medium.otf">
+        <array key="ostrich-regular.ttf">
             <string>OstrichSans-Medium</string>
         </array>
     </customFonts>
     <scenes>
-        <!--Workout View Controller-->
+        <!--Workouts-->
         <scene sceneID="NaC-Nf-r7z">
             <objects>
                 <viewController id="web-Kx-5uf" customClass="WorkoutViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fxM-Zu-PAx">
-                                <rect key="frame" x="12" y="271" width="351" height="384"/>
+                                <rect key="frame" x="12" y="223" width="351" height="432"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="na8-7f-cQY">
                                     <size key="itemSize" width="66" height="71"/>
@@ -85,14 +82,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workouts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ilg-7q-TZa">
-                                <rect key="frame" x="12" y="74" width="274.5" height="90"/>
-                                <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="75"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hw0-it-XSg">
-                                <rect key="frame" x="12" y="230" width="351" height="17"/>
+                                <rect key="frame" x="12" y="182" width="351" height="17"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9h-rH-Crz">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="17"/>
@@ -139,20 +130,20 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqV-II-fuy">
-                                <rect key="frame" x="158.5" y="173" width="58" height="36"/>
+                                <rect key="frame" x="158.5" y="125" width="58" height="36"/>
                                 <fontDescription key="fontDescription" name="OstrichSans-Bold" family="Ostrich Sans" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxQ-uQ-6K6">
-                                <rect key="frame" x="317" y="167" width="46" height="30"/>
+                                <rect key="frame" x="317" y="119" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="nextMonthButtonTapped:" destination="web-Kx-5uf" eventType="touchUpInside" id="8xt-o6-ebX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CcH-Aa-rc3">
-                                <rect key="frame" x="12" y="176" width="46" height="30"/>
+                                <rect key="frame" x="12" y="128" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="previousMonthButtonTapped:" destination="web-Kx-5uf" eventType="touchUpInside" id="ouf-UL-NKN"/>
@@ -161,32 +152,30 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4Rz-Mw-4zy" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ilg-7q-TZa" secondAttribute="trailing" symbolic="YES" id="0hs-lL-31D"/>
                             <constraint firstItem="Hw0-it-XSg" firstAttribute="top" secondItem="CcH-Aa-rc3" secondAttribute="bottom" constant="24" id="0wl-Hs-jgb"/>
                             <constraint firstItem="fxM-Zu-PAx" firstAttribute="top" secondItem="Hw0-it-XSg" secondAttribute="bottom" constant="24" id="0xY-Wc-ciL"/>
                             <constraint firstItem="wxQ-uQ-6K6" firstAttribute="trailing" secondItem="Hw0-it-XSg" secondAttribute="trailing" id="2bt-zx-JFs"/>
                             <constraint firstItem="4Rz-Mw-4zy" firstAttribute="bottom" secondItem="fxM-Zu-PAx" secondAttribute="bottom" constant="12" id="8tx-dI-pL5"/>
-                            <constraint firstItem="Ilg-7q-TZa" firstAttribute="leading" secondItem="CcH-Aa-rc3" secondAttribute="leading" id="Hy7-rP-6d2"/>
                             <constraint firstItem="4Rz-Mw-4zy" firstAttribute="trailing" secondItem="fxM-Zu-PAx" secondAttribute="trailing" constant="12" id="JPz-aV-gZH"/>
                             <constraint firstItem="CcH-Aa-rc3" firstAttribute="leading" secondItem="Hw0-it-XSg" secondAttribute="leading" id="VWm-Ns-Nnp"/>
                             <constraint firstItem="Hw0-it-XSg" firstAttribute="top" secondItem="wxQ-uQ-6K6" secondAttribute="bottom" constant="33" id="YOm-v5-umC"/>
                             <constraint firstItem="hqV-II-fuy" firstAttribute="centerY" secondItem="CcH-Aa-rc3" secondAttribute="centerY" id="bEG-kM-sRr"/>
-                            <constraint firstItem="Ilg-7q-TZa" firstAttribute="top" secondItem="4Rz-Mw-4zy" secondAttribute="top" constant="10" id="iH8-ga-p3w"/>
+                            <constraint firstItem="CcH-Aa-rc3" firstAttribute="top" secondItem="4Rz-Mw-4zy" secondAttribute="top" constant="12" id="ka1-pH-YZp"/>
                             <constraint firstItem="Hw0-it-XSg" firstAttribute="trailing" secondItem="fxM-Zu-PAx" secondAttribute="trailing" id="lMx-3T-mu5"/>
                             <constraint firstItem="Hw0-it-XSg" firstAttribute="leading" secondItem="fxM-Zu-PAx" secondAttribute="leading" id="led-56-bSn"/>
                             <constraint firstItem="hqV-II-fuy" firstAttribute="centerX" secondItem="4Rz-Mw-4zy" secondAttribute="centerX" id="mbW-7B-BrE"/>
                             <constraint firstItem="fxM-Zu-PAx" firstAttribute="leading" secondItem="4Rz-Mw-4zy" secondAttribute="leading" constant="12" id="qPu-HZ-QNH"/>
-                            <constraint firstItem="CcH-Aa-rc3" firstAttribute="top" secondItem="Ilg-7q-TZa" secondAttribute="bottom" constant="12" id="z6i-O8-XzE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Rz-Mw-4zy"/>
                     </view>
-                    <navigationItem key="navigationItem" id="eC1-yT-0Sl"/>
+                    <navigationItem key="navigationItem" title="Workouts" largeTitleDisplayMode="always" id="eC1-yT-0Sl">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="MBU-VR-h9u"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="calendarCollectionView" destination="fxM-Zu-PAx" id="2uc-Z9-MCH"/>
                         <outlet property="monthLabel" destination="hqV-II-fuy" id="924-MF-0bj"/>
                         <outlet property="nextMonthButton" destination="wxQ-uQ-6K6" id="csc-76-A5b"/>
                         <outlet property="previousMonthButton" destination="CcH-Aa-rc3" id="d1m-A3-JDo"/>
-                        <outlet property="titleLabel" destination="Ilg-7q-TZa" id="2GZ-6E-bmx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jze-QG-kaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -202,7 +191,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sU8-IE-z5z">
-                                <rect key="frame" x="12" y="167" width="351" height="488"/>
+                                <rect key="frame" x="12" y="219" width="351" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="workoutCell" textLabel="0CJ-xC-LFC" rowHeight="68" style="IBUITableViewCellStyleDefault" id="W0o-HF-nii">
@@ -225,33 +214,33 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZv-jN-Hz2">
-                                <rect key="frame" x="166.5" y="122" width="42" height="21"/>
+                                <rect key="frame" x="166.5" y="174" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDR-O0-nB5">
-                                <rect key="frame" x="317" y="117.5" width="46" height="30"/>
+                                <rect key="frame" x="317" y="169.5" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="nextDayButtonTapped:" destination="7CM-RD-sUS" eventType="touchUpInside" id="XvO-Z2-wfs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgc-D7-toC">
-                                <rect key="frame" x="12" y="117.5" width="46" height="30"/>
+                                <rect key="frame" x="12" y="169.5" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="previousDayButtonTapped:" destination="7CM-RD-sUS" eventType="touchUpInside" id="xcT-GE-P87"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPU-fp-AzV">
-                                <rect key="frame" x="12" y="74" width="71" height="36"/>
+                                <rect key="frame" x="12" y="126" width="71" height="36"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ca6-i6-bgU">
-                                <rect key="frame" x="317" y="77" width="46" height="30"/>
+                                <rect key="frame" x="317" y="129" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="backButtonTapped:" destination="7CM-RD-sUS" eventType="touchUpInside" id="lTy-g4-pej"/>
@@ -294,9 +283,12 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c1X-ya-8VH" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Workouts" id="EBW-q0-q5N"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8c0-Je-vAU">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8c0-Je-vAU">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="60"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
