@@ -24,12 +24,13 @@ class Dish {
     }
 }
 
-enum DishType: Int {
-    case breakfast
-    case lunch
-    case dinner
-    case snack
+enum DishType: String {
+    case Breakfast
+    case Lunch
+    case Dinner
+    case Snack
 }
+
 // dish model
 //name
 // array of ingredients

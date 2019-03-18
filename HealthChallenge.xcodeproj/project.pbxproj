@@ -207,7 +207,6 @@
 			children = (
 				CEB299B2223C09740089DA63 /* Dish.swift */,
 				CE57AD2922402B2800712975 /* FoodTracker.swift */,
-				CE60FC5F224038390029386F /* DishController.swift */,
 				CEB299B0223C09250089DA63 /* Nutrients.swift */,
 				CEB299AE223C08D30089DA63 /* Food.swift */,
 				62D067BC2237182300D5410B /* User.swift */,
@@ -232,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				62D067C2223718F600D5410B /* UserController.swift */,
+				CE60FC5F224038390029386F /* DishController.swift */,
 				B6EBA607223822810001F5BF /* GoalController.swift */,
 				B6EBA60922384F6E0001F5BF /* ChallengeController.swift */,
 				CEB299B4223C0AAB0089DA63 /* FoodController.swift */,
