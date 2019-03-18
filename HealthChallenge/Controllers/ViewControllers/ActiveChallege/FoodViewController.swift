@@ -42,59 +42,20 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         //print(sender.itemLandingPad?.name as Any)
         dump(ingredients)
     }
-    
-    @IBAction func mealSegmentControl(_ sender: Any) {
    
-        guard let dishName1 = dishName else {return}
-        let getIndex = mealSegment.selectedSegmentIndex
-        print(getIndex)
-        //breakfast, lunch, dinner, snack
-  
-        switch (getIndex) {
-            
-        // apend an array of arrays to the breakfast array (an array of [Foods] makes a breakfast
-        case 0:
-            FoodTrackerController.shared.breakFast.append(ingredients)
-            print("---------Breakfast---------")
-            
-            dump(FoodTrackerController.shared.breakFast)
-         
-        case 1:
-            FoodTrackerController.shared.lunch.append(ingredients)
-            print("---------Lunch---------")
-           dump(FoodTrackerController.shared.lunch)
-        case 2:
-           // let dish = Dish(dishName: dishName1.text!, dish: ingredients,  dishType: "Dinner")
-            //DishController.shared.dishesArray.append(dish)
-            FoodTrackerController.shared.dinner.append(ingredients)
-            print("---------Dinner---------")
-           dump(FoodTrackerController.shared.dinner)
-        case 3:
-          
-          
-            FoodTrackerController.shared.snack.append(ingredients)
-            print("---------Snack---------")
-            dump(FoodTrackerController.shared.snack)
-            
-        default: break
-            //?
-        }
+    @IBAction func saveButtonTapped1(_ sender: Any) {
+        print("save button tapped")
         
-    }
-
-    
-    @IBAction func saveButtonTapped(_ sender: Any) {
         guard let name = dishName.text,
-        !name.isEmpty,
-        let type = DishType(rawValue:  mealSegment.selectedSegmentIndex),
-        ingredients.count > 0
+            !name.isEmpty,
+            //        let index = mealSegment.selectedSegmentIndex,
+            ingredients.count > 0
             else { return }
-        DishController.shared.createDish(name: name, type: type, ingredients: ingredients)
+        DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients)
         navigationController?.popViewController(animated: true)
-        
-        
+
     }
-    
+  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
