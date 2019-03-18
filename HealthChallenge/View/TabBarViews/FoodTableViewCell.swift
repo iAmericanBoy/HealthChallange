@@ -34,11 +34,13 @@ class FoodTableViewCell: UITableViewCell {
         amountLabel.text = unwrappedItem.measure
     }
    
-    @IBAction func ingredientCheckTapped(_ sender: Any) {
+   
+    @IBAction func ingredientCheckTapped1(_ sender: Any) {
+        
+        print("ingredientCheckTapped1")
         delegate?.buttonCellButtontapped(self)
-        // updateButton(isComplete: true)
+
     }
-    
     func updateNutrients() {
         guard let nutrientItem = nutrientLandingPad else { return }
         caloriesLabel.text = nutrientItem.calories
