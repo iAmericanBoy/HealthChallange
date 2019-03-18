@@ -42,10 +42,6 @@
 		62D06808223AC65A00D5410B /* AddWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */; };
 		62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A17223E94A3009240C6 /* ColorController.swift */; };
 		62FE5A20223EAAFC009240C6 /* ostrich-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A1F223EAAF1009240C6 /* ostrich-regular.ttf */; };
-		62FE5A26223EABAA009240C6 /* OstrichSans-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A25223EABA6009240C6 /* OstrichSans-Black.otf */; };
-		62FE5A27223EABAF009240C6 /* OstrichSans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A22223EABA6009240C6 /* OstrichSans-Bold.otf */; };
-		62FE5A28223EABB3009240C6 /* OstrichSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A23223EABA6009240C6 /* OstrichSans-Light.otf */; };
-		62FE5A29223EABB6009240C6 /* OstrichSans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A24223EABA6009240C6 /* OstrichSans-Medium.otf */; };
 		62FE5A2B223EBE76009240C6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A2A223EBE76009240C6 /* Settings.storyboard */; };
 		62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */; };
 		62FE5A33223FE450009240C6 /* SettingsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */; };
@@ -106,10 +102,6 @@
 		62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutsViewController.swift; sourceTree = "<group>"; };
 		62FE5A17223E94A3009240C6 /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
 		62FE5A1F223EAAF1009240C6 /* ostrich-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ostrich-regular.ttf"; sourceTree = "<group>"; };
-		62FE5A22223EABA6009240C6 /* OstrichSans-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Bold.otf"; path = "../../../../ostrich-sans/OstrichSans-Bold.otf"; sourceTree = "<group>"; };
-		62FE5A23223EABA6009240C6 /* OstrichSans-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Light.otf"; path = "../../../../ostrich-sans/OstrichSans-Light.otf"; sourceTree = "<group>"; };
-		62FE5A24223EABA6009240C6 /* OstrichSans-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Medium.otf"; path = "../../../../ostrich-sans/OstrichSans-Medium.otf"; sourceTree = "<group>"; };
-		62FE5A25223EABA6009240C6 /* OstrichSans-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OstrichSans-Black.otf"; path = "../../../../ostrich-sans/OstrichSans-Black.otf"; sourceTree = "<group>"; };
 		62FE5A2A223EBE76009240C6 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopupViewController.swift; sourceTree = "<group>"; };
@@ -291,10 +283,6 @@
 		62FE5A21223EAB5F009240C6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				62FE5A25223EABA6009240C6 /* OstrichSans-Black.otf */,
-				62FE5A22223EABA6009240C6 /* OstrichSans-Bold.otf */,
-				62FE5A23223EABA6009240C6 /* OstrichSans-Light.otf */,
-				62FE5A24223EABA6009240C6 /* OstrichSans-Medium.otf */,
 				62FE5A1F223EAAF1009240C6 /* ostrich-regular.ttf */,
 			);
 			path = Fonts;
@@ -449,10 +437,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62FE5A26223EABAA009240C6 /* OstrichSans-Black.otf in Resources */,
 				62FE5A2B223EBE76009240C6 /* Settings.storyboard in Resources */,
 				62D067D82238914400D5410B /* HealthKitAccess.storyboard in Resources */,
-				62FE5A29223EABB6009240C6 /* OstrichSans-Medium.otf in Resources */,
 				B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */,
 				B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */,
 				62D067D62238911200D5410B /* SignUp.storyboard in Resources */,
@@ -461,12 +447,10 @@
 				B6E332C12236B8650088D6FF /* Main.storyboard in Resources */,
 				62D067E52238924E00D5410B /* WeeklyGoals.storyboard in Resources */,
 				62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */,
-				62FE5A27223EABAF009240C6 /* OstrichSans-Bold.otf in Resources */,
 				62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */,
 				62D067EC2238943B00D5410B /* FoodTab.storyboard in Resources */,
 				62D067EA223892A400D5410B /* InviteOthers.storyboard in Resources */,
 				62D067E22238921B00D5410B /* StartDate.storyboard in Resources */,
-				62FE5A28223EABB3009240C6 /* OstrichSans-Light.otf in Resources */,
 				62D067E72238928700D5410B /* MonthlyGoals.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -81,7 +81,6 @@ extension CKRecord {
         
         self.setValue(user.userName, forKey: User.usernameKey)
         self.setValue(user.appleUserRef, forKey: User.appleUserRefKey)
-//        self.setValue(user.monthlyChallanges, forKey: User.monthlyChallengesKey)
         self.setValue(user.imageAsset, forKey: User.photoKey)
     }
 }

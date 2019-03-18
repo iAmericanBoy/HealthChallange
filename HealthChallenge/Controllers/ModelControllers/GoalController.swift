@@ -138,8 +138,11 @@ class GoalController {
     ///Fetches the Monthly goal
     func fetchUsersMonthGoal(withUserReference userReference: CKRecord.Reference, andChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
         
-        let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.userReferencesKey,userReference])
-        let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+        let userPredicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.userReferencesKey,userReference])
+        let challengePredicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.challengeMonthGoalsKey,challengeReference])
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [userPredicate,challengePredicate])
+        
+        let query = CKQuery(recordType: Goal.typeKey, predicate: compoundPredicate)
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
             
             if isSuccess {
@@ -219,8 +222,9 @@ class GoalController {
     /// - parameter user: The User to reference.
     /// - parameter completion: Handler for when the goal was updated
     /// - parameter isSuccess: Confirms that the goal was updated.
-    func add(newUserReference userRef: CKRecord.Reference, toGoal goal: Goal, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+    func add(newUserReference userRef: CKRecord.Reference, toGoal goal: Goal ,forChallenge challengeRef: CKRecord.Reference, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
         
+        goal.challengeMonthGoals.append(challengeRef)
         goal.usersMonthlyGoals.append(userRef)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in

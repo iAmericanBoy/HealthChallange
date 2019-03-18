@@ -137,12 +137,13 @@ extension MonthlyGoalsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let userID = UserController.shared.appleUserID else {return}
+        guard let challengeID = ChallengeController.shared.currentChallenge?.recordID else {return}
         if !selectedWeekGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
             let selectedGoal = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
             if seleted == nil {
                 seleted = selectedGoal
                 //SAVE
-                GoalController.shared.add(newUserReference: CKRecord.Reference(recordID: userID, action: .none), toGoal: selectedGoal) { (isSuccess) in
+                GoalController.shared.add(newUserReference: CKRecord.Reference(recordID: userID, action: .none), toGoal: selectedGoal, forChallenge: CKRecord.Reference(recordID: challengeID, action: .none))  { (isSuccess) in
                 }
             } else {
                 //REMOVE
