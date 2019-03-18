@@ -45,6 +45,7 @@
 		62FE5A2B223EBE76009240C6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62FE5A2A223EBE76009240C6 /* Settings.storyboard */; };
 		62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */; };
 		62FE5A33223FE450009240C6 /* SettingsPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */; };
+		B6E210622240500200642274 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E210612240500100642274 /* InitialViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
@@ -109,6 +110,7 @@
 		62FE5A2A223EBE76009240C6 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPopupViewController.swift; sourceTree = "<group>"; };
+		B6E210612240500100642274 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6E332C02236B8650088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				62D067B52236FD9F00D5410B /* NewChallenge */,
 				62D06806223AB6B200D5410B /* ActiveChallege */,
 				62FE5A2F223EC1CC009240C6 /* Settings */,
+				B6E210612240500100642274 /* InitialViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
 				CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */,
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
+				B6E210622240500200642274 /* InitialViewController.swift in Sources */,
 				CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */,
 				CE60FC60224038390029386F /* DishController.swift in Sources */,
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,

@@ -27,6 +27,13 @@ class ShareViewController: UIViewController {
     @IBAction func shareButtonTapped(_ sender: Any) {
         shareCurrentChallenge()
     }
+    @IBAction func goToMainViewButtonTapped(_ sender: UIButton) {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "ActiveChallengeController")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
     
     
     //MARK: - Private Functions
@@ -52,8 +59,16 @@ class ShareViewController: UIViewController {
 } // end class
 
 extension ShareViewController: UICloudSharingControllerDelegate {
+    func cloudSharingControllerDidSaveShare(_ csc: UICloudSharingController) {
+        print("saved successfully")
+    }
+    
     func cloudSharingController(_ csc: UICloudSharingController, failedToSaveShareWithError error: Error) {
-        
+        print("failed to save: \(error.localizedDescription)")
+    }
+    
+    func itemThumbnailData(for csc: UICloudSharingController) -> Data? {
+        return nil //You can set a hero image in your share sheet. Nil uses the default.
     }
     
     func itemTitle(for csc: UICloudSharingController) -> String? {

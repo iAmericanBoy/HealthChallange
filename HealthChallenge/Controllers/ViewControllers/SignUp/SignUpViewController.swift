@@ -29,6 +29,12 @@ class SignUpViewController: UIViewController, PhotoSelectorViewControllerDelegat
             let photo = profilePhoto else { return }
         let strengthValue = lifestyleSegmentedControl.selectedSegmentIndex
         UserController.shared.createUserWith(userName: name, userPhoto: photo, strengthValue: strengthValue) { (_) in
+            self.resignFirstResponder()
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
+                    self.present(viewController, animated: true, completion: nil)
+            }
         }
     }
     
