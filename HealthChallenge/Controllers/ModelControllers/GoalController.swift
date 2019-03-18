@@ -224,7 +224,7 @@ class GoalController {
     /// - parameter isSuccess: Confirms that the goal was updated.
     func add(newUserReference userRef: CKRecord.Reference, toGoal goal: Goal ,forChallenge challengeRef: CKRecord.Reference, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
         
-        goal.challengeMonthGoals.insert(challengeRef)
+        goal.challengeMonthGoals.append(challengeRef)
         goal.usersMonthlyGoals.append(userRef)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [CKRecord(goal: goal)], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
