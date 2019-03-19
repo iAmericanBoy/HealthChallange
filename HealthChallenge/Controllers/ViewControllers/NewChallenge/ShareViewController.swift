@@ -45,7 +45,7 @@ class ShareViewController: UIViewController {
         
         let sharingViewController = UICloudSharingController { (controller, completion: @escaping (CKShare?, CKContainer?, Error?) -> Void) in
             
-            CloudKitController.shared.share(rootRecord: CKRecord(challenge: challenge), completion)
+            CloudKitController.shared.share(rootRecord: CKRecord(challenge: challenge)!, completion)
         }
         
         
