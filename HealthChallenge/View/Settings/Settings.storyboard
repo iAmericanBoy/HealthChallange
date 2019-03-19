@@ -13,7 +13,7 @@
         <!--Settings Popup View Controller-->
         <scene sceneID="PME-KR-Re1">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="xDQ-jh-PaP" customClass="SettingsPopupViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" modalPresentationStyle="overCurrentContext" id="xDQ-jh-PaP" customClass="SettingsPopupViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="P8H-EL-0Gp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,14 +55,23 @@
                                             <action selector="endChallengeButtonTapped:" destination="xDQ-jh-PaP" eventType="touchUpInside" id="4Yz-dx-mkQ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFZ-30-HES">
+                                        <rect key="frame" x="128" y="386" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="xDQ-jh-PaP" eventType="touchUpInside" id="kEc-aO-jHy"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Lt4-Ot-YZ0" firstAttribute="centerX" secondItem="bbe-qX-Dac" secondAttribute="centerX" id="44v-3R-eQX"/>
                                     <constraint firstAttribute="width" constant="200" id="5RH-pg-qAw"/>
                                     <constraint firstItem="Lt4-Ot-YZ0" firstAttribute="trailing" secondItem="zP5-Km-wvu" secondAttribute="trailing" id="6ES-IP-Q4a"/>
+                                    <constraint firstItem="FFZ-30-HES" firstAttribute="trailing" secondItem="gdj-3S-828" secondAttribute="trailing" id="MP3-iD-kIf"/>
                                     <constraint firstItem="gdj-3S-828" firstAttribute="top" secondItem="4XZ-W8-Wzb" secondAttribute="bottom" constant="24" id="W3x-7P-NCu"/>
                                     <constraint firstAttribute="trailing" secondItem="zP5-Km-wvu" secondAttribute="trailing" constant="24" id="YAb-Mx-jjc"/>
+                                    <constraint firstItem="FFZ-30-HES" firstAttribute="top" secondItem="gdj-3S-828" secondAttribute="bottom" constant="44.5" id="crw-GD-3Bq"/>
                                     <constraint firstItem="Tt5-pv-ann" firstAttribute="top" secondItem="zP5-Km-wvu" secondAttribute="bottom" constant="8" id="gch-q9-MgX"/>
                                     <constraint firstItem="Lt4-Ot-YZ0" firstAttribute="top" secondItem="bbe-qX-Dac" secondAttribute="top" constant="24" id="s9Q-lW-2Z4"/>
                                     <constraint firstItem="4XZ-W8-Wzb" firstAttribute="top" secondItem="Tt5-pv-ann" secondAttribute="bottom" constant="24" id="uXp-4R-u1s"/>
@@ -74,12 +83,17 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.6023316062176165" green="0.6023316062176165" blue="0.6023316062176165" alpha="0.50184308978873238" colorSpace="custom" customColorSpace="displayP3"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bbe-qX-Dac" firstAttribute="bottom" secondItem="PF5-7y-7Bn" secondAttribute="bottom" id="51j-Ai-Gp2"/>
                             <constraint firstItem="bbe-qX-Dac" firstAttribute="top" secondItem="PF5-7y-7Bn" secondAttribute="top" id="bpM-oZ-RcO"/>
                             <constraint firstItem="bbe-qX-Dac" firstAttribute="trailing" secondItem="PF5-7y-7Bn" secondAttribute="trailing" id="eVV-lG-oFv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PF5-7y-7Bn"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="xuP-AX-yjU" appends="YES" id="0qQ-aZ-sDs"/>
+                            <outletCollection property="gestureRecognizers" destination="xuP-AX-yjU" appends="YES" id="hjf-LH-j6H"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="challengesLabel" destination="Tt5-pv-ann" id="cx5-lp-SD1"/>
@@ -88,6 +102,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAK-Ec-K7o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="xuP-AX-yjU"/>
             </objects>
             <point key="canvasLocation" x="-1146.4000000000001" y="-26.53673163418291"/>
         </scene>
