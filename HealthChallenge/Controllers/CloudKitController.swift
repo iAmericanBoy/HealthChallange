@@ -23,11 +23,8 @@ class CloudKitController {
     
     //MARK: - INIT
     init() {
-        //        createZone(withName: Purchase.privateRecordZoneName) { (isSuccess, newZone) in
-        //            if !isSuccess {
-        //                print("Could not create new zone.")
-        //            }
-        //        }
+        createRecordZone(withName: "private") { (isSuccess) in
+        }
     }
     
     //MARK: - CRUD
@@ -52,6 +49,24 @@ class CloudKitController {
         }
     }
     
+    
+    ///Creates a RecordZone in the PrivateDataBase
+    func createRecordZone(withName name: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let newRecordZone = CKRecordZone(zoneName: name)
+        
+        let operation = CKModifyRecordZonesOperation(recordZonesToSave: [newRecordZone])
+        operation.modifyRecordZonesCompletionBlock = { (savedZone,_,error) in
+            if let error = error {
+                print("There was an error creating a recordZone in CK: \(error)")
+                completion(false)
+                return
+            }
+            
+            guard let recordZone = savedZone?.first, newRecordZone == recordZone else {completion(false); return}
+            completion(true)
+        }
+    }
+ 
     ///Fetches the UserRecordID.
     /// - parameter completion: Handler for when the UserRecord could be found.
     /// - parameter isSuccess: Confirms the record could be found.
