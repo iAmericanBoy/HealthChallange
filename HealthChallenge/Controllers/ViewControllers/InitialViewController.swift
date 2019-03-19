@@ -56,10 +56,20 @@ class InitialViewController: UIViewController {
                 }
             } else {
                 //USER NOT FOUND
-                DispatchQueue.main.async {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let viewController = storyboard.instantiateViewController(withIdentifier: "SignUpParentViewController")
-                    self.present(viewController, animated: true, completion: nil)
+                
+                //Checks to see that iCloud is Available
+                if let _ = UserController.shared.appleUserID {
+                    DispatchQueue.main.async {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = storyboard.instantiateViewController(withIdentifier: "SignUpParentViewController")
+                        self.present(viewController, animated: true, completion: nil)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = storyboard.instantiateViewController(withIdentifier: "ActiveChallengeController")
+                        self.present(viewController, animated: true, completion: nil)
+                    }
                 }
             }
         }

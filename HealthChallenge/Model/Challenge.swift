@@ -51,11 +51,15 @@ class Challenge {
 
 extension CKRecord {
     
-    convenience init(challenge: Challenge) {
-        self.init(recordType: Challenge.typeKey, recordID: CKRecord.ID(recordName: challenge.recordID.recordName, zoneID: CKRecordZone.ID(zoneName: "private")))
-        
-        self.setValue(challenge.name, forKey: Challenge.nameKey)
-        self.setValue(challenge.startDay, forKey: Challenge.startDayKey)
-        self.setValue(challenge.finishDay, forKey: Challenge.finishDayKey)
+    convenience init?(challenge: Challenge) {
+        if let recordZone = CloudKitController.shared.privateRecordZone {
+            self.init(recordType: Challenge.typeKey, recordID: CKRecord.ID(recordName: challenge.recordID.recordName, zoneID: recordZone.zoneID))
+            
+            self.setValue(challenge.name, forKey: Challenge.nameKey)
+            self.setValue(challenge.startDay, forKey: Challenge.startDayKey)
+            self.setValue(challenge.finishDay, forKey: Challenge.finishDayKey)
+        } else {
+            return nil
+        }
     }
 }

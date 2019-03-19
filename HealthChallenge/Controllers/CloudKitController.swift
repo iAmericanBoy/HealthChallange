@@ -21,13 +21,16 @@ class CloudKitController {
     /// The public Database of the User.
     let publicDB = CKContainer.default().publicCloudDatabase
     
+    /// The the private RecordZone for the Challenge
+    var privateRecordZone: CKRecordZone?
+    
     //MARK: - INIT
     init() {
-        //        createZone(withName: Purchase.privateRecordZoneName) { (isSuccess, newZone) in
-        //            if !isSuccess {
-        //                print("Could not create new zone.")
-        //            }
-        //        }
+        fetchprivateRecordZone { (isSuccess) in
+            if isSuccess {
+                print("RecordZone Found or Created")
+            }
+        }
     }
     
     //MARK: - CRUD
@@ -51,6 +54,49 @@ class CloudKitController {
             }
         }
     }
+    
+    
+    ///Creates a RecordZone in the PrivateDataBase
+    func createRecordZone(withName name: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
+        let newRecordZone = CKRecordZone(zoneID: CKRecordZone.ID(zoneName: name))
+        
+        
+        let operation = CKModifyRecordZonesOperation(recordZonesToSave: [newRecordZone])
+        operation.modifyRecordZonesCompletionBlock = { (savedZone,_,error) in
+            if let error = error {
+                print("There was an error creating a recordZone in CK: \(error)")
+                completion(false)
+                return
+            }
+            
+            guard let recordZone = savedZone?.first, newRecordZone == recordZone else {completion(false); return}
+            self.privateRecordZone = newRecordZone
+            completion(true)
+        }
+    }
+ 
+    func fetchprivateRecordZone(completion: @escaping (_ isSuccess: Bool) -> Void) {
+        privateDB.fetch(withRecordZoneID: CKRecordZone.ID(zoneName: "private")) { (foundZone, error) in
+            if let error = error {
+                print("There was an error creating a recordZone in CK: \(error)")
+                completion(false)
+                return
+            }
+            if let foundZone = foundZone {
+                self.privateRecordZone = foundZone
+                completion(true)
+            } else {
+                self.createRecordZone(withName: "private", completion: { (isSuccess) in
+                    if isSuccess {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            }
+        }
+    }
+    
     
     ///Fetches the UserRecordID.
     /// - parameter completion: Handler for when the UserRecord could be found.
