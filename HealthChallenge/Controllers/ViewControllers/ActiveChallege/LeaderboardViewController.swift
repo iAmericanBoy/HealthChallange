@@ -15,7 +15,7 @@ class LeaderboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        settingsImage()
         
     }
     
@@ -23,6 +23,16 @@ class LeaderboardViewController: UIViewController {
         
     }
     
+    func settingsImage() {
+        if let image = UserController.shared.loggedInUser?.photo {
+            optionsButton.image = image
+        } else {
+            guard let image = UIImage(named: "stockPhoto"),
+                let imageAsData = image.pngData()
+                else { return }
+            optionsButton.image = UIImage(data: imageAsData, scale: 10)
+        }
+    }
     
     /*
     // MARK: - Navigation
