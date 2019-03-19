@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +16,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
-
+    
+    
+    func application(_ application: UIApplication, userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata) {
+        
+        let acceptSharing: CKAcceptSharesOperation = CKAcceptSharesOperation(shareMetadatas: [cloudKitShareMetadata])
+        
+        acceptSharing.qualityOfService = .userInteractive
+        acceptSharing.perShareCompletionBlock = {meta, share, error in
+            print("successfully shared")
+        }
+        acceptSharing.acceptSharesCompletionBlock = { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+        CKContainer(identifier: cloudKitShareMetadata.containerIdentifier).add(acceptSharing)
+    }
 }
 
