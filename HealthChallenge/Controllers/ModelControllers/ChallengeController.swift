@@ -46,7 +46,7 @@ class ChallengeController {
     /// - parameter isSuccess: Confirms that the challenge was created.
     func createNewChallenge(withStartDate date: Date, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
         let newChallenge = Challenge(startDay: date)
-        let record = CKRecord(challenge: newChallenge)
+        guard let record = CKRecord(challenge: newChallenge) else {completion(false);return}
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
@@ -89,8 +89,8 @@ class ChallengeController {
     func update(challenge: Challenge, withNewStartDate date: Date, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
         challenge.startDay = date
         
-        let record = CKRecord(challenge: challenge)
-        
+        guard let record = CKRecord(challenge: challenge) else {completion(false);return}
+
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
@@ -107,8 +107,8 @@ class ChallengeController {
     /// - parameter completion: Handler for when the challenge was deleted
     /// - parameter isSuccess: Confirms that the challenge was deleted.
     func delete(challenge: Challenge, completion: @escaping (_ isSuccess:Bool) -> Void) {
-        let recordID = CKRecord(challenge: challenge).recordID
-        
+        guard let recordID = CKRecord(challenge: challenge)?.recordID else {completion(false);return}
+
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [], purchasesToDelete: [recordID]) { (isSuccess, _, deletedRecords) in
             if isSuccess {
                 guard let deletedRecordID = deletedRecords?.first, deletedRecordID == recordID else {completion(false); return}

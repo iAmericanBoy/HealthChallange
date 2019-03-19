@@ -111,13 +111,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jk-aU-67m">
-                                <rect key="frame" x="166" y="463.5" width="43" height="30"/>
-                                <state key="normal" title="(save)"/>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="Qxc-du-j74" eventType="touchUpInside" id="m8c-Ec-EXn"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIM-3P-7Vl">
                                 <rect key="frame" x="160.5" y="147" width="54.5" height="34.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="25"/>
@@ -149,12 +142,10 @@
                             <constraint firstItem="DGC-yf-pZg" firstAttribute="centerX" secondItem="oJT-vt-3HA" secondAttribute="centerX" id="9Vo-UT-MaE"/>
                             <constraint firstItem="GLf-yk-iMm" firstAttribute="leading" secondItem="O68-Yk-Ip7" secondAttribute="leading" id="Arz-GP-cJ5"/>
                             <constraint firstItem="vIM-3P-7Vl" firstAttribute="centerX" secondItem="oJT-vt-3HA" secondAttribute="centerX" id="BRX-S7-dNM"/>
-                            <constraint firstItem="6jk-aU-67m" firstAttribute="centerX" secondItem="oJT-vt-3HA" secondAttribute="centerX" id="I6b-Vr-wFD"/>
                             <constraint firstItem="GLf-yk-iMm" firstAttribute="top" secondItem="6pK-Yl-i5L" secondAttribute="top" constant="12" id="LMp-Ud-Yxu"/>
                             <constraint firstItem="O68-Yk-Ip7" firstAttribute="top" secondItem="GLf-yk-iMm" secondAttribute="bottom" constant="14.5" id="PLX-EB-gbc"/>
                             <constraint firstItem="O68-Yk-Ip7" firstAttribute="top" secondItem="Ble-4y-acb" secondAttribute="bottom" constant="14.5" id="UcZ-eg-Caa"/>
                             <constraint firstItem="O68-Yk-Ip7" firstAttribute="leading" secondItem="6pK-Yl-i5L" secondAttribute="leading" constant="24" id="Uea-iB-HAr"/>
-                            <constraint firstItem="6jk-aU-67m" firstAttribute="top" secondItem="DGC-yf-pZg" secondAttribute="bottom" constant="34.5" id="Z1Z-pp-IvP"/>
                             <constraint firstItem="DGC-yf-pZg" firstAttribute="top" secondItem="O68-Yk-Ip7" secondAttribute="bottom" constant="24" id="csH-dB-5RN"/>
                             <constraint firstItem="vIM-3P-7Vl" firstAttribute="centerY" secondItem="GLf-yk-iMm" secondAttribute="centerY" id="gNp-uY-TE5"/>
                             <constraint firstItem="6pK-Yl-i5L" firstAttribute="trailing" secondItem="O68-Yk-Ip7" secondAttribute="trailing" constant="24" id="olC-ls-neL"/>
@@ -185,11 +176,10 @@
         <!--Navigation Controller-->
         <scene sceneID="1hy-A9-bJP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SfV-eM-0Ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="startDateNav" automaticallyAdjustsScrollViewInsets="NO" id="cHK-xv-gxF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="jod-R3-6Wr">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="117"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="60"/>
@@ -201,6 +191,7 @@
                         <segue destination="Qxc-du-j74" kind="relationship" relationship="rootViewController" id="sfE-Ra-nom"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SfV-eM-0Ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1641" y="797"/>
         </scene>
