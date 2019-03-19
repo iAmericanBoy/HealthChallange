@@ -10,17 +10,13 @@ import UIKit
 
 class FoodViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FoodTableViewCellDelegate {
     
-    
-    func buttonCellButtontapped(_ sender: FoodTableViewCell) {
-        dish.append(sender.itemLandingPad!)
-        print(sender.itemLandingPad?.name as Any)
-    }
-    
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dishTableView: UITableView!
+    @IBOutlet weak var dishName: UITextField!
+    @IBOutlet weak var ingredientTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var mealSegment: UISegmentedControl!
     
-    
-    var dish: [Food] = []
+    var ingredients: [Food] = []
     var count = 0
     var searchTerm1 = ""  // paginate with same searchTerm
     let foods: [Food] = []
@@ -28,21 +24,53 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        dishTableView.dataSource = self
+        self.ingredientTableView.delegate = self
+        self.ingredientTableView.dataSource = self
+        dishTableView.reloadData()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        self.ingredientTableView.reloadData()
     }
     
+    func buttonCellButtontapped(_ sender: FoodTableViewCell) {
+        guard let item = sender.itemLandingPad else {return}
+        ingredients.append(item)
+        dishTableView.reloadData()
+        //print(sender.itemLandingPad?.name as Any)
+        dump(ingredients)
+    }
+   
+    @IBAction func saveButtonTapped1(_ sender: Any) {
+        print("save button tapped")
+        
+        guard let name = dishName.text,
+            !name.isEmpty,
+            //        let index = mealSegment.selectedSegmentIndex,
+            ingredients.count > 0
+            else { return }
+        DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients)
+        navigationController?.popViewController(animated: true)
+
+    }
+  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        if tableView == ingredientTableView {
+      
         return FoodController.food.count
+    }
+        _ = dishTableView
+        return ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        if tableView == ingredientTableView {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath) as? FoodTableViewCell
         cell?.delegate = self
         let foodItem = FoodController.food[indexPath.row]
@@ -59,6 +87,23 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell ?? UITableViewCell()
         
     }
+        let dishCell = tableView.dequeueReusableCell(withIdentifier: "dishCell")
+        
+        dishCell?.textLabel?.text = ingredients[indexPath.row].name
+        
+        return dishCell ?? UITableViewCell()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            self.ingredients.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+  
     
     //MARK: - Pagination tableView protocol method
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -75,7 +120,7 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
                     let postFetchCount = FoodController.food.count
                     if preFetchCount != postFetchCount {
                         DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                            self.ingredientTableView.reloadData()
                             print("\(preFetchCount)")
                             print("\(postFetchCount)")
                             
@@ -117,7 +162,7 @@ extension FoodViewController: UISearchBarDelegate {
                 //                }
                 //                dispatchGroup.notify(queue: .main, execute: {
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.ingredientTableView.reloadData()
                 }
             }
         }

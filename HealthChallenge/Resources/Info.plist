@@ -25,9 +25,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>allow</string>
+	<string>Need Access to read Workouts</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>allow</string>
+	<string>Need Acces to update Calories</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>UIAppFonts</key>
@@ -38,6 +40,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>CKSharingSupported</key>
+	<true/>
+	<key></key>
+	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

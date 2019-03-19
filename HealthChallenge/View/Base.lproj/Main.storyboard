@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b55-gH-Rl5">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XcP-pn-erq">
+  <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -118,10 +118,39 @@
             </objects>
             <point key="canvasLocation" x="2014" y="356"/>
         </scene>
+        <!--Initial View Controller-->
+        <scene sceneID="PCO-ko-YhK">
+            <objects>
+                <viewController id="XcP-pn-erq" customClass="InitialViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jg5-wX-OBh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="18H-W2-Pk0">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="18H-W2-Pk0" firstAttribute="leading" secondItem="E1z-lN-lZp" secondAttribute="leading" id="FAg-OH-8fu"/>
+                            <constraint firstItem="18H-W2-Pk0" firstAttribute="top" secondItem="E1z-lN-lZp" secondAttribute="top" id="JgG-l3-sCa"/>
+                            <constraint firstItem="E1z-lN-lZp" firstAttribute="bottom" secondItem="18H-W2-Pk0" secondAttribute="bottom" id="LF6-K4-JAQ"/>
+                            <constraint firstItem="E1z-lN-lZp" firstAttribute="trailing" secondItem="18H-W2-Pk0" secondAttribute="trailing" id="fKu-NN-Tw8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="E1z-lN-lZp"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="18H-W2-Pk0" id="XVQ-Xo-4nv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Dq-02-guQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="345" y="923"/>
+        </scene>
         <!--Sign Up Parent View Controller-->
         <scene sceneID="cb2-YW-Q01">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="iya-QT-8rm" customClass="SignUpParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpParentViewController" automaticallyAdjustsScrollViewInsets="NO" id="iya-QT-8rm" customClass="SignUpParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KWw-HN-bhr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -171,7 +200,7 @@
         <!--New Challenge Parent View Controller-->
         <scene sceneID="acq-aT-oYI">
             <objects>
-                <viewController storyboardIdentifier="NewChallengePageView" id="Hae-4L-kyx" customClass="NewChallengeParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewChallengeParentViewController" id="Hae-4L-kyx" customClass="NewChallengeParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dwh-Zx-P5e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

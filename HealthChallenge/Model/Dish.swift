@@ -13,15 +13,24 @@ import UIKit
 class Dish {
     
     var dishName: String
-    var dish: [Food]?
+    var ingredients: [Food]?
     var photo: UIImage?
+    let dishType: DishType
     
-    init(dishName: String,dish: [Food], photo: UIImage?) {
+    init(dishName: String, ingredients: [Food], dishType: DishType) {
         self.dishName = dishName
-        self.dish = dish
-        self.photo = photo
+        self.ingredients = ingredients
+        self.dishType = dishType
     }
 }
+
+enum DishType: String {
+    case Breakfast
+    case Lunch
+    case Dinner
+    case Snack
+}
+
 // dish model
 //name
 // array of ingredients

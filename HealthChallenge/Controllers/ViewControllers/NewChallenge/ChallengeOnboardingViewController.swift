@@ -17,10 +17,18 @@ class ChallengeOnboardingViewController: UIPageViewController {
         UIStoryboard(name: "InviteOthers", bundle: nil).instantiateViewController(withIdentifier: "shareNav")
     ]
     
+    var isPresentingMonthGoalVC = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
-        setViewControllers([onboardingViewControllers.first!], direction: .forward, animated: true, completion: nil)
+        if isPresentingMonthGoalVC {
+            setViewControllers([onboardingViewControllers[2]], direction: .forward, animated: true, completion: nil)
+        } else {
+            setViewControllers([onboardingViewControllers.first!], direction: .forward, animated: true, completion: nil)
+
+        }
+
     }
 }
 
