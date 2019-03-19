@@ -138,6 +138,13 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.monthLabel.text = "\(month)"
         }
         
+//        Set color of dates that show a workout.
+        if date == workouts[indexPath.row].endDate {
+            cell.backgroundColor = Color.theme.value
+        } else {
+            cell.backgroundColor = .white
+        }
+        
         if date.stripTimestamp() == today.stripTimestamp() {
             cell.dayLabel.textColor = Color.darkText.value
             cell.monthLabel.textColor = Color.darkText.value

@@ -18,7 +18,7 @@ class SettingsPopupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateViews()
         
     }
     
@@ -33,9 +33,14 @@ class SettingsPopupViewController: UIViewController {
         }
     }
     
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     func updateViews() {
         if let user = UserController.shared.loggedInUser {
-//            photoImageView.image = user?.photo
+ //           photoImageView.image = user?.photo
         }
     }
     
