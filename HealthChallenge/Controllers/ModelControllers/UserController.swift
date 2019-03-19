@@ -83,6 +83,8 @@ class UserController {
                         completion(false)
                     }
                 })
+            } else {
+                completion(false)
             }
         }
     }
