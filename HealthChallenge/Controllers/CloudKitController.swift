@@ -21,9 +21,15 @@ class CloudKitController {
     /// The public Database of the User.
     let publicDB = CKContainer.default().publicCloudDatabase
     
+    /// The the private RecordZone for the Challenge
+    var privateRecordZone: CKRecordZone?
+    
     //MARK: - INIT
     init() {
-        createRecordZone(withName: "private") { (isSuccess) in
+        fetchprivateRecordZone { (isSuccess) in
+            if isSuccess {
+                print("RecordZone Found or Created")
+            }
         }
     }
     
@@ -52,7 +58,8 @@ class CloudKitController {
     
     ///Creates a RecordZone in the PrivateDataBase
     func createRecordZone(withName name: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
-        let newRecordZone = CKRecordZone(zoneName: name)
+        let newRecordZone = CKRecordZone(zoneID: CKRecordZone.ID(zoneName: name))
+        
         
         let operation = CKModifyRecordZonesOperation(recordZonesToSave: [newRecordZone])
         operation.modifyRecordZonesCompletionBlock = { (savedZone,_,error) in
@@ -63,10 +70,34 @@ class CloudKitController {
             }
             
             guard let recordZone = savedZone?.first, newRecordZone == recordZone else {completion(false); return}
+            self.privateRecordZone = newRecordZone
             completion(true)
         }
     }
  
+    func fetchprivateRecordZone(completion: @escaping (_ isSuccess: Bool) -> Void) {
+        privateDB.fetch(withRecordZoneID: CKRecordZone.ID(zoneName: "private")) { (foundZone, error) in
+            if let error = error {
+                print("There was an error creating a recordZone in CK: \(error)")
+                completion(false)
+                return
+            }
+            if let foundZone = foundZone {
+                self.privateRecordZone = foundZone
+                completion(true)
+            } else {
+                self.createRecordZone(withName: "private", completion: { (isSuccess) in
+                    if isSuccess {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            }
+        }
+    }
+    
+    
     ///Fetches the UserRecordID.
     /// - parameter completion: Handler for when the UserRecord could be found.
     /// - parameter isSuccess: Confirms the record could be found.
