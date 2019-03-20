@@ -88,8 +88,6 @@ class WorkoutViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toWorkoutsVC" {
             let destinationVC = segue.destination as? AddWorkoutsViewController
-            let workouts = HealthKitController.shared.readWorkoutsFrom(date: selectedDay, toDate: selectedDay)
-            destinationVC?.workouts = workouts
             destinationVC?.sourceDate = selectedDay
         }
     }
