@@ -56,7 +56,7 @@ class WorkoutController {
             if success {
                 guard let recordID = recordID else { return }
                 
-                let predicate = NSPredicate(format: "%K === %@", argumentArray: [Workout.referenceKey, recordID])
+                let predicate = NSPredicate(format: "%K == %@", argumentArray: [Workout.referenceKey, recordID])
                 let query = CKQuery(recordType: Workout.typeKey, predicate: predicate)
                 
                 CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (success, foundRecords) in

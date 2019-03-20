@@ -29,6 +29,7 @@ class AddWorkoutsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        queryWorkouts()
         nextDayButton.isEnabled = false
         date = sourceDate!
         currentDayLabel.text = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
