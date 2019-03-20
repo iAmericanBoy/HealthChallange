@@ -13,7 +13,6 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
    
     @IBOutlet weak var foodTrackerTableView: UITableView!
     
-    
     var dishesKeys = {
         DishController.shared.dishes.keys.map { $0 }
     }()
@@ -25,8 +24,6 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         self.foodTrackerTableView.reloadData()
     }
-    
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return dishesKeys.count
@@ -42,10 +39,36 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "foodTrackerCell", for: indexPath) as? FoodTrackerCell
         let type = dishesKeys[indexPath.section]
-        cell.textLabel?.text = DishController.shared.dishes[type]?[indexPath.row].dishName
-        return cell
+        
+        let foodName = DishController.shared.dishes[type]?[indexPath.row].dishName
+        let nutrients = DishController.shared.dishes[type]?[indexPath.row].ingredients
+        
+        
+       cell?.dishNameLanding = foodName
+       cell?.nutrientLandingPad = nutrients
+        
+        print("============FoodName===========")
+        //dump(foodName)
+        
+  
+//        var calories1: Double = 0
+//
+//        guard let nutrients1 = nutrients else { return UITableViewCell() }
+//
+//        for nutrient in nutrients1 {
+//            calories1 += Double((nutrient.nutrients?.calories)!)!
+//
+//           // cell.detailTextLabel?.text = "\(String(calories1)) calories"
+//
+//            print(calories1)
+        
+        return cell ?? UITableViewCell()
+        }
+
+//        cell.textLabel?.text = DishController.shared.dishes[type]?[indexPath.row].dishName
+      //  return cell
     }
     
 
@@ -59,4 +82,4 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     */
 
-}
+

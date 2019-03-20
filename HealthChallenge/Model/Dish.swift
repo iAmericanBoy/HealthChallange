@@ -31,7 +31,3 @@ enum DishType: String {
     case Snack
 }
 
-// dish model
-//name
-// array of ingredients
-//photo ?

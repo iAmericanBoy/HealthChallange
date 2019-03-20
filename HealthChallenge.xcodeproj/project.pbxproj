@@ -63,6 +63,7 @@
 		CE57AD2A22402B2800712975 /* FoodTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57AD2922402B2800712975 /* FoodTracker.swift */; };
 		CE60FC60224038390029386F /* DishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FC5F224038390029386F /* DishController.swift */; };
 		CE60FC6222403B260029386F /* FoodTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FC6122403B260029386F /* FoodTrackerViewController.swift */; };
+		CE60FC6422416E180029386F /* FoodTrackerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FC6322416E180029386F /* FoodTrackerCell.swift */; };
 		CEB299AF223C08D30089DA63 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299AE223C08D30089DA63 /* Food.swift */; };
 		CEB299B1223C09250089DA63 /* Nutrients.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B0223C09250089DA63 /* Nutrients.swift */; };
 		CEB299B3223C09740089DA63 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B2223C09740089DA63 /* Dish.swift */; };
@@ -131,6 +132,7 @@
 		CE57AD2922402B2800712975 /* FoodTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTracker.swift; sourceTree = "<group>"; };
 		CE60FC5F224038390029386F /* DishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishController.swift; sourceTree = "<group>"; };
 		CE60FC6122403B260029386F /* FoodTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerViewController.swift; sourceTree = "<group>"; };
+		CE60FC6322416E180029386F /* FoodTrackerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerCell.swift; sourceTree = "<group>"; };
 		CEB299AE223C08D30089DA63 /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		CEB299B0223C09250089DA63 /* Nutrients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nutrients.swift; sourceTree = "<group>"; };
 		CEB299B2223C09740089DA63 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				62D067F1223894A100D5410B /* GoalsTab.storyboard */,
 				62D067F3223894D500D5410B /* LeaderboardTab.storyboard */,
 				CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */,
+				CE60FC6322416E180029386F /* FoodTrackerCell.swift */,
 			);
 			path = TabBarViews;
 			sourceTree = "<group>";
@@ -286,11 +289,11 @@
 			isa = PBXGroup;
 			children = (
 				62D067FE223AB68100D5410B /* FoodViewController.swift */,
+				CE60FC6122403B260029386F /* FoodTrackerViewController.swift */,
 				62D06800223AB68E00D5410B /* WorkoutViewController.swift */,
 				62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */,
 				62D06802223AB69900D5410B /* GoalsViewController.swift */,
 				62D06804223AB6A900D5410B /* LeaderboardViewController.swift */,
-				CE60FC6122403B260029386F /* FoodTrackerViewController.swift */,
 			);
 			path = ActiveChallege;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				62D067C3223718F600D5410B /* UserController.swift in Sources */,
 				B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */,
 				CE60FC6222403B260029386F /* FoodTrackerViewController.swift in Sources */,
+				CE60FC6422416E180029386F /* FoodTrackerCell.swift in Sources */,
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
 				62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
