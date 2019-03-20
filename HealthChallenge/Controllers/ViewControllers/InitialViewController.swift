@@ -39,6 +39,30 @@ class InitialViewController: UIViewController {
                                             NotificationCenter.default.post(weekGoalsOfChallengeFound)
                                         }
                                     })
+                                    
+                                    guard let userID = UserController.shared.appleUserID else {return}
+                                    
+                                    GoalController.shared.fetchUsersMonthGoal(withUserReference: CKRecord.Reference(recordID: userID, action: .none), andChallengeReference: challengeReference) { (isSuccess) in
+                                        if isSuccess {
+                                            //MONTHGOAL FOR USER FOUND
+                                            print("MONTHGOAL FOR USER FOUND")
+                                            
+                                            DispatchQueue.main.async {
+                                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                                let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
+                                                self.present(viewController, animated: true, completion: nil)
+                                            }
+                                        } else {
+                                            //MONTHGOAL FOR USER NOT FOUND
+                                            print("MONTHGOAL FOR USER NOT FOUND")
+                                            
+                                            DispatchQueue.main.async {
+                                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                                let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
+                                                self.present(viewController, animated: true, completion: nil)
+                                            }
+                                        }
+                                    }
                                 } else {
                                     print("no Shared current Challenge found")
                                 }
