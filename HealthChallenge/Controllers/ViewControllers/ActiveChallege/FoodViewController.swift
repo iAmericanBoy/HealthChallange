@@ -37,10 +37,8 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func buttonCellButtontapped(_ sender: FoodTableViewCell) {
         guard let item = sender.itemLandingPad else {return}
-        //sender.itemLandingPad?.nutrients?.calories
         ingredients.append(item)
         dishTableView.reloadData()
-        
         //print(sender.itemLandingPad?.name as Any)
         dump(ingredients)
     }
@@ -50,7 +48,7 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         guard let name = dishName.text,
             !name.isEmpty,
-            
+            //        let index = mealSegment.selectedSegmentIndex,
             ingredients.count > 0
             else { return }
         DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients)
@@ -133,7 +131,21 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 }
+//MARK: - segue to DishtableViewController
 
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toDishVC" {
+//            //if tableView.indexPathForSelectedRow != nil {
+//            guard let destinationVC = segue.destination as? DishTableViewController else {return}
+//
+//            let dishToSend = dish
+//            destinationVC.dishLandingPad = dishToSend
+//
+//        }
+//    }
+//}
+
+//MARK: - dispatchGroup - submit multiple work items track when complete
 //MARK: - SearchBar
 extension FoodViewController: UISearchBarDelegate {
     
@@ -141,7 +153,14 @@ extension FoodViewController: UISearchBarDelegate {
         guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
         FoodController.getFood(query: searchTerm) { (success) in
             if success {
-    
+                //                let dispatchGroup = DispatchGroup()
+                //                for food in FoodController.food {
+                //                    dispatchGroup.enter()
+                //                    NutrientsController.instance.getNutrients(food: food, completion: { (success) in
+                //                        dispatchGroup.leave()
+                //                    })
+                //                }
+                //                dispatchGroup.notify(queue: .main, execute: {
                 DispatchQueue.main.async {
                     self.ingredientTableView.reloadData()
                 }
