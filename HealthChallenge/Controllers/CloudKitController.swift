@@ -141,7 +141,6 @@ class CloudKitController {
     /// - parameter record: The RootRecord to share.
     /// - parameter completion: Handler for when the rootrecord has been shared.
     /// - parameter container: The RootRecord to share.
-
     func share(rootRecord record: CKRecord, _ completion: @escaping (_ sharedRecord: CKShare?, _ container: CKContainer?, _ error: Error?) -> Void) {
         
         let shareRecord = CKShare(rootRecord: record)

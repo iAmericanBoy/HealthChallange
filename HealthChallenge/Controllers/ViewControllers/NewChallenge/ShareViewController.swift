@@ -39,14 +39,28 @@ class ShareViewController: UIViewController {
     //MARK: - Private Functions
     private func shareCurrentChallenge(){
 
-        guard let challenge = ChallengeController.shared.currentChallenge else {return}
+        guard let challenge = ChallengeController.shared.currentChallenge, let record = CKRecord(challenge: challenge) else {return}
+        let share = CKShare(rootRecord: record)
+        share.publicPermission = .readWrite
         
-        
-        
-        let sharingViewController = UICloudSharingController { (controller, completion: @escaping (CKShare?, CKContainer?, Error?) -> Void) in
+        let sharingViewController = UICloudSharingController(preparationHandler: {(UICloudSharingController, handler: @escaping (CKShare?, CKContainer?, Error?) -> Void) in
+            let operation = CKModifyRecordsOperation(recordsToSave: [record,share], recordIDsToDelete: nil)
+            operation.savePolicy = .changedKeys
+
+            operation.modifyRecordsCompletionBlock = { (savedRecord, _,error) in
+                handler(share, CKContainer.default(), error)
+            }
             
-            CloudKitController.shared.share(rootRecord: CKRecord(challenge: challenge)!, completion)
-        }
+            
+            operation.perRecordCompletionBlock = { (savedRecord,error) in
+                if let error = error {
+                    print(error)
+                }
+            }
+            
+            CloudKitController.shared.privateDB.add(operation)
+        })
+        
         
         
         sharingViewController.delegate = self
@@ -60,11 +74,11 @@ class ShareViewController: UIViewController {
 
 extension ShareViewController: UICloudSharingControllerDelegate {
     func cloudSharingControllerDidSaveShare(_ csc: UICloudSharingController) {
-        print("saved successfully")
+        print("CKShare saved successfully")
     }
     
     func cloudSharingController(_ csc: UICloudSharingController, failedToSaveShareWithError error: Error) {
-        print("failed to save: \(error.localizedDescription)")
+        print("failed to save ckshare: \(error),\(error.localizedDescription)")
     }
     
     func itemThumbnailData(for csc: UICloudSharingController) -> Data? {
