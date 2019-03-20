@@ -28,7 +28,13 @@ class CloudKitController {
     init() {
         fetchprivateRecordZone { (isSuccess) in
             if isSuccess {
-                print("RecordZone Found or Created")
+                print("RecordZone Found")
+            } else {
+                self.createRecordZone(withName: "private", completion: { (isSuccess) in
+                    if isSuccess {
+                        print("RecordZone created")
+                    }
+                })
             }
         }
     }
@@ -73,12 +79,14 @@ class CloudKitController {
             self.privateRecordZone = newRecordZone
             completion(true)
         }
+        
+        privateDB.add(operation)
     }
  
     func fetchprivateRecordZone(completion: @escaping (_ isSuccess: Bool) -> Void) {
         privateDB.fetch(withRecordZoneID: CKRecordZone.ID(zoneName: "private")) { (foundZone, error) in
             if let error = error {
-                print("There was an error creating a recordZone in CK: \(error)")
+                print("There was an error fetching the private recordZone in CK: \(error)")
                 completion(false)
                 return
             }
@@ -86,13 +94,7 @@ class CloudKitController {
                 self.privateRecordZone = foundZone
                 completion(true)
             } else {
-                self.createRecordZone(withName: "private", completion: { (isSuccess) in
-                    if isSuccess {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                })
+                completion(false)
             }
         }
     }
