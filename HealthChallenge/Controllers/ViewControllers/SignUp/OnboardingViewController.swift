@@ -15,10 +15,16 @@ class OnboardingViewController: UIPageViewController {
         UIStoryboard(name: "SignUp", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
     ]
 
+    var isPresentingSignUpVC = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
-        setViewControllers([onboardingViewControllers.first!], direction: .forward, animated: true, completion: nil)
+        if isPresentingSignUpVC {
+            setViewControllers([onboardingViewControllers[1]], direction: .forward, animated: true, completion: nil)
+        } else {
+            setViewControllers([onboardingViewControllers.first!], direction: .forward, animated: true, completion: nil)
+        }
         
     }
 }

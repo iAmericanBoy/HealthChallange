@@ -31,7 +31,7 @@ class HealthKitAccessViewController: UIViewController {
     @IBAction func allowButtonTapped(_ sender: Any) {
         HealthKitController.shared.authorizeHK { (success) in
             //handle
-            //pop to new user
+            
         }
     }
     

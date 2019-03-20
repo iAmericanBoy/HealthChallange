@@ -81,7 +81,7 @@ class WeeklyGoalsViewController: UIViewController {
                 
             })
         }
-        //TODO: Pop to next VC
+        // Pop to next view
     }
     
     //MARK: - Private Functions
