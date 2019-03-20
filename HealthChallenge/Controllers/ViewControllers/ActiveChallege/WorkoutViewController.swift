@@ -16,7 +16,7 @@ class WorkoutViewController: UIViewController {
     
     // Properties
     var selectedDay: Date = Date().stripTimestamp()
-    var workouts: [HKWorkout] = []
+    var workouts: [Workout] = []
     var dateRange: [Date] = []
     
     // MARK: - MOCK DATA
@@ -24,8 +24,6 @@ class WorkoutViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var monthLabel: UILabel!
-    @IBOutlet weak var previousMonthButton: UIButton!
-    @IBOutlet weak var nextMonthButton: UIButton!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var optionsButton: UIBarButtonItem!
     
@@ -38,25 +36,18 @@ class WorkoutViewController: UIViewController {
         findDateRange(from: Date())
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
-        previousMonthButton.isHidden = true
         monthLabel.text = "\(challenge.name)"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        workouts = HealthKitController.shared.readWorkoutsFrom(date: challenge.startDay, toDate: challenge.finishDay)
-        print(workouts)
+        WorkoutController.shared.fetchUsersWorkouts { (success) in
+            print("Fetched workouts successfully.")
+            self.workouts = WorkoutController.shared.workouts
+        }
     }
     
     // MARK: - Actions
-    @IBAction func previousMonthButtonTapped(_ sender: Any) {
-        
-    }
-    
-    @IBAction func nextMonthButtonTapped(_ sender: Any) {
-        
-    }
-    
     @IBAction func optionsButtonTapped(_ sender: Any) {
         
     }
@@ -140,7 +131,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         
 //        Set color of dates that show a workout.
         if !workouts.isEmpty {
-            if date == workouts[indexPath.row].endDate {
+            if date == workouts[indexPath.row].end {
                 cell.backgroundColor = Color.theme.value
             } else {
                 cell.backgroundColor = .white

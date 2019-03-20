@@ -36,7 +36,7 @@ class HealthKitController {
             print("Read/Write granted.")
         }
     }
-    /*
+    /**
      Read workout information from HK and return an array of workouts.
      PARAMETER 1: date start - start date of query
      PARAMETER 2: toDate end - end date of query
@@ -61,7 +61,7 @@ class HealthKitController {
         healthStore.execute(query)
         return workoutArray
     }
-    /*
+    /**
     Save food item to HK in the form of calories consumed.
     PARAMETER 1: calories that will be calculated from a dish.
     */
@@ -78,13 +78,15 @@ class HealthKitController {
             }
         }
     }
-    /*
+    /**
     Save workout to HK with generic workout type.
     PARAMETER 1: start - start date/time of a workout
     PARAMETER 2: finish - end date/time of a workout
      */
-    func addWorkoutToHK(start: Date, finish: Date) {
-        let workout = HKWorkout(activityType: .other, start: start, end: finish)
+    func addWorkoutToHK(start: Date, finish: Date, activity: HKWorkoutActivityType, totoalEnergyBurned: HKQuantity?) {
+        let duration = finish.timeIntervalSince(start)
+        
+        let workout = HKWorkout(activityType: activity, start: start, end: finish, duration: duration, totalEnergyBurned: totoalEnergyBurned, totalDistance: nil, metadata: nil)
         
         healthStore.save(workout) { (success, error) in
             if let error = error {
