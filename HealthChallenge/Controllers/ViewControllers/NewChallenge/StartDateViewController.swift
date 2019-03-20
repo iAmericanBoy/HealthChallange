@@ -133,22 +133,6 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.monthLabel.text = "\(month)"
         }
         
-//        if indexPath.item <= firstDay - 2 {
-//            cell.isHidden = true
-//        } else {
-//            let calcDate = indexPath.row - firstDay + 2
-//            cell.isHidden = false
-//            cell.dayLabel.text = "\(calcDate)"
-//            let cellDate = Calendar.current.date(from: DateComponents(calendar: Calendar.current, year: year, month: month, day: calcDate))
-//            cell.cellDate = cellDate
-//            if calcDate < today && year == calendarController.presentYear && month == calendarController.presentMonthIndex {
-//                cell.isUserInteractionEnabled = false
-//                cell.dayLabel.textColor = UIColor.lightGray
-//            } else {
-//                cell.isUserInteractionEnabled = true
-//            }
-//        }
-        
         //logic to color cells of the selected date and the 30 days in the challenge
         if let challengeStartDate = challengeStartDate {
             if cell.cellDate! == challengeStartDate {
@@ -173,14 +157,14 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             //update the date
             ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
                 if isSuccess {
-                    //TODO: Pop to next screen
+                    // handle
                 }
             }
         } else {
             // create new Challenge with date
             ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
                 if isSuccess {
-                    //TODO: Pop to next screen
+                // handle
                 }
             }
         }

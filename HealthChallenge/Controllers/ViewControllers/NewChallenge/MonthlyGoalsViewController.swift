@@ -144,6 +144,7 @@ extension MonthlyGoalsViewController: UITableViewDelegate, UITableViewDataSource
                 seleted = selectedGoal
                 //SAVE
                 GoalController.shared.add(newUserReference: CKRecord.Reference(recordID: userID, action: .none), toGoal: selectedGoal, forChallenge: CKRecord.Reference(recordID: challengeID, action: .none))  { (isSuccess) in
+                    // Pop to next screen
                 }
             } else {
                 //REMOVE

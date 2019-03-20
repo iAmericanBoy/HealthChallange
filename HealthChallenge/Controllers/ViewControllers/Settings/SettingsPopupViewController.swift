@@ -39,8 +39,10 @@ class SettingsPopupViewController: UIViewController {
     
     
     func updateViews() {
-        if let user = UserController.shared.loggedInUser {
- //           photoImageView.image = user?.photo
+        if let user = user {
+            photoImageView.image = user.photo
+            nameLabel.text = user.userName
+            challengesLabel.text = ChallengeController.shared.currentChallenge?.name
         }
     }
     

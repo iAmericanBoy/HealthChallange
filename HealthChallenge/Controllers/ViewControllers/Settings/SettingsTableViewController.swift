@@ -9,8 +9,6 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController, PhotoSelectorViewControllerDelegate {
-
-    
     
     var user: User?
     var profilePhoto: UIImage?
