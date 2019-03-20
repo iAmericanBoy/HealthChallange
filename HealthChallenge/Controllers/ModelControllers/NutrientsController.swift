@@ -32,6 +32,7 @@ class NutrientsController {
         let calories = URLQueryItem(name: "nutrients", value: "208")  // calories
         let sugars = URLQueryItem(name: "nutrients", value: "269")    // sugars
         let fats = URLQueryItem(name: "nutrients", value: "204")      //fats
+        //let sodium = URLQueryItem(name: "nutrients", value: "307")    //sodium
         let ndbno = URLQueryItem(name: "ndbno", value: food.ndbno)
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
@@ -62,6 +63,8 @@ class NutrientsController {
                 print("json data was not converted into correct format")
                 completion(false)
                 return
+                
+                
             }
             guard let jsonReport :[String: Any] = jsonDictionary?["report"] as? [String: Any] else {print("got report"); return}
            
@@ -74,23 +77,24 @@ class NutrientsController {
                 }
                 
                 guard let jsonNutrients = foodDictionary["nutrients"] as? [[String: Any]] else {print("got jsonNutrients"); return}
-                //print(jsonNutrients)
+                print(jsonNutrients)
                 
                 if let nutrient = Nutrients( dictionary: jsonNutrients) {
-                    print("=====nutrient======")
-                    print("food: \(food.name)")
-                    print("measure: \(String(describing: food.measure))")
-                    print("calories: \(nutrient.calories)")
-                    print("sugar: \(nutrient.sugar)")
-                    print("fats: \(nutrient.fats)")
-                    print("carbs: \(nutrient.carbs)")
-                    print("=====nutrient======")
+//                    print("=====nutrient======")
+//                    print("food: \(food.name)")
+//                    print("measure: \(String(describing: food.measure))")
+//                    print("calories: \(nutrient.calories)")
+//                    print("sugar: \(nutrient.sugar)")
+//                    print("fats: \(nutrient.fats)")
+//                    print("carbs: \(nutrient.carbs)")
+//                    //print("sodium:    )
+//                    print("=====nutrient======")
                     food.nutrients = nutrient
                 }
             }
             
             completion(true)
-            //dump(jsonFoods)
+           // dump(jsonFoods)
         }
         dataTask.resume()
     }
