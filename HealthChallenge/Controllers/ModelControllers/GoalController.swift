@@ -29,7 +29,7 @@ class GoalController {
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
-            return [usersGoals,allPublicGoals]
+            return [weeklyGoals,usersGoals,allPublicGoals]
         }
     }
     
@@ -117,7 +117,7 @@ class GoalController {
         }
     }
     
-    ///Fetches the Weekly goals of a Challenge
+    ///Fetches the Weekly goals of a Challenge and filters the weekly goals out of the public and user goals arrays.
     func fetchGoals(withChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
         
         let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.challengeReferencesKey,challengeReference])
@@ -127,6 +127,12 @@ class GoalController {
                 if isSuccess {
                     let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
                     self.weeklyGoals = foundGoals
+                    self.allPublicGoals = self.allPublicGoals.filter({ (goal) -> Bool in
+                        return !self.weeklyGoals.contains(goal)
+                    })
+                    self.usersGoals = self.usersGoals.filter({ (goal) -> Bool in
+                        return !self.weeklyGoals.contains(goal)
+                    })
                     completion(true)
                 } else {
                     completion(false)
