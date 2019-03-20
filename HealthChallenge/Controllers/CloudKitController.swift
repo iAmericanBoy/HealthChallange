@@ -20,6 +20,8 @@ class CloudKitController {
     let privateDB = CKContainer.default().privateCloudDatabase
     /// The public Database of the User.
     let publicDB = CKContainer.default().publicCloudDatabase
+    /// The shared Database of the User.
+    let shareDB = CKContainer.default().sharedCloudDatabase
     
     /// The the private RecordZone for the Challenge
     var privateRecordZone: CKRecordZone?
@@ -28,7 +30,13 @@ class CloudKitController {
     init() {
         fetchprivateRecordZone { (isSuccess) in
             if isSuccess {
-                print("RecordZone Found or Created")
+                print("RecordZone Found")
+            } else {
+                self.createRecordZone(withName: "private", completion: { (isSuccess) in
+                    if isSuccess {
+                        print("RecordZone created")
+                    }
+                })
             }
         }
     }
@@ -73,12 +81,14 @@ class CloudKitController {
             self.privateRecordZone = newRecordZone
             completion(true)
         }
+        
+        privateDB.add(operation)
     }
  
     func fetchprivateRecordZone(completion: @escaping (_ isSuccess: Bool) -> Void) {
         privateDB.fetch(withRecordZoneID: CKRecordZone.ID(zoneName: "private")) { (foundZone, error) in
             if let error = error {
-                print("There was an error creating a recordZone in CK: \(error)")
+                print("There was an error fetching the private recordZone in CK: \(error)")
                 completion(false)
                 return
             }
@@ -86,14 +96,21 @@ class CloudKitController {
                 self.privateRecordZone = foundZone
                 completion(true)
             } else {
-                self.createRecordZone(withName: "private", completion: { (isSuccess) in
-                    if isSuccess {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                })
+                completion(false)
             }
+        }
+    }
+    
+    
+    func fetchRecordZonesInTheSharedDataBase(completion: @escaping (_ isSuccess: Bool, _ foundRecordZones: [CKRecordZone]?) -> Void) {
+        shareDB.fetchAllRecordZones { (allRecordZones, error) in
+            if let error = error {
+                print("There was an error fetching all recordZones: \(error)")
+                completion(false,nil)
+                return
+            }
+            
+            completion(true, allRecordZones)
         }
     }
     
@@ -139,7 +156,6 @@ class CloudKitController {
     /// - parameter record: The RootRecord to share.
     /// - parameter completion: Handler for when the rootrecord has been shared.
     /// - parameter container: The RootRecord to share.
-
     func share(rootRecord record: CKRecord, _ completion: @escaping (_ sharedRecord: CKShare?, _ container: CKContainer?, _ error: Error?) -> Void) {
         
         let shareRecord = CKShare(rootRecord: record)

@@ -60,9 +60,9 @@ class ChallengeController {
     }
     
     ///Fetches the current Challenge from CK and assigns the current Challenge to the property.
-    /// - parameter completion: Handler for when the challenge was created.
-    /// - parameter isSuccess: Confirms that the challenge was created.
-    func fetchCurrentChallenge(_ completion: @escaping (_ isSuccess: Bool) -> Void) {
+    /// - parameter completion: Handler for when the challenge was found.
+    /// - parameter isSuccess: Confirms that the challenge was found.
+    func fetchCurrentChallenge(inDataBase database: CKDatabase = CloudKitController.shared.privateDB, inZoneWithID zoneID: CKRecordZone.ID = CKRecordZone.ID(zoneName: "private"),_ completion: @escaping (_ isSuccess: Bool) -> Void) {
         let currentDay = Date()
         let olderThenStart = NSPredicate(format: "%K >= %@ ", argumentArray: [Challenge.startDayKey,currentDay])
 //        let youngerThenFinish = NSPredicate(format: "%K <= %@ ", argumentArray: [Challenge.finishDayKey,currentDay.addingTimeInterval(2592000)])
@@ -70,7 +70,7 @@ class ChallengeController {
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [olderThenStart])
         
         let query = CKQuery(recordType: Challenge.typeKey, predicate: predicate)
-        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.privateDB, inZoneWith: CKRecordZone.ID(zoneName: "private")){ (isSuccess, foundRecords) in
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: database, inZoneWith: zoneID) { (isSuccess, foundRecords) in
             if isSuccess {
                 guard let foundRecord = foundRecords.first, let currentChallenge = Challenge(record: foundRecord) else {completion(false);return}
                 self.currentChallenge = currentChallenge

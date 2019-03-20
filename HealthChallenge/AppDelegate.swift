@@ -26,7 +26,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         acceptSharing.qualityOfService = .userInteractive
         acceptSharing.perShareCompletionBlock = {meta, share, error in
-            print("successfully shared")
+            if let error = error {
+                print("An error accepting a CKShare has occured: \(error), \(error.localizedDescription)")
+            }
+            
+            CloudKitController.shared.fetchRecordZonesInTheSharedDataBase(completion: { (isSuccess, foundZones) in
+                if isSuccess {
+                    foundZones?.forEach({ (zone) in
+                        ChallengeController.shared.fetchCurrentChallenge(inDataBase: CloudKitController.shared.shareDB, inZoneWithID: zone.zoneID, { (isSuccess) in
+                            if isSuccess {
+                                print("Shared Challenge is now current Challenge")
+                                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
+                                NotificationCenter.default.post(challengeFound)
+                                
+                                let challengeReference = CKRecord.Reference(recordID: ChallengeController.shared.currentChallenge!.recordID, action: .none)
+                                GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
+                                    if isSuccess {
+                                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
+                                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
+                                    }
+                                })
+                            }
+                        })
+                    })
+                }
+            })
+
         }
         acceptSharing.acceptSharesCompletionBlock = { error in
             if let error = error {
