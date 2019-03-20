@@ -74,6 +74,7 @@ class ShareViewController: UIViewController {
 
 extension ShareViewController: UICloudSharingControllerDelegate {
     func cloudSharingControllerDidSaveShare(_ csc: UICloudSharingController) {
+        print(csc.share?.url)
         print("CKShare saved successfully")
     }
     

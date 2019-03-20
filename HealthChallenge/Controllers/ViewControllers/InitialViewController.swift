@@ -21,15 +21,19 @@ class InitialViewController: UIViewController {
         UserController.shared.fetchUserLoggedInUser { (isSuccess) in
             if isSuccess {
                 //USER FOUND
+                print("User found")
                 ChallengeController.shared.fetchCurrentChallenge { (isSuccess) in
                     if isSuccess {
                         //CURRENTCHALLENGE FOUND
+                        print("CURRENTCHALLENGE FOUND")
                         //CHECK DATE
                         guard let challengeID = ChallengeController.shared.currentChallenge?.recordID, let userID = UserController.shared.appleUserID else {return}
                         
                         GoalController.shared.fetchUsersMonthGoal(withUserReference: CKRecord.Reference(recordID: userID, action: .none), andChallengeReference: CKRecord.Reference(recordID: challengeID, action: .none)) { (isSuccess) in
                             if isSuccess {
                                 //MONTHGOAL FOR USER FOUND
+                                print("MONTHGOAL FOR USER FOUND")
+
                                 DispatchQueue.main.async {
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                                     let viewController = storyboard.instantiateViewController(withIdentifier: "ActiveChallengeController")
@@ -37,16 +41,19 @@ class InitialViewController: UIViewController {
                                 }
                             } else {
                                 //MONTHGOAL FOR USER NOT FOUND
+                                print("MONTHGOAL FOR USER NOT FOUND")
+
                                 DispatchQueue.main.async {
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                    guard let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController") as? ChallengeOnboardingViewController else {return}
-                                    viewController.isPresentingMonthGoalVC = true
+                                    let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
                                     self.present(viewController, animated: true, completion: nil)
                                 }
                             }
                         }
                     } else {
                         //NO CHALLENGE FOUND
+                        print("NO CHALLENGE FOUND")
+
                         DispatchQueue.main.async {
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
@@ -56,7 +63,7 @@ class InitialViewController: UIViewController {
                 }
             } else {
                 //USER NOT FOUND
-                
+                print("USER NOT FOUND")
                 //Checks to see that iCloud is Available
                 if let _ = UserController.shared.appleUserID {
                     DispatchQueue.main.async {

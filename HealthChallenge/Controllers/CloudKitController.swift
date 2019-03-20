@@ -20,6 +20,8 @@ class CloudKitController {
     let privateDB = CKContainer.default().privateCloudDatabase
     /// The public Database of the User.
     let publicDB = CKContainer.default().publicCloudDatabase
+    /// The shared Database of the User.
+    let shareDB = CKContainer.default().sharedCloudDatabase
     
     /// The the private RecordZone for the Challenge
     var privateRecordZone: CKRecordZone?
@@ -96,6 +98,19 @@ class CloudKitController {
             } else {
                 completion(false)
             }
+        }
+    }
+    
+    
+    func fetchRecordZonesInTheSharedDataBase(completion: @escaping (_ isSuccess: Bool, _ foundRecordZones: [CKRecordZone]?) -> Void) {
+        shareDB.fetchAllRecordZones { (allRecordZones, error) in
+            if let error = error {
+                print("There was an error fetching all recordZones: \(error)")
+                completion(false,nil)
+                return
+            }
+            
+            completion(true, allRecordZones)
         }
     }
     
