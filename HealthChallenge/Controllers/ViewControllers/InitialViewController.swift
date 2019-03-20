@@ -16,7 +16,7 @@ class InitialViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //TODO: CHECK if network Available
         
         UserController.shared.fetchUserLoggedInUser { (isSuccess) in
             if isSuccess {
