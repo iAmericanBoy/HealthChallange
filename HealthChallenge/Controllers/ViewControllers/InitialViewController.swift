@@ -22,6 +22,30 @@ class InitialViewController: UIViewController {
             if isSuccess {
                 //USER FOUND
                 print("User found")
+                
+                CloudKitController.shared.fetchRecordZonesInTheSharedDataBase(completion: { (isSuccess, foundZones) in
+                    if isSuccess {
+                        foundZones?.forEach({ (zone) in
+                            ChallengeController.shared.fetchCurrentChallenge(inDataBase: CloudKitController.shared.shareDB, inZoneWithID: zone.zoneID, { (isSuccess) in
+                                if isSuccess {
+                                    print("Shared Challenge is now current Challenge")
+                                    let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
+                                    NotificationCenter.default.post(challengeFound)
+                                    
+                                    let challengeReference = CKRecord.Reference(recordID: ChallengeController.shared.currentChallenge!.recordID, action: .none)
+                                    GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
+                                        if isSuccess {
+                                            let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
+                                            NotificationCenter.default.post(weekGoalsOfChallengeFound)
+                                        }
+                                    })
+                                } else {
+                                    print("no Shared current Challenge found")
+                                }
+                            })
+                        })
+                    }
+                })
                 ChallengeController.shared.fetchCurrentChallenge { (isSuccess) in
                     if isSuccess {
                         //CURRENTCHALLENGE FOUND
@@ -36,7 +60,7 @@ class InitialViewController: UIViewController {
 
                                 DispatchQueue.main.async {
                                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                    let viewController = storyboard.instantiateViewController(withIdentifier: "ActiveChallengeController")
+                                    let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
                                     self.present(viewController, animated: true, completion: nil)
                                 }
                             } else {

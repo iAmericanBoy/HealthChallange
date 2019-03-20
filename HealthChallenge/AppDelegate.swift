@@ -38,13 +38,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 print("Shared Challenge is now current Challenge")
                                 let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                                 NotificationCenter.default.post(challengeFound)
+                                
+                                let challengeReference = CKRecord.Reference(recordID: ChallengeController.shared.currentChallenge!.recordID, action: .none)
+                                GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
+                                    if isSuccess {
+                                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
+                                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
+                                    }
+                                })
                             }
                         })
                     })
                 }
             })
 
-            print("successfully shared")
         }
         acceptSharing.acceptSharesCompletionBlock = { error in
             if let error = error {
