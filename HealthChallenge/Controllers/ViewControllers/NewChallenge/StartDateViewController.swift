@@ -14,7 +14,7 @@ class StartDateViewController: UIViewController {
     var dateRange: [Date] = []
     
     // MARK: - Outlets
-    
+
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var previousMonthButton: UIButton!
