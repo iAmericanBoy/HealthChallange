@@ -32,12 +32,12 @@ class NutrientsController {
         let calories = URLQueryItem(name: "nutrients", value: "208")  // calories
         let sugars = URLQueryItem(name: "nutrients", value: "269")    // sugars
         let fats = URLQueryItem(name: "nutrients", value: "204")      //fats
-        //let sodium = URLQueryItem(name: "nutrients", value: "307")    //sodium
+        let sodium = URLQueryItem(name: "nutrients", value: "307")    //sodium
         let ndbno = URLQueryItem(name: "ndbno", value: food.ndbno)
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
-        components?.queryItems = [format1, apiKeyQuery, carbs, calories, sugars, fats, ndbno]
+        components?.queryItems = [format1, apiKeyQuery, carbs, calories, sugars, fats, sodium, ndbno]
         
         guard let requestURL = components?.url else {completion(false); return}
         
@@ -64,6 +64,7 @@ class NutrientsController {
                 completion(false)
                 return
                 
+               // dump(jsonDictionary)
                 
             }
             guard let jsonReport :[String: Any] = jsonDictionary?["report"] as? [String: Any] else {print("got report"); return}
@@ -80,15 +81,15 @@ class NutrientsController {
                 print(jsonNutrients)
                 
                 if let nutrient = Nutrients( dictionary: jsonNutrients) {
-//                    print("=====nutrient======")
-//                    print("food: \(food.name)")
-//                    print("measure: \(String(describing: food.measure))")
-//                    print("calories: \(nutrient.calories)")
-//                    print("sugar: \(nutrient.sugar)")
-//                    print("fats: \(nutrient.fats)")
-//                    print("carbs: \(nutrient.carbs)")
-//                    //print("sodium:    )
-//                    print("=====nutrient======")
+                    print("=====nutrient======")
+                    print("food: \(food.name)")
+                    print("measure: \(String(describing: food.measure))")
+                    print("calories: \(nutrient.calories)")
+                    print("sugar: \(nutrient.sugar)")
+                    print("fats: \(nutrient.fats)")
+                    print("carbs: \(nutrient.carbs)")
+                    print("sodium: \(nutrient.sodium)")
+                    print("=====nutrient======")
                     food.nutrients = nutrient
                 }
             }
