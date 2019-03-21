@@ -16,7 +16,8 @@ class WorkoutDetailViewController: UIViewController {
     var counter = 0.0
     var timer = Timer()
     var isActive = false
-    var exersices = ["Walking", "Running", "Cycling", "Eliptical", "Strength Training", "Cross Training", "Other"]
+    var exercises = ["Walking", "Running", "Cycling", "Eliptical", "Strength Training", "Cross Training", "Other"]
+    weak var delegate: WorkoutDetailViewControllerDelegate?
     
     // MARK: - Outlets
     @IBOutlet weak var timerLabel: UILabel!
@@ -74,17 +75,17 @@ class WorkoutDetailViewController: UIViewController {
         var totalEnergyBurned = HKQuantity(unit: HKUnit.largeCalorie(), doubleValue: calories)
         
         // Set HKWorkoutActivityType from string value
-        if currentExersize == exersices.first {
+        if currentExersize == exercises.first {
             activity = HKWorkoutActivityType.walking
-        } else if currentExersize == exersices[1] {
+        } else if currentExersize == exercises[1] {
             activity = HKWorkoutActivityType.running
-        } else if currentExersize == exersices[2] {
+        } else if currentExersize == exercises[2] {
             activity = HKWorkoutActivityType.cycling
-        } else if currentExersize == exersices[3] {
+        } else if currentExersize == exercises[3] {
             activity = HKWorkoutActivityType.elliptical
-        } else if currentExersize == exersices[4] {
+        } else if currentExersize == exercises[4] {
             activity = HKWorkoutActivityType.traditionalStrengthTraining
-        } else if currentExersize == exersices[5] {
+        } else if currentExersize == exercises[5] {
             activity = HKWorkoutActivityType.crossTraining
         } else {
             activity = HKWorkoutActivityType.other
@@ -92,9 +93,12 @@ class WorkoutDetailViewController: UIViewController {
         
         if HKHealthStore.isHealthDataAvailable() {
             HealthKitController.shared.addWorkoutToHK(start: startDate, finish: endDate, activity: activity, totoalEnergyBurned: totalEnergyBurned)
+            WorkoutController.shared.createWorkoutWith(startTime: startDate, endTime: endDate, duration: duration, activity: currentExersize) { (success) in
+                self.delegate?.finishedWorkout(success: true)
+            }
         } else {
             WorkoutController.shared.createWorkoutWith(startTime: startDate, endTime: endDate, duration: duration, activity: currentExersize) { (success) in
-                // handle
+                self.delegate?.finishedWorkout(success: true)
             }
         }
     }
@@ -107,14 +111,18 @@ extension WorkoutDetailViewController: UIPickerViewDelegate, UIPickerViewDataSou
     }
     // number of rows in picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return exersices.count
+        return exercises.count
     }
     // title for row
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return exersices[row]
+        return exercises[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        currentExersize = exersices[row]
+        currentExersize = exercises[row]
     }
+}
+
+protocol WorkoutDetailViewControllerDelegate: class {
+    func finishedWorkout(success: Bool)
 }

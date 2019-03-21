@@ -35,7 +35,7 @@
 		62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F1223894A100D5410B /* GoalsTab.storyboard */; };
 		62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62D067F3223894D500D5410B /* LeaderboardTab.storyboard */; };
 		62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FC22397F3600D5410B /* HealthKitController.swift */; };
-		62D067FF223AB68100D5410B /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FE223AB68100D5410B /* FoodViewController.swift */; };
+		62D067FF223AB68100D5410B /* DishCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FE223AB68100D5410B /* DishCreatorViewController.swift */; };
 		62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06800223AB68E00D5410B /* WorkoutViewController.swift */; };
 		62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06802223AB69900D5410B /* GoalsViewController.swift */; };
 		62D06805223AB6A900D5410B /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06804223AB6A900D5410B /* LeaderboardViewController.swift */; };
@@ -51,6 +51,7 @@
 		62FE5A6B2242C80E009240C6 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A6A2242C80E009240C6 /* WorkoutController.swift */; };
 		B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD36862243EB2000E66A7F /* AppStates.swift */; };
 		B6BD368B224440DA00E66A7F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */; };
+		62FE5A6D2244193C009240C6 /* WorkoutDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A6C2244193C009240C6 /* WorkoutDetailTableViewCell.swift */; };
 		B6E210622240500200642274 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E210612240500100642274 /* InitialViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
@@ -65,6 +66,9 @@
 		B6EBA60E22386CD30001F5BF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60D22386CD30001F5BF /* CloudKit.framework */; };
 		B6EBA61022396D730001F5BF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60F22396D730001F5BF /* HealthKit.framework */; };
 		B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA6112239DA400001F5BF /* MagicStrings.swift */; };
+		CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FB92242B2D800C3EEB3 /* Extensions.swift */; };
+		CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */; };
+		CE178FBE2242E73500C3EEB3 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */; };
 		CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57AD2722402B1200712975 /* FoodTrackerController.swift */; };
 		CE57AD2A22402B2800712975 /* FoodTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57AD2922402B2800712975 /* FoodTracker.swift */; };
 		CE60FC60224038390029386F /* DishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FC5F224038390029386F /* DishController.swift */; };
@@ -107,7 +111,7 @@
 		62D067F1223894A100D5410B /* GoalsTab.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoalsTab.storyboard; sourceTree = "<group>"; };
 		62D067F4223894D500D5410B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HealthChallenge/View/Base.lproj/LeaderboardTab.storyboard; sourceTree = "<group>"; };
 		62D067FC22397F3600D5410B /* HealthKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
-		62D067FE223AB68100D5410B /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
+		62D067FE223AB68100D5410B /* DishCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCreatorViewController.swift; sourceTree = "<group>"; };
 		62D06800223AB68E00D5410B /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		62D06802223AB69900D5410B /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		62D06804223AB6A900D5410B /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		62FE5A6A2242C80E009240C6 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 		B6BD36862243EB2000E66A7F /* AppStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStates.swift; sourceTree = "<group>"; };
 		B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		62FE5A6C2244193C009240C6 /* WorkoutDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B6E210612240500100642274 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +145,9 @@
 		B6EBA60D22386CD30001F5BF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B6EBA60F22396D730001F5BF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B6EBA6112239DA400001F5BF /* MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicStrings.swift; sourceTree = "<group>"; };
+		CE178FB92242B2D800C3EEB3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailViewController.swift; sourceTree = "<group>"; };
+		CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
 		CE57AD2722402B1200712975 /* FoodTrackerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerController.swift; sourceTree = "<group>"; };
 		CE57AD2922402B2800712975 /* FoodTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTracker.swift; sourceTree = "<group>"; };
 		CE60FC5F224038390029386F /* DishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishController.swift; sourceTree = "<group>"; };
@@ -297,6 +305,8 @@
 				62D067F3223894D500D5410B /* LeaderboardTab.storyboard */,
 				CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */,
 				CE60FC6322416E180029386F /* FoodTrackerCell.swift */,
+				62FE5A6C2244193C009240C6 /* WorkoutDetailTableViewCell.swift */,
+				CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */,
 			);
 			path = TabBarViews;
 			sourceTree = "<group>";
@@ -304,8 +314,9 @@
 		62D06806223AB6B200D5410B /* ActiveChallege */ = {
 			isa = PBXGroup;
 			children = (
-				62D067FE223AB68100D5410B /* FoodViewController.swift */,
+				62D067FE223AB68100D5410B /* DishCreatorViewController.swift */,
 				CE60FC6122403B260029386F /* FoodTrackerViewController.swift */,
+				CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */,
 				62D06800223AB68E00D5410B /* WorkoutViewController.swift */,
 				62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */,
 				62FE5A6422429C11009240C6 /* WorkoutDetailViewController.swift */,
@@ -360,6 +371,7 @@
 		B6E332BA2236B8650088D6FF /* HealthChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				CE178FB92242B2D800C3EEB3 /* Extensions.swift */,
 				B6EBA60B22386CCE0001F5BF /* HealthChallenge.entitlements */,
 				62D067BE2237182900D5410B /* Model */,
 				62D067A32236D1D700D5410B /* Controllers */,
@@ -498,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE178FBE2242E73500C3EEB3 /* DishTableViewCell.swift in Sources */,
 				62D067B12236DBDF00D5410B /* OnboardingViewController.swift in Sources */,
 				CEB299B3223C09740089DA63 /* Dish.swift in Sources */,
 				CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */,
@@ -517,6 +530,7 @@
 				CE60FC6422416E180029386F /* FoodTrackerCell.swift in Sources */,
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
 				62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */,
+				62FE5A6D2244193C009240C6 /* WorkoutDetailTableViewCell.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
 				CE57AD2A22402B2800712975 /* FoodTracker.swift in Sources */,
 				62FE5A33223FE450009240C6 /* SettingsPopupViewController.swift in Sources */,
@@ -526,6 +540,7 @@
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
+				CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */,
 				62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */,
 				62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* ShareViewController.swift in Sources */,
@@ -537,7 +552,7 @@
 				62D06805223AB6A900D5410B /* LeaderboardViewController.swift in Sources */,
 				62FE5A672242BA67009240C6 /* Workout.swift in Sources */,
 				B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */,
-				62D067FF223AB68100D5410B /* FoodViewController.swift in Sources */,
+				62D067FF223AB68100D5410B /* DishCreatorViewController.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */,
 				B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */,
@@ -545,6 +560,7 @@
 				CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */,
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
 				B6E210622240500200642274 /* InitialViewController.swift in Sources */,
+				CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */,
 				CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */,
 				CE60FC60224038390029386F /* DishController.swift in Sources */,
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
