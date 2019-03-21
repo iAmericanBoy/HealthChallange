@@ -49,6 +49,7 @@
 		62FE5A672242BA67009240C6 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A662242BA67009240C6 /* Workout.swift */; };
 		62FE5A692242BC7E009240C6 /* Workout+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A682242BC7E009240C6 /* Workout+MagicStrings.swift */; };
 		62FE5A6B2242C80E009240C6 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A6A2242C80E009240C6 /* WorkoutController.swift */; };
+		B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD36862243EB2000E66A7F /* AppStates.swift */; };
 		B6E210622240500200642274 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E210612240500100642274 /* InitialViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
@@ -119,6 +120,7 @@
 		62FE5A662242BA67009240C6 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		62FE5A682242BC7E009240C6 /* Workout+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+MagicStrings.swift"; sourceTree = "<group>"; };
 		62FE5A6A2242C80E009240C6 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
+		B6BD36862243EB2000E66A7F /* AppStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStates.swift; sourceTree = "<group>"; };
 		B6E210612240500100642274 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				B6E332BB2236B8650088D6FF /* AppDelegate.swift */,
 				B6EBA6112239DA400001F5BF /* MagicStrings.swift */,
 				B6E332CD2236B87E0088D6FF /* Resources */,
+				B6BD36862243EB2000E66A7F /* AppStates.swift */,
 			);
 			path = HealthChallenge;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				62D067FF223AB68100D5410B /* FoodViewController.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */,
+				B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
 				CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */,
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
