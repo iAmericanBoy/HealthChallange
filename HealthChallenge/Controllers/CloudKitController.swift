@@ -109,7 +109,6 @@ class CloudKitController {
                 completion(false,nil)
                 return
             }
-            
             completion(true, allRecordZones)
         }
     }
