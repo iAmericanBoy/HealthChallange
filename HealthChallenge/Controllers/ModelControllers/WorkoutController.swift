@@ -52,19 +52,26 @@ class WorkoutController {
     
     //fetch
     func fetchUsersWorkouts(completion: @escaping (Bool) -> Void) {
+        var allWorkouts: [Workout] = []
+//        guard let currentChallenge = ChallengeController.shared.currentChallenge else { completion(false) ; return }
+//        let hkWorkouts = WorkoutController.shared.transformHKWorkoutsFrom(startDate: currentChallenge.startDay, endDate: currentChallenge.finishDay)
+//        self.allWorkouts.append(contentsOf: hkWorkouts)
+        
         CloudKitController.shared.fetchUserRecordID { (success, recordID) in
             if success {
-                guard let recordID = recordID else { return }
+                guard let recordID = recordID else { completion(false) ; return }
                 
                 let predicate = NSPredicate(format: "%K == %@", argumentArray: [Workout.referenceKey, recordID])
                 let query = CKQuery(recordType: Workout.typeKey, predicate: predicate)
                 
                 CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (success, foundRecords) in
                     if success {
-                        let foundWorkouts = foundRecords.compactMap({ Workout(record: $0)})
-                        self.workouts = foundWorkouts
+                        let foundWorkouts = foundRecords.compactMap({ Workout(record: $0) })
+                        allWorkouts.append(contentsOf: foundWorkouts)
+                        self.workouts = allWorkouts
                         completion(true)
                     } else {
+                        self.workouts = allWorkouts
                         completion(false)
                     }
                 })

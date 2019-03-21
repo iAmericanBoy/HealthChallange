@@ -34,7 +34,6 @@ class Workout {
             let end = record[Workout.endKey] as? Date,
             let duration = record[Workout.durationKey] as? TimeInterval,
             let activity = record[Workout.activityKey] as? String,
-            let caloriesBurned = record[Workout.caloriesBurnedKey] as? Double,
             let reference = record[Workout.referenceKey] as? CKRecord.Reference
             else { return nil }
         
@@ -44,7 +43,7 @@ class Workout {
         self.end = end
         self.duration = duration
         self.activity = activity
-        self.caloriesBurned = caloriesBurned
+        self.caloriesBurned = record[Workout.caloriesBurnedKey] as? Double
     }
 }
 

@@ -30,6 +30,10 @@ class WorkoutViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        WorkoutController.shared.fetchUsersWorkouts { (success) in
+            print("Fetched workouts successfully.")
+            self.workouts = WorkoutController.shared.workouts
+        }
         settingsImage()
         calendarCollectionView.backgroundColor = .clear
         calendarController.initializeCurrentCalendar()
@@ -40,11 +44,11 @@ class WorkoutViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        WorkoutController.shared.fetchUsersWorkouts { (success) in
-            print("Fetched workouts successfully.")
-            self.workouts = WorkoutController.shared.workouts
-        }
+//        super.viewWillAppear(animated)
+//        WorkoutController.shared.fetchUsersWorkouts { (success) in
+//            print("Fetched workouts successfully.")
+//            self.workouts = WorkoutController.shared.workouts
+//        }
     }
     
     // MARK: - Actions
@@ -127,14 +131,10 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.monthLabel.text = "\(month)"
         }
         
-//        Set color of dates that show a workout.
-        if !workouts.isEmpty {
-            if date == workouts[indexPath.row].end {
-                cell.backgroundColor = Color.theme.value
-            } else {
-                cell.backgroundColor = .white
-            }
+        if workouts.filter({ $0.end.stripTimestamp() == date.stripTimestamp() }).count > 0 {
+            cell.backgroundColor = .green
         }
+        
         
         if date.stripTimestamp() == today.stripTimestamp() {
             cell.dayLabel.textColor = Color.darkText.value

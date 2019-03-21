@@ -20,6 +20,7 @@ class AddWorkoutsViewController: UIViewController {
     let today = Date().stripTimestamp()
     
     
+    
     @IBOutlet weak var addWorkoutContainer: UIView!
     @IBOutlet weak var currentDayLabel: UILabel!
     @IBOutlet weak var previousDayButton: UIButton!
@@ -30,6 +31,8 @@ class AddWorkoutsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         queryWorkouts()
+        tableView.delegate = self
+        tableView.dataSource = self
         nextDayButton.isEnabled = false
         date = sourceDate!
         currentDayLabel.text = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
@@ -39,24 +42,25 @@ class AddWorkoutsViewController: UIViewController {
     @IBAction func nextDayButtonTapped(_ sender: Any) {
         date.addTimeInterval(86400)
         queryWorkouts()
-        updateViews()
     }
     
     // Subtract 24 hours from date and query workouts.
     @IBAction func previousDayButtonTapped(_ sender: Any) {
         date.addTimeInterval(-86400)
         queryWorkouts()
-        updateViews()
     }
     
     // Query workouts from HK and transform them into Workout objects.
     func queryWorkouts() {
-        let newWorkouts = WorkoutController.shared.transformHKWorkoutsFrom(startDate: date, endDate: date)
-        workouts = newWorkouts
+        WorkoutController.shared.fetchUsersWorkouts { (success) in
+            self.workouts = WorkoutController.shared.workouts
+            self.updateViews()
+        }
     }
     
     // Enable/Disable next day button and previous day button.
     func updateViews() {
+        workouts = workouts.filter{( $0.end.stripTimestamp() == date.stripTimestamp() )}
         DispatchQueue.main.async {
             if self.date == self.today {
                 self.nextDayButton.isEnabled = false
@@ -76,8 +80,16 @@ class AddWorkoutsViewController: UIViewController {
                 self.addWorkoutContainer.isHidden = false
             } else {
                 self.tableView.isHidden = false
+                self.tableView.reloadData()
                 self.addWorkoutContainer.isHidden = true
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "workoutDetailVC" {
+            let embedVC = segue.destination as? WorkoutDetailViewController
+            embedVC?.delegate = self
         }
     }
 }
@@ -90,14 +102,36 @@ extension AddWorkoutsViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as? WorkoutDetailTableViewCell
         let workout = workouts[indexPath.row]
-        if let numOfCalories = workout.caloriesBurned {
-            let caloriesString = String(format: "CaloriesBurned: %.2f", numOfCalories)
-            cell.textLabel?.text = caloriesString
-        } else {
-            cell.textLabel?.text = nil
-        }
-        return cell
+        cell?.delegate = self
+        cell?.activityLabel.text = workout.activity
+        cell?.durationLabel.text = "\(workout.duration)"
+        cell?.dateLabel.text = "\(workout.end.month)/\(workout.end.day)"
+        
+        return cell ?? UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let workoutToDelete = workouts[indexPath.row]
+            WorkoutController.shared.delete(workout: workoutToDelete) { (success) in
+                DispatchQueue.main.async {
+                    self.workouts.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+        }
+    }
+}
+
+extension AddWorkoutsViewController: WorkoutDetailViewControllerDelegate {
+    func finishedWorkout(success: Bool) {
+        if success == true {
+            queryWorkouts()
+        }
+    }
+}
+
+extension AddWorkoutsViewController: WorkoutDetailTableViewCellDelegate {
 }
