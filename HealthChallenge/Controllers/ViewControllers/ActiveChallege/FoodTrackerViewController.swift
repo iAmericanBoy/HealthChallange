@@ -10,7 +10,9 @@ import UIKit
 
 class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-   
+    
+    @IBOutlet weak var dishDateLabel: UILabel!
+    
     @IBOutlet weak var foodTrackerTableView: UITableView!
     
     var dishesKeys = {
@@ -22,9 +24,13 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
         self.foodTrackerTableView.reloadData()
     }
     override func viewWillAppear(_ animated: Bool) {
+        dishDateLabel.text = Date.sharedDate.format()
         self.foodTrackerTableView.reloadData()
     }
     
+    func updateViews() {
+        
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return dishesKeys.count
     }
@@ -46,40 +52,45 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
         let nutrients = DishController.shared.dishes[type]?[indexPath.row].ingredients
         
         
-       cell?.dishNameLanding = foodName
-       cell?.nutrientLandingPad = nutrients
+        cell?.dishNameLanding = foodName
+        cell?.nutrientLandingPad = nutrients
         
-        print("============FoodName===========")
+        //print("============FoodName===========")
         //dump(foodName)
         
-  
-//        var calories1: Double = 0
-//
-//        guard let nutrients1 = nutrients else { return UITableViewCell() }
-//
-//        for nutrient in nutrients1 {
-//            calories1 += Double((nutrient.nutrients?.calories)!)!
-//
-//           // cell.detailTextLabel?.text = "\(String(calories1)) calories"
-//
-//            print(calories1)
-        
         return cell ?? UITableViewCell()
-        }
-
-//        cell.textLabel?.text = DishController.shared.dishes[type]?[indexPath.row].dishName
-      //  return cell
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        let type = dishesKeys[indexPath.section]
+    //        let data = DishController.shared.dishes[type]?[indexPath.row].dishName
+    //        let data2 = DishController.shared.dishes[type]?[indexPath.row].ingredients
+    //
+    //        let data3 = DishController.shared.dishes[type]?[indexPath.row]
+    //
+    ////        self.performSegue(withIdentifier: "toDishVC", sender: data)
+    ////
+    ////        self.performSegue(withIdentifier: "toDishVC", sender: data2)
+    ////
+    //    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        // iidoo
+        if segue.identifier == "toDishVC" {
+            
+            if let index = foodTrackerTableView.indexPathForSelectedRow  {
+                guard let destVC = segue.destination as? DishViewController else {return}
+                
+                let type = dishesKeys[index.section]
+                let dishToSend = DishController.shared.dishes[type]?[index.row]
+                //destVC.bulletinBoard = sender as? String
+                destVC.dish = dishToSend
+            }
+        }
+        
     }
-    */
+    
+}
 
 

@@ -16,11 +16,13 @@ class Dish {
     var ingredients: [Food]?
     var photo: UIImage?
     let dishType: DishType
+    var timeStamp: Date = Date()
     
-    init(dishName: String, ingredients: [Food], dishType: DishType) {
+    init(dishName: String, ingredients: [Food], dishType: DishType, timeStamp: Date) {
         self.dishName = dishName
         self.ingredients = ingredients
         self.dishType = dishType
+        self.timeStamp = timeStamp
     }
 }
 

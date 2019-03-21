@@ -35,7 +35,7 @@ class DishController {
             return
         }
         
-        let dish = Dish(dishName: name, ingredients: ingredients, dishType: dishType!)
+        let dish = Dish(dishName: name, ingredients: ingredients, dishType: dishType!, timeStamp: Date())
         dishes[dishType!.rawValue]?.append(dish)
      
     }

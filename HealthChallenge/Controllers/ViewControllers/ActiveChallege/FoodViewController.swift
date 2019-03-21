@@ -27,6 +27,8 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
         dishTableView.dataSource = self
         self.ingredientTableView.delegate = self
         self.ingredientTableView.dataSource = self
+        self.dishTableView.tableFooterView = UIView()
+        self.ingredientTableView.tableFooterView = UIView()
         dishTableView.reloadData()
         
     }
@@ -91,8 +93,9 @@ class FoodViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
         let dishCell = tableView.dequeueReusableCell(withIdentifier: "dishCell")
         
-        dishCell?.textLabel?.text = ingredients[indexPath.row].name
+        dishCell?.textLabel?.text = ingredients[indexPath.row].name //<== This has what I want 
         
+    
         return dishCell ?? UITableViewCell()
         
     }
