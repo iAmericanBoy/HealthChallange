@@ -20,24 +20,6 @@ class ChallengeController {
     
     ///The weekGoals of the current Challenge
     var currentChallengeWeekGoals: [Goal] = []
-
-    //MARK: - init
-    init() {
-        fetchCurrentChallenge { (isSuccess) in
-            if isSuccess {
-                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
-                NotificationCenter.default.post(challengeFound)
-                
-                let challengeReference = CKRecord.Reference(recordID: self.currentChallenge!.recordID, action: .none)
-                GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
-                    if isSuccess {
-                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
-                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
-                    }
-                })
-            }
-        }
-    }
     
     //MARK: - CRUD
     ///Creates a new Challenge with a start date.

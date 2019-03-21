@@ -22,7 +22,8 @@ class InitialViewController: UIViewController {
         //TODO: CHECK if network Available
         
         _ = GoalController.shared
-
+        
+        //fetch User
         fetchUser { userState in
             switch userState {
             case .isUser:
@@ -30,160 +31,94 @@ class InitialViewController: UIViewController {
                 self.fetchChallenge({ challengeState in
                     switch challengeState {
                     case .isOwnerChallenge:
-                        //check StartDate
+                        let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
+                        NotificationCenter.default.post(challengeFound)
+                        
                         //can Edit Week Goals
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
                             switch monthGoalState {
-                            case .isMonthGoal: break
-                            case .noMonthGoal: break
+                            case .isMonthGoal:
+                                //check StartDate
+                                print("Checking for Start Day...")
+                                let startDay = ChallengeController.shared.currentChallenge?.startDay
+                                
+                                if startDay! < Date() {
+                                    //before StartDay
+                                    print("Challenge's StartDay after Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.currentChallenge()
+                                } else {
+                                    //after startDay
+                                    print("Challenge's StartDay after Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.activeChallenge()
+                                }
+                                
+                                
+                            case .noMonthGoal:
+                                self.addMonthGoal()
                             }
                         })
                         break
                     case .isParticipantChallenge:
+                        let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
+                        NotificationCenter.default.post(challengeFound)
+                        
                         //check StartDate
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
                             switch monthGoalState {
-                            case .isMonthGoal: break
-                            case .noMonthGoal: break
+                            case .isMonthGoal:
+                                print("Checking for Start Day...")
+                                let startDay = ChallengeController.shared.currentChallenge?.startDay
+                                
+                                if startDay! < Date() {
+                                    //before StartDay
+                                    print("Challenge's StartDay after Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.currentChallenge()
+                                } else {
+                                    //after startDay
+                                    print("Challenge's StartDay after Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.activeChallenge()
+                                }
+                            case .noMonthGoal:
+                                self.addMonthGoal()
                             }
                         })
                     case .noActiveChallenge:
                         //can create new Challenge or join a challenge
                         //can look at past challenges
-                        break
+                        self.createNewChallenge()
                     }
                 })
             case .noUser:
                 //create new User
-                break
+                self.createNewUser()
             }
         }
         
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        UserController.shared.fetchUserLoggedInUser { (isSuccess) in
-//            if isSuccess {
-//                //USER FOUND
-//                print("User found")
-//
-//                CloudKitController.shared.fetchRecordZonesInTheSharedDataBase(completion: { (isSuccess, foundZones) in
-//                    if isSuccess {
-//                        foundZones?.forEach({ (zone) in
-//                            ChallengeController.shared.fetchCurrentChallenge(inDataBase: CloudKitController.shared.shareDB, inZoneWithID: zone.zoneID, { (isSuccess) in
-//                                if isSuccess {
-//                                    print("Shared Challenge is now current Challenge")
-//                                    let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
-//                                    NotificationCenter.default.post(challengeFound)
-//
-//                                    let challengeReference = CKRecord.Reference(recordID: ChallengeController.shared.currentChallenge!.recordID, action: .none)
-//                                    GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
-//                                        if isSuccess {
-//                                            let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
-//                                            NotificationCenter.default.post(weekGoalsOfChallengeFound)
-//                                        }
-//                                    })
-//
-//                                    guard let userID = UserController.shared.appleUserID else {return}
-//
-//                                    GoalController.shared.fetchUsersMonthGoal(withUserReference: CKRecord.Reference(recordID: userID, action: .none), andChallengeReference: challengeReference) { (isSuccess) in
-//                                        if isSuccess {
-//                                            //MONTHGOAL FOR USER FOUND
-//                                            print("MONTHGOAL FOR USER FOUND")
-//
-//                                            DispatchQueue.main.async {
-//                                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                                                let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
-//                                                self.present(viewController, animated: true, completion: nil)
-//                                            }
-//                                        } else {
-//                                            //MONTHGOAL FOR USER NOT FOUND
-//                                            print("MONTHGOAL FOR USER NOT FOUND")
-//
-//                                            DispatchQueue.main.async {
-//                                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                                                let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
-//                                                self.present(viewController, animated: true, completion: nil)
-//                                            }
-//                                        }
-//                                    }
-//                                } else {
-//                                    print("no Shared current Challenge found")
-//                                }
-//                            })
-//                        })
-//                    }
-//                })
-//                ChallengeController.shared.fetchCurrentChallenge { (isSuccess) in
-//                    if isSuccess {
-//                        //CURRENTCHALLENGE FOUND
-//                        print("CURRENTCHALLENGE FOUND")
-//                        //CHECK DATE
-//                        guard let challengeID = ChallengeController.shared.currentChallenge?.recordID, let userID = UserController.shared.appleUserID else {return}
-//
-//                        GoalController.shared.fetchUsersMonthGoal(withUserReference: CKRecord.Reference(recordID: userID, action: .none), andChallengeReference: CKRecord.Reference(recordID: challengeID, action: .none)) { (isSuccess) in
-//                            if isSuccess {
-//                                //MONTHGOAL FOR USER FOUND
-//                                print("MONTHGOAL FOR USER FOUND")
-//
-//                                DispatchQueue.main.async {
-//                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                                    let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
-//                                    self.present(viewController, animated: true, completion: nil)
-//                                }
-//                            } else {
-//                                //MONTHGOAL FOR USER NOT FOUND
-//                                print("MONTHGOAL FOR USER NOT FOUND")
-//
-//                                DispatchQueue.main.async {
-//                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                                    let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
-//                                    self.present(viewController, animated: true, completion: nil)
-//                                }
-//                            }
-//                        }
-//                    } else {
-//                        //NO CHALLENGE FOUND
-//                        print("NO CHALLENGE FOUND")
-//
-//                        DispatchQueue.main.async {
-//                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
-//                            self.present(viewController, animated: true, completion: nil)
-//                        }
-//                    }
-//                }
-//            } else {
-//                //USER NOT FOUND
-//                print("USER NOT FOUND")
-//                //Checks to see that iCloud is Available
-//                if let _ = UserController.shared.appleUserID {
-//                    DispatchQueue.main.async {
-//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                        let viewController = storyboard.instantiateViewController(withIdentifier: "SignUpParentViewController")
-//                        self.present(viewController, animated: true, completion: nil)
-//                    }
-//                } else {
-//                    DispatchQueue.main.async {
-//                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                        let viewController = storyboard.instantiateViewController(withIdentifier: "ActiveChallengeController")
-//                        self.present(viewController, animated: true, completion: nil)
-//                    }
-//                }
-//            }
-//        }
+        //        fetchCurrentChallenge { (isSuccess) in
+        //            if isSuccess {
+        //                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
+        //                NotificationCenter.default.post(challengeFound)
+        //
+        //                let challengeReference = CKRecord.Reference(recordID: self.currentChallenge!.recordID, action: .none)
+        //                GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
+        //                    if isSuccess {
+        //                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
+        //                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
+        //                    }
+        //                })
+        //            }
+        //        }
     }
     
     
     //MARK: - Private Functions
+    //MARK: Fetch
     
     ///Fetches the User if it exists
     /// - parameter completion: Handler for when the logged in user has been found
@@ -272,6 +207,49 @@ class InitialViewController: UIViewController {
                 print("No Month Goal Found")
                 completion(.noMonthGoal)
             }
+        }
+    }
+    
+    //MARK: Go to specific VC
+    ///Segue to newUser VC
+    func createNewUser() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "SignUpParentViewController")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    ///Segue to createChallenge VC
+    func createNewChallenge() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    ///Segue to currentChallenge VC if its before StartDate
+    func currentChallenge() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    ///Segue to addMonthGoal VC
+    func addMonthGoal() {
+        //TODO: Add logic to segue directly to the monthGoal screen
+        currentChallenge()
+    }
+    
+    ///Segue to activeChallenge VC its after StartDate
+    func activeChallenge() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "ActiveChallengeController")
+            self.present(viewController, animated: true, completion: nil)
         }
     }
 }
