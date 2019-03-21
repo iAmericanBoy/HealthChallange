@@ -12,6 +12,8 @@ class DishController {
     
     static let shared = DishController()
     
+    //MARK: - place this mock Data inside either meal array below to test whether date is working:     Dish(dishName: "dfsfds", ingredients: [], dishType: .Breakfast, timeStamp: Date().addingTimeInterval(24*60*60))
+    
     var dishes: [String : [Dish]] = [
         "Breakfast" : [],
         "Lunch" : [],
@@ -35,7 +37,7 @@ class DishController {
             return
         }
         
-        let dish = Dish(dishName: name, ingredients: ingredients, dishType: dishType!)
+        let dish = Dish(dishName: name, ingredients: ingredients, dishType: dishType!, timeStamp: Date())
         dishes[dishType!.rawValue]?.append(dish)
      
     }
