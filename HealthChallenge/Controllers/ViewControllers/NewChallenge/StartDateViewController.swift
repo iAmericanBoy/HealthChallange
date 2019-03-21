@@ -48,9 +48,21 @@ class StartDateViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
+        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
+        ChallengeState(rawValue: rawValue ?? 0)! == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
+        
     }
     
     //MARK: - Private Functions
+    
+    func updateViewsForOwner() {
+        calendarCollectionView.allowsSelection = true
+    }
+    
+    func updateViewsForParticipant() {
+        calendarCollectionView.allowsSelection = false
+    }
+    
     func updateViews() {
         DispatchQueue.main.async {
             self.challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
@@ -135,7 +147,7 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         
         //logic to color cells of the selected date and the 30 days in the challenge
         if let challengeStartDate = challengeStartDate {
-            if cell.cellDate! == challengeStartDate {
+            if cell.cellDate!.stripTimestamp() == challengeStartDate.stripTimestamp() {
                 cell.backgroundColor = .green
             } else if cell.cellDate! <= challengeStartDate.addingTimeInterval(2592000) && cell.cellDate! >= challengeStartDate {
                 cell.backgroundColor = UIColor.green.withAlphaComponent(0.1)

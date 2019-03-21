@@ -27,10 +27,16 @@ class InitialViewController: UIViewController {
         fetchUser { userState in
             switch userState {
             case .isUser:
+                UserDefaults.standard.set(UserState.isUser.hashValue, forKey: "UserState")
                 //fetch challenge
                 self.fetchChallenge({ challengeState in
                     switch challengeState {
                     case .isOwnerChallenge:
+                        UserDefaults.standard.set(ChallengeState.isOwnerChallenge.rawValue, forKey: "ChallengeState")
+                        let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+
+                        UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
+
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
                         
@@ -44,9 +50,9 @@ class InitialViewController: UIViewController {
                                 print("Checking for Start Day...")
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
                                 
-                                if startDay! < Date() {
+                                if startDay! > Date() {
                                     //before StartDay
-                                    print("Challenge's StartDay after Today")
+                                    print("Challenge's StartDay before Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.currentChallenge()
                                 } else {
@@ -63,6 +69,11 @@ class InitialViewController: UIViewController {
                         })
                         break
                     case .isParticipantChallenge:
+                        UserDefaults.standard.set(ChallengeState.isParticipantChallenge.rawValue, forKey: "ChallengeState")
+                        let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                        
+                        UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
+                        
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
                         
@@ -97,21 +108,12 @@ class InitialViewController: UIViewController {
                     }
                 })
             case .noUser:
+                UserDefaults.standard.set(UserState.noUser.hashValue, forKey: "UserState")
+
                 //create new User
                 self.createNewUser()
             }
         }
-        
-        
-        
-        //        fetchCurrentChallenge { (isSuccess) in
-        //            if isSuccess {
-        //                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
-        //                NotificationCenter.default.post(challengeFound)
-        //
- 
-        //            }
-        //        }
     }
     
     

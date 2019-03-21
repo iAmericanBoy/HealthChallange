@@ -16,13 +16,13 @@ enum UserState {
     case isUser
 }
 
-enum ChallengeState {
+enum ChallengeState: Int {
     /// no active Challenge
-    case noActiveChallenge
+    case noActiveChallenge = 0
     /// found a challenge that the user is the Owner off
-    case isOwnerChallenge
+    case isOwnerChallenge = 1
     /// found a challenge that the user is Participating in
-    case isParticipantChallenge
+    case isParticipantChallenge = 2
 }
 
 enum MonthGoalState {
