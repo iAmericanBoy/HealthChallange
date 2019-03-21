@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DishViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DishDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
       @IBOutlet weak var dishTableView: UITableView!
     

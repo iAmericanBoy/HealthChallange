@@ -10,7 +10,6 @@ import Foundation
 
 extension Date {
     
-    static let sharedDate = Date()
     
     func format() -> String {
         let dateFormatter = DateFormatter()
