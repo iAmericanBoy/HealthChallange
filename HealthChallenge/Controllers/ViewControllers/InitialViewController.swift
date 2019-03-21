@@ -34,6 +34,8 @@ class InitialViewController: UIViewController {
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
                         
+                        self.fetchWeekGoalsForCurrentChallenge()
+
                         //can Edit Week Goals
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
                             switch monthGoalState {
@@ -63,6 +65,8 @@ class InitialViewController: UIViewController {
                     case .isParticipantChallenge:
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
+                        
+                        self.fetchWeekGoalsForCurrentChallenge()
                         
                         //check StartDate
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
@@ -105,13 +109,7 @@ class InitialViewController: UIViewController {
         //                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
         //                NotificationCenter.default.post(challengeFound)
         //
-        //                let challengeReference = CKRecord.Reference(recordID: self.currentChallenge!.recordID, action: .none)
-        //                GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
-        //                    if isSuccess {
-        //                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
-        //                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
-        //                    }
-        //                })
+ 
         //            }
         //        }
     }
@@ -192,6 +190,22 @@ class InitialViewController: UIViewController {
         }
     }
     
+    ///Fetches the Challenge's week Goals
+    func fetchWeekGoalsForCurrentChallenge() {
+        guard let currentChallengeID = ChallengeController.shared.currentChallenge?.recordID else {return}
+        let challengeReference = CKRecord.Reference(recordID: currentChallengeID, action: .none)
+        print("Looking for week goals of current Challenge...")
+        GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
+            if isSuccess {
+                print("Week goals found")
+                let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
+                NotificationCenter.default.post(weekGoalsOfChallengeFound)
+            } else {
+                print("no week goals found")
+            }
+        })
+    }
+    
     ///Fetches the User's MonthGoal if it has been set
     /// - parameter completion: Handler for when the month Goal has been found
     /// - parameter monthGoalState: The State of the MonthGoal.
@@ -253,6 +267,3 @@ class InitialViewController: UIViewController {
         }
     }
 }
-
-
-
