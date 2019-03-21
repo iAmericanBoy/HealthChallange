@@ -15,6 +15,8 @@ class NotificationStrings {
     static let weekGoalsFound = "weekGoalsOfChallengeFound"
     /// "monthGoalOfChallengeFound"
     static let monthGoalFound = "monthGoalOfChallengeFound"
+    /// "secondChallengeAccepted"
+    static let secondChallengeAccepted = "secondChallengeAccepted"
 }
 
 class UserDefaultStrings {

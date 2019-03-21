@@ -44,6 +44,11 @@ class StartDateViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, queue: nil) { [weak self] (_) in
             self?.updateViews()
         }
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -25,5 +25,11 @@ class NewChallengeParentViewController: UIViewController {
             
             self.pageControl.currentPage = currentPageIndex
         }
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+            
+        }
     }
 }

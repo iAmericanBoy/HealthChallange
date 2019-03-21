@@ -114,6 +114,13 @@ class InitialViewController: UIViewController {
                 self.createNewUser()
             }
         }
+        
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            let secondChallengeAlert = UIAlertController(title: "SecondChallenge", message: "You can only take part in one challnge", preferredStyle: .alert)
+            self.present(secondChallengeAlert, animated: true)
+        }
     }
     
     
@@ -177,7 +184,7 @@ class InitialViewController: UIViewController {
                     if self.isNoChallengeFound {
                         completion(.noActiveChallenge)
                     } else {
-                        print("No Zones Found")
+                        print("No Challenge Found")
                         self.isNoChallengeFound = true
                     }
                 })
