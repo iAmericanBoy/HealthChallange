@@ -170,6 +170,9 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
                 if isSuccess {
                     // handle
+                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                    
+                    UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
                 }
             }
         } else {
@@ -177,6 +180,9 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
                 if isSuccess {
                 // handle
+                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                    
+                    UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
                 }
             }
         }
