@@ -77,6 +77,21 @@ class InitialViewController: UIViewController {
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
                         
+                        //Fetch The Share for the current Challenge
+                        let currentChallenge = ChallengeController.shared.currentChallenge
+                        if let stringURL = currentChallenge?.urlString {
+                            guard let url = URL(string: stringURL) else {return}
+                            print("Fetching MetaData for shared Challenge...")
+                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
+                                if isSuccess {
+                                    print("Share Found.")
+                                    ChallengeController.shared.currentShare = share
+                                } else {
+                                    print("No share Found.")
+                                }
+                            })
+                        }
+                        
                         self.fetchWeekGoalsForCurrentChallenge()
                         
                         //check StartDate

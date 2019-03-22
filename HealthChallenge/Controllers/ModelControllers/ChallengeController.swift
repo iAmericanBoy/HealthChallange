@@ -21,6 +21,9 @@ class ChallengeController {
     ///The weekGoals of the current Challenge
     var currentChallengeWeekGoals: [Goal] = []
     
+    ///The share of the current Challenge
+    var currentShare: CKShare?
+    
     //MARK: - CRUD
     ///Creates a new Challenge with a start date.
     /// - parameter date: The start date of the challenge.

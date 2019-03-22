@@ -161,15 +161,29 @@ class CloudKitController {
     
     ///Fetches the Metadata of a share for a given URL
     /// - parameter daturlaBase: The URL for the CKShare.
-    func fetchShareMetadata(forURL url: URL){
+    /// - parameter completion: Handler for when the Share.Meta was found.
+    /// - parameter isSuccess: Confirms the Share.Meta was found.
+    /// - parameter share: The CkShare associate with the Share.Meta that was found
+    func fetchShareMetadata(forURL url: URL, _ completion: @escaping (_ isSuccess:Bool, _ share: CKShare?) -> Void) {
     
     let operation = CKFetchShareMetadataOperation(shareURLs: [url])
-        operation.perShareMetadataBlock = { (url,meta,error) in
+        operation.perShareMetadataBlock = { (shareUrl,fetchedMeta,error) in
+            if let error = error {
+                print("There was an error fetching the ShareMetaData for the URL: \(error)")
+                completion(false, nil)
+                return
+            }
             
+            guard let meta = fetchedMeta, url == shareUrl else {completion(false,nil); return}
+            completion(true, meta.share)
         }
         
         operation.fetchShareMetadataCompletionBlock = { error in
-            
+            if let error = error {
+                print("There was an error fetching the ShareMetaData for the URL: \(error)")
+                completion(false, nil)
+                return
+            }
         }
         CKContainer.default().add(operation)
     }

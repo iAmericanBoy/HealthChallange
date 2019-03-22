@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     
                 } else {
-                    
+                    ChallengeController.shared.currentShare = share
                     
                     CloudKitController.shared.fetchRecordZonesInTheSharedDataBase(completion: { (isSuccess, foundZones) in
                         if isSuccess {
