@@ -53,6 +53,8 @@
 		B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD36862243EB2000E66A7F /* AppStates.swift */; };
 		B6BD368B224440DA00E66A7F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */; };
 		B6BD368D224579E900E66A7F /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368C224579E900E66A7F /* UserCollectionViewCell.swift */; };
+		B6BD368F2245892D00E66A7F /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368E2245892D00E66A7F /* Points.swift */; };
+		B6BD369122458A5D00E66A7F /* Points+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD369022458A5D00E66A7F /* Points+Extension.swift */; };
 		B6E210622240500200642274 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E210612240500100642274 /* InitialViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
@@ -130,6 +132,8 @@
 		B6BD36862243EB2000E66A7F /* AppStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStates.swift; sourceTree = "<group>"; };
 		B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		B6BD368C224579E900E66A7F /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6BD368E2245892D00E66A7F /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
+		B6BD369022458A5D00E66A7F /* Points+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+Extension.swift"; sourceTree = "<group>"; };
 		B6E210612240500100642274 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -235,6 +239,7 @@
 				CE57AD2922402B2800712975 /* FoodTracker.swift */,
 				CEB299B0223C09250089DA63 /* Nutrients.swift */,
 				CEB299AE223C08D30089DA63 /* Food.swift */,
+				B6BD368E2245892D00E66A7F /* Points.swift */,
 				62D067BC2237182300D5410B /* User.swift */,
 				B6EBA5FB22380F970001F5BF /* Challenge.swift */,
 				B6EBA5FD22380FE10001F5BF /* Goal.swift */,
@@ -251,6 +256,7 @@
 				B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */,
 				B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */,
 				62FE5A682242BC7E009240C6 /* Workout+MagicStrings.swift */,
+				B6BD369022458A5D00E66A7F /* Points+Extension.swift */,
 			);
 			path = MagicStrings;
 			sourceTree = "<group>";
@@ -542,6 +548,7 @@
 				CEB299AF223C08D30089DA63 /* Food.swift in Sources */,
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
+				B6BD369122458A5D00E66A7F /* Points+Extension.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
 				CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */,
 				62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */,
@@ -549,6 +556,7 @@
 				62D067AD2236D25F00D5410B /* ShareViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
+				B6BD368F2245892D00E66A7F /* Points.swift in Sources */,
 				62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */,
 				B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */,
 				62D06808223AC65A00D5410B /* AddWorkoutsViewController.swift in Sources */,
