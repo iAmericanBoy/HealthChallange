@@ -11,10 +11,9 @@ import CloudKit
 
 class Challenge {
     var startDay: Date
-
     var recordID: CKRecord.ID
-    
     var name: String
+    var urlString: String?
     
     var finishDay: Date {
         get {
@@ -46,6 +45,7 @@ class Challenge {
         self.name = name
         self.startDay = startDay
         self.recordID = record.recordID
+        self.urlString = record[Challenge.shareURLKey] as? String
     }
 }
 
@@ -54,6 +54,11 @@ extension CKRecord {
     convenience init?(challenge: Challenge) {
         if let recordZone = CloudKitController.shared.privateRecordZone {
             self.init(recordType: Challenge.typeKey, recordID: CKRecord.ID(recordName: challenge.recordID.recordName, zoneID: recordZone.zoneID))
+            
+            
+            if let url = challenge.urlString {
+                self.setValue(url, forKey: Challenge.shareURLKey)
+            }
             
             self.setValue(challenge.name, forKey: Challenge.nameKey)
             self.setValue(challenge.startDay, forKey: Challenge.startDayKey)

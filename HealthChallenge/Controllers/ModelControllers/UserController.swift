@@ -17,6 +17,9 @@ class UserController {
     ///The current logged in user
     var loggedInUser: User?
     
+    ///The useres of the current Chaallenge
+    var currentUsers: [User] = []
+    
     ///The ID of the icloudUser
     var appleUserID: CKRecord.ID?
     
@@ -57,8 +60,6 @@ class UserController {
     }
     
     ///Fetches the Logged in User in the publicDB and assigns it to loggedInUser.
-    /// - parameter completion: Handler for when the logged in user could be found.
-    /// - parameter isSuccess: Confirms that the Logged in User was found in the PublicDB.
     /// - parameter completion: Handler for when the user was found in the publicDB and added to the property.
     /// - parameter isSuccess: Confirms that the user was found and added to the property.
     func fetchUserLoggedInUser(completion: @escaping (_ isSuccess:Bool) -> Void) {
@@ -89,6 +90,26 @@ class UserController {
         }
     }
     
+    ///Fetches the given user and appendes it to the current User array.
+    /// - parameter recordID: The recordID of the user that is being searched for.
+    /// - parameter completion: Handler for when the user was found in the publicDB and added to the property.
+    /// - parameter isSuccess: Confirms that the user was found and added to the property.
+    func fetch(userWithRecordID recordID: CKRecord.ID, completion: @escaping (_ isSuccess:Bool) -> Void ) {
+        let reference = CKRecord.Reference(recordID: recordID, action: .deleteSelf)
+        let predicate = NSPredicate(format: "%K == %@", argumentArray: [User.appleUserRefKey,reference])
+        let query = CKQuery(recordType: User.typeKey, predicate: predicate)
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB, { (isSuccess, records) in
+            if isSuccess {
+                guard let record = records.first, let user = User(record: record) else {completion(false); return }
+                self.currentUsers.append(user)
+                completion(true)
+            } else {
+                //no public user found in the database.
+                completion(false)
+            }
+        })
+    }
+    
     ///Updates the name or the Photo of a User and saves the change to CK.
     /// - parameter user: The user to be updated.
     /// - parameter newStrengthValue: StrengthValue of the user.
@@ -106,26 +127,6 @@ class UserController {
             if isSuccess {
                 guard let record = updatedRecords?.first, updatedRecord.recordID == record.recordID else {completion(false);return}
                 completion(true)
-            }
-        }
-    }
-    
-    ///Sets the monthly goal for a particular challenge of a user.
-    /// - parameter goal: The goal that will be the new monthly challange of the user.
-    /// - parameter challenge: the Challange the monthly goal is getting set for.
-    /// - parameter user: The user that will have a new monthly goal
-    /// - parameter completion: Handler for when the user was updated.
-    /// - parameter isSuccess: Confirms that the update has synced to CloudKit.
-    func set(monthlyGoal goal: Goal, inChallenge challenge: Challenge, forUser user: User,_ completion: @escaping (_ isSuccess:Bool) -> Void) {
-        user.monthlyChallanges[CKRecord.Reference(recordID: challenge.recordID, action: .none)] = CKRecord.Reference(recordID: goal.recordID, action: .none)
-        let record = CKRecord(user: user)
-        
-        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
-            if isSuccess {
-                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID else {completion(false); return}
-                completion(true)
-            } else {
-                completion(false)
             }
         }
     }

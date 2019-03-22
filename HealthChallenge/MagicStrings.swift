@@ -15,9 +15,19 @@ class NotificationStrings {
     static let weekGoalsFound = "weekGoalsOfChallengeFound"
     /// "monthGoalOfChallengeFound"
     static let monthGoalFound = "monthGoalOfChallengeFound"
+    /// "secondChallengeAccepted"
+    static let secondChallengeAccepted = "secondChallengeAccepted"
 }
 
 class UserDefaultStrings {
     ///"reviewForPubicSwitch"
     static let reviewForPublic = "reviewForPubicSwitch"
+    ///"currentChallengeFinishDay"
+    static let currentChallengeFinishDay = "currentChallengeFinishDay"
+    ///"ChallengeState"
+    static let ChallengeState = "ChallengeState"
+    ///"UserState"
+    static let UserState = "UserState"
+    ///"ShareRecordName"
+    static let ShareRecordName = "ShareRecordName"    
 }

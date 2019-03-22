@@ -12,6 +12,7 @@ class WeeklyGoalsViewController: UIViewController {
     
     //MARK: - Properties
     var selectedGoals: [Goal] = []
+    var challengeState = ChallengeState.noActiveChallenge
     
     // MARK: - Outlets
     @IBOutlet weak var weeklyGoalsLabel: UILabel!
@@ -42,8 +43,20 @@ class WeeklyGoalsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
-        tableView.reloadData()
+        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
+        challengeState = ChallengeState(rawValue: rawValue ?? 0)!
+        challengeState == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
+    }
+    
     
     // MARK: - Actions
     @IBAction func addButtonTapped(_ sender: Any) {
@@ -85,6 +98,16 @@ class WeeklyGoalsViewController: UIViewController {
     }
     
     //MARK: - Private Functions
+    func updateViewsForOwner() {
+        tableView.allowsSelection = true
+    }
+    
+    func updateViewsForParticipant() {
+        tableView.allowsSelection = false
+        saveButton.isHidden = true
+        customGoalTextField.isHidden = true
+    }
+    
     func updateViews() {
         reviewForPublicSwitch.isOn = UserDefaults.standard.bool(forKey: UserDefaultStrings.reviewForPublic)
         
@@ -119,7 +142,14 @@ class WeeklyGoalsViewController: UIViewController {
 extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return GoalController.shared.allGoalsFromCK.count
+        switch challengeState {
+        case .isOwnerChallenge:
+            return GoalController.shared.allGoalsFromCK.count
+        case .isParticipantChallenge:
+            return 1
+        case .noActiveChallenge:
+            return GoalController.shared.allGoalsFromCK.count
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -132,7 +162,14 @@ extension WeeklyGoalsViewController: UITableViewDelegate, UITableViewDataSource 
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GoalController.shared.allGoalsFromCK[section].count
+        switch challengeState {
+        case .isOwnerChallenge:
+            return GoalController.shared.allGoalsFromCK[section].count
+        case .isParticipantChallenge:
+            return GoalController.shared.allGoalsFromCK[section].count
+        case .noActiveChallenge:
+            return GoalController.shared.allGoalsFromCK[section].count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

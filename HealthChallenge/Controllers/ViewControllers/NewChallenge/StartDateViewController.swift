@@ -44,13 +44,35 @@ class StartDateViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, queue: nil) { [weak self] (_) in
             self?.updateViews()
         }
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
+        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
+        ChallengeState(rawValue: rawValue ?? 0)! == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
     //MARK: - Private Functions
+    
+    func updateViewsForOwner() {
+        calendarCollectionView.allowsSelection = true
+    }
+    
+    func updateViewsForParticipant() {
+        calendarCollectionView.allowsSelection = false
+    }
+    
     func updateViews() {
         DispatchQueue.main.async {
             self.challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
@@ -135,7 +157,7 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         
         //logic to color cells of the selected date and the 30 days in the challenge
         if let challengeStartDate = challengeStartDate {
-            if cell.cellDate! == challengeStartDate {
+            if cell.cellDate!.stripTimestamp() == challengeStartDate.stripTimestamp() {
                 cell.backgroundColor = .green
             } else if cell.cellDate! <= challengeStartDate.addingTimeInterval(2592000) && cell.cellDate! >= challengeStartDate {
                 cell.backgroundColor = UIColor.green.withAlphaComponent(0.1)
@@ -158,6 +180,9 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
                 if isSuccess {
                     // handle
+                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                    
+                    UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
                 }
             }
         } else {
@@ -165,6 +190,9 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
                 if isSuccess {
                 // handle
+                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                    
+                    UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
                 }
             }
         }

@@ -20,24 +20,9 @@ class ChallengeController {
     
     ///The weekGoals of the current Challenge
     var currentChallengeWeekGoals: [Goal] = []
-
-    //MARK: - init
-    init() {
-        fetchCurrentChallenge { (isSuccess) in
-            if isSuccess {
-                let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
-                NotificationCenter.default.post(challengeFound)
-                
-                let challengeReference = CKRecord.Reference(recordID: self.currentChallenge!.recordID, action: .none)
-                GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
-                    if isSuccess {
-                        let weekGoalsOfChallengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.weekGoalsFound), object: nil, userInfo: nil)
-                        NotificationCenter.default.post(weekGoalsOfChallengeFound)
-                    }
-                })
-            }
-        }
-    }
+    
+    ///The share of the current Challenge
+    var currentShare: CKShare?
     
     //MARK: - CRUD
     ///Creates a new Challenge with a start date.
@@ -91,6 +76,27 @@ class ChallengeController {
         
         guard let record = CKRecord(challenge: challenge) else {completion(false);return}
 
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
+                self.currentChallenge = updatedChallenge
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    ///Adds the url as a string to a challenge and saves it.
+    /// - parameter challenge: The challenge to update.
+    /// - parameter stringURL: The new URL for a challenge.
+    /// - parameter completion: Handler for when the challenge was updated
+    /// - parameter isSuccess: Confirms that the challenge was updated.
+    func add(stringURL: String, toChallenge challenge: Challenge, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        challenge.urlString = stringURL
+        
+        guard let record = CKRecord(challenge: challenge) else {completion(false);return}
+        
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
