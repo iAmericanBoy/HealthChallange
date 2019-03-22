@@ -105,6 +105,7 @@ class InitialViewController: UIViewController {
                         //can create new Challenge or join a challenge
                         //can look at past challenges
                         UserDefaults.standard.set(nil, forKey: "currentChallengeFinishDay")
+                        UserDefaults.standard.set(nil, forKey: UserDefaultStrings.ShareRecordName)
 
                         self.createNewChallenge()
                         
