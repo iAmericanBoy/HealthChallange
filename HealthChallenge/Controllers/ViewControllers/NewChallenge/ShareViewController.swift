@@ -24,6 +24,10 @@ class ShareViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 3])
+        
+        guard let record = CKRecord(challenge: ChallengeController.shared.currentChallenge!) else {return}
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +36,7 @@ class ShareViewController: UIViewController {
         let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
         challengeState = ChallengeState(rawValue: rawValue ?? 0)!
         challengeState == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
+        
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
             self.presentAlert()

@@ -159,6 +159,22 @@ class CloudKitController {
         }
     }
     
+    ///Fetches the Metadata of a share for a given URL
+    /// - parameter daturlaBase: The URL for the CKShare.
+    func fetchShareMetadata(forURL url: URL){
+    
+    let operation = CKFetchShareMetadataOperation(shareURLs: [url])
+        operation.perShareMetadataBlock = { (url,meta,error) in
+            
+        }
+        
+        operation.fetchShareMetadataCompletionBlock = { error in
+            
+        }
+        CKContainer.default().add(operation)
+    }
+
+    
     //MARK: - Share
     /// Shares the RootRecord and save it to the privateDataBase.
     /// - parameter record: The RootRecord to share.
