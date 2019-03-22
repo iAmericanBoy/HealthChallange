@@ -44,18 +44,23 @@ class StartDateViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, queue: nil) { [weak self] (_) in
             self?.updateViews()
         }
-        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
-            print("Second Notification Accepted")
-            self.presentAlert()
 
-        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateViews()
         let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
         ChallengeState(rawValue: rawValue ?? 0)! == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
     //MARK: - Private Functions

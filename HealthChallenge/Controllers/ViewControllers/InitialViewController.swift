@@ -117,13 +117,19 @@ class InitialViewController: UIViewController {
                 self.createNewUser()
             }
         }
-        
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
-            let secondChallengeAlert = UIAlertController(title: "SecondChallenge", message: "You can only take part in one challnge", preferredStyle: .alert)
-            self.present(secondChallengeAlert, animated: true)
+            self.presentAlert()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
     
