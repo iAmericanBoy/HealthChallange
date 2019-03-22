@@ -13,10 +13,10 @@ import CloudKit
 class Points {
     let appleUserRef: CKRecord.Reference
     let challengeRef: CKRecord.Reference
-    let workOutPoints: Int
-    let weeklyGoalPoints: Int
-    let monthlyGoalPoints: Int
-    let foodTrackingPoints: Int
+    var workOutPoints: Int
+    var weeklyGoalPoints: Int
+    var monthlyGoalPoints: Int
+    var foodTrackingPoints: Int
     var recordID:CKRecord.ID
     
     var totalPoints: Int {

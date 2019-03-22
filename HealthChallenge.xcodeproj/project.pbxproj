@@ -55,6 +55,7 @@
 		B6BD368D224579E900E66A7F /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368C224579E900E66A7F /* UserCollectionViewCell.swift */; };
 		B6BD368F2245892D00E66A7F /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368E2245892D00E66A7F /* Points.swift */; };
 		B6BD369122458A5D00E66A7F /* Points+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD369022458A5D00E66A7F /* Points+Extension.swift */; };
+		B6BD369322458E7500E66A7F /* PointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD369222458E7500E66A7F /* PointsController.swift */; };
 		B6E210622240500200642274 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E210612240500100642274 /* InitialViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
@@ -134,6 +135,7 @@
 		B6BD368C224579E900E66A7F /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		B6BD368E2245892D00E66A7F /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
 		B6BD369022458A5D00E66A7F /* Points+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+Extension.swift"; sourceTree = "<group>"; };
+		B6BD369222458E7500E66A7F /* PointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsController.swift; sourceTree = "<group>"; };
 		B6E210612240500100642274 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				CEB299B6223C0B240089DA63 /* NutrientsController.swift */,
 				CE57AD2722402B1200712975 /* FoodTrackerController.swift */,
 				62FE5A6A2242C80E009240C6 /* WorkoutController.swift */,
+				B6BD369222458E7500E66A7F /* PointsController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
 				CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */,
+				B6BD369322458E7500E66A7F /* PointsController.swift in Sources */,
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
 				B6E210622240500200642274 /* InitialViewController.swift in Sources */,
 				CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */,
