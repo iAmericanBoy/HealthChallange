@@ -65,6 +65,9 @@ class CloudKitController {
     
     
     ///Creates a RecordZone in the PrivateDataBase
+    /// - parameter name: The name for the record Zone.
+    /// - parameter completion: Handler for when the zone was created.
+    /// - parameter isSuccess: Confirms the zone was created.
     func createRecordZone(withName name: String, completion: @escaping (_ isSuccess: Bool) -> Void) {
         let newRecordZone = CKRecordZone(zoneID: CKRecordZone.ID(zoneName: name))
         
@@ -84,7 +87,10 @@ class CloudKitController {
         
         privateDB.add(operation)
     }
- 
+    
+    ///Fetches the custum created private RecordZone in the provateDB.
+    /// - parameter completion: Handler for when the zone was found.
+    /// - parameter isSuccess: Confirms the zone was found.
     func fetchprivateRecordZone(completion: @escaping (_ isSuccess: Bool) -> Void) {
         privateDB.fetch(withRecordZoneID: CKRecordZone.ID(zoneName: "private")) { (foundZone, error) in
             if let error = error {
@@ -101,7 +107,10 @@ class CloudKitController {
         }
     }
     
-    
+    ///Fetches all RecordZones in the sharedDatabase.
+    /// - parameter completion: Handler for when the zones where found
+    /// - parameter isSuccess: Confirms the zones where found
+    /// - parameter foundRecordZones: The found RecordZones
     func fetchRecordZonesInTheSharedDataBase(completion: @escaping (_ isSuccess: Bool, _ foundRecordZones: [CKRecordZone]?) -> Void) {
         shareDB.fetchAllRecordZones { (allRecordZones, error) in
             if let error = error {
