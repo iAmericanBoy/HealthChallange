@@ -36,14 +36,6 @@ class ShareViewController: UIViewController {
         challengeState = ChallengeState(rawValue: rawValue ?? 0)!
         challengeState == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
         
-        ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
-            guard let userRecordID = participant.userIdentity.userRecordID else {return}
-            UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
-                if isSuccess {
-                    self.updateViews()
-                }
-            })
-        })
         
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")

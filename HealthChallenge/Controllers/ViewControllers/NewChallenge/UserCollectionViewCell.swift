@@ -11,6 +11,7 @@ import UIKit
 class UserCollectionViewCell: UICollectionViewCell {
     //MARK: - Outlets
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     
     //MARK: - Properties
     var user: User? {
@@ -23,5 +24,6 @@ class UserCollectionViewCell: UICollectionViewCell {
     func updateViews(){
         guard let user = user else {return}
         userImageView.image = user.photo
+        nameLabel.text = user.userName
     }
 }

@@ -51,6 +51,13 @@ class InitialViewController: UIViewController {
                                 if isSuccess {
                                     print("Share Found.")
                                     ChallengeController.shared.currentShare = share
+                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
+                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
+                                            if isSuccess {
+                                            }
+                                        })
+                                    })
                                 } else {
                                     print("No share Found.")
                                 }
@@ -101,6 +108,13 @@ class InitialViewController: UIViewController {
                                 if isSuccess {
                                     print("Share Found.")
                                     ChallengeController.shared.currentShare = share
+                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
+                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
+                                            if isSuccess {
+                                            }
+                                        })
+                                    })
                                 } else {
                                     print("No share Found.")
                                 }
