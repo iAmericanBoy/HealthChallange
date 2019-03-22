@@ -41,6 +41,28 @@ class InitialViewController: UIViewController {
                         NotificationCenter.default.post(challengeFound)
                         
                         self.fetchWeekGoalsForCurrentChallenge()
+                        
+                        //Fetch The Share for the current Challenge
+                        let currentChallenge = ChallengeController.shared.currentChallenge
+                        if let stringURL = currentChallenge?.urlString {
+                            guard let url = URL(string: stringURL) else {return}
+                            print("Fetching MetaData for shared Challenge...")
+                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
+                                if isSuccess {
+                                    print("Share Found.")
+                                    ChallengeController.shared.currentShare = share
+                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
+                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
+                                            if isSuccess {
+                                            }
+                                        })
+                                    })
+                                } else {
+                                    print("No share Found.")
+                                }
+                            })
+                        }
 
                         //can Edit Week Goals
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
@@ -77,6 +99,28 @@ class InitialViewController: UIViewController {
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
                         
+                        //Fetch The Share for the current Challenge
+                        let currentChallenge = ChallengeController.shared.currentChallenge
+                        if let stringURL = currentChallenge?.urlString {
+                            guard let url = URL(string: stringURL) else {return}
+                            print("Fetching MetaData for shared Challenge...")
+                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
+                                if isSuccess {
+                                    print("Share Found.")
+                                    ChallengeController.shared.currentShare = share
+                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
+                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
+                                            if isSuccess {
+                                            }
+                                        })
+                                    })
+                                } else {
+                                    print("No share Found.")
+                                }
+                            })
+                        }
+                        
                         self.fetchWeekGoalsForCurrentChallenge()
                         
                         //check StartDate
@@ -104,7 +148,11 @@ class InitialViewController: UIViewController {
                     case .noActiveChallenge:
                         //can create new Challenge or join a challenge
                         //can look at past challenges
+                        UserDefaults.standard.set(nil, forKey: "currentChallengeFinishDay")
+                        UserDefaults.standard.set(nil, forKey: UserDefaultStrings.ShareRecordName)
+
                         self.createNewChallenge()
+                        
                     }
                 })
             case .noUser:
@@ -114,13 +162,19 @@ class InitialViewController: UIViewController {
                 self.createNewUser()
             }
         }
-        
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
-            let secondChallengeAlert = UIAlertController(title: "SecondChallenge", message: "You can only take part in one challnge", preferredStyle: .alert)
-            self.present(secondChallengeAlert, animated: true)
+            self.presentAlert()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
     

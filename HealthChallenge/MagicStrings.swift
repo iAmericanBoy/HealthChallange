@@ -22,4 +22,12 @@ class NotificationStrings {
 class UserDefaultStrings {
     ///"reviewForPubicSwitch"
     static let reviewForPublic = "reviewForPubicSwitch"
+    ///"currentChallengeFinishDay"
+    static let currentChallengeFinishDay = "currentChallengeFinishDay"
+    ///"ChallengeState"
+    static let ChallengeState = "ChallengeState"
+    ///"UserState"
+    static let UserState = "UserState"
+    ///"ShareRecordName"
+    static let ShareRecordName = "ShareRecordName"    
 }

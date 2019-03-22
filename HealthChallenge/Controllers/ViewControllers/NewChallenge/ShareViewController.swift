@@ -23,7 +23,10 @@ class ShareViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.dataSource = self
+        collectionView.delegate = self
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 3])
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +35,17 @@ class ShareViewController: UIViewController {
         let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
         challengeState = ChallengeState(rawValue: rawValue ?? 0)!
         challengeState == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
+        
+        
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
     //MARK: - Actions
@@ -48,7 +62,6 @@ class ShareViewController: UIViewController {
     
     
     //MARK: - Private Functions
-    
     func updateViewsForOwner() {
     }
     
@@ -56,8 +69,13 @@ class ShareViewController: UIViewController {
         shareButton.isHidden = true
     }
     
+    func updateViews() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
     private func shareCurrentChallengeAsOwner(){
-
         guard let challenge = ChallengeController.shared.currentChallenge, let record = CKRecord(challenge: challenge) else {return}
         let share = CKShare(rootRecord: record)
         share.publicPermission = .readWrite
@@ -80,24 +98,28 @@ class ShareViewController: UIViewController {
             CloudKitController.shared.privateDB.add(operation)
         })
         
-        
-        
         sharingViewController.delegate = self
         
         self.present(sharingViewController, animated: true)
-        
     }
+    
     private func shareCurrentChallengeAsParticipant(){
-        
         
     }
     
     
 } // end class
 
+//MARK: - UICloudSharingControllerDelegate
 extension ShareViewController: UICloudSharingControllerDelegate {
     func cloudSharingControllerDidSaveShare(_ csc: UICloudSharingController) {
-        print(csc.share?.url)
+        guard let url = csc.share?.url, let challenge = ChallengeController.shared.currentChallenge else {return}
+        ChallengeController.shared.add(stringURL: url.absoluteString, toChallenge: challenge) { (isSuccess) in
+            if isSuccess {
+                print("Succesfully added Url to Challenge")
+                print(url)
+            }
+        }
         print("CKShare saved successfully")
     }
     
@@ -111,5 +133,20 @@ extension ShareViewController: UICloudSharingControllerDelegate {
     
     func itemTitle(for csc: UICloudSharingController) -> String? {
         return ChallengeController.shared.currentChallenge?.name
+    }
+}
+
+//MARK: - CollectionViewDelegate
+extension ShareViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return UserController.shared.currentUsers.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as? UserCollectionViewCell
+        
+        cell?.user = UserController.shared.currentUsers[indexPath.row]
+        
+        return cell ?? UICollectionViewCell()
     }
 }

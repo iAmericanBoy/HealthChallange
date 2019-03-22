@@ -16,7 +16,6 @@ class User {
     var recordID:CKRecord.ID
     var photoData: Data?
     var strengthValue: Int
-    var monthlyChallanges: [CKRecord.Reference: CKRecord.Reference] = [:]
     
     
     var imageAsset: CKAsset? {
@@ -55,15 +54,12 @@ class User {
     init?(record: CKRecord) {
         guard let name = record[User.usernameKey] as? String,
             let appleUserRef = record[User.appleUserRefKey] as? CKRecord.Reference,
-            let strengthValue = record[User.strengthValueKey] as? Int,
-            let monthlyChallanges = record[User.monthlyChallengesKey] as? [CKRecord.Reference:CKRecord.Reference],
             let imageAsset = record[User.photoKey] as? CKAsset else {return nil}
         
         self.appleUserRef = appleUserRef
         self.userName = name
         self.recordID = record.recordID
-        self.strengthValue = strengthValue
-        self.monthlyChallanges = monthlyChallanges
+        self.strengthValue = record[User.strengthValueKey] as? Int ?? 1
         
         do {
             try self.photoData = Data(contentsOf: imageAsset.fileURL)
