@@ -41,6 +41,21 @@ class InitialViewController: UIViewController {
                         NotificationCenter.default.post(challengeFound)
                         
                         self.fetchWeekGoalsForCurrentChallenge()
+                        
+                        //Fetch The Share for the current Challenge
+                        let currentChallenge = ChallengeController.shared.currentChallenge
+                        if let stringURL = currentChallenge?.urlString {
+                            guard let url = URL(string: stringURL) else {return}
+                            print("Fetching MetaData for shared Challenge...")
+                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
+                                if isSuccess {
+                                    print("Share Found.")
+                                    ChallengeController.shared.currentShare = share
+                                } else {
+                                    print("No share Found.")
+                                }
+                            })
+                        }
 
                         //can Edit Week Goals
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
