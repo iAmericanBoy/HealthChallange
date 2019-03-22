@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController, PhotoSelectorViewControllerDelegate {
     
-    var user: User?
+    var user = UserController.shared.loggedInUser
     var profilePhoto: UIImage?
     
     @IBOutlet weak var usernameTextField: UITextField!
@@ -19,16 +19,8 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
-    @IBAction func healthKitAccessSwitchToggled(_ sender: Any) {
-        HealthKitController.shared.authorizeHK { (success) in
-            if success {
-                // handle
-            }
-        }
-    }
     
     @IBAction func saveChangesButtonTapped(_ sender: Any) {
         guard let user = user,
@@ -38,7 +30,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         let strengthValue = lifestyleSegmentedControl.selectedSegmentIndex
         UserController.shared.update(user: user, withNewName: username, andWithNewPhoto: profilePhoto, newStrengthValue: strengthValue) { (success) in
             if success {
-                // pop view
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -53,7 +45,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        // pop view
+        self.navigationController?.popViewController(animated: true)
     }
     
     func photoSelectorViewControllerSelected(image: UIImage) {
@@ -64,6 +56,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         if segue.identifier == "photoSelectSegue" {
             let destinationVC = segue.destination as? PhotoSelectorViewController
             destinationVC?.delegate = self
+            destinationVC?.user = user
         }
     }
 }

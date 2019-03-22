@@ -19,7 +19,6 @@ class WorkoutDetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var activityLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     
     func updateViews() {
