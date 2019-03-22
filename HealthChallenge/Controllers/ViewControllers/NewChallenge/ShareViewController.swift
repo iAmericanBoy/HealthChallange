@@ -111,7 +111,13 @@ class ShareViewController: UIViewController {
 
 extension ShareViewController: UICloudSharingControllerDelegate {
     func cloudSharingControllerDidSaveShare(_ csc: UICloudSharingController) {
-        print(csc.share?.url)
+        guard let url = csc.share?.url, let challenge = ChallengeController.shared.currentChallenge else {return}
+        ChallengeController.shared.add(stringURL: url.absoluteString, toChallenge: challenge) { (isSuccess) in
+            if isSuccess {
+                print("Succesfully added Url to Challenge")
+                print(url)
+            }
+        }
         print("CKShare saved successfully")
     }
     

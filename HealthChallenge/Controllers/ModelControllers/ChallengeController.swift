@@ -83,6 +83,27 @@ class ChallengeController {
             }
         }
     }
+    
+    ///Adds the url as a string to a challenge and saves it.
+    /// - parameter challenge: The challenge to update.
+    /// - parameter stringURL: The new URL for a challenge.
+    /// - parameter completion: Handler for when the challenge was updated
+    /// - parameter isSuccess: Confirms that the challenge was updated.
+    func add(stringURL: String, toChallenge challenge: Challenge, _ completion: @escaping (_ isSuccess: Bool) -> Void) {
+        challenge.urlString = stringURL
+        
+        guard let record = CKRecord(challenge: challenge) else {completion(false);return}
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
+            if isSuccess {
+                guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let updatedChallenge = Challenge(record: updatedRecord) else {completion(false);return}
+                self.currentChallenge = updatedChallenge
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+    }
         
     ///Deletes the given Challenge.
     /// - parameter challenge: The challenge to delete.
