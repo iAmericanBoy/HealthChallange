@@ -25,16 +25,14 @@ class AddWorkoutsViewController: UIViewController {
     @IBOutlet weak var currentDayLabel: UILabel!
     @IBOutlet weak var previousDayButton: UIButton!
     @IBOutlet weak var nextDayButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let dateToSet = sourceDate else { return }
+        date = dateToSet
         queryWorkouts()
-        tableView.delegate = self
-        tableView.dataSource = self
         nextDayButton.isEnabled = false
-        date = sourceDate!
         currentDayLabel.text = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
     }
     
@@ -62,7 +60,7 @@ class AddWorkoutsViewController: UIViewController {
         date.addTimeInterval(-86400)
         queryWorkouts()
     }
-    
+
     // Query workouts from HK and transform them into Workout objects.
     func queryWorkouts() {
         WorkoutController.shared.fetchUsersWorkouts { (success) in
@@ -85,17 +83,7 @@ class AddWorkoutsViewController: UIViewController {
             } else {
                 self.previousDayButton.isEnabled = true
             }
-            self.tableView.reloadData()
             self.currentDayLabel.text = DateFormatter.localizedString(from: self.date, dateStyle: .short, timeStyle: .none)
-            
-            if self.workouts.isEmpty {
-                self.tableView.isHidden = true
-                self.addWorkoutContainer.isHidden = false
-            } else {
-                self.tableView.isHidden = false
-                self.tableView.reloadData()
-                self.addWorkoutContainer.isHidden = true
-            }
         }
     }
     
@@ -107,44 +95,12 @@ class AddWorkoutsViewController: UIViewController {
     }
 }
 
-// MARK: - TableView DataSource
-extension AddWorkoutsViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return workouts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as? WorkoutDetailTableViewCell
-        let workout = workouts[indexPath.row]
-        cell?.delegate = self
-        cell?.activityLabel.text = workout.activity
-        cell?.durationLabel.text = "\(workout.duration)"
-        cell?.dateLabel.text = "\(workout.end.month)/\(workout.end.day)"
-        
-        return cell ?? UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let workoutToDelete = workouts[indexPath.row]
-            WorkoutController.shared.delete(workout: workoutToDelete) { (success) in
-                DispatchQueue.main.async {
-                    self.workouts.remove(at: indexPath.row)
-                    self.tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-            }
-        }
-    }
-}
-
 extension AddWorkoutsViewController: WorkoutDetailViewControllerDelegate {
     func finishedWorkout(success: Bool) {
         if success == true {
-            queryWorkouts()
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
-}
-
-extension AddWorkoutsViewController: WorkoutDetailTableViewCellDelegate {
 }

@@ -11,6 +11,7 @@ import UIKit
 class PhotoSelectorViewController: UIViewController, UINavigationControllerDelegate {
     
     let imagePicker = UIImagePickerController()
+    var user: User?
     weak var delegate: PhotoSelectorViewControllerDelegate?
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -19,6 +20,9 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        if let user = UserController.shared.loggedInUser {
+            profileImageView.image = user.photo
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

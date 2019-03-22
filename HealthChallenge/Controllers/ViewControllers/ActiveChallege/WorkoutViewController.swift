@@ -16,16 +16,19 @@ class WorkoutViewController: UIViewController {
     
     // Properties
     var selectedDay: Date = Date().stripTimestamp()
-    var workouts: [Workout] = []
+    var workouts: [Workout] = [] {
+        didSet{
+            updateViews()
+        }
+    }
+    var dayWorkouts: [Workout] = []
     var dateRange: [Date] = []
-    
-    // MARK: - MOCK DATA
-    var challenge = Challenge(startDay: Date())
 
     // MARK: - Outlets
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var optionsButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,6 +37,10 @@ class WorkoutViewController: UIViewController {
             print("Fetched workouts successfully.")
             self.workouts = WorkoutController.shared.workouts
         }
+        guard let challenge = ChallengeController.shared.currentChallenge else { return }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         settingsImage()
         calendarCollectionView.backgroundColor = .clear
         calendarController.initializeCurrentCalendar()
@@ -44,6 +51,8 @@ class WorkoutViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        updateViews()
+        // animations?
         super.viewWillAppear(animated)
 //        WorkoutController.shared.fetchUsersWorkouts { (success) in
 //            print("Fetched workouts successfully.")
@@ -97,16 +106,25 @@ class WorkoutViewController: UIViewController {
         dateRange = dayRange
     }
     
+    func updateViews() {
+        dayWorkouts = workouts.filter({ $0.end.stripTimestamp().format() == selectedDay.format() })
+        DispatchQueue.main.async {
+            self.calendarCollectionView.reloadData()
+            self.tableView.reloadData()
+        }
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toWorkoutsVC" {
+        // only perform segue if selected day workouts is empty, and the selected day is within the past week.
+        if segue.identifier == "toWorkoutsVC" && dayWorkouts.count == 0 {
             let destinationVC = segue.destination as? AddWorkoutsViewController
             destinationVC?.sourceDate = selectedDay
         }
     }
 }
 
-// MARK: - DataSource
+// MARK: - CollectionView DataSource
 extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -140,14 +158,16 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.monthLabel.text = "\(month)"
         }
         
-        if workouts.filter({ $0.end.stripTimestamp() == date.stripTimestamp() }).count > 0 {
+        if workouts.filter({ $0.end.stripTimestamp().format() == date.stripTimestamp().format() }).count > 0 {
             cell.backgroundColor = .green
         }
-        
         
         if date.stripTimestamp() == today.stripTimestamp() {
             cell.dayLabel.textColor = Color.darkText.value
             cell.monthLabel.textColor = Color.darkText.value
+        } else {
+            cell.dayLabel.textColor = .black
+            cell.monthLabel.textColor = .black
         }
         // Allows users to only edit workouts for past week.
         if date.day < today.day && monthIndex == calendarController.presentMonthIndex - 1{
@@ -169,10 +189,50 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
+extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dayWorkouts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as? WorkoutDetailTableViewCell
+        cell?.delegate = self
+        let workout = dayWorkouts[indexPath.row]
+        cell?.activityLabel.text = workout.activity
+        cell?.durationLabel.text = "\(workout.duration)"
+        cell?.dateLabel.text = "\(workout.end.month)/\(workout.end.day)"
+        
+        return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let workoutToDelete = dayWorkouts[indexPath.row]
+            WorkoutController.shared.delete(workout: workoutToDelete) { (success) in
+                DispatchQueue.main.async {
+                    self.dayWorkouts.remove(at: indexPath.row)
+                    self.workouts.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    self.updateViews()
+                }
+            }
+        }
+    }
+}
+
 // Conform to DateCollectionViewCellDelegate and perform segue
-extension WorkoutViewController: DateCollectionViewCellDelegate {
+extension WorkoutViewController: DateCollectionViewCellDelegate, WorkoutDetailTableViewCellDelegate {
     func collectionViewCell(_ cell: UICollectionViewCell, buttonTapped: UIButton) {
+        if HKHealthStore.isHealthDataAvailable() == false {
+            HealthKitController.shared.authorizeHK { (success) in
+                if success {
+                    print("HealthKit auth granted.")
+                }
+            }
+        }
         let dateCell = cell as! DateCollectionViewCell
         self.selectedDay = dateCell.cellDate!
+        updateViews()
     }
 }

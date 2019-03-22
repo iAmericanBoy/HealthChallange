@@ -13,14 +13,18 @@ class WorkoutDetailViewController: UIViewController {
 
     var date = Date()
     var currentExersize = ""
-    var counter = 0.0
-    var timer = Timer()
+    weak var timer: Timer?
+    var startTime: Double = 0
+    var time: Double = 0
+    var elapsed: Double = 0
     var isActive = false
     var exercises = ["Walking", "Running", "Cycling", "Eliptical", "Strength Training", "Cross Training", "Other"]
     weak var delegate: WorkoutDetailViewControllerDelegate?
     
     // MARK: - Outlets
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var millisecondsLabel: UILabel!
+    @IBOutlet weak var secondsLabel: UILabel!
+    @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
@@ -28,7 +32,6 @@ class WorkoutDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        timerLabel.text = "\(counter)"
         endButton.isEnabled = false
         workoutPickerView.delegate = self
         workoutPickerView.dataSource = self
@@ -54,8 +57,8 @@ class WorkoutDetailViewController: UIViewController {
         
         startButton.isEnabled = false
         endButton.isEnabled = true
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        startTime = Date().timeIntervalSinceReferenceDate - elapsed
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         isActive = true
         date = Date()
     }
@@ -64,7 +67,8 @@ class WorkoutDetailViewController: UIViewController {
         startButton.isEnabled = true
         endButton.isEnabled = false
         
-        timer.invalidate()
+        elapsed = Date().timeIntervalSinceReferenceDate - startTime
+        timer?.invalidate()
         isActive = false
     }
     
@@ -73,13 +77,31 @@ class WorkoutDetailViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        counter = counter + 0.1
-        timerLabel.text = "\(counter)"
+        //Calc total time
+        time = Date().timeIntervalSinceReferenceDate - startTime
+        //Calc minutes
+        let minutes = Int(time / 60)
+        time -= (TimeInterval(minutes) * 60)
+        //Calc seconds
+        let seconds = Int(time)
+        time -= TimeInterval(seconds)
+        //Calc milliseconds
+        let milliseconds = Int(time * 100)
+
+        //Format time with leading zero
+        let minString = String(format: "%02d", minutes)
+        let secString = String(format: "%02d", seconds)
+        let millString = String(format: "%02d", milliseconds)
+        
+        //Set labels
+        minutesLabel.text = minString
+        secondsLabel.text = secString
+        millisecondsLabel.text = millString
     }
     
     func createWorkout() {
-        guard let durationString = timerLabel.text, durationString != "0.0" else { return }
-        guard let duration = Double(durationString) else { return }
+        guard let duration = TimeInterval(exactly: elapsed) else { return }
+//        guard let duration = Double(durationString) else { return }
         let startDate = date
         let endDate = Date(timeInterval: duration, since: startDate)
         var activity = HKWorkoutActivityType.other
