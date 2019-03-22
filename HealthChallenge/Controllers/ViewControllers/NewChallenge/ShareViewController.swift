@@ -25,9 +25,14 @@ class ShareViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.post(name: NewChallengeParentViewController.pageSwipedNotification, object: nil, userInfo: [NewChallengeParentViewController.pageIndexKey : 3])
         
-        guard let record = CKRecord(challenge: ChallengeController.shared.currentChallenge!) else {return}
-        
-
+        ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+            guard let userRecordID = participant.userIdentity.userRecordID else {return}
+            UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
+                if isSuccess {
+                    self.updateViews()
+                }
+            })
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +73,12 @@ class ShareViewController: UIViewController {
     
     func updateViewsForParticipant() {
         shareButton.isHidden = true
+    }
+    
+    func updateViews() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     private func shareCurrentChallengeAsOwner(){
