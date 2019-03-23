@@ -150,7 +150,7 @@ class InitialViewController: UIViewController {
                         //can look at past challenges
                         UserDefaults.standard.set(nil, forKey: "currentChallengeFinishDay")
                         UserDefaults.standard.set(nil, forKey: UserDefaultStrings.ShareRecordName)
-
+                        UserDefaults.standard.set(0, forKey: UserDefaultStrings.ChallengeState)
                         self.createNewChallenge()
                         
                     }
