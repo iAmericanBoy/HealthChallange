@@ -16,19 +16,13 @@ class NewOnboardingViewController: UIViewController {
     private let nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitle("Next", for: .normal)
-        button.setTitleColor(UIColor.green, for: .normal)
         button.addTarget(self, action: #selector(handelNext), for: .touchUpInside)
         return button
     }()
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitle("Previous", for: .normal)
         button.addTarget(self, action: #selector(handelPrevious), for: .touchUpInside)
-        button.setTitleColor(UIColor.green, for: .normal)
         return button
     }()
     private lazy var pageControl: UIPageControl = {
@@ -46,7 +40,8 @@ class NewOnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .always
-        
+        self.title = "\(pageControl.currentPage)"
+        view.backgroundColor = .white
         setupCollectionView()
         setupBottonControls()
     }
@@ -56,12 +51,14 @@ class NewOnboardingViewController: UIViewController {
         let nextIndex = min(pageControl.currentPage + 1, pageControl.numberOfPages - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
+        self.title = "\(pageControl.currentPage)"
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     @objc fileprivate func handelPrevious() {
         let nextIndex = max(pageControl.currentPage - 1, 0)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
+        self.title = "\(pageControl.currentPage)"
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
@@ -124,7 +121,6 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
-        cell.backgroundColor = .green
         return cell
     }
 }
