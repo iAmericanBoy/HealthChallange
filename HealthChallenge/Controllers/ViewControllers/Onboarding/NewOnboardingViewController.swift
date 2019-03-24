@@ -156,6 +156,35 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
 
 //MARK: - SignUpCollectionViewCellDelegate
 extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
+    func save(user: User?, withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int) {
+        let userPhoto = photo ?? UIImage(named: "stockPhoto")!
+
+        if let user = user {
+            //update
+            UserController.shared.update(user: user, withNewName: name, andWithNewPhoto: userPhoto, newStrengthValue: value) { (isSuccess) in
+                
+                if isSuccess {
+                    DispatchQueue.main.async {
+                        self.screenCount = max(2,self.screenCount)
+                        self.collectionView?.reloadData()
+                        self.handelNext()
+                    }
+                }
+            }
+        } else {
+            //create New
+            UserController.shared.createUserWith(userName: name, userPhoto: userPhoto, strengthValue: value) { (isSuccess) in
+                if isSuccess {
+                    DispatchQueue.main.async {
+                        self.screenCount = max(2,self.screenCount)
+                        self.collectionView?.reloadData()
+                        self.handelNext()
+                    }
+                }
+            }
+        }
+    }
+    
     func selectPhoto() {
         let selectImageAlert = UIAlertController(title: "Add a Profile Photo", message: nil, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
@@ -172,10 +201,6 @@ extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
         selectImageAlert.addAction(photoLibraryAction)
         
         present(selectImageAlert, animated: true, completion: nil)
-    }
-    
-    func saveUser(withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int) {
-        print("save")
     }
 }
 

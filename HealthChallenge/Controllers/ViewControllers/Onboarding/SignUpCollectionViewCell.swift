@@ -10,7 +10,7 @@ import UIKit
 
 protocol SignUpCollectionViewCellDelegate {
     func selectPhoto()
-    func saveUser(withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int)
+    func save(user: User?,withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int)
 }
 
 class SignUpCollectionViewCell: UICollectionViewCell {
@@ -94,7 +94,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     //MARK: - Actions
     @objc func saveButtonTapped() {
         guard let name = userNameTextField.text else {return}
-        delegate?.saveUser(withName: name, andUserPhoto: profilePhoto, andLifeStyleValue: lifeStyleSegmentedControl.selectedSegmentIndex)
+        delegate?.save(user: user, withName: name, andUserPhoto: profilePhoto, andLifeStyleValue: lifeStyleSegmentedControl.selectedSegmentIndex)
     }
     
     @objc func photoButtonTapped() {
@@ -109,7 +109,6 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         userNameLabel.text = "Hello"
         photoButton.setBackgroundImage(user.photo, for: .normal)
         photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
-
     }
     
     func setupViews() {
