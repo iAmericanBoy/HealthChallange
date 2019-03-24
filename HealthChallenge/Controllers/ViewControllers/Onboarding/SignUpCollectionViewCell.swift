@@ -105,8 +105,8 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     func updateViews() {
         guard let user = user else {return}
         lifeStyleSegmentedControl.setEnabled(true, forSegmentAt: user.strengthValue)
-        userNameTextField.text = user.userName
-        userNameLabel.text = "Hello"
+        userNameTextField.attributedText = NSAttributedString(string: user.userName, attributes: FontController.textFieldFont)
+        userNameLabel.attributedText = NSAttributedString(string: "Hello", attributes: FontController.labelFont)
         photoButton.setBackgroundImage(user.photo, for: .normal)
         photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
     }
