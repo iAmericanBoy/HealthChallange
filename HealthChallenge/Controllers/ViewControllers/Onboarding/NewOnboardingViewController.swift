@@ -128,7 +128,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     fileprivate func registerCells() {
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
         collectionView?.register(SignUpCollectionViewCell.self, forCellWithReuseIdentifier: "signUpCell")
-        collectionView?.register(StartDayCollectionViewCell.self, forCellWithReuseIdentifier: "startDayCell")
+        collectionView?.register(StartDayCollectionViewCell.self, forCellWithReuseIdentifier: "startDateCell")
     }
 }
 
@@ -175,6 +175,11 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
                 cell?.profilePhoto = UIImage(named: "stockPhoto")
             }
             cell?.user = UserController.shared.loggedInUser
+            return cell ?? UICollectionViewCell()
+        case 1:
+            //startDay
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "startDateCell", for: indexPath) as? StartDayCollectionViewCell
+
             return cell ?? UICollectionViewCell()
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
