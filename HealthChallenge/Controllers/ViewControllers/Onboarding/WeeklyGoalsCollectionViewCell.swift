@@ -11,7 +11,11 @@ import UIKit
 class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
-    var selectedGoals: [Goal] = []
+    var selectedGoals: [Goal] = [] {
+        didSet {
+            self.updateViews()
+        }
+    }
     
     // MARK: - Outlets
     var tableView: UITableView?
@@ -81,7 +85,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Private Functions
     func updateViews() {
-        
+        tableView?.reloadData()
     }
     
     func setupViews() {
@@ -126,6 +130,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
         tableView?.tableFooterView = UIView()
         tableView?.delegate = self
         tableView?.dataSource = self
+        tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "goalCell")
     }
 }
 
@@ -153,6 +158,11 @@ extension WeeklyGoalsCollectionViewCell: UITextFieldDelegate {
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return GoalController.shared.allGoalsFromCK.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return GoalController.shared.allGoalsFromCK[section].count
     }
@@ -160,7 +170,7 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
         
-        cell.textLabel?.text = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name
+        cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.labelTitleFont)
         
         if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
             cell.backgroundColor = UIColor.lushGreenColor

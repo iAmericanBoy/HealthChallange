@@ -63,6 +63,16 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
             print("Second Notification Accepted")
             self.presentAlert()
         }
+        NotificationCenter.default.addObserver(forName: Notification.Name(NotificationStrings.weekGoalsFound), object: nil, queue: .main) { [weak self] (_) in
+            DispatchQueue.main.async {
+                self?.collectionView?.reloadData()
+            }
+        }
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, queue: nil) { [weak self] (_) in
+            DispatchQueue.main.async {
+                self?.collectionView?.reloadData()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -101,9 +111,9 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
             self.title = "SHARE"
         default:
             self.title = "\(pageControl.currentPage)"
-
         }
     }
+    
     fileprivate func setupBottonControls() {
         let bottomControlStackView = UIStackView(arrangedSubviews: [previousButton,pageControl,nextButton])
         bottomControlStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -200,6 +210,7 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weeklyGoalsCell", for: indexPath) as? WeeklyGoalsCollectionViewCell
 //            cell?.delegate = self
 //            cell?.activeChallenge = ChallengeController.shared.currentChallenge
+            cell?.selectedGoals = GoalController.shared.weeklyGoals
             return cell ?? UICollectionViewCell()
         case 3:
             //monthGoals
