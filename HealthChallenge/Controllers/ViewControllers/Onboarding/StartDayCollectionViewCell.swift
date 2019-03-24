@@ -16,7 +16,75 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
     var calendarCollectionView: UICollectionView?
-
+    
+    fileprivate var monthLabel: UILabel = {
+        var label = UILabel()
+        return label
+    }()
+    
+    lazy var previousMonthButton: UIButton = {
+        var button = UIButton(type: .system)
+        button.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.buttonFont), for: .normal)
+        button.addTarget(self, action: #selector(previousMonthButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var nextMonthButton: UIButton = {
+        var button = UIButton(type: .system)
+        button.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.buttonFont), for: .normal)
+        button.addTarget(self, action: #selector(nextMonthButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    fileprivate var sunLabel: UILabel = {
+        var label = UILabel()
+        label.attributedText = NSAttributedString(string: "SUN", attributes: FontController.labelFont)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    fileprivate var monLabel: UILabel = {
+        var label = UILabel()
+        label.attributedText = NSAttributedString(string: "MON", attributes: FontController.labelFont)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    fileprivate var tueLabel: UILabel = {
+        var label = UILabel()
+        label.attributedText = NSAttributedString(string: "TUE", attributes: FontController.labelFont)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    fileprivate var wedLabel: UILabel = {
+        var label = UILabel()
+        label.attributedText = NSAttributedString(string: "WED", attributes: FontController.labelFont)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    fileprivate var thuLabel: UILabel = {
+        var label = UILabel()
+        label.attributedText = NSAttributedString(string: "THU", attributes: FontController.labelFont)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    fileprivate var friLabel: UILabel = {
+        var label = UILabel()
+        label.textAlignment = .center
+        label.attributedText = NSAttributedString(string: "FRI", attributes: FontController.labelFont)
+        return label
+    }()
+    
+    fileprivate var satLabel: UILabel = {
+        var label = UILabel()
+        label.textAlignment = .center
+        label.attributedText = NSAttributedString(string: "SAT", attributes: FontController.labelFont)
+        return label
+    }()
+    
     //MARK: - Properties
     var activeChallenge: Challenge?
     var challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
@@ -36,12 +104,44 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Private Functions
-    func setupViews() {
-        setupCollectionView()
+    //MARK: - Actions
+    @objc func previousMonthButtonTapped() {
+        print("prev")
     }
     
-    fileprivate func setupCollectionView() {
+    @objc func nextMonthButtonTapped() {
+        print("next")
+    }
+    
+    //MARK: - Private Functions
+    func updateViews() {
+        //turn on and off the previous label
+        //set monthlabel
+    }
+    func setupViews() {
+        let monthLabelStackView = UIStackView(arrangedSubviews: [previousMonthButton,monthLabel,nextMonthButton])
+        monthLabelStackView.alignment = .fill
+        monthLabelStackView.distribution = .fillEqually
+        monthLabelStackView.axis = .horizontal
+        
+        let weekLabelStackView = UIStackView(arrangedSubviews: [sunLabel,monLabel,tueLabel,wedLabel,thuLabel,friLabel,satLabel])
+        weekLabelStackView.alignment = .fill
+        weekLabelStackView.distribution = .fillProportionally
+        weekLabelStackView.axis = .horizontal
+        weekLabelStackView.spacing = 3
+        
+        let topRowStackView = UIStackView(arrangedSubviews: [monthLabelStackView,weekLabelStackView])
+        topRowStackView.alignment = .fill
+        topRowStackView.distribution = .fill
+        topRowStackView.axis = .vertical
+        topRowStackView.spacing = 10
+        topRowStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        contentView.addSubview(topRowStackView)
+        topRowStackView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        topRowStackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.95).isActive = true
+        topRowStackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor).isActive = true
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         calendarCollectionView = UICollectionView(frame: contentView.frame, collectionViewLayout: layout)
@@ -54,7 +154,13 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.showsHorizontalScrollIndicator = false
         calendarCollectionView?.clipsToBounds = true
         calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
+        
+        calendarCollectionView?.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(calendarCollectionView!)
+        calendarCollectionView?.topAnchor.constraint(equalTo: topRowStackView.bottomAnchor).isActive = true
+        calendarCollectionView?.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        calendarCollectionView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.95).isActive = true
+        calendarCollectionView?.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 1).isActive = true
     }
     
     func findDateRange(from startDate: Date) {
@@ -110,7 +216,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
             cell.cellDate = dateRange[indexPath.row]
             let index = date.month
             month = calendarController.shortMonthNames[index - 1]
-            cell.monthLabel.attributedText = NSAttributedString(string: "\(month)", attributes: FontController.labelFont)
+            cell.monthLabel.attributedText = NSAttributedString(string: "\(month)", attributes: FontController.subTitleLabelFont)
         }
         
         //logic to color cells of the selected date and the 30 days in the challenge
