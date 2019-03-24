@@ -43,7 +43,9 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = FontController.titleFont
+
         setTitle()
         view.backgroundColor = .white
         imagePicker.delegate = self
