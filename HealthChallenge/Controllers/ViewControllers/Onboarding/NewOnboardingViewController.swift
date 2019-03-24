@@ -35,7 +35,6 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         return pc
     }()
     
-    
     //MARK: - Properties
     var screenCount = 5 {
         didSet {
