@@ -26,7 +26,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     //MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .blue
         findDateRange(from: Date())
         setupViews()
     }
@@ -48,6 +48,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.delegate = self
         calendarCollectionView?.dataSource = self
         
+        calendarCollectionView?.backgroundColor = .white
         calendarCollectionView?.showsHorizontalScrollIndicator = false
         calendarCollectionView?.clipsToBounds = true
         calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
@@ -80,7 +81,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
 extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 1
+        let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 2
         return sectionItems
     }
     
