@@ -201,7 +201,7 @@ extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
                 if isSuccess {
                     DispatchQueue.main.async {
                         self.screenCount = max(2,self.screenCount)
-                        self.collectionView?.reloadData()
+                        self.collectionView?.reloadItems(at: [IndexPath(item: 0, section: 0)])
                         self.handelNext()
                     }
                 }
@@ -212,7 +212,7 @@ extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
                 if isSuccess {
                     DispatchQueue.main.async {
                         self.screenCount = max(2,self.screenCount)
-                        self.collectionView?.reloadData()
+                        self.collectionView?.reloadItems(at: [IndexPath(item: 0, section: 0)])
                         self.handelNext()
                     }
                 }
@@ -287,8 +287,10 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
                 if isSuccess {
                     // handle
                     let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-                    
                     UserDefaults.standard.set(finishDay, forKey: UserDefaultStrings.currentChallengeFinishDay)
+                    DispatchQueue.main.async {
+                        self.collectionView?.reloadItems(at: [IndexPath(item: 1, section: 0)])
+                    }
                 }
             }
         } else {
@@ -297,8 +299,10 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
                 if isSuccess {
                     // handle
                     let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-                    
                     UserDefaults.standard.set(finishDay, forKey: UserDefaultStrings.currentChallengeFinishDay)
+                    DispatchQueue.main.async {
+                        self.collectionView?.reloadItems(at: [IndexPath(item: 1, section: 0)])
+                    }
                 }
             }
         }

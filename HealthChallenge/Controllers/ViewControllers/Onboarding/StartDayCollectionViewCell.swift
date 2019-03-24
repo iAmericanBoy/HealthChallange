@@ -102,19 +102,19 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
         if date == Date().ignoreDate {
             cell.isHidden = true
         } else {
-            cell.dayLabel.text = "\(date.day)"
+            cell.dayLabel.attributedText = NSAttributedString(string: "\(date.day)", attributes: FontController.labelFont)
             cell.cellDate = dateRange[indexPath.row]
             let index = date.month
             month = calendarController.shortMonthNames[index - 1]
-            cell.monthLabel.text = "\(month)"
+            cell.monthLabel.attributedText = NSAttributedString(string: "\(month)", attributes: FontController.labelFont)
         }
         
         //logic to color cells of the selected date and the 30 days in the challenge
         if let challengeStartDate = activeChallenge?.startDay {
             if cell.cellDate!.stripTimestamp() == challengeStartDate.stripTimestamp() {
-                cell.backgroundColor = .green
+                cell.backgroundColor = .lushGreenColor
             } else if cell.cellDate! <= challengeStartDate.addingTimeInterval(2592000) && cell.cellDate! >= challengeStartDate {
-                cell.backgroundColor = UIColor.green.withAlphaComponent(0.1)
+                cell.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.1)
             }
         }
         return cell
@@ -123,7 +123,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NewDateCollectionViewCell else {return}
         
-        cell.backgroundColor = UIColor.green
+        cell.backgroundColor = UIColor.lushGreenColor
         
         delegate?.save(challenge: activeChallenge, withDate: cell.cellDate)
     }
