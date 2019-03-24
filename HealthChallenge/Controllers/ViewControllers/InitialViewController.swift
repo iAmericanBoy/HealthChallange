@@ -17,167 +17,152 @@ class InitialViewController: UIViewController {
     var isNoChallengeFound = false
     
     //MARK: - LifeCycle
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //TODO: CHECK if network Available
 
-        DispatchQueue.main.async {
-            DispatchQueue.main.async {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "onboardingV2")
-                self.present(viewController, animated: true, completion: nil)
+        _ = GoalController.shared
+
+        //fetch User
+        fetchUser { userState in
+            switch userState {
+            case .isUser:
+                UserDefaults.standard.set(UserState.isUser.hashValue, forKey: "UserState")
+                //fetch challenge
+                self.fetchChallenge({ challengeState in
+                    switch challengeState {
+                    case .isOwnerChallenge:
+                        UserDefaults.standard.set(ChallengeState.isOwnerChallenge.rawValue, forKey: "ChallengeState")
+                        let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+
+                        UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
+
+                        let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
+                        NotificationCenter.default.post(challengeFound)
+
+                        self.fetchWeekGoalsForCurrentChallenge()
+
+                        //Fetch The Share for the current Challenge
+                        let currentChallenge = ChallengeController.shared.currentChallenge
+                        if let stringURL = currentChallenge?.urlString {
+                            guard let url = URL(string: stringURL) else {return}
+                            print("Fetching MetaData for shared Challenge...")
+                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
+                                if isSuccess {
+                                    print("Share Found.")
+                                    ChallengeController.shared.currentShare = share
+                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
+                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
+                                            if isSuccess {
+                                            }
+                                        })
+                                    })
+                                } else {
+                                    print("No share Found.")
+                                }
+                            })
+                        }
+
+                        //can Edit Week Goals
+                        self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
+                            switch monthGoalState {
+                            case .isMonthGoal:
+                                //check StartDate
+                                print("Checking for Start Day...")
+                                let startDay = ChallengeController.shared.currentChallenge?.startDay
+
+                                if startDay! > Date() {
+                                    //before StartDay
+                                    print("Challenge's StartDay before Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.currentChallenge()
+                                } else {
+                                    //after startDay
+                                    print("Challenge's StartDay after Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.activeChallenge()
+                                }
+
+
+                            case .noMonthGoal:
+                                self.addMonthGoal()
+                            }
+                        })
+                        break
+                    case .isParticipantChallenge:
+                        UserDefaults.standard.set(ChallengeState.isParticipantChallenge.rawValue, forKey: "ChallengeState")
+                        let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+
+                        UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
+
+                        let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
+                        NotificationCenter.default.post(challengeFound)
+
+                        //Fetch The Share for the current Challenge
+                        let currentChallenge = ChallengeController.shared.currentChallenge
+                        if let stringURL = currentChallenge?.urlString {
+                            guard let url = URL(string: stringURL) else {return}
+                            print("Fetching MetaData for shared Challenge...")
+                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
+                                if isSuccess {
+                                    print("Share Found.")
+                                    ChallengeController.shared.currentShare = share
+                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
+                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
+                                            if isSuccess {
+                                            }
+                                        })
+                                    })
+                                } else {
+                                    print("No share Found.")
+                                }
+                            })
+                        }
+
+                        self.fetchWeekGoalsForCurrentChallenge()
+
+                        //check StartDate
+                        self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
+                            switch monthGoalState {
+                            case .isMonthGoal:
+                                print("Checking for Start Day...")
+                                let startDay = ChallengeController.shared.currentChallenge?.startDay
+
+                                if startDay! < Date() {
+                                    //before StartDay
+                                    print("Challenge's StartDay after Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.currentChallenge()
+                                } else {
+                                    //after startDay
+                                    print("Challenge's StartDay after Today")
+                                    print("Current Challenge's StartDay:\(startDay!)")
+                                    self.activeChallenge()
+                                }
+                            case .noMonthGoal:
+                                self.addMonthGoal()
+                            }
+                        })
+                    case .noActiveChallenge:
+                        //can create new Challenge or join a challenge
+                        //can look at past challenges
+                        UserDefaults.standard.set(nil, forKey: "currentChallengeFinishDay")
+                        UserDefaults.standard.set(nil, forKey: UserDefaultStrings.ShareRecordName)
+                        UserDefaults.standard.set(0, forKey: UserDefaultStrings.ChallengeState)
+                        self.createNewChallenge()
+
+                    }
+                })
+            case .noUser:
+                UserDefaults.standard.set(UserState.noUser.hashValue, forKey: "UserState")
+
+                //create new User
+                self.createNewUser()
             }
         }
     }
-    
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        //TODO: CHECK if network Available
-//
-//        _ = GoalController.shared
-//
-//        //fetch User
-//        fetchUser { userState in
-//            switch userState {
-//            case .isUser:
-//                UserDefaults.standard.set(UserState.isUser.hashValue, forKey: "UserState")
-//                //fetch challenge
-//                self.fetchChallenge({ challengeState in
-//                    switch challengeState {
-//                    case .isOwnerChallenge:
-//                        UserDefaults.standard.set(ChallengeState.isOwnerChallenge.rawValue, forKey: "ChallengeState")
-//                        let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-//
-//                        UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
-//
-//                        let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
-//                        NotificationCenter.default.post(challengeFound)
-//
-//                        self.fetchWeekGoalsForCurrentChallenge()
-//
-//                        //Fetch The Share for the current Challenge
-//                        let currentChallenge = ChallengeController.shared.currentChallenge
-//                        if let stringURL = currentChallenge?.urlString {
-//                            guard let url = URL(string: stringURL) else {return}
-//                            print("Fetching MetaData for shared Challenge...")
-//                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
-//                                if isSuccess {
-//                                    print("Share Found.")
-//                                    ChallengeController.shared.currentShare = share
-//                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
-//                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
-//                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
-//                                            if isSuccess {
-//                                            }
-//                                        })
-//                                    })
-//                                } else {
-//                                    print("No share Found.")
-//                                }
-//                            })
-//                        }
-//
-//                        //can Edit Week Goals
-//                        self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
-//                            switch monthGoalState {
-//                            case .isMonthGoal:
-//                                //check StartDate
-//                                print("Checking for Start Day...")
-//                                let startDay = ChallengeController.shared.currentChallenge?.startDay
-//
-//                                if startDay! > Date() {
-//                                    //before StartDay
-//                                    print("Challenge's StartDay before Today")
-//                                    print("Current Challenge's StartDay:\(startDay!)")
-//                                    self.currentChallenge()
-//                                } else {
-//                                    //after startDay
-//                                    print("Challenge's StartDay after Today")
-//                                    print("Current Challenge's StartDay:\(startDay!)")
-//                                    self.activeChallenge()
-//                                }
-//
-//
-//                            case .noMonthGoal:
-//                                self.addMonthGoal()
-//                            }
-//                        })
-//                        break
-//                    case .isParticipantChallenge:
-//                        UserDefaults.standard.set(ChallengeState.isParticipantChallenge.rawValue, forKey: "ChallengeState")
-//                        let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-//
-//                        UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
-//
-//                        let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
-//                        NotificationCenter.default.post(challengeFound)
-//
-//                        //Fetch The Share for the current Challenge
-//                        let currentChallenge = ChallengeController.shared.currentChallenge
-//                        if let stringURL = currentChallenge?.urlString {
-//                            guard let url = URL(string: stringURL) else {return}
-//                            print("Fetching MetaData for shared Challenge...")
-//                            CloudKitController.shared.fetchShareMetadata(forURL: url, { (isSuccess, share) in
-//                                if isSuccess {
-//                                    print("Share Found.")
-//                                    ChallengeController.shared.currentShare = share
-//                                    ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
-//                                        guard let userRecordID = participant.userIdentity.userRecordID else {return}
-//                                        UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
-//                                            if isSuccess {
-//                                            }
-//                                        })
-//                                    })
-//                                } else {
-//                                    print("No share Found.")
-//                                }
-//                            })
-//                        }
-//
-//                        self.fetchWeekGoalsForCurrentChallenge()
-//
-//                        //check StartDate
-//                        self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
-//                            switch monthGoalState {
-//                            case .isMonthGoal:
-//                                print("Checking for Start Day...")
-//                                let startDay = ChallengeController.shared.currentChallenge?.startDay
-//
-//                                if startDay! < Date() {
-//                                    //before StartDay
-//                                    print("Challenge's StartDay after Today")
-//                                    print("Current Challenge's StartDay:\(startDay!)")
-//                                    self.currentChallenge()
-//                                } else {
-//                                    //after startDay
-//                                    print("Challenge's StartDay after Today")
-//                                    print("Current Challenge's StartDay:\(startDay!)")
-//                                    self.activeChallenge()
-//                                }
-//                            case .noMonthGoal:
-//                                self.addMonthGoal()
-//                            }
-//                        })
-//                    case .noActiveChallenge:
-//                        //can create new Challenge or join a challenge
-//                        //can look at past challenges
-//                        UserDefaults.standard.set(nil, forKey: "currentChallengeFinishDay")
-//                        UserDefaults.standard.set(nil, forKey: UserDefaultStrings.ShareRecordName)
-//                        UserDefaults.standard.set(0, forKey: UserDefaultStrings.ChallengeState)
-//                        self.createNewChallenge()
-//
-//                    }
-//                })
-//            case .noUser:
-//                UserDefaults.standard.set(UserState.noUser.hashValue, forKey: "UserState")
-//
-//                //create new User
-//                self.createNewUser()
-//            }
-//        }
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -325,7 +310,7 @@ class InitialViewController: UIViewController {
     func currentChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
+            let viewController = storyboard.instantiateViewController(withIdentifier: "onboardingV2")
             self.present(viewController, animated: true, completion: nil)
         }
     }
