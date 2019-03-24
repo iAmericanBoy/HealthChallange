@@ -22,6 +22,15 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    lazy var saveButton: UIButton = {
+        var button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.buttonFont), for: .normal)
+        button.setTitleColor(UIColor.green, for: .normal)
+        button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var previousMonthButton: UIButton = {
         var button = UIButton(type: .system)
         button.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.buttonFont), for: .normal)
@@ -112,14 +121,20 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarController.didChangeMonthDown(monthIndex: monthIndex, year: year)
 
         updateViews()
-        
     }
     
     @objc func nextMonthButtonTapped() {
         let monthIndex = calendarController.currentMonthIndex
         let year = calendarController.currentYear
         calendarController.didChangeMonthUp(monthIndex: monthIndex, year: year)
-        updateViews()        
+        
+        updateViews()
+    }
+    
+    @objc func saveButtonTapped() {
+        print("save")
+        delegate?.save(challenge: activeChallenge, withDate: challengeStartDate)
+
     }
     
     //MARK: - Private Functions
@@ -133,9 +148,18 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         } else {
             previousMonthButton.isEnabled = true
         }
+        
+        if challengeStartDate == nil {
+            saveButton.isEnabled = false
+            saveButton.setAttributedTitle(NSAttributedString(string: "Select A Start Day", attributes: FontController.labelTitleFont), for: .normal)
+        } else {
+            saveButton.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.buttonFont), for: .normal)
+            saveButton.isEnabled = true
+        }
+        
         calendarCollectionView?.reloadData()
-
     }
+    
     func setupViews() {
         let monthLabelStackView = UIStackView(arrangedSubviews: [previousMonthButton,monthLabel,nextMonthButton])
         monthLabelStackView.alignment = .fill
@@ -172,13 +196,18 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.showsHorizontalScrollIndicator = false
         calendarCollectionView?.clipsToBounds = true
         calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
-        
         calendarCollectionView?.translatesAutoresizingMaskIntoConstraints = false
+        
         contentView.addSubview(calendarCollectionView!)
         calendarCollectionView?.topAnchor.constraint(equalTo: topRowStackView.bottomAnchor).isActive = true
         calendarCollectionView?.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         calendarCollectionView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.95).isActive = true
-        calendarCollectionView?.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 1).isActive = true
+        calendarCollectionView?.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
+        
+        contentView.addSubview(saveButton)
+        saveButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        saveButton.topAnchor.constraint(equalTo: (calendarCollectionView?.bottomAnchor)!).isActive = true
+        saveButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
     }
     
     func findDateRange(from startDate: Date) {
@@ -252,9 +281,8 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
         guard let cell = collectionView.cellForItem(at: indexPath) as? NewDateCollectionViewCell else {return}
         challengeStartDate = cell.cellDate
         cell.contentView.backgroundColor = .lushGreenColor
-        calendarCollectionView?.reloadData()
+        updateViews()
         
-        delegate?.save(challenge: activeChallenge, withDate: cell.cellDate)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
