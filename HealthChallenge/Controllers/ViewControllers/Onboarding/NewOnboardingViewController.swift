@@ -179,7 +179,8 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
         case 1:
             //startDay
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "startDateCell", for: indexPath) as? StartDayCollectionViewCell
-
+            cell?.delegate = self
+            cell?.activeChallenge = ChallengeController.shared.currentChallenge
             return cell ?? UICollectionViewCell()
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
@@ -272,5 +273,34 @@ extension NewOnboardingViewController: UIImagePickerControllerDelegate {
             collectionView?.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+//MARK: - StartDayCollectionViewCellDelegate
+extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
+    func save(challenge: Challenge?, withDate date: Date?) {
+        guard let date = date else {return}
+        
+        if let currentChallenge = ChallengeController.shared.currentChallenge {
+            //update the date
+            ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: date) { (isSuccess) in
+                if isSuccess {
+                    // handle
+                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                    
+                    UserDefaults.standard.set(finishDay, forKey: UserDefaultStrings.currentChallengeFinishDay)
+                }
+            }
+        } else {
+            // create new Challenge with date
+            ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
+                if isSuccess {
+                    // handle
+                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                    
+                    UserDefaults.standard.set(finishDay, forKey: UserDefaultStrings.currentChallengeFinishDay)
+                }
+            }
+        }
     }
 }

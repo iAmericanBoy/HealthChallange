@@ -9,7 +9,7 @@
 import UIKit
 
 protocol StartDayCollectionViewCellDelegate {
-    func save(challenge: Challenge?, withDate date: Date)
+    func save(challenge: Challenge?, withDate date: Date?)
 }
 
 class StartDayCollectionViewCell: UICollectionViewCell {
@@ -121,34 +121,11 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? DateCollectionViewCell else {return}
+        guard let cell = collectionView.cellForItem(at: indexPath) as? NewDateCollectionViewCell else {return}
         
         cell.backgroundColor = UIColor.green
-        collectionView.reloadData()
         
-        guard let date = cell.cellDate else {return}
-        
-        if let currentChallenge = ChallengeController.shared.currentChallenge {
-            //update the date
-            ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: cell.cellDate!) { (isSuccess) in
-                if isSuccess {
-                    // handle
-                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-                    
-                    UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
-                }
-            }
-        } else {
-            // create new Challenge with date
-            ChallengeController.shared.createNewChallenge(withStartDate: date) { (isSuccess) in
-                if isSuccess {
-                    // handle
-                    let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-                    
-                    UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
-                }
-            }
-        }
+        delegate?.save(challenge: activeChallenge, withDate: cell.cellDate)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
