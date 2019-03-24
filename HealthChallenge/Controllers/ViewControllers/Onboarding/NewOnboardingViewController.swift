@@ -121,6 +121,9 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
         self.title = "\(pageControl.currentPage)"
     }
     
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         pageControl.numberOfPages = screenCount
         return screenCount
@@ -133,13 +136,23 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
         case 0:
             //signUp
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
-//            cell?.delegate = self
-//            cell?.user = UserController.shared.loggedInUser
+            cell?.delegate = self
+            cell?.user = UserController.shared.loggedInUser
             return cell ?? UICollectionViewCell()
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
             return cell
         }
+    }
+}
 
+//MARK: - SignUpCollectionViewCellDelegate
+extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
+    func selectPhoto() {
+        print("photo")
+    }
+    
+    func saveUser(withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int) {
+        print("save")
     }
 }

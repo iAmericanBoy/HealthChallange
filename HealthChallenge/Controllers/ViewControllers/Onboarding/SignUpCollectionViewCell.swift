@@ -9,28 +9,28 @@
 import UIKit
 
 protocol SignUpCollectionViewCellDelegate {
+    func selectPhoto()
     func saveUser(withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int)
 }
 
 class SignUpCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
-    fileprivate var saveButton: UIButton = {
+    lazy var saveButton: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.buttonFont), for: .normal)
         button.setTitleColor(UIColor.green, for: .normal)
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        
         return button
     }()
     
-    fileprivate var containerView: UIView = {
-        var view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        view.backgroundColor = .blue
-        return view
+    lazy var photoButton: UIButton = {
+        var button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(photoButtonTapped), for: .touchUpInside)
+        button.backgroundColor = .blue
+        return button
     }()
     
     fileprivate var userNameTextField: UITextField = {
@@ -67,6 +67,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     var delegate: SignUpCollectionViewCellDelegate?
+    var profilePhoto: UIImage?
     var user: User? {
         didSet{
             self.updateViews()
@@ -88,7 +89,11 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     //MARK: - Actions
     @objc func saveButtonTapped() {
         guard let name = userNameTextField.text else {return}
-        delegate?.saveUser(withName: name, andUserPhoto: nil, andLifeStyleValue: lifeStyleSegmentedControl.selectedSegmentIndex)
+        delegate?.saveUser(withName: name, andUserPhoto: profilePhoto, andLifeStyleValue: lifeStyleSegmentedControl.selectedSegmentIndex)
+    }
+    
+    @objc func photoButtonTapped() {
+        delegate?.selectPhoto()
     }
     
     //MARK: - Private Functions
@@ -97,16 +102,15 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         lifeStyleSegmentedControl.setEnabled(true, forSegmentAt: user.strengthValue)
         userNameTextField.text = user.userName
         userNameLabel.text = "Hello"
+        photoButton.setBackgroundImage(user.photo, for: .normal)
     }
     
     func setupViews() {
-        
-        contentView.addSubview(containerView)
-        containerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: contentView.frame.height / 16).isActive = true
-        containerView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
-        containerView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
-        containerView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
-        
+        contentView.addSubview(photoButton)
+        photoButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: contentView.frame.height / 16).isActive = true
+        photoButton.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        photoButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        photoButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
         
         let saveButtonStackView = UIStackView(arrangedSubviews: [saveButton])
         saveButtonStackView.axis = .horizontal
@@ -131,8 +135,5 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         signUpStackView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         signUpStackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
         signUpStackView.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor).isActive = true
-
-        
-        
     }
 }
