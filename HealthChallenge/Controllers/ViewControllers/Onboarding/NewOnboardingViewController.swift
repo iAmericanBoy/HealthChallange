@@ -53,6 +53,19 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         setupBottonControls()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
+    }
+    
     //MARK: - Actions
     @objc fileprivate func handelNext() {
         let nextIndex = min(pageControl.currentPage + 1, pageControl.numberOfPages - 1)
