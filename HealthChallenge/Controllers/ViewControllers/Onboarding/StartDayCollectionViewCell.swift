@@ -26,7 +26,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     //MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .white
         findDateRange(from: Date())
         setupViews()
     }
@@ -48,7 +48,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.delegate = self
         calendarCollectionView?.dataSource = self
         
-        calendarCollectionView?.backgroundColor = .white
+        calendarCollectionView?.backgroundColor = .clear
         calendarCollectionView?.showsHorizontalScrollIndicator = false
         calendarCollectionView?.clipsToBounds = true
         calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
