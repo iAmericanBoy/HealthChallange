@@ -37,14 +37,14 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     
     
     //MARK: - Properties
-    var screenCount = 1
+    var screenCount = 2
     var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.largeTitleDisplayMode = .always
-        self.title = "\(pageControl.currentPage)"
+        setTitle()
         view.backgroundColor = .white
         imagePicker.delegate = self
         setupCollectionView()
@@ -56,18 +56,30 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         let nextIndex = min(pageControl.currentPage + 1, pageControl.numberOfPages - 1)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
-        self.title = "\(pageControl.currentPage)"
+        setTitle()
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     @objc fileprivate func handelPrevious() {
         let nextIndex = max(pageControl.currentPage - 1, 0)
         let indexPath = IndexPath(item: nextIndex, section: 0)
         pageControl.currentPage = nextIndex
-        self.title = "\(pageControl.currentPage)"
+        setTitle()
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     //MARK: - Private Functions
+    
+    fileprivate func setTitle() {
+        switch pageControl.currentPage {
+        case 0:
+            self.title = "HELLO"
+        case 1:
+            self.title = "STARTDAY"
+        default:
+            self.title = "\(pageControl.currentPage)"
+
+        }
+    }
     fileprivate func setupBottonControls() {
         let bottomControlStackView = UIStackView(arrangedSubviews: [previousButton,pageControl,nextButton])
         bottomControlStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -99,8 +111,9 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     }
     
     fileprivate func registerCells() {
-                collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
         collectionView?.register(SignUpCollectionViewCell.self, forCellWithReuseIdentifier: "signUpCell")
+        collectionView?.register(StartDayCollectionViewCell.self, forCellWithReuseIdentifier: "startDayCell")
     }
 }
 
@@ -122,7 +135,8 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
         
         pageControl.currentPage = Int(x / view.frame.width)
         
-        self.title = "\(pageControl.currentPage)"
+        setTitle()
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {

@@ -74,6 +74,7 @@
 		B6FD98CC2246E75F00A6522E /* SignUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */; };
 		B6FD98CE2246ED1100A6522E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CD2246ED1100A6522E /* UIColor+Extension.swift */; };
 		B6FD98D02246F97800A6522E /* FontController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CF2246F97700A6522E /* FontController.swift */; };
+		B6FD98D222472E4E00A6522E /* StartDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98D122472E4E00A6522E /* StartDayCollectionViewCell.swift */; };
 		CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FB92242B2D800C3EEB3 /* Extensions.swift */; };
 		CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */; };
 		CE178FBE2242E73500C3EEB3 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */; };
@@ -161,6 +162,7 @@
 		B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCollectionViewCell.swift; sourceTree = "<group>"; };
 		B6FD98CD2246ED1100A6522E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		B6FD98CF2246F97700A6522E /* FontController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontController.swift; sourceTree = "<group>"; };
+		B6FD98D122472E4E00A6522E /* StartDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE178FB92242B2D800C3EEB3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailViewController.swift; sourceTree = "<group>"; };
 		CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			children = (
 				B6823FAE2246DD0500D2E23B /* NewOnboardingViewController.swift */,
 				B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */,
+				B6FD98D122472E4E00A6522E /* StartDayCollectionViewCell.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				62D067B12236DBDF00D5410B /* OnboardingViewController.swift in Sources */,
 				CEB299B3223C09740089DA63 /* Dish.swift in Sources */,
 				CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */,
+				B6FD98D222472E4E00A6522E /* StartDayCollectionViewCell.swift in Sources */,
 				B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */,
 				B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */,
 				62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */,
