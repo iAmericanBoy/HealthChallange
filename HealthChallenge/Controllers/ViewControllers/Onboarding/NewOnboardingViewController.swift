@@ -28,13 +28,14 @@ class NewOnboardingViewController: UIViewController {
     private lazy var pageControl: UIPageControl = {
         let pc = UIPageControl()
         pc.currentPage = 0
-        pc.numberOfPages = 4
+        pc.numberOfPages = screenCount
         pc.currentPageIndicatorTintColor = UIColor.purple
         pc.pageIndicatorTintColor = .gray
         return pc
     }()
     
     //MARK: - Properties
+    var screenCount = 1
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -82,8 +83,6 @@ class NewOnboardingViewController: UIViewController {
         collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collectionView?.contentInsetAdjustmentBehavior = .scrollableAxes
         
-        
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
         collectionView?.delegate = self
         collectionView?.dataSource = self
         
@@ -91,6 +90,13 @@ class NewOnboardingViewController: UIViewController {
         collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.clipsToBounds = true
         view.addSubview(collectionView!)
+        
+        registerCells()
+    }
+    
+    fileprivate func registerCells() {
+                collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
+        collectionView?.register(SignUpCollectionViewCell.self, forCellWithReuseIdentifier: "signUpCell")
     }
 }
 
@@ -116,11 +122,24 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        pageControl.numberOfPages = screenCount
+        return screenCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
-        return cell
+        
+        
+        switch indexPath.item {
+        case 0:
+            //signUp
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
+//            cell?.delegate = self
+//            cell?.user = UserController.shared.loggedInUser
+            return cell ?? UICollectionViewCell()
+        default:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
+            return cell
+        }
+
     }
 }
