@@ -19,6 +19,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
 
     //MARK: - Properties
     var activeChallenge: Challenge?
+    var challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
     var calendarController = CalendarController()
     var dateRange: [Date] = []
     var delegate: StartDayCollectionViewCellDelegate?
@@ -39,6 +40,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     func setupViews() {
         setupCollectionView()
     }
+    
     fileprivate func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -81,6 +83,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
 extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //TODO: Fix crash when currenday is sunday
         let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 2
         return sectionItems
     }
@@ -93,10 +96,10 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
         cell.isHidden = false
         
         let date = dateRange[indexPath.row]
-        cell.layer.cornerRadius = cell.frame.width / 2
-        cell.layer.borderWidth = 1
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.backgroundColor = .white
+        cell.contentView.layer.cornerRadius = cell.frame.width / 2
+        cell.contentView.layer.borderWidth = 1
+        cell.contentView.layer.borderColor = UIColor.black.cgColor
+        cell.contentView.backgroundColor = .white
         cell.dayLabel.textColor = .black
         cell.cellDate = Date(timeIntervalSince1970: 0)
         
@@ -111,11 +114,11 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
         }
         
         //logic to color cells of the selected date and the 30 days in the challenge
-        if let challengeStartDate = activeChallenge?.startDay {
+        if let challengeStartDate = challengeStartDate {
             if cell.cellDate!.stripTimestamp() == challengeStartDate.stripTimestamp() {
-                cell.backgroundColor = .lushGreenColor
+                cell.contentView.backgroundColor = .lushGreenColor
             } else if cell.cellDate! <= challengeStartDate.addingTimeInterval(2592000) && cell.cellDate! >= challengeStartDate {
-                cell.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.1)
+                cell.contentView.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.1)
             }
         }
         return cell
@@ -123,8 +126,9 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? NewDateCollectionViewCell else {return}
-        
-        cell.backgroundColor = UIColor.lushGreenColor
+        challengeStartDate = cell.cellDate
+        cell.contentView.backgroundColor = .lushGreenColor
+        calendarCollectionView?.reloadData()
         
         delegate?.save(challenge: activeChallenge, withDate: cell.cellDate)
     }
