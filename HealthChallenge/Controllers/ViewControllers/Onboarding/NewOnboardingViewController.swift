@@ -37,7 +37,12 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     
     
     //MARK: - Properties
-    var screenCount = 2
+    var screenCount = 1 {
+        didSet {
+            collectionView?.reloadData()
+            pageControl.numberOfPages = screenCount
+        }
+    }
     var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
     
     //MARK: - LifeCycle
@@ -83,7 +88,6 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     }
     
     //MARK: - Private Functions
-    
     fileprivate func setTitle() {
         switch pageControl.currentPage {
         case 0:
@@ -212,7 +216,6 @@ extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
                 if isSuccess {
                     DispatchQueue.main.async {
                         self.screenCount = max(2,self.screenCount)
-                        self.collectionView?.reloadItems(at: [IndexPath(item: 0, section: 0)])
                         self.handelNext()
                     }
                 }
