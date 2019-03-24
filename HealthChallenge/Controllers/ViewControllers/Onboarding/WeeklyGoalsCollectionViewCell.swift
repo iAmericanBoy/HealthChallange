@@ -109,6 +109,23 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
         topStackView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         topStackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         topStackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
+        
+        
+        tableView = UITableView()
+        contentView.addSubview(tableView!)
+        tableView?.translatesAutoresizingMaskIntoConstraints = false
+        tableView?.topAnchor.constraint(equalTo: topStackView.bottomAnchor).isActive = true
+        tableView?.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.95).isActive = true
+        tableView?.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        
+        setUpTableView()
+    }
+    
+    func setUpTableView() {
+        tableView?.tableFooterView = UIView()
+        tableView?.delegate = self
+        tableView?.dataSource = self
     }
 }
 
@@ -131,5 +148,29 @@ extension WeeklyGoalsCollectionViewCell: UITextFieldDelegate {
             reviewForPublicLabel.isHidden = true
             addButton.isHidden = true
         }
+    }
+}
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return GoalController.shared.allGoalsFromCK[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
+        
+        cell.textLabel?.text = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name
+        
+        if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
+            cell.backgroundColor = UIColor.lushGreenColor
+            cell.textLabel?.textColor = UIColor.lushGreenColor
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else {
+            cell.backgroundColor = .white
+            cell.textLabel?.textColor = .black
+            cell.accessoryType = UITableViewCell.AccessoryType.none
+        }
+        return cell
     }
 }
