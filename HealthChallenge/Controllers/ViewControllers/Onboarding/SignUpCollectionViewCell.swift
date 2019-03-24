@@ -123,26 +123,31 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         let saveButtonStackView = UIStackView(arrangedSubviews: [saveButton])
         saveButtonStackView.axis = .horizontal
         saveButtonStackView.alignment = .fill
-        saveButtonStackView.alignment = .fill
 
         let userNameStackView = UIStackView(arrangedSubviews: [userNameLabel,userNameTextField])
         userNameStackView.axis = .vertical
-        userNameStackView.spacing = 10
+        userNameStackView.spacing = 5
+        userNameStackView.alignment = .fill
+        userNameStackView.distribution = .fill
         
         let lifeStyleStackView = UIStackView(arrangedSubviews: [lifeStyleLabel,lifeStyleSegmentedControl])
         lifeStyleStackView.axis = .vertical
-        lifeStyleStackView.spacing = 10
+        lifeStyleStackView.spacing = 5
+        lifeStyleStackView.alignment = .fill
+        lifeStyleStackView.distribution = .fill
         
         
-        let signUpStackView = UIStackView(arrangedSubviews: [saveButtonStackView,userNameStackView,lifeStyleStackView])
+        let signUpStackView = UIStackView(arrangedSubviews: [userNameStackView,lifeStyleStackView, saveButtonStackView])
         signUpStackView.translatesAutoresizingMaskIntoConstraints = false
         signUpStackView.axis = .vertical
         signUpStackView.spacing = 15
+        signUpStackView.alignment = .fill
+        signUpStackView.distribution = .fillEqually
         
         contentView.addSubview(signUpStackView)
-        signUpStackView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        signUpStackView.topAnchor.constraint(equalTo: photoButton.bottomAnchor, constant: 0).isActive = true
         signUpStackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
-        signUpStackView.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        signUpStackView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
     }
 }
 
