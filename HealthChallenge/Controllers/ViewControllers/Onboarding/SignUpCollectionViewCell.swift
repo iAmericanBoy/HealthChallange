@@ -83,6 +83,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white
+        userNameTextField.delegate = self
         setupViews()
         updateViews()
     }
@@ -93,6 +94,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Actions
     @objc func saveButtonTapped() {
+        userNameTextField.resignFirstResponder()
         guard let name = userNameTextField.text else {return}
         delegate?.save(user: user, withName: name, andUserPhoto: profilePhoto, andLifeStyleValue: lifeStyleSegmentedControl.selectedSegmentIndex)
     }
@@ -141,5 +143,13 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         signUpStackView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         signUpStackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
         signUpStackView.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    }
+}
+
+//MARK: - UITextFieldDelegate
+extension SignUpCollectionViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
