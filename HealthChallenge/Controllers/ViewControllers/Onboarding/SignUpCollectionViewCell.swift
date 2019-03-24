@@ -29,7 +29,8 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(photoButtonTapped), for: .touchUpInside)
-        button.backgroundColor = .blue
+        button.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+
         return button
     }()
     
@@ -38,7 +39,6 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Add Username..."
         textField.defaultTextAttributes = FontController.textFieldFont
-        
         return textField
     }()
     
@@ -67,7 +67,12 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     var delegate: SignUpCollectionViewCellDelegate?
-    var profilePhoto: UIImage?
+    var profilePhoto: UIImage? {
+        didSet {
+            photoButton.setBackgroundImage(profilePhoto, for: .normal)
+            photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+        }
+    }
     var user: User? {
         didSet{
             self.updateViews()
@@ -103,6 +108,8 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         userNameTextField.text = user.userName
         userNameLabel.text = "Hello"
         photoButton.setBackgroundImage(user.photo, for: .normal)
+        photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+
     }
     
     func setupViews() {

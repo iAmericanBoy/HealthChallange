@@ -9,9 +9,10 @@
 import UIKit
 
 
-class NewOnboardingViewController: UIViewController {
+class NewOnboardingViewController: UIViewController, UINavigationControllerDelegate {
     //MARK: - Outlets
     var collectionView: UICollectionView?
+    let imagePicker = UIImagePickerController()
     
     private let nextButton: UIButton = {
         let button = UIButton(type: .system)
@@ -34,8 +35,10 @@ class NewOnboardingViewController: UIViewController {
         return pc
     }()
     
+    
     //MARK: - Properties
     var screenCount = 1
+    var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -43,6 +46,7 @@ class NewOnboardingViewController: UIViewController {
         self.navigationItem.largeTitleDisplayMode = .always
         self.title = "\(pageControl.currentPage)"
         view.backgroundColor = .white
+        imagePicker.delegate = self
         setupCollectionView()
         setupBottonControls()
     }
@@ -131,12 +135,16 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         switch indexPath.item {
         case 0:
             //signUp
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
             cell?.delegate = self
+            if let profilePicture = profilePicture {
+                cell?.profilePhoto = profilePicture
+            } else {
+                cell?.profilePhoto = UIImage(named: "stockPhoto")
+            }
             cell?.user = UserController.shared.loggedInUser
             return cell ?? UICollectionViewCell()
         default:
@@ -149,10 +157,61 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
 //MARK: - SignUpCollectionViewCellDelegate
 extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
     func selectPhoto() {
-        print("photo")
+        let selectImageAlert = UIAlertController(title: "Add a Profile Photo", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            self.imagePicker.dismiss(animated: true, completion: nil)
+        }
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (_) in
+            self.openCamera()
+        }
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
+            self.openGallery()
+        }
+        selectImageAlert.addAction(cancelAction)
+        selectImageAlert.addAction(cameraAction)
+        selectImageAlert.addAction(photoLibraryAction)
+        
+        present(selectImageAlert, animated: true, completion: nil)
     }
     
     func saveUser(withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int) {
         print("save")
+    }
+}
+
+//MARK: - UIImagePickerControllerDelegate
+extension NewOnboardingViewController: UIImagePickerControllerDelegate {
+    func openCamera() {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "No Camera Access", message: "Please allow access to the camera to use this feature.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Back", style: .default, handler: nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func openGallery() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "No Photos Access", message: "Please allow access to Photos to use this feature.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Back", style: .default, handler: nil)
+            alert.addAction(okAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            profilePicture = pickedImage
+            collectionView?.reloadItems(at: [IndexPath(item: 0, section: 0)])
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
