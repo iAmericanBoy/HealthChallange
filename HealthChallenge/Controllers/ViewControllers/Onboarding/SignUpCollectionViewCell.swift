@@ -71,6 +71,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         didSet {
             photoButton.setBackgroundImage(profilePhoto, for: .normal)
             photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+            self.updateViews()
         }
     }
     var user: User? {
