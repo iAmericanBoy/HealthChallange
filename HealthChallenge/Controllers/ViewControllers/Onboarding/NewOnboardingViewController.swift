@@ -37,7 +37,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     
     
     //MARK: - Properties
-    var screenCount = 1 {
+    var screenCount = 3 {
         didSet {
             collectionView?.reloadData()
             pageControl.numberOfPages = screenCount
@@ -91,9 +91,11 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     fileprivate func setTitle() {
         switch pageControl.currentPage {
         case 0:
-            self.title = "HELLO"
+            self.title = UserController.shared.loggedInUser?.userName ?? "HELLO"
         case 1:
-            self.title = "STARTDAY"
+            self.title = "START DAY"
+        case 2:
+            self.title = "WEEKLY GOALS"
         default:
             self.title = "\(pageControl.currentPage)"
 
@@ -133,6 +135,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellID")
         collectionView?.register(SignUpCollectionViewCell.self, forCellWithReuseIdentifier: "signUpCell")
         collectionView?.register(StartDayCollectionViewCell.self, forCellWithReuseIdentifier: "startDateCell")
+        collectionView?.register(WeeklyGoalsCollectionViewCell.self, forCellWithReuseIdentifier: "weeklyGoalsCell")
     }
 }
 
@@ -185,6 +188,12 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "startDateCell", for: indexPath) as? StartDayCollectionViewCell
             cell?.delegate = self
             cell?.activeChallenge = ChallengeController.shared.currentChallenge
+            return cell ?? UICollectionViewCell()
+        case 2:
+            //weeklyGoals
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weeklyGoalsCell", for: indexPath) as? WeeklyGoalsCollectionViewCell
+//            cell?.delegate = self
+//            cell?.activeChallenge = ChallengeController.shared.currentChallenge
             return cell ?? UICollectionViewCell()
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
