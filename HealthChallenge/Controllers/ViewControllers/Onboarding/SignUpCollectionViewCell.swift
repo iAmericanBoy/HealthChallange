@@ -45,7 +45,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     fileprivate var lifeStyleSegmentedControl: UISegmentedControl = {
         var segmentedControl = UISegmentedControl(items: ["Sedentary","Moderate","Active"])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.setTitleTextAttributes(FontController.labelFont, for: .normal)
+        segmentedControl.setTitleTextAttributes(FontController.labelTitleFont, for: .normal)
         segmentedControl.setEnabled(true, forSegmentAt: 1)
         segmentedControl.tintColor = UIColor.lushGreenColor
         return segmentedControl
@@ -54,14 +54,14 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     fileprivate var userNameLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.attributedText = NSAttributedString(string: "Username:", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "Username:", attributes: FontController.labelTitleFont)
         return label
     }()
     
     fileprivate var lifeStyleLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.attributedText = NSAttributedString(string: "Lifestyle:", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "Lifestyle:", attributes: FontController.labelTitleFont)
         return label
     }()
     
@@ -108,7 +108,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         guard let user = user else {return}
         lifeStyleSegmentedControl.setEnabled(true, forSegmentAt: user.strengthValue)
         userNameTextField.attributedText = NSAttributedString(string: user.userName, attributes: FontController.textFieldFont)
-        userNameLabel.attributedText = NSAttributedString(string: "Hello", attributes: FontController.labelFont)
+        userNameLabel.attributedText = NSAttributedString(string: "Hello", attributes: FontController.labelTitleFont)
         photoButton.setBackgroundImage(user.photo, for: .normal)
         photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
     }

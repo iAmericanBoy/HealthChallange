@@ -10,7 +10,7 @@ import UIKit
 
 struct FontController {
     
-    static let labelFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 20),NSAttributedString.Key.foregroundColor: UIColor.black]
+    static let labelTitleFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 20),NSAttributedString.Key.foregroundColor: UIColor.black]
     
     static let textFieldFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 17),NSAttributedString.Key.foregroundColor: UIColor.black]
     
@@ -18,7 +18,7 @@ struct FontController {
 
     static let titleFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.heavy]]), size: 60),NSAttributedString.Key.foregroundColor: UIColor.purple]
     
-    static let buttonFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.bold]]), size: 25),NSAttributedString.Key.foregroundColor: UIColor.lushGreenColor]
+    static let buttonFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.bold]]), size: 30),NSAttributedString.Key.foregroundColor: UIColor.lushGreenColor]
     
 
 }

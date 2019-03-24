@@ -38,35 +38,35 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     
     fileprivate var sunLabel: UILabel = {
         var label = UILabel()
-        label.attributedText = NSAttributedString(string: "SUN", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "SUN", attributes: FontController.labelTitleFont)
         label.textAlignment = .center
         return label
     }()
     
     fileprivate var monLabel: UILabel = {
         var label = UILabel()
-        label.attributedText = NSAttributedString(string: "MON", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "MON", attributes: FontController.labelTitleFont)
         label.textAlignment = .center
         return label
     }()
     
     fileprivate var tueLabel: UILabel = {
         var label = UILabel()
-        label.attributedText = NSAttributedString(string: "TUE", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "TUE", attributes: FontController.labelTitleFont)
         label.textAlignment = .center
         return label
     }()
     
     fileprivate var wedLabel: UILabel = {
         var label = UILabel()
-        label.attributedText = NSAttributedString(string: "WED", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "WED", attributes: FontController.labelTitleFont)
         label.textAlignment = .center
         return label
     }()
     
     fileprivate var thuLabel: UILabel = {
         var label = UILabel()
-        label.attributedText = NSAttributedString(string: "THU", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "THU", attributes: FontController.labelTitleFont)
         label.textAlignment = .center
         return label
     }()
@@ -74,14 +74,14 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     fileprivate var friLabel: UILabel = {
         var label = UILabel()
         label.textAlignment = .center
-        label.attributedText = NSAttributedString(string: "FRI", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "FRI", attributes: FontController.labelTitleFont)
         return label
     }()
     
     fileprivate var satLabel: UILabel = {
         var label = UILabel()
         label.textAlignment = .center
-        label.attributedText = NSAttributedString(string: "SAT", attributes: FontController.labelFont)
+        label.attributedText = NSAttributedString(string: "SAT", attributes: FontController.labelTitleFont)
         return label
     }()
     
@@ -98,6 +98,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .white
         findDateRange(from: Date())
         setupViews()
+        updateViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,17 +107,34 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Actions
     @objc func previousMonthButtonTapped() {
-        print("prev")
+        let monthIndex = calendarController.currentMonthIndex
+        let year = calendarController.currentYear
+        calendarController.didChangeMonthDown(monthIndex: monthIndex, year: year)
+
+        updateViews()
+        
     }
     
     @objc func nextMonthButtonTapped() {
-        print("next")
+        let monthIndex = calendarController.currentMonthIndex
+        let year = calendarController.currentYear
+        calendarController.didChangeMonthUp(monthIndex: monthIndex, year: year)
+        updateViews()        
     }
     
     //MARK: - Private Functions
     func updateViews() {
-        //turn on and off the previous label
-        //set monthlabel
+        previousMonthButton.isEnabled = false
+        let monthLabelText =  "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
+        monthLabel.attributedText = NSAttributedString(string: monthLabelText, attributes: FontController.labelTitleFont)
+        
+        if calendarController.currentMonthIndex == challengeStartDate?.month || calendarController.currentMonthIndex == Date().month {
+            previousMonthButton.isEnabled = false
+        } else {
+            previousMonthButton.isEnabled = true
+        }
+        calendarCollectionView?.reloadData()
+
     }
     func setupViews() {
         let monthLabelStackView = UIStackView(arrangedSubviews: [previousMonthButton,monthLabel,nextMonthButton])
@@ -126,7 +144,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         
         let weekLabelStackView = UIStackView(arrangedSubviews: [sunLabel,monLabel,tueLabel,wedLabel,thuLabel,friLabel,satLabel])
         weekLabelStackView.alignment = .fill
-        weekLabelStackView.distribution = .fillProportionally
+        weekLabelStackView.distribution = .fillEqually
         weekLabelStackView.axis = .horizontal
         weekLabelStackView.spacing = 3
         
@@ -212,7 +230,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
         if date == Date().ignoreDate {
             cell.isHidden = true
         } else {
-            cell.dayLabel.attributedText = NSAttributedString(string: "\(date.day)", attributes: FontController.labelFont)
+            cell.dayLabel.attributedText = NSAttributedString(string: "\(date.day)", attributes: FontController.labelTitleFont)
             cell.cellDate = dateRange[indexPath.row]
             let index = date.month
             month = calendarController.shortMonthNames[index - 1]
