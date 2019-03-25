@@ -62,15 +62,15 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         imagePicker.delegate = self
         setupCollectionView()
         setupBottonControls()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         let currentIndex = IndexPath(item: screenCount - 1, section: 0)
         collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
         pageControl.currentPage = screenCount - 1
         setTitle()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
@@ -215,11 +215,8 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
             
             cell?.delegate = self
-            if profilePicture == nil {
-                cell?.profilePhoto = UIImage(named: "stockPhoto")
-            } else {
-                cell?.profilePhoto = profilePicture
-            }
+            
+            cell?.profilePhoto = profilePicture
             
             cell?.user = UserController.shared.loggedInUser
             
@@ -343,7 +340,7 @@ extension NewOnboardingViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profilePicture = pickedImage
-            collectionView?.reloadData()
+            collectionView?.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
         picker.dismiss(animated: true, completion: nil)
     }

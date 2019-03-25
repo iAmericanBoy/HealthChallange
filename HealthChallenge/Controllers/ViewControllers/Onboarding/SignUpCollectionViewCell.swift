@@ -69,9 +69,12 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     var delegate: SignUpCollectionViewCellDelegate?
     var profilePhoto: UIImage? {
         didSet {
-            photoButton.setBackgroundImage(profilePhoto, for: .normal)
+            if profilePhoto == nil {
+                photoButton.setBackgroundImage(UIImage(named: "stockPhoto"), for: .normal)
+            } else {
+                photoButton.setBackgroundImage(profilePhoto, for: .normal)
+            }
             photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
-            self.updateViews()
         }
     }
     var user: User? {
@@ -110,7 +113,9 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         lifeStyleSegmentedControl.selectedSegmentIndex = user.strengthValue
         userNameTextField.attributedText = NSAttributedString(string: user.userName, attributes: FontController.textFieldFont)
         userNameLabel.attributedText = NSAttributedString(string: "Hello", attributes: FontController.labelTitleFont)
-        photoButton.setBackgroundImage(user.photo, for: .normal)
+        if profilePhoto == nil {
+            photoButton.setBackgroundImage(user.photo, for: .normal)
+        }
         photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
     }
     
