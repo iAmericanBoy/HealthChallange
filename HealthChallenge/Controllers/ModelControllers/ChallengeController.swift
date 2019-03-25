@@ -25,7 +25,7 @@ class ChallengeController {
     var currentShare: CKShare?
     
     //MARK: - CRUD
-    ///Creates a new Challenge with a start date.
+    ///Creates a new Challenge with a start date. Also Creates a new instance of usersPoints.
     /// - parameter date: The start date of the challenge.
     /// - parameter completion: Handler for when the challenge was created.
     /// - parameter isSuccess: Confirms that the challenge was created.

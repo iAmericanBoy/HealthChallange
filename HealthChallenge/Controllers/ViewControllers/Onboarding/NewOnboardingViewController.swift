@@ -45,6 +45,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
             pageControl.numberOfPages = screenCount
         }
     }
+    
     var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
     var challengeState = ChallengeState.noActiveChallenge
 
@@ -61,15 +62,15 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         imagePicker.delegate = self
         setupCollectionView()
         setupBottonControls()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         let currentIndex = IndexPath(item: screenCount - 1, section: 0)
         collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
         pageControl.currentPage = screenCount - 1
         setTitle()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
@@ -214,19 +215,16 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
             
             cell?.delegate = self
-            profilePicture = UserController.shared.loggedInUser?.photo
-            if let profilePicture = profilePicture {
-                cell?.profilePhoto = profilePicture
-            } else {
-                cell?.profilePhoto = UIImage(named: "stockPhoto")
-            }
+            
+            cell?.profilePhoto = profilePicture
+            
             cell?.user = UserController.shared.loggedInUser
             
             return cell ?? UICollectionViewCell()
         case 1:
             //startDay
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "startDateCell", for: indexPath) as? StartDayCollectionViewCell
-            
+            cell?.challengeState = challengeState
             cell?.delegate = self
             cell?.activeChallenge = ChallengeController.shared.currentChallenge
             

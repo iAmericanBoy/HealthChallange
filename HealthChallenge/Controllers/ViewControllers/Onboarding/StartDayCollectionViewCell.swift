@@ -101,6 +101,12 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     var dateRange: [Date] = []
     var delegate: StartDayCollectionViewCellDelegate?
     
+    var challengeState = ChallengeState.noActiveChallenge {
+        didSet {
+            self.updateViews()
+        }
+    }
+    
     //MARK: - LifeCycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -145,7 +151,24 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Private Functions
+    
+    func updateViewsForOwner() {
+        calendarCollectionView?.allowsSelection = true
+    }
+    
+    func updateViewsForParticipant() {
+        calendarCollectionView?.allowsSelection = false
+    }
+    
     func updateViews() {
+        switch challengeState {
+        case .isOwnerChallenge:
+            updateViewsForOwner()
+        case .isParticipantChallenge:
+            updateViewsForParticipant()
+        case .noActiveChallenge:
+            updateViewsForOwner()
+        }
         previousMonthButton.isEnabled = false
         let monthLabelText =  "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
         monthLabel.attributedText = NSAttributedString(string: monthLabelText, attributes: FontController.labelTitleFont)

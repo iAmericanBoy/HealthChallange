@@ -9,30 +9,25 @@
 // For timeStamp add 24hrs (86400 sec) to dishTimeReference VAR WHEN INCREMENT/ DECREMENT BUTTON ARE PRESSED AND GET THE
 //CURRENT TIME FROM STRIPTIMESTAMP THEN FILTER ALL OF THE DISHES BY THEIR TIMESTAMP and hide next day button if we are on the current day .
 
-// we know
-
 
 import UIKit
 
 class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
+    var date = Date()
     var dishTimeReference: Date = Date().stripTimestamp() {
         didSet {
             dishDateLabel.text = dishTimeReference.format()
         }
     }
-
     
     @IBOutlet weak var dishDateLabel: UILabel!
-    
     @IBOutlet weak var foodTrackerTableView: UITableView!
     
     var dishesKeys = {
         DishController.shared.dishes.keys.map { $0 }
     }()
-    
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,18 +47,21 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
-    
     @IBAction func previousDayTapped(_ sender: Any) {
-    // remove 86,400 seconds from the current day variable and then filter all of the dishes by this reference
+        // remove 86,400 seconds from the current day variable and then filter all of the dishes by this reference
         dishTimeReference = dishTimeReference.addingTimeInterval(-86400)
         foodTrackerTableView.reloadData()
     }
     
-    
+    // remove/ hide button if we are on the current day
     @IBAction func nextDayTapped(_ sender: Any) {
-    // add 86,400 seconds to current day var and then filter all of the dishes by this reference
+        // add 86,400 seconds to current day var and then filter all of the dishes by this reference
+        
         dishTimeReference = dishTimeReference.addingTimeInterval(86400)
-       foodTrackerTableView.reloadData()
+        
+        foodTrackerTableView.reloadData()
+        
+        
     }
     
     func updateViews() {
@@ -91,27 +89,20 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
         let type = dishesKeys[indexPath.section]
         guard let dish = DishController.shared.dishes[type]?[indexPath.row] else { return UITableViewCell() }
         
-        let foodName = dish.dishName
-        let nutrients = dish.ingredients
-        
-//
-//        cell?.dishNameLanding = foodName
-//        cell?.nutrientLandingPad = nutrients
-        
+//        let foodName = dish.dishName
+//        let nutrients = dish.ingredients
         
         if dish.timeStamp.stripTimestamp() == dishTimeReference {
-            cell?.dishNameLanding = foodName
-            cell?.nutrientLandingPad = nutrients
-            
+            cell?.dishLanding = dish
+            //cell?.nutrientLandingPad = nutrients
         }
-    
         
         //print("============FoodName===========")
         //dump(foodName)
         
         return cell ?? UITableViewCell()
     }
-  
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         // iidoo
@@ -126,9 +117,7 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
                 destVC.dish = dishToSend
             }
         }
-        
     }
-    
 }
 
 
