@@ -139,7 +139,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
         tableView?.translatesAutoresizingMaskIntoConstraints = false
         tableView?.topAnchor.constraint(equalTo: topStackView.bottomAnchor).isActive = true
         tableView?.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        tableView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.95).isActive = true
+        tableView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 1).isActive = true
         tableView?.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         
         setUpTableView()
@@ -149,6 +149,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
         tableView?.tableFooterView = UIView()
         tableView?.delegate = self
         tableView?.dataSource = self
+        tableView?.tintColor = UIColor.lushGreenColor
         tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "goalCell")
     }
 }
@@ -179,7 +180,6 @@ extension WeeklyGoalsCollectionViewCell: UITextFieldDelegate {
 extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(selectedGoals)
         return GoalController.shared.allGoalsFromCK.count
     }
     
@@ -193,7 +193,7 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
         cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.labelTitleFont)
         
         if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
-            cell.backgroundColor = UIColor.lushGreenColor
+            cell.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.05)
             cell.textLabel?.textColor = UIColor.lushGreenColor
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
@@ -221,5 +221,17 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
                 }
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedGoal = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
+        if selectedGoals.index(of: selectedGoal) == nil && selectedGoals.count < 4 {
+            selectedGoals.append(selectedGoal)
+        } else {
+            guard let index = selectedGoals.index(of: selectedGoal) else {return}
+            selectedGoals.remove(at: index)
+        }
+        
+        tableView.reloadData()
     }
 }
