@@ -78,6 +78,11 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
                 self?.collectionView?.reloadData()
             }
         }
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.monthGoalFound), object: nil, queue: .main) { [weak self] (_) in
+            DispatchQueue.main.async {
+                self?.collectionView?.reloadData()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -195,6 +200,7 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
         case 0:
             //signUp
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
+            
             cell?.delegate = self
             profilePicture = UserController.shared.loggedInUser?.photo
             if let profilePicture = profilePicture {
@@ -203,31 +209,42 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
                 cell?.profilePhoto = UIImage(named: "stockPhoto")
             }
             cell?.user = UserController.shared.loggedInUser
+            
             return cell ?? UICollectionViewCell()
         case 1:
             //startDay
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "startDateCell", for: indexPath) as? StartDayCollectionViewCell
+            
             cell?.delegate = self
             cell?.activeChallenge = ChallengeController.shared.currentChallenge
+            
             return cell ?? UICollectionViewCell()
         case 2:
             //weeklyGoals
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weeklyGoalsCell", for: indexPath) as? WeeklyGoalsCollectionViewCell
+            
             cell?.delegate = self
-            cell?.challengeState = ChallengeState.isParticipantChallenge
+            cell?.challengeState = challengeState
             cell?.selectedGoals = GoalController.shared.weeklyGoals
+            
             return cell ?? UICollectionViewCell()
         case 3:
             //monthGoals
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "monthGoalCell", for: indexPath) as? MonthGoalCollectionViewCell
-            //            cell?.delegate = self
-            //            cell?.activeChallenge = ChallengeController.shared.currentChallenge
+            
+            cell?.delegate = self
+            cell?.challengeState = challengeState
+            cell?.selectedWeekGoals = GoalController.shared.weeklyGoals
+            cell?.selectedGoal = GoalController.shared.monthGoal
+            
             return cell ?? UICollectionViewCell()
         case 4:
             //share
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "shareCell", for: indexPath) as? ShareCollectionViewCell
+            
             //            cell?.delegate = self
             //            cell?.activeChallenge = ChallengeController.shared.currentChallenge
+            
             return cell ?? UICollectionViewCell()
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath)
@@ -358,6 +375,10 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
 
 //MARK: - WeeklyGoalsCollectionViewCellDelegate
 extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
+    func save(monthGoal: Goal) {
+        
+    }
+    
     func save(newGoalWithName name: String, toReviewForPublic: Bool) {
         GoalController.shared.createGoalWith(goalName: name, reviewForPublic: toReviewForPublic) { (isSuccess) in
             if isSuccess {

@@ -11,6 +11,7 @@ import UIKit
 protocol GoalsCollectionViewCellDelegate {
     func save(weeklyGoals: [Goal])
     func save(newGoalWithName name: String, toReviewForPublic: Bool)
+    func save(monthGoal: Goal)
 }
 
 class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
