@@ -34,6 +34,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         pc.numberOfPages = screenCount
         pc.currentPageIndicatorTintColor = UIColor.purple
         pc.pageIndicatorTintColor = .gray
+        pc.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         return pc
     }()
     
