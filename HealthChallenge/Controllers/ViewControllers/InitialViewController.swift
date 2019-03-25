@@ -73,13 +73,13 @@ class InitialViewController: UIViewController {
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
 
                                 if startDay! > Date() {
-                                    //before StartDay
-                                    print("Challenge's StartDay before Today")
+                                    //after StartDay
+                                    print("Challenge's StartDay after Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.currentChallenge()
                                 } else {
-                                    //after startDay
-                                    print("Challenge's StartDay after Today")
+                                    //before startDay
+                                    print("Challenge's StartDay before Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.activeChallenge()
                                 }
@@ -130,14 +130,14 @@ class InitialViewController: UIViewController {
                                 print("Checking for Start Day...")
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
 
-                                if startDay! < Date() {
-                                    //before StartDay
+                                if startDay! > Date() {
+                                    //after StartDay
                                     print("Challenge's StartDay after Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.currentChallenge()
                                 } else {
-                                    //after startDay
-                                    print("Challenge's StartDay after Today")
+                                    //before startDay
+                                    print("Challenge's StartDay before Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.activeChallenge()
                                 }
