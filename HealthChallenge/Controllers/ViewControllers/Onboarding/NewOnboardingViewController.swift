@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 
 class NewOnboardingViewController: UIViewController, UINavigationControllerDelegate {
@@ -37,7 +38,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     }()
     
     //MARK: - Properties
-    var screenCount = 5 {
+    var screenCount = 1 {
         didSet {
             collectionView?.reloadData()
             pageControl.numberOfPages = screenCount
@@ -376,7 +377,26 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
 //MARK: - WeeklyGoalsCollectionViewCellDelegate
 extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
     func save(monthGoal: Goal) {
+        guard let userID = UserController.shared.appleUserID, let challengeID = ChallengeController.shared.currentChallenge?.recordID else {return}
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        GoalController.shared.remove(userRef: CKRecord.Reference(recordID: userID, action: .none), fromGoal: GoalController.shared.monthGoal!) { (isSuccess) in
+            if isSuccess {
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.enter()
+
+        GoalController.shared.add(newUserReference: CKRecord.Reference(recordID: userID, action: .none), toGoal: monthGoal, forChallenge: CKRecord.Reference(recordID: challengeID, action: .none))  { (isSuccess) in
+            if isSuccess {
+                dispatchGroup.leave()
+            }
+        }
         
+        dispatchGroup.notify(queue: .main) {
+            self.screenCount = max(5,self.screenCount)
+            self.handelNext()
+        }
     }
     
     func save(newGoalWithName name: String, toReviewForPublic: Bool) {

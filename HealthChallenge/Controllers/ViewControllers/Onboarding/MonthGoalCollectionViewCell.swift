@@ -268,12 +268,12 @@ extension MonthGoalCollectionViewCell: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newSelectedGoal = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
-        if selectedGoal != nil {
-        }
-        if selectedGoal != newSelectedGoal {
-            selectedGoal = newSelectedGoal
-        } else {
-            selectedGoal = nil
+        if !selectedWeekGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
+            if selectedGoal == nil {
+                selectedGoal = newSelectedGoal
+            } else {
+                selectedGoal = nil
+            }
         }
         updateViews()
     }
