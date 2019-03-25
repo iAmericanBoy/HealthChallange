@@ -238,16 +238,15 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
         cell.selectionStyle = .none
-        
-        cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFont)
+
         
         if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
             cell.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.05)
-            cell.textLabel?.textColor = UIColor.lushGreenColor
+            cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFontGREEN)
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
             cell.backgroundColor = .white
-            cell.textLabel?.textColor = .black
+            cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFont)
             cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         return cell
