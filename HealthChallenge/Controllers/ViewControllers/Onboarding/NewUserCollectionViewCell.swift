@@ -47,7 +47,7 @@ class NewUserCollectionViewCell: UICollectionViewCell {
     fileprivate func updateViews() {
         guard let user = user else {return}
         userImageView.image = user.photo
-        nameLabel.text = user.userName
+        nameLabel.attributedText = NSAttributedString(string: user.userName, attributes: FontController.subTitleLabelFont) 
     }
     
     fileprivate func setUpViews() {
