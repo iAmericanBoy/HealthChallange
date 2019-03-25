@@ -29,9 +29,16 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(photoButtonTapped), for: .touchUpInside)
-        button.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
 
         return button
+    }()
+    
+    lazy var photoImageView: UIImageView = {
+        var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
     }()
     
     fileprivate var userNameTextField: UITextField = {
@@ -70,11 +77,10 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     var profilePhoto: UIImage? {
         didSet {
             if profilePhoto == nil {
-                photoButton.setBackgroundImage(UIImage(named: "stockPhoto"), for: .normal)
+                photoImageView.image = UIImage(named: "stockPhoto")
             } else {
-                photoButton.setBackgroundImage(profilePhoto, for: .normal)
+                photoImageView.image = profilePhoto
             }
-            photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
         }
     }
     var user: User? {
@@ -114,12 +120,17 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         userNameTextField.attributedText = NSAttributedString(string: user.userName, attributes: FontController.textFieldFont)
         userNameLabel.attributedText = NSAttributedString(string: "Hello", attributes: FontController.labelTitleFont)
         if profilePhoto == nil {
-            photoButton.setBackgroundImage(user.photo, for: .normal)
+            photoImageView.image = user.photo
         }
-        photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
     }
     
     func setupViews() {
+        contentView.addSubview(photoImageView)
+        photoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: contentView.frame.height / 16).isActive = true
+        photoImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        photoImageView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        photoImageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
+        
         contentView.addSubview(photoButton)
         photoButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: contentView.frame.height / 16).isActive = true
         photoButton.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
