@@ -97,6 +97,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     @objc func saveButtonTapped() {
         print("save")
         delegate?.save(weeklyGoals: selectedGoals)
+        tableView?.reloadData()
     }
     
     @objc func reviewForPublicSwitchChanged(_ sender: UISwitch) {

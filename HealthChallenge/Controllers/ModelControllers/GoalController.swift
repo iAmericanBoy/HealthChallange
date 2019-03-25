@@ -29,7 +29,13 @@ class GoalController {
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
-            return [weeklyGoals,usersGoals,allPublicGoals]
+            let users = self.usersGoals.filter({ (goal) -> Bool in
+                return !self.weeklyGoals.contains(goal)
+            })
+            let allPublic = self.allPublicGoals.filter({ (goal) -> Bool in
+                return !self.weeklyGoals.contains(goal)
+            })
+            return [weeklyGoals,users,allPublic]
         }
     }
     
@@ -127,12 +133,7 @@ class GoalController {
                 if isSuccess {
                     let foundGoals = foundRecords.compactMap({ Goal(record: $0)})
                     self.weeklyGoals = foundGoals
-                    self.allPublicGoals = self.allPublicGoals.filter({ (goal) -> Bool in
-                        return !self.weeklyGoals.contains(goal)
-                    })
-                    self.usersGoals = self.usersGoals.filter({ (goal) -> Bool in
-                        return !self.weeklyGoals.contains(goal)
-                    })
+
                     completion(true)
                 } else {
                     completion(false)

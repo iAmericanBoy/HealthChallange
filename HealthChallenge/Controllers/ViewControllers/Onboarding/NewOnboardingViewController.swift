@@ -209,7 +209,7 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             //weeklyGoals
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weeklyGoalsCell", for: indexPath) as? WeeklyGoalsCollectionViewCell
             cell?.delegate = self
-            cell?.selectedGoals += GoalController.shared.weeklyGoals
+            cell?.selectedGoals = GoalController.shared.weeklyGoals
             return cell ?? UICollectionViewCell()
         case 3:
             //monthGoals
