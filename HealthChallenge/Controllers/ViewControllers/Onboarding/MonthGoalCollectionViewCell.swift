@@ -24,11 +24,7 @@ class MonthGoalCollectionViewCell: UICollectionViewCell {
     }
     
     var delegate: GoalsCollectionViewCellDelegate?
-    var challengeState = ChallengeState.noActiveChallenge {
-        didSet {
-            self.updateViews()
-        }
-    }
+
     
     // MARK: - Outlets
     var tableView: UITableView?
@@ -113,27 +109,9 @@ class MonthGoalCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Private Functions
-    func updateViewsForOwner() {
-        tableView?.allowsSelection = true
-    }
-    
-    func updateViewsForParticipant() {
-        tableView?.allowsSelection = false
-        saveButton.isHidden = true
-        customGoalTextField.isHidden = true
-    }
-    
     func updateViews() {
         tableView?.reloadData()
         
-        switch challengeState {
-        case .isOwnerChallenge:
-            updateViewsForOwner()
-        case .isParticipantChallenge:
-            updateViewsForParticipant()
-        case .noActiveChallenge:
-            updateViewsForOwner()
-        }
         
         if selectedGoal != nil {
             saveButton.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.enabledButtonFont), for: .normal)

@@ -234,7 +234,6 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "monthGoalCell", for: indexPath) as? MonthGoalCollectionViewCell
             
             cell?.delegate = self
-            cell?.challengeState = challengeState
             cell?.selectedWeekGoals = GoalController.shared.weeklyGoals
             cell?.selectedGoal = GoalController.shared.monthGoal
             
@@ -351,7 +350,14 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
                     let finishDay = ChallengeController.shared.currentChallenge?.finishDay
                     UserDefaults.standard.set(finishDay, forKey: UserDefaultStrings.currentChallengeFinishDay)
                     DispatchQueue.main.async {
-                        self.screenCount = max(3,self.screenCount)
+                        switch self.challengeState {
+                        case .isOwnerChallenge:
+                            self.screenCount = max(3,self.screenCount)
+                        case .isParticipantChallenge:
+                            self.screenCount = max(4,self.screenCount)
+                        case .noActiveChallenge:
+                            self.screenCount = max(3,self.screenCount)
+                        }
                         self.handelNext()
                     }
                 }
@@ -364,7 +370,14 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
                     let finishDay = ChallengeController.shared.currentChallenge?.finishDay
                     UserDefaults.standard.set(finishDay, forKey: UserDefaultStrings.currentChallengeFinishDay)
                     DispatchQueue.main.async {
-                        self.screenCount = max(3,self.screenCount)
+                        switch self.challengeState {
+                        case .isOwnerChallenge:
+                            self.screenCount = max(3,self.screenCount)
+                        case .isParticipantChallenge:
+                            self.screenCount = max(4,self.screenCount)
+                        case .noActiveChallenge:
+                            self.screenCount = max(3,self.screenCount)
+                        }
                         self.handelNext()
                     }
                 }
@@ -373,7 +386,7 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
     }
 }
 
-//MARK: - WeeklyGoalsCollectionViewCellDelegate
+//MARK: - GoalsCollectionViewCellDelegate
 extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
     func save(monthGoal: Goal) {
         guard let userID = UserController.shared.appleUserID, let challengeID = ChallengeController.shared.currentChallenge?.recordID else {return}
@@ -432,7 +445,6 @@ extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.screenCount = max(4,self.screenCount)
             self.handelNext()
         }
     }
