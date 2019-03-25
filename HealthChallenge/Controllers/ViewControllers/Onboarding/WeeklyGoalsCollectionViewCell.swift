@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol WeeklyGoalsCollectionViewCellDelegate {
+protocol GoalsCollectionViewCellDelegate {
     func save(weeklyGoals: [Goal])
     func save(newGoalWithName name: String, toReviewForPublic: Bool)
 }
@@ -21,7 +21,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
             self.updateViews()
         }
     }
-    var delegate: WeeklyGoalsCollectionViewCellDelegate?
+    var delegate: GoalsCollectionViewCellDelegate?
     
     // MARK: - Outlets
     var tableView: UITableView?
@@ -96,6 +96,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     
     @objc func saveButtonTapped() {
         print("save")
+        delegate?.save(weeklyGoals: selectedGoals)
     }
     
     @objc func reviewForPublicSwitchChanged(_ sender: UISwitch) {

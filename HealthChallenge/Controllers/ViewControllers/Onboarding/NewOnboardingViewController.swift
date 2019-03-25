@@ -351,7 +351,7 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
 }
 
 //MARK: - WeeklyGoalsCollectionViewCellDelegate
-extension NewOnboardingViewController: WeeklyGoalsCollectionViewCellDelegate {
+extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
     func save(newGoalWithName name: String, toReviewForPublic: Bool) {
         GoalController.shared.createGoalWith(goalName: name, reviewForPublic: toReviewForPublic) { (isSuccess) in
             if isSuccess {
@@ -365,6 +365,15 @@ extension NewOnboardingViewController: WeeklyGoalsCollectionViewCellDelegate {
     func save(weeklyGoals: [Goal]) {
         guard let challenge = ChallengeController.shared.currentChallenge else {return}
         let dispatchGroup = DispatchGroup()
+        GoalController.shared.weeklyGoals.forEach { (goal) in
+            dispatchGroup.enter()
+            GoalController.shared.remove(challenge: challenge, fromGoal: goal, { (isSuccess) in
+                if isSuccess {
+                    dispatchGroup.leave()
+                }
+            })
+        }
+        
         weeklyGoals.forEach { (goal) in
             dispatchGroup.enter()
             GoalController.shared.add(newChallenge: challenge, toGoal: goal, { (isSuccess) in
@@ -373,6 +382,7 @@ extension NewOnboardingViewController: WeeklyGoalsCollectionViewCellDelegate {
                 }
             })
         }
+        
         dispatchGroup.notify(queue: .main) {
             self.screenCount = max(4,self.screenCount)
             self.handelNext()
