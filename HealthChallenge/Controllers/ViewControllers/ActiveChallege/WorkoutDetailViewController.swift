@@ -13,13 +13,18 @@ class WorkoutDetailViewController: UIViewController {
 
     var date = Date()
     var currentExersize = ""
-    var counter = 0.0
-    var timer = Timer()
+    weak var timer: Timer?
+    var startTime: Double = 0
+    var time: Double = 0
+    var elapsed: Double = 0
     var isActive = false
-    var exersices = ["Walking", "Running", "Cycling", "Eliptical", "Strength Training", "Cross Training", "Other"]
+    var exercises = ["Walking", "Running", "Cycling", "Eliptical", "Strength Training", "Cross Training", "Other"]
+    weak var delegate: WorkoutDetailViewControllerDelegate?
     
     // MARK: - Outlets
-    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var millisecondsLabel: UILabel!
+    @IBOutlet weak var secondsLabel: UILabel!
+    @IBOutlet weak var minutesLabel: UILabel!
     @IBOutlet weak var endButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var finishButton: UIButton!
@@ -27,10 +32,22 @@ class WorkoutDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        timerLabel.text = "\(counter)"
         endButton.isEnabled = false
         workoutPickerView.delegate = self
         workoutPickerView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
     @IBAction func startButtonTapped(_ sender: Any) {
@@ -40,8 +57,8 @@ class WorkoutDetailViewController: UIViewController {
         
         startButton.isEnabled = false
         endButton.isEnabled = true
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        startTime = Date().timeIntervalSinceReferenceDate - elapsed
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         isActive = true
         date = Date()
     }
@@ -50,7 +67,8 @@ class WorkoutDetailViewController: UIViewController {
         startButton.isEnabled = true
         endButton.isEnabled = false
         
-        timer.invalidate()
+        elapsed = Date().timeIntervalSinceReferenceDate - startTime
+        timer?.invalidate()
         isActive = false
     }
     
@@ -59,13 +77,31 @@ class WorkoutDetailViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        counter = counter + 0.1
-        timerLabel.text = "\(counter)"
+        //Calc total time
+        time = Date().timeIntervalSinceReferenceDate - startTime
+        //Calc minutes
+        let minutes = Int(time / 60)
+        time -= (TimeInterval(minutes) * 60)
+        //Calc seconds
+        let seconds = Int(time)
+        time -= TimeInterval(seconds)
+        //Calc milliseconds
+        let milliseconds = Int(time * 100)
+
+        //Format time with leading zero
+        let minString = String(format: "%02d", minutes)
+        let secString = String(format: "%02d", seconds)
+        let millString = String(format: "%02d", milliseconds)
+        
+        //Set labels
+        minutesLabel.text = minString
+        secondsLabel.text = secString
+        millisecondsLabel.text = millString
     }
     
     func createWorkout() {
-        guard let durationString = timerLabel.text, durationString != "0.0" else { return }
-        guard let duration = Double(durationString) else { return }
+        guard let duration = TimeInterval(exactly: elapsed) else { return }
+//        guard let duration = Double(durationString) else { return }
         let startDate = date
         let endDate = Date(timeInterval: duration, since: startDate)
         var activity = HKWorkoutActivityType.other
@@ -74,17 +110,17 @@ class WorkoutDetailViewController: UIViewController {
         var totalEnergyBurned = HKQuantity(unit: HKUnit.largeCalorie(), doubleValue: calories)
         
         // Set HKWorkoutActivityType from string value
-        if currentExersize == exersices.first {
+        if currentExersize == exercises.first {
             activity = HKWorkoutActivityType.walking
-        } else if currentExersize == exersices[1] {
+        } else if currentExersize == exercises[1] {
             activity = HKWorkoutActivityType.running
-        } else if currentExersize == exersices[2] {
+        } else if currentExersize == exercises[2] {
             activity = HKWorkoutActivityType.cycling
-        } else if currentExersize == exersices[3] {
+        } else if currentExersize == exercises[3] {
             activity = HKWorkoutActivityType.elliptical
-        } else if currentExersize == exersices[4] {
+        } else if currentExersize == exercises[4] {
             activity = HKWorkoutActivityType.traditionalStrengthTraining
-        } else if currentExersize == exersices[5] {
+        } else if currentExersize == exercises[5] {
             activity = HKWorkoutActivityType.crossTraining
         } else {
             activity = HKWorkoutActivityType.other
@@ -92,9 +128,12 @@ class WorkoutDetailViewController: UIViewController {
         
         if HKHealthStore.isHealthDataAvailable() {
             HealthKitController.shared.addWorkoutToHK(start: startDate, finish: endDate, activity: activity, totoalEnergyBurned: totalEnergyBurned)
+            WorkoutController.shared.createWorkoutWith(startTime: startDate, endTime: endDate, duration: duration, activity: currentExersize) { (success) in
+                self.delegate?.finishedWorkout(success: true)
+            }
         } else {
             WorkoutController.shared.createWorkoutWith(startTime: startDate, endTime: endDate, duration: duration, activity: currentExersize) { (success) in
-                // handle
+                self.delegate?.finishedWorkout(success: true)
             }
         }
     }
@@ -107,14 +146,18 @@ extension WorkoutDetailViewController: UIPickerViewDelegate, UIPickerViewDataSou
     }
     // number of rows in picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return exersices.count
+        return exercises.count
     }
     // title for row
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return exersices[row]
+        return exercises[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        currentExersize = exersices[row]
+        currentExersize = exercises[row]
     }
+}
+
+protocol WorkoutDetailViewControllerDelegate: class {
+    func finishedWorkout(success: Bool)
 }

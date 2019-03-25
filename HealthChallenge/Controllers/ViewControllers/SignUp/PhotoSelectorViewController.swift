@@ -11,6 +11,7 @@ import UIKit
 class PhotoSelectorViewController: UIViewController, UINavigationControllerDelegate {
     
     let imagePicker = UIImagePickerController()
+    var user: User?
     weak var delegate: PhotoSelectorViewControllerDelegate?
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -19,6 +20,21 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        guard let photo = user?.photo else { return }
+        profileImageView.image = photo
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: Any) {

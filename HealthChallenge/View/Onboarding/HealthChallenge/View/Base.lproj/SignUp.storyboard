@@ -97,14 +97,13 @@
         <!--Photo Selector View Controller-->
         <scene sceneID="yvJ-L1-SBS">
             <objects>
-                <viewController id="rye-jh-qCP" customClass="PhotoSelectorViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="photoPicker" id="rye-jh-qCP" customClass="PhotoSelectorViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G5n-uL-2Jz">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="202.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UO-5G-AJf">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="202.5"/>
-                                <state key="normal" title="(button)"/>
                                 <connections>
                                     <action selector="addPhotoButtonTapped:" destination="rye-jh-qCP" eventType="touchUpInside" id="8N4-5z-6Ea"/>
                                     <action selector="changePhotoButtonTapped:" destination="HG6-nC-OYI" eventType="touchUpInside" id="Ne5-CA-HS7"/>

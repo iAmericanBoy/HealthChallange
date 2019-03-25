@@ -145,7 +145,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Dq-02-guQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="923"/>
+            <point key="canvasLocation" x="-49" y="958"/>
+        </scene>
+        <!--New Onboarding View Controller-->
+        <scene sceneID="VEB-22-P98">
+            <objects>
+                <viewController id="YOZ-cJ-cQQ" customClass="NewOnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Si-yX-D1K">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="M1J-ow-hfm"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="7oR-2x-uOT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mv0-Dq-1N6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1671.2" y="957.57121439280365"/>
         </scene>
         <!--Sign Up Parent View Controller-->
         <scene sceneID="cb2-YW-Q01">
@@ -187,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nnc-x4-RgE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1436" y="958"/>
+            <point key="canvasLocation" x="2375.1999999999998" y="957.57121439280365"/>
         </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="wkM-hQ-rYj">
@@ -195,7 +212,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="z1e-O7-sQP" customClass="OnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhY-ZQ-Smm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2174" y="958"/>
+            <point key="canvasLocation" x="3112.8000000000002" y="957.57121439280365"/>
         </scene>
         <!--New Challenge Parent View Controller-->
         <scene sceneID="acq-aT-oYI">
@@ -245,7 +262,26 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="T59-Id-EQD" customClass="ChallengeOnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vay-D1-cV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084" y="1628"/>
+            <point key="canvasLocation" x="2174" y="1628"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cLt-7k-xDn">
+            <objects>
+                <navigationController storyboardIdentifier="onboardingV2" automaticallyAdjustsScrollViewInsets="NO" id="e0x-S4-vCX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qnr-LR-6Bo">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YOZ-cJ-cQQ" kind="relationship" relationship="rootViewController" id="fQy-d6-9RB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HTF-lH-MWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="732" y="957.57121439280365"/>
         </scene>
     </scenes>
 </document>

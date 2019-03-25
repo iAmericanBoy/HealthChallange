@@ -25,4 +25,6 @@ extension Challenge {
     static let startDayKey = "startDay"
     /// "finishDay"
     static let finishDayKey = "finishDay"
+    /// "shareURL"
+    static let shareURLKey = "shareURL"
 }
