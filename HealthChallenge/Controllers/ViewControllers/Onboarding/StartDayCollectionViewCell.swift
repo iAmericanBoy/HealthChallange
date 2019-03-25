@@ -187,16 +187,8 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         calendarCollectionView = UICollectionView(frame: contentView.frame, collectionViewLayout: layout)
-        calendarCollectionView?.contentInsetAdjustmentBehavior = .scrollableAxes
         
-        calendarCollectionView?.delegate = self
-        calendarCollectionView?.dataSource = self
-        
-        calendarCollectionView?.backgroundColor = .clear
-        calendarCollectionView?.showsHorizontalScrollIndicator = false
-        calendarCollectionView?.clipsToBounds = true
-        calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
-        calendarCollectionView?.translatesAutoresizingMaskIntoConstraints = false
+        setupCollectionView()
         
         contentView.addSubview(calendarCollectionView!)
         calendarCollectionView?.topAnchor.constraint(equalTo: topRowStackView.bottomAnchor).isActive = true
@@ -208,6 +200,19 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         saveButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         saveButton.topAnchor.constraint(equalTo: (calendarCollectionView?.bottomAnchor)!).isActive = true
         saveButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
+    }
+    
+    func setupCollectionView() {
+        calendarCollectionView?.contentInsetAdjustmentBehavior = .scrollableAxes
+        
+        calendarCollectionView?.delegate = self
+        calendarCollectionView?.dataSource = self
+        
+        calendarCollectionView?.backgroundColor = .clear
+        calendarCollectionView?.showsHorizontalScrollIndicator = false
+        calendarCollectionView?.clipsToBounds = true
+        calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
+        calendarCollectionView?.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func findDateRange(from startDate: Date) {
@@ -232,7 +237,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     }
 }
 
-//MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

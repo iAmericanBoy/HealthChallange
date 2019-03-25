@@ -77,5 +77,55 @@ class ShareCollectionViewCell: UICollectionViewCell {
         topRowStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         topRowStackView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
         
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        userCollectionView = UICollectionView(frame: contentView.frame, collectionViewLayout: layout)
+        
+        contentView.addSubview(userCollectionView!)
+        userCollectionView?.topAnchor.constraint(equalTo: topRowStackView.bottomAnchor, constant: 10).isActive = true
+        userCollectionView?.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        userCollectionView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 1).isActive = true
+        userCollectionView?.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
+        
+        setupCollectionView()
+    }
+    
+    func setupCollectionView() {
+        userCollectionView?.contentInsetAdjustmentBehavior = .scrollableAxes
+        
+        userCollectionView?.delegate = self
+        userCollectionView?.dataSource = self
+        
+        userCollectionView?.backgroundColor = .clear
+        userCollectionView?.showsHorizontalScrollIndicator = false
+        userCollectionView?.clipsToBounds = true
+        userCollectionView?.register(NewUserCollectionViewCell.self, forCellWithReuseIdentifier: "userCell")
+        userCollectionView?.translatesAutoresizingMaskIntoConstraints = false
     }
 }
+
+//MARK: - CollectionViewDelegate, UICollectionViewDataSource
+extension ShareCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return UserController.shared.currentUsers.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as? NewUserCollectionViewCell
+        
+        cell?.user = UserController.shared.currentUsers[indexPath.row]
+        
+        return cell ?? UICollectionViewCell()
+    }
+}
+//MARK: - UICollectionViewDelegateFlowLayout
+extension ShareCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (collectionView.frame.width / 4) - 4, height: (collectionView.frame.width / 4) - 4)
+    }
+}
+
