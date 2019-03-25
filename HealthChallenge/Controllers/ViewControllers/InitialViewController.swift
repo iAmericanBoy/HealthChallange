@@ -51,12 +51,19 @@ class InitialViewController: UIViewController {
                                 if isSuccess {
                                     print("Share Found.")
                                     ChallengeController.shared.currentShare = share
+                                    let dispatchGroup = DispatchGroup()
                                     ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        dispatchGroup.enter()
                                         guard let userRecordID = participant.userIdentity.userRecordID else {return}
                                         UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
                                             if isSuccess {
+                                                dispatchGroup.leave()
                                             }
                                         })
+                                    })
+                                    dispatchGroup.notify(queue: .main, execute: {
+                                        let useresFound = Notification(name: Notification.Name(rawValue: NotificationStrings.allUsersOfChallengeFound), object: nil, userInfo: nil)
+                                        NotificationCenter.default.post(useresFound)
                                     })
                                 } else {
                                     print("No share Found.")

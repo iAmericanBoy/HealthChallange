@@ -90,6 +90,11 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
                 self?.collectionView?.reloadData()
             }
         }
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.allUsersOfChallengeFound), object: nil, queue: .main) { [weak self] (_) in
+            DispatchQueue.main.async {
+                self?.collectionView?.reloadData()
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
