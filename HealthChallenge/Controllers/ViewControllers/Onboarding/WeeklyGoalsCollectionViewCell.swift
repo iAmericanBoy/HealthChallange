@@ -203,4 +203,23 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 1 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let goalToDelete = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
+            GoalController.shared.delete(goal: goalToDelete) { (isSuccess) in
+                DispatchQueue.main.async {
+                    self.tableView?.deleteRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+    }
 }
