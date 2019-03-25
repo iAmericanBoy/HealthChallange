@@ -43,7 +43,7 @@ extension Color {
         
         switch self {
         case .theme:
-            instanceColor = UIColor(hexString: "#42C242")
+            instanceColor = UIColor(hexString: "#942192")
         case .border:
             instanceColor = UIColor(hexString: "#061306")
         case .shadow:
@@ -55,7 +55,7 @@ extension Color {
         case .intermediateBackground:
             instanceColor = UIColor(hexString: "#6D696F")
         case .darkText:
-            instanceColor = UIColor(hexString: "#8702D1")
+            instanceColor = UIColor(hexString: "#942192")
         case .lightText:
             instanceColor = UIColor(hexString: "#EFCF8D")
         case .intermediateText:
