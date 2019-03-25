@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol WeeklyGoalsCollectionViewCellDelegate {
+    func save(weeklyGoals: [Goal])
+    func save(newGoalWithName name: String, toReviewForPublic: Bool)
+}
+
 class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
@@ -16,6 +21,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
             self.updateViews()
         }
     }
+    var delegate: WeeklyGoalsCollectionViewCellDelegate?
     
     // MARK: - Outlets
     var tableView: UITableView?
@@ -47,6 +53,7 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
         let reviewSwitch = UISwitch()
         reviewSwitch.onTintColor = UIColor.lushGreenColor
         reviewSwitch.setOn(true, animated: true)
+        reviewSwitch.addTarget(self, action: #selector(reviewForPublicSwitchChanged), for: .valueChanged)
         reviewSwitch.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
         reviewSwitch.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
         return reviewSwitch
@@ -77,10 +84,22 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     //MARK: - Actions
     @objc func addButtonTapped() {
         print("add")
+        guard let name = customGoalTextField.text, !name.isEmpty else {return}
+        delegate?.save(newGoalWithName: name, toReviewForPublic: reviewForPublicSwitch.isOn)
+        self.tableView?.reloadData()
+        self.customGoalTextField.resignFirstResponder()
+        self.customGoalTextField.text = ""
+        self.reviewForPublicSwitch.isHidden = true
+        self.reviewForPublicLabel.isHidden = true
+        self.addButton.isHidden = true
     }
     
     @objc func saveButtonTapped() {
         print("save")
+    }
+    
+    @objc func reviewForPublicSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: UserDefaultStrings.reviewForPublic)
     }
     
     //MARK: - Private Functions
@@ -160,6 +179,7 @@ extension WeeklyGoalsCollectionViewCell: UITextFieldDelegate {
 extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        print(selectedGoals)
         return GoalController.shared.allGoalsFromCK.count
     }
     

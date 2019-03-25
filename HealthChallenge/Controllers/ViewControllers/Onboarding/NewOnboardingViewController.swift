@@ -165,7 +165,7 @@ extension NewOnboardingViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: -
+//MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = targetContentOffset.pointee.x
@@ -208,9 +208,8 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
         case 2:
             //weeklyGoals
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weeklyGoalsCell", for: indexPath) as? WeeklyGoalsCollectionViewCell
-//            cell?.delegate = self
-//            cell?.activeChallenge = ChallengeController.shared.currentChallenge
-            cell?.selectedGoals = GoalController.shared.weeklyGoals
+            cell?.delegate = self
+            cell?.selectedGoals += GoalController.shared.weeklyGoals
             return cell ?? UICollectionViewCell()
         case 3:
             //monthGoals
@@ -347,6 +346,36 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+//MARK: - WeeklyGoalsCollectionViewCellDelegate
+extension NewOnboardingViewController: WeeklyGoalsCollectionViewCellDelegate {
+    func save(newGoalWithName name: String, toReviewForPublic: Bool) {
+        GoalController.shared.createGoalWith(goalName: name, reviewForPublic: toReviewForPublic) { (isSuccess) in
+            if isSuccess {
+                DispatchQueue.main.async {
+                    self.collectionView?.reloadData()
+                }
+            }
+        }
+    }
+    
+    func save(weeklyGoals: [Goal]) {
+        guard let challenge = ChallengeController.shared.currentChallenge else {return}
+        let dispatchGroup = DispatchGroup()
+        weeklyGoals.forEach { (goal) in
+            dispatchGroup.enter()
+            GoalController.shared.add(newChallenge: challenge, toGoal: goal, { (isSuccess) in
+                if isSuccess {
+                    dispatchGroup.leave()
+                }
+            })
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.screenCount = max(4,self.screenCount)
+            self.handelNext()
         }
     }
 }
