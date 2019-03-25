@@ -36,8 +36,8 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     lazy var photoImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -130,6 +130,12 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         photoImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
         photoImageView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
         photoImageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
+        
+        photoImageView.layer.cornerRadius = contentView.safeAreaLayoutGuide.layoutFrame.size.width * 0.25
+        photoImageView.layer.masksToBounds = true
+        photoImageView.backgroundColor = .white
+        
+
         
         contentView.addSubview(photoButton)
         photoButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: contentView.frame.height / 16).isActive = true
