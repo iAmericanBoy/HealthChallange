@@ -45,7 +45,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         }
     }
     var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
-    var challengeState = ChallengeState.isParticipantChallenge
+    var challengeState = ChallengeState.noActiveChallenge
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -53,10 +53,9 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = FontController.titleFont
         
-//        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
-//        challengeState = ChallengeState(rawValue: rawValue ?? 0)!
-//        
-        setTitle()
+        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
+        challengeState = ChallengeState(rawValue: rawValue ?? 0)!
+
         view.backgroundColor = .white
         imagePicker.delegate = self
         setupCollectionView()
@@ -65,6 +64,12 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let currentIndex = IndexPath(item: screenCount - 1, section: 0)
+        collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
+        pageControl.currentPage = screenCount - 1
+        setTitle()
+
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
             self.presentAlert()

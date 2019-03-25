@@ -292,8 +292,11 @@ class InitialViewController: UIViewController {
     func createNewUser() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "SignUpParentViewController")
-            self.present(viewController, animated: true, completion: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 1
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
@@ -301,8 +304,11 @@ class InitialViewController: UIViewController {
     func createNewChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
-            self.present(viewController, animated: true, completion: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 2
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
@@ -310,15 +316,25 @@ class InitialViewController: UIViewController {
     func currentChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "onboardingV2")
-            self.present(viewController, animated: true, completion: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 5
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
     ///Segue to addMonthGoal VC
     func addMonthGoal() {
         //TODO: Add logic to segue directly to the monthGoal screen
-        currentChallenge()
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 4
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
     
     ///Segue to activeChallenge VC its after StartDate
