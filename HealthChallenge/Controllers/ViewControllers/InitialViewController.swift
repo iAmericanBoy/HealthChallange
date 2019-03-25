@@ -20,9 +20,9 @@ class InitialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: CHECK if network Available
-        
+
         _ = GoalController.shared
-        
+
         //fetch User
         fetchUser { userState in
             switch userState {
@@ -39,9 +39,9 @@ class InitialViewController: UIViewController {
 
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
-                        
+
                         self.fetchWeekGoalsForCurrentChallenge()
-                        
+
                         //Fetch The Share for the current Challenge
                         let currentChallenge = ChallengeController.shared.currentChallenge
                         if let stringURL = currentChallenge?.urlString {
@@ -71,7 +71,7 @@ class InitialViewController: UIViewController {
                                 //check StartDate
                                 print("Checking for Start Day...")
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
-                                
+
                                 if startDay! > Date() {
                                     //before StartDay
                                     print("Challenge's StartDay before Today")
@@ -83,8 +83,8 @@ class InitialViewController: UIViewController {
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.activeChallenge()
                                 }
-                                
-                                
+
+
                             case .noMonthGoal:
                                 self.addMonthGoal()
                             }
@@ -93,12 +93,12 @@ class InitialViewController: UIViewController {
                     case .isParticipantChallenge:
                         UserDefaults.standard.set(ChallengeState.isParticipantChallenge.rawValue, forKey: "ChallengeState")
                         let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-                        
+
                         UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
-                        
+
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
-                        
+
                         //Fetch The Share for the current Challenge
                         let currentChallenge = ChallengeController.shared.currentChallenge
                         if let stringURL = currentChallenge?.urlString {
@@ -120,16 +120,16 @@ class InitialViewController: UIViewController {
                                 }
                             })
                         }
-                        
+
                         self.fetchWeekGoalsForCurrentChallenge()
-                        
+
                         //check StartDate
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
                             switch monthGoalState {
                             case .isMonthGoal:
                                 print("Checking for Start Day...")
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
-                                
+
                                 if startDay! < Date() {
                                     //before StartDay
                                     print("Challenge's StartDay after Today")
@@ -150,9 +150,9 @@ class InitialViewController: UIViewController {
                         //can look at past challenges
                         UserDefaults.standard.set(nil, forKey: "currentChallengeFinishDay")
                         UserDefaults.standard.set(nil, forKey: UserDefaultStrings.ShareRecordName)
-
+                        UserDefaults.standard.set(0, forKey: UserDefaultStrings.ChallengeState)
                         self.createNewChallenge()
-                        
+
                     }
                 })
             case .noUser:
@@ -310,7 +310,7 @@ class InitialViewController: UIViewController {
     func currentChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
+            let viewController = storyboard.instantiateViewController(withIdentifier: "onboardingV2")
             self.present(viewController, animated: true, completion: nil)
         }
     }

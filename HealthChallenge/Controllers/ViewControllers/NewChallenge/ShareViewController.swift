@@ -34,8 +34,14 @@ class ShareViewController: UIViewController {
         
         let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
         challengeState = ChallengeState(rawValue: rawValue ?? 0)!
-        challengeState == .isOwnerChallenge ? updateViewsForOwner() : updateViewsForParticipant()
-        
+        switch ChallengeState(rawValue: rawValue ?? 0)! {
+        case .isOwnerChallenge:
+            updateViewsForOwner()
+        case .isParticipantChallenge:
+            updateViewsForParticipant()
+        case .noActiveChallenge:
+            updateViewsForOwner()
+        }
         
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")

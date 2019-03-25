@@ -61,9 +61,18 @@
 		62FE5A692242BC7E009240C6 /* Workout+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A682242BC7E009240C6 /* Workout+MagicStrings.swift */; };
 		62FE5A6B2242C80E009240C6 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A6A2242C80E009240C6 /* WorkoutController.swift */; };
 		62FE5A6D2244193C009240C6 /* WorkoutDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A6C2244193C009240C6 /* WorkoutDetailTableViewCell.swift */; };
+		B624ACAE2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACAD2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift */; };
+		B624ACB02248026B00B5DD2F /* MonthGoalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACAF2248026B00B5DD2F /* MonthGoalCollectionViewCell.swift */; };
+		B624ACB22248027D00B5DD2F /* ShareCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACB12248027D00B5DD2F /* ShareCollectionViewCell.swift */; };
+		B624ACB422487BF100B5DD2F /* NewUserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACB322487BF100B5DD2F /* NewUserCollectionViewCell.swift */; };
+		B66C81D422473C0500FDACC8 /* NewDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66C81D322473C0500FDACC8 /* NewDateCollectionViewCell.swift */; };
+		B6823FAF2246DD0500D2E23B /* NewOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6823FAE2246DD0500D2E23B /* NewOnboardingViewController.swift */; };
 		B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD36862243EB2000E66A7F /* AppStates.swift */; };
 		B6BD368B224440DA00E66A7F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */; };
 		B6BD368D224579E900E66A7F /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368C224579E900E66A7F /* UserCollectionViewCell.swift */; };
+		B6BD368F2245892D00E66A7F /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368E2245892D00E66A7F /* Points.swift */; };
+		B6BD369122458A5D00E66A7F /* Points+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD369022458A5D00E66A7F /* Points+Extension.swift */; };
+		B6BD369322458E7500E66A7F /* PointsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD369222458E7500E66A7F /* PointsController.swift */; };
 		B6E210622240500200642274 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E210612240500100642274 /* InitialViewController.swift */; };
 		B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E332BB2236B8650088D6FF /* AppDelegate.swift */; };
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
@@ -78,6 +87,10 @@
 		B6EBA60E22386CD30001F5BF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60D22386CD30001F5BF /* CloudKit.framework */; };
 		B6EBA61022396D730001F5BF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60F22396D730001F5BF /* HealthKit.framework */; };
 		B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA6112239DA400001F5BF /* MagicStrings.swift */; };
+		B6FD98CC2246E75F00A6522E /* SignUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */; };
+		B6FD98CE2246ED1100A6522E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CD2246ED1100A6522E /* UIColor+Extension.swift */; };
+		B6FD98D02246F97800A6522E /* FontController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CF2246F97700A6522E /* FontController.swift */; };
+		B6FD98D222472E4E00A6522E /* StartDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98D122472E4E00A6522E /* StartDayCollectionViewCell.swift */; };
 		CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FB92242B2D800C3EEB3 /* Extensions.swift */; };
 		CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */; };
 		CE178FBE2242E73500C3EEB3 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */; };
@@ -149,9 +162,18 @@
 		62FE5A682242BC7E009240C6 /* Workout+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workout+MagicStrings.swift"; sourceTree = "<group>"; };
 		62FE5A6A2242C80E009240C6 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 		62FE5A6C2244193C009240C6 /* WorkoutDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDetailTableViewCell.swift; sourceTree = "<group>"; };
+		B624ACAD2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyGoalsCollectionViewCell.swift; sourceTree = "<group>"; };
+		B624ACAF2248026B00B5DD2F /* MonthGoalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGoalCollectionViewCell.swift; sourceTree = "<group>"; };
+		B624ACB12248027D00B5DD2F /* ShareCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCollectionViewCell.swift; sourceTree = "<group>"; };
+		B624ACB322487BF100B5DD2F /* NewUserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCollectionViewCell.swift; sourceTree = "<group>"; };
+		B66C81D322473C0500FDACC8 /* NewDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDateCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6823FAE2246DD0500D2E23B /* NewOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingViewController.swift; sourceTree = "<group>"; };
 		B6BD36862243EB2000E66A7F /* AppStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStates.swift; sourceTree = "<group>"; };
 		B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		B6BD368C224579E900E66A7F /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6BD368E2245892D00E66A7F /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
+		B6BD369022458A5D00E66A7F /* Points+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Points+Extension.swift"; sourceTree = "<group>"; };
+		B6BD369222458E7500E66A7F /* PointsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsController.swift; sourceTree = "<group>"; };
 		B6E210612240500100642274 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		B6E332B82236B8650088D6FF /* HealthChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6E332BB2236B8650088D6FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +191,10 @@
 		B6EBA60D22386CD30001F5BF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B6EBA60F22396D730001F5BF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B6EBA6112239DA400001F5BF /* MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicStrings.swift; sourceTree = "<group>"; };
+		B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6FD98CD2246ED1100A6522E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		B6FD98CF2246F97700A6522E /* FontController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontController.swift; sourceTree = "<group>"; };
+		B6FD98D122472E4E00A6522E /* StartDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE178FB92242B2D800C3EEB3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailViewController.swift; sourceTree = "<group>"; };
 		CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
@@ -201,6 +227,7 @@
 		62D067A22236D1CC00D5410B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6823FB02246DD0F00D2E23B /* Onboarding */,
 				62D067B42236FD6200D5410B /* SignUp */,
 				62D067B52236FD9F00D5410B /* NewChallenge */,
 				62D06806223AB6B200D5410B /* ActiveChallege */,
@@ -215,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				62FE5A17223E94A3009240C6 /* ColorController.swift */,
+				B6FD98CF2246F97700A6522E /* FontController.swift */,
 				62D067FC22397F3600D5410B /* HealthKitController.swift */,
 				62D067C7223719A700D5410B /* CloudKitController.swift */,
 				62D067CF223836CA00D5410B /* CallendarControlls */,
@@ -257,6 +285,7 @@
 				CE57AD2922402B2800712975 /* FoodTracker.swift */,
 				CEB299B0223C09250089DA63 /* Nutrients.swift */,
 				CEB299AE223C08D30089DA63 /* Food.swift */,
+				B6BD368E2245892D00E66A7F /* Points.swift */,
 				62D067BC2237182300D5410B /* User.swift */,
 				B6EBA5FB22380F970001F5BF /* Challenge.swift */,
 				B6EBA5FD22380FE10001F5BF /* Goal.swift */,
@@ -273,6 +302,7 @@
 				B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */,
 				B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */,
 				62FE5A682242BC7E009240C6 /* Workout+MagicStrings.swift */,
+				B6BD369022458A5D00E66A7F /* Points+Extension.swift */,
 			);
 			path = MagicStrings;
 			sourceTree = "<group>";
@@ -288,6 +318,7 @@
 				CEB299B6223C0B240089DA63 /* NutrientsController.swift */,
 				CE57AD2722402B1200712975 /* FoodTrackerController.swift */,
 				62FE5A6A2242C80E009240C6 /* WorkoutController.swift */,
+				B6BD369222458E7500E66A7F /* PointsController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -387,6 +418,21 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		B6823FB02246DD0F00D2E23B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B6823FAE2246DD0500D2E23B /* NewOnboardingViewController.swift */,
+				B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */,
+				B6FD98D122472E4E00A6522E /* StartDayCollectionViewCell.swift */,
+				B66C81D322473C0500FDACC8 /* NewDateCollectionViewCell.swift */,
+				B624ACAD2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift */,
+				B624ACAF2248026B00B5DD2F /* MonthGoalCollectionViewCell.swift */,
+				B624ACB12248027D00B5DD2F /* ShareCollectionViewCell.swift */,
+				B624ACB322487BF100B5DD2F /* NewUserCollectionViewCell.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		B6E332AF2236B8650088D6FF = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +462,7 @@
 				B6EBA6112239DA400001F5BF /* MagicStrings.swift */,
 				B6E332CD2236B87E0088D6FF /* Resources */,
 				B6BD36862243EB2000E66A7F /* AppStates.swift */,
+				B6FD98CD2246ED1100A6522E /* UIColor+Extension.swift */,
 			);
 			path = HealthChallenge;
 			sourceTree = "<group>";
@@ -560,6 +607,8 @@
 				62D067B12236DBDF00D5410B /* OnboardingViewController.swift in Sources */,
 				CEB299B3223C09740089DA63 /* Dish.swift in Sources */,
 				CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */,
+				B624ACB02248026B00B5DD2F /* MonthGoalCollectionViewCell.swift in Sources */,
+				B6FD98D222472E4E00A6522E /* StartDayCollectionViewCell.swift in Sources */,
 				B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */,
 				B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */,
 				62D067B32236FD4800D5410B /* NewChallengeParentViewController.swift in Sources */,
@@ -578,6 +627,7 @@
 				62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */,
 				62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */,
 				62FE5A6D2244193C009240C6 /* WorkoutDetailTableViewCell.swift in Sources */,
+				B6FD98CE2246ED1100A6522E /* UIColor+Extension.swift in Sources */,
 				62D067B72236FDCB00D5410B /* ChallengeOnboardingViewController.swift in Sources */,
 				CE57AD2A22402B2800712975 /* FoodTracker.swift in Sources */,
 				62FE5A33223FE450009240C6 /* SettingsPopupViewController.swift in Sources */,
@@ -586,15 +636,22 @@
 				CEB299AF223C08D30089DA63 /* Food.swift in Sources */,
 				62D067C0223718BD00D5410B /* User+MagicSrings.swift in Sources */,
 				62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */,
+				B624ACAE2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift in Sources */,
+				B6BD369122458A5D00E66A7F /* Points+Extension.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
 				CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */,
+				B66C81D422473C0500FDACC8 /* NewDateCollectionViewCell.swift in Sources */,
 				62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */,
 				62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */,
+				B6823FAF2246DD0500D2E23B /* NewOnboardingViewController.swift in Sources */,
 				62D067AD2236D25F00D5410B /* ShareViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
+				B624ACB422487BF100B5DD2F /* NewUserCollectionViewCell.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
+				B6BD368F2245892D00E66A7F /* Points.swift in Sources */,
 				62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */,
 				B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */,
+				B6FD98D02246F97800A6522E /* FontController.swift in Sources */,
 				62D06808223AC65A00D5410B /* AddWorkoutsViewController.swift in Sources */,
 				62D06805223AB6A900D5410B /* LeaderboardViewController.swift in Sources */,
 				62FE5A672242BA67009240C6 /* Workout.swift in Sources */,
@@ -602,14 +659,17 @@
 				62D067FF223AB68100D5410B /* DishCreatorViewController.swift in Sources */,
 				62D067AF2236D90900D5410B /* SignUpParentViewController.swift in Sources */,
 				62D06803223AB69900D5410B /* GoalsViewController.swift in Sources */,
+				B6FD98CC2246E75F00A6522E /* SignUpCollectionViewCell.swift in Sources */,
 				B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */,
 				62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */,
 				CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */,
+				B6BD369322458E7500E66A7F /* PointsController.swift in Sources */,
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
 				B6E210622240500200642274 /* InitialViewController.swift in Sources */,
 				CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */,
 				B6BD368D224579E900E66A7F /* UserCollectionViewCell.swift in Sources */,
 				CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */,
+				B624ACB22248027D00B5DD2F /* ShareCollectionViewCell.swift in Sources */,
 				CE60FC60224038390029386F /* DishController.swift in Sources */,
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
 				62FE5A6522429C11009240C6 /* WorkoutDetailViewController.swift in Sources */,

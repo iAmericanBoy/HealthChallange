@@ -22,6 +22,10 @@ class CalendarController {
     var firstWeekDayOfMonth = 0
     var currentCalendar = Calendar.current
     
+    init() {
+        initializeCurrentCalendar()
+    }
+    
     func initializeCurrentCalendar() {
         currentMonthIndex = currentCalendar.component(.month, from: Date())
         currentYear = currentCalendar.component(.year, from: Date())

@@ -12,6 +12,13 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleVersion</key>
 	<string>4</string>
+	<string>6</string>
+	<key>CKSharingSupported</key>
+	<true/>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>CKSharingSupported</key>
