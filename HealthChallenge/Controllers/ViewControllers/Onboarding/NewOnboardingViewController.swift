@@ -10,6 +10,7 @@ import UIKit
 
 
 class NewOnboardingViewController: UIViewController, UINavigationControllerDelegate {
+    
     //MARK: - Outlets
     var collectionView: UICollectionView?
     let imagePicker = UIImagePickerController()
@@ -43,13 +44,17 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         }
     }
     var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
-    
+    var challengeState = ChallengeState.noActiveChallenge
+
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = FontController.titleFont
-
+        
+        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
+        challengeState = ChallengeState(rawValue: rawValue ?? 0)!
+        
         setTitle()
         view.backgroundColor = .white
         imagePicker.delegate = self
@@ -209,6 +214,7 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             //weeklyGoals
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weeklyGoalsCell", for: indexPath) as? WeeklyGoalsCollectionViewCell
             cell?.delegate = self
+            cell?.challengeState = challengeState
             cell?.selectedGoals = GoalController.shared.weeklyGoals
             return cell ?? UICollectionViewCell()
         case 3:
