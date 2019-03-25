@@ -53,9 +53,6 @@ class WorkoutController {
     //fetch
     func fetchUsersWorkouts(completion: @escaping (Bool) -> Void) {
         var allWorkouts: [Workout] = []
-//        guard let currentChallenge = ChallengeController.shared.currentChallenge else { completion(false) ; return }
-//        let hkWorkouts = WorkoutController.shared.transformHKWorkoutsFrom(startDate: currentChallenge.startDay, endDate: currentChallenge.finishDay)
-//        self.allWorkouts.append(contentsOf: hkWorkouts)
         
         CloudKitController.shared.fetchUserRecordID { (success, recordID) in
             if success {

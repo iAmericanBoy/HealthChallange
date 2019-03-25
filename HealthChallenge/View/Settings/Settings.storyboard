@@ -13,7 +13,7 @@
         <!--Settings Table View Controller-->
         <scene sceneID="C5p-Pj-cah">
             <objects>
-                <tableViewController id="WKL-77-GBe" customClass="SettingsTableViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Settings" id="WKL-77-GBe" customClass="SettingsTableViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="eJ1-83-JoG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,8 +128,27 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="A2H-fH-RN8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cGe-pd-jub">
                                         <rect key="frame" x="0.0" y="592.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cGe-pd-jub" id="HLb-8U-g0Y">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mos-VP-80P">
+                                                    <rect key="frame" x="129" y="7" width="117" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Delete Challenge"/>
+                                                    <connections>
+                                                        <action selector="deleteChallengeButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="K09-eZ-IOf"/>
+                                                        <action selector="deleteProfileButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="e5e-wg-lZg"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="A2H-fH-RN8">
+                                        <rect key="frame" x="0.0" y="636.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A2H-fH-RN8" id="rSs-DS-Ekf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -174,6 +193,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMj-G8-e5P">
                                 <rect key="frame" x="0.0" y="0.0" width="247" height="247"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="addPhotoButtonTapped:" destination="gmp-LP-Xmh" eventType="touchUpInside" id="7UR-9m-oQT"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stockPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="pc7-3b-Yw7">
                                 <rect key="frame" x="0.0" y="0.0" width="247" height="247"/>
@@ -195,6 +217,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="s2x-gR-5UP"/>
                     </view>
+                    <connections>
+                        <outlet property="profileImageView" destination="pc7-3b-Yw7" id="eY9-om-vEP"/>
+                        <outlet property="selectImageButton" destination="vMj-G8-e5P" id="6fl-Mz-chT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhe-nV-pcJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
