@@ -215,7 +215,11 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
             
             cell?.delegate = self
-            cell?.profilePhoto = profilePicture
+            if profilePicture == nil {
+                cell?.profilePhoto = UIImage(named: "stockPhoto")
+            } else {
+                cell?.profilePhoto = profilePicture
+            }
             
             cell?.user = UserController.shared.loggedInUser
             
