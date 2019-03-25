@@ -20,9 +20,8 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-        if let user = UserController.shared.loggedInUser {
-            profileImageView.image = user.photo
-        }
+        guard let photo = user?.photo else { return }
+        profileImageView.image = photo
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6254412A2245984800A87290 /* SettingsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625441292245984800A87290 /* SettingsNavigationViewController.swift */; };
+		625441352246AC4000A87290 /* JosefinSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6254412B2246AC4000A87290 /* JosefinSans-Bold.ttf */; };
+		625441362246AC4000A87290 /* JosefinSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6254412C2246AC4000A87290 /* JosefinSans-Regular.ttf */; };
+		625441372246AC4000A87290 /* JosefinSans-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6254412D2246AC4000A87290 /* JosefinSans-Thin.ttf */; };
+		625441382246AC4000A87290 /* JosefinSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6254412E2246AC4000A87290 /* JosefinSans-Italic.ttf */; };
+		625441392246AC4000A87290 /* JosefinSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6254412F2246AC4000A87290 /* JosefinSans-SemiBoldItalic.ttf */; };
+		6254413A2246AC4000A87290 /* JosefinSans-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 625441302246AC4000A87290 /* JosefinSans-ThinItalic.ttf */; };
+		6254413B2246AC4000A87290 /* JosefinSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 625441312246AC4000A87290 /* JosefinSans-SemiBold.ttf */; };
+		6254413C2246AC4000A87290 /* JosefinSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 625441322246AC4000A87290 /* JosefinSans-LightItalic.ttf */; };
+		6254413D2246AC4000A87290 /* JosefinSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 625441332246AC4000A87290 /* JosefinSans-BoldItalic.ttf */; };
+		6254413E2246AC4000A87290 /* JosefinSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 625441342246AC4000A87290 /* JosefinSans-Light.ttf */; };
 		62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A02236D1C400D5410B /* SignUpViewController.swift */; };
 		62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A42236D1FB00D5410B /* HealthKitAccessViewController.swift */; };
 		62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A62236D22000D5410B /* StartDateViewController.swift */; };
@@ -97,6 +108,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		625441292245984800A87290 /* SettingsNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationViewController.swift; sourceTree = "<group>"; };
+		6254412B2246AC4000A87290 /* JosefinSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-Bold.ttf"; path = "../../../../josefin-sans/JosefinSans-Bold.ttf"; sourceTree = "<group>"; };
+		6254412C2246AC4000A87290 /* JosefinSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-Regular.ttf"; path = "../../../../josefin-sans/JosefinSans-Regular.ttf"; sourceTree = "<group>"; };
+		6254412D2246AC4000A87290 /* JosefinSans-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-Thin.ttf"; path = "../../../../josefin-sans/JosefinSans-Thin.ttf"; sourceTree = "<group>"; };
+		6254412E2246AC4000A87290 /* JosefinSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-Italic.ttf"; path = "../../../../josefin-sans/JosefinSans-Italic.ttf"; sourceTree = "<group>"; };
+		6254412F2246AC4000A87290 /* JosefinSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-SemiBoldItalic.ttf"; path = "../../../../josefin-sans/JosefinSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		625441302246AC4000A87290 /* JosefinSans-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-ThinItalic.ttf"; path = "../../../../josefin-sans/JosefinSans-ThinItalic.ttf"; sourceTree = "<group>"; };
+		625441312246AC4000A87290 /* JosefinSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-SemiBold.ttf"; path = "../../../../josefin-sans/JosefinSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		625441322246AC4000A87290 /* JosefinSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-LightItalic.ttf"; path = "../../../../josefin-sans/JosefinSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		625441332246AC4000A87290 /* JosefinSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-BoldItalic.ttf"; path = "../../../../josefin-sans/JosefinSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		625441342246AC4000A87290 /* JosefinSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "JosefinSans-Light.ttf"; path = "../../../../josefin-sans/JosefinSans-Light.ttf"; sourceTree = "<group>"; };
 		62D067A02236D1C400D5410B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		62D067A42236D1FB00D5410B /* HealthKitAccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAccessViewController.swift; sourceTree = "<group>"; };
 		62D067A62236D22000D5410B /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
@@ -363,6 +385,16 @@
 		62FE5A21223EAB5F009240C6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				6254412B2246AC4000A87290 /* JosefinSans-Bold.ttf */,
+				625441332246AC4000A87290 /* JosefinSans-BoldItalic.ttf */,
+				6254412E2246AC4000A87290 /* JosefinSans-Italic.ttf */,
+				625441342246AC4000A87290 /* JosefinSans-Light.ttf */,
+				625441322246AC4000A87290 /* JosefinSans-LightItalic.ttf */,
+				6254412C2246AC4000A87290 /* JosefinSans-Regular.ttf */,
+				625441312246AC4000A87290 /* JosefinSans-SemiBold.ttf */,
+				6254412F2246AC4000A87290 /* JosefinSans-SemiBoldItalic.ttf */,
+				6254412D2246AC4000A87290 /* JosefinSans-Thin.ttf */,
+				625441302246AC4000A87290 /* JosefinSans-ThinItalic.ttf */,
 				62FE5A1F223EAAF1009240C6 /* ostrich-regular.ttf */,
 			);
 			path = Fonts;
@@ -381,6 +413,7 @@
 			children = (
 				62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */,
 				62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */,
+				625441292245984800A87290 /* SettingsNavigationViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -536,20 +569,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				62FE5A2B223EBE76009240C6 /* Settings.storyboard in Resources */,
+				625441352246AC4000A87290 /* JosefinSans-Bold.ttf in Resources */,
 				62D067D82238914400D5410B /* HealthKitAccess.storyboard in Resources */,
+				625441362246AC4000A87290 /* JosefinSans-Regular.ttf in Resources */,
+				6254413C2246AC4000A87290 /* JosefinSans-LightItalic.ttf in Resources */,
 				B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */,
 				B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */,
 				62D067D62238911200D5410B /* SignUp.storyboard in Resources */,
+				6254413B2246AC4000A87290 /* JosefinSans-SemiBold.ttf in Resources */,
 				62D067F02238947F00D5410B /* WorkoutTab.storyboard in Resources */,
+				6254413A2246AC4000A87290 /* JosefinSans-ThinItalic.ttf in Resources */,
 				62FE5A20223EAAFC009240C6 /* ostrich-regular.ttf in Resources */,
 				B6E332C12236B8650088D6FF /* Main.storyboard in Resources */,
+				6254413D2246AC4000A87290 /* JosefinSans-BoldItalic.ttf in Resources */,
 				62D067E52238924E00D5410B /* WeeklyGoals.storyboard in Resources */,
+				625441392246AC4000A87290 /* JosefinSans-SemiBoldItalic.ttf in Resources */,
 				62D067F5223894D500D5410B /* LeaderboardTab.storyboard in Resources */,
 				62D067F2223894A100D5410B /* GoalsTab.storyboard in Resources */,
 				62D067EC2238943B00D5410B /* FoodTab.storyboard in Resources */,
 				62D067EA223892A400D5410B /* InviteOthers.storyboard in Resources */,
 				62D067E22238921B00D5410B /* StartDate.storyboard in Resources */,
 				62D067E72238928700D5410B /* MonthlyGoals.storyboard in Resources */,
+				625441382246AC4000A87290 /* JosefinSans-Italic.ttf in Resources */,
+				6254413E2246AC4000A87290 /* JosefinSans-Light.ttf in Resources */,
+				625441372246AC4000A87290 /* JosefinSans-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +616,7 @@
 				B6BD368B224440DA00E66A7F /* UIViewController+Extension.swift in Sources */,
 				62FE5A692242BC7E009240C6 /* Workout+MagicStrings.swift in Sources */,
 				62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */,
+				6254412A2245984800A87290 /* SettingsNavigationViewController.swift in Sources */,
 				CEB299B7223C0B240089DA63 /* NutrientsController.swift in Sources */,
 				62D067A92236D23800D5410B /* WeeklyGoalsViewController.swift in Sources */,
 				62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */,
