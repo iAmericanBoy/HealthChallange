@@ -41,10 +41,9 @@ class WorkoutViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        settingsImage()
         calendarCollectionView.backgroundColor = .clear
         calendarController.initializeCurrentCalendar()
-        findDateRange(from: Date())
+        findDateRange(from: challenge.startDay)
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         monthLabel.text = "\(challenge.name)"
@@ -73,17 +72,17 @@ class WorkoutViewController: UIViewController {
     @IBAction func optionsButtonTapped(_ sender: Any) {
         
     }
-    
-    func settingsImage() {
-        if let image = UserController.shared.loggedInUser?.photo {
-            optionsButton.image = image
-        } else {
-            guard let image = UIImage(named: "stockPhoto"),
-                let imageAsData = image.pngData()
-                else { return }
-            optionsButton.image = UIImage(data: imageAsData, scale: 10)
-        }
-    }
+//    
+//    func settingsImage() {
+//        if let image = UserController.shared.loggedInUser?.photo {
+//            optionsButton.image = image
+//        } else {
+//            guard let image = UIImage(named: "stockPhoto"),
+//                let imageAsData = image.pngData()
+//                else { return }
+//            optionsButton.image = UIImage(data: imageAsData, scale: 10)
+//        }
+//    }
     
     func findDateRange(from startDate: Date) {
         var dayRange = [startDate]

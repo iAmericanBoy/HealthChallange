@@ -39,11 +39,11 @@
         <!--Goals-->
         <scene sceneID="iZt-Ee-oxL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nPX-vx-Rrd" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nPX-vx-Rrd" customClass="SettingsNavigationViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Goals" id="qiE-DQ-9SM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="mFM-YG-5Vn">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="117"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="OstrichSans-Black" family="Ostrich Sans" pointSize="60"/>
