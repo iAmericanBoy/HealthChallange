@@ -189,8 +189,9 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
+        cell.selectionStyle = .none
         
-        cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.labelTitleFont)
+        cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFont)
         
         if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
             cell.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.05)
@@ -217,7 +218,7 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
             let goalToDelete = GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]
             GoalController.shared.delete(goal: goalToDelete) { (isSuccess) in
                 DispatchQueue.main.async {
-                    self.tableView?.deleteRows(at: [indexPath], with: .automatic)
+                    self.tableView?.deleteRows(at: [indexPath], with: .right)
                 }
             }
         }

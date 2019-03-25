@@ -12,11 +12,13 @@ struct FontController {
     
     static let labelTitleFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 20),NSAttributedString.Key.foregroundColor: UIColor.black]
     
+        static let tableViewRowFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 17),NSAttributedString.Key.foregroundColor: UIColor.black]
+    
     static let textFieldFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 17),NSAttributedString.Key.foregroundColor: UIColor.black]
     
     static let subTitleLabelFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.medium]]), size: 13),NSAttributedString.Key.foregroundColor: UIColor.black]
 
-    static let titleFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.heavy]]), size: 60),NSAttributedString.Key.foregroundColor: UIColor.purple]
+    static let titleFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.heavy]]), size: 55),NSAttributedString.Key.foregroundColor: UIColor.purple]
     
     static let buttonFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.bold]]), size: 30),NSAttributedString.Key.foregroundColor: UIColor.lushGreenColor]
     
