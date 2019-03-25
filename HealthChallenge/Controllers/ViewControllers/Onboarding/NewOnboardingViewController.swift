@@ -379,14 +379,16 @@ extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
     func save(monthGoal: Goal) {
         guard let userID = UserController.shared.appleUserID, let challengeID = ChallengeController.shared.currentChallenge?.recordID else {return}
         let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        GoalController.shared.remove(userRef: CKRecord.Reference(recordID: userID, action: .none), fromGoal: GoalController.shared.monthGoal!) { (isSuccess) in
-            if isSuccess {
-                dispatchGroup.leave()
+        if let oldGoal = GoalController.shared.monthGoal {
+            dispatchGroup.enter()
+            GoalController.shared.remove(userRef: CKRecord.Reference(recordID: userID, action: .none), fromGoal: oldGoal ) { (isSuccess) in
+                if isSuccess {
+                    dispatchGroup.leave()
+                }
             }
         }
-        dispatchGroup.enter()
 
+        dispatchGroup.enter()
         GoalController.shared.add(newUserReference: CKRecord.Reference(recordID: userID, action: .none), toGoal: monthGoal, forChallenge: CKRecord.Reference(recordID: challengeID, action: .none))  { (isSuccess) in
             if isSuccess {
                 dispatchGroup.leave()
