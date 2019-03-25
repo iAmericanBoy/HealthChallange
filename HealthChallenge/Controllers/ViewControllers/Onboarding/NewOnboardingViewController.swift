@@ -45,7 +45,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         }
     }
     var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
-    var challengeState = ChallengeState.noActiveChallenge
+    var challengeState = ChallengeState.isParticipantChallenge
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -53,9 +53,9 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = FontController.titleFont
         
-        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
-        challengeState = ChallengeState(rawValue: rawValue ?? 0)!
-        
+//        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
+//        challengeState = ChallengeState(rawValue: rawValue ?? 0)!
+//        
         setTitle()
         view.backgroundColor = .white
         imagePicker.delegate = self
@@ -475,7 +475,10 @@ extension NewOnboardingViewController: ShareCollectionViewCellDelegate {
                 self.present(sharingViewController, animated: true)
             }
         case .isParticipantChallenge:
-            break
+            guard let shareURL = ChallengeController.shared.currentShare?.url else {return}
+            let activityViewController = UIActivityViewController(activityItems: [shareURL], applicationActivities: nil)
+            present(activityViewController, animated: true, completion: {})
+
         case .noActiveChallenge:
             break
         }
