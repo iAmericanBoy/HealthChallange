@@ -27,23 +27,21 @@ class WorkoutViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
-    @IBOutlet weak var optionsButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        WorkoutController.shared.fetchUsersWorkouts { (success) in
-            print("Fetched workouts successfully.")
-            self.workouts = WorkoutController.shared.workouts
-        }
         guard let challenge = ChallengeController.shared.currentChallenge else { return }
+        workouts = WorkoutController.shared.workouts
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         calendarCollectionView.backgroundColor = .clear
         calendarController.initializeCurrentCalendar()
         findDateRange(from: challenge.startDay)
+        setPoints()
+        setSettingsButton()
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         monthLabel.text = "\(challenge.name)"
@@ -53,10 +51,6 @@ class WorkoutViewController: UIViewController {
         updateViews()
         // animations?
         super.viewWillAppear(animated)
-//        WorkoutController.shared.fetchUsersWorkouts { (success) in
-//            print("Fetched workouts successfully.")
-//            self.workouts = WorkoutController.shared.workouts
-//        }
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
             self.presentAlert()
@@ -68,22 +62,7 @@ class WorkoutViewController: UIViewController {
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
-    // MARK: - Actions
-    @IBAction func optionsButtonTapped(_ sender: Any) {
-        
-    }
-//    
-//    func settingsImage() {
-//        if let image = UserController.shared.loggedInUser?.photo {
-//            optionsButton.image = image
-//        } else {
-//            guard let image = UIImage(named: "stockPhoto"),
-//                let imageAsData = image.pngData()
-//                else { return }
-//            optionsButton.image = UIImage(data: imageAsData, scale: 10)
-//        }
-//    }
-    
+    // MARK: - Class functions
     func findDateRange(from startDate: Date) {
         var dayRange = [startDate]
         var previousDate = startDate
@@ -103,6 +82,56 @@ class WorkoutViewController: UIViewController {
             }
         }
         dateRange = dayRange
+    }
+    
+    func setSettingsButton() {
+        guard let navBar = self.navigationController?.navigationBar else { return }
+        let button = UIButton()
+        let image = Settings.shared.imageView.image
+        button.setImage(image, for: .normal)
+        button.layer.cornerRadius = button.frame.height / 2
+        button.clipsToBounds = true
+        self.navigationController?.navigationBar.addSubview(button)
+        button.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
+            button.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
+            button.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
+            button.widthAnchor.constraint(equalTo: button.heightAnchor)
+            ])
+    }
+    
+    @objc func showSettingsView() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "Settings")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+    
+    func setPoints() {
+        guard let userPoints = PointsController.shared.usersPoints else { return }
+        var totalPoints: Int = 0
+        let weekOne = dateRange[0].day...dateRange[7].day
+        let weekTwo = dateRange[8].day...dateRange[14].day
+        let weekThree = dateRange[15].day...dateRange[21].day
+        let weekFour = dateRange[22].day...dateRange[30].day
+
+        let weekOneWorkouts = workouts.filter({ weekOne.contains($0.end.day) }).count
+        let weekTwoWorkouts = workouts.filter({ weekTwo.contains($0.end.day) }).count
+        let weekThreeWorkouts = workouts.filter({ weekThree.contains($0.end.day) }).count
+        let weekFourWorkouts = workouts.filter({ weekFour.contains($0.end.day) }).count
+        
+        totalPoints += min(3, weekOneWorkouts)
+        totalPoints += min(3, weekTwoWorkouts)
+        totalPoints += min(3, weekThreeWorkouts)
+        totalPoints += min(3, weekFourWorkouts)
+        
+        PointsController.shared.set(workOutPoints: totalPoints, toPoints: userPoints) { (success) in
+            //handle
+        }
     }
     
     func updateViews() {

@@ -111,7 +111,9 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .white
-        findDateRange(from: Date())
+        let components = Calendar.current.dateComponents([.month, .year], from: Date())
+        findDateRange(from: Calendar.current.date(from: components)!)
+        print(Calendar.current.date(from: components))
         setupViews()
         updateViews()
     }
@@ -125,7 +127,9 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         let monthIndex = calendarController.currentMonthIndex
         let year = calendarController.currentYear
         calendarController.didChangeMonthDown(monthIndex: monthIndex, year: year)
-
+        let previousMonthDate = Calendar.current.date(byAdding: .month, value: -1, to: dateRange[15])
+        let components = Calendar.current.dateComponents([.month, .year], from: previousMonthDate!)
+        findDateRange(from: Calendar.current.date(from: components)!)
         updateViews()
     }
     
@@ -134,6 +138,9 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         let year = calendarController.currentYear
         calendarController.didChangeMonthUp(monthIndex: monthIndex, year: year)
         
+        let nextMonthDate = Calendar.current.date(byAdding: .month, value: 1, to: dateRange[15])
+        let components = Calendar.current.dateComponents([.month, .year], from: nextMonthDate!)
+        findDateRange(from: Calendar.current.date(from: components)!)
         updateViews()
     }
     
@@ -243,7 +250,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         var previousDate = startDate
         let emptyCells = startDate.weekday - 1
         
-        while dayRange.count != 35 {
+        while dayRange.count != calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] {
             let date = previousDate.addingTimeInterval(86400)
             dayRange.append(date)
             previousDate = date
@@ -265,7 +272,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //TODO: Fix crash when currenday is sunday
-        let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 2
+        let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 1
         return sectionItems
     }
     

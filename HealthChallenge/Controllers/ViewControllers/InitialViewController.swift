@@ -196,6 +196,9 @@ class InitialViewController: UIViewController {
         UserController.shared.fetchUserLoggedInUser { (isSuccess) in
             if isSuccess {
                 print("User found")
+                WorkoutController.shared.fetchUsersWorkouts { (success) in
+                    print("User workouts fetched successfully")
+                }
                 completion(.isUser)
             } else {
                 print("No User found")

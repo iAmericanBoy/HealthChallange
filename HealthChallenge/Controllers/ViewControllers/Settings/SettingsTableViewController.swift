@@ -19,6 +19,9 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let user = user else { return }
+        profilePhoto = user.photo
+        usernameTextField.text = user.userName
     }
     
     
@@ -39,13 +42,24 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         guard let user = user else { return }
         UserController.shared.delete(User: user) { (success) in
             if success {
-                // relaunch the app
+                self.restartApp()
             }
         }
     }
     
+    @IBAction func deleteChallengeButtonTapped(_ sender: Any) {
+        guard let challenge = ChallengeController.shared.currentChallenge else { return }
+        ChallengeController.shared.delete(challenge: challenge) { (success) in
+            DispatchQueue.main.async {
+                self.restartApp()
+            }
+        }
+    }
+    
+    
     @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func photoSelectorViewControllerSelected(image: UIImage) {
@@ -57,6 +71,23 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
             let destinationVC = segue.destination as? PhotoSelectorViewController
             destinationVC?.delegate = self
             destinationVC?.user = user
+        }
+    }
+    
+    func restartApp() {
+        let viewController = InitialViewController()
+        let navControl = UINavigationController(rootViewController: viewController)
+        
+        guard let window = UIApplication.shared.keyWindow,
+            let rootViewController = window.rootViewController else { return }
+        
+        navControl.view.frame = rootViewController.view.frame
+        navControl.view.layoutIfNeeded()
+        
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil) { (success) in
+            if success {
+                window.rootViewController = navControl
+            }
         }
     }
 }

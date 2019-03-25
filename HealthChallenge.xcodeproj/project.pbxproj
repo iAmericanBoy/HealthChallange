@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6254412A2245984800A87290 /* SettingsNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625441292245984800A87290 /* SettingsNavigationViewController.swift */; };
+		625441402249451700A87290 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6254413F2249451700A87290 /* SettingsHelper.swift */; };
 		62D067A12236D1C400D5410B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A02236D1C400D5410B /* SignUpViewController.swift */; };
 		62D067A52236D1FB00D5410B /* HealthKitAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A42236D1FB00D5410B /* HealthKitAccessViewController.swift */; };
 		62D067A72236D22000D5410B /* StartDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067A62236D22000D5410B /* StartDateViewController.swift */; };
@@ -100,6 +101,7 @@
 
 /* Begin PBXFileReference section */
 		625441292245984800A87290 /* SettingsNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationViewController.swift; sourceTree = "<group>"; };
+		6254413F2249451700A87290 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		62D067A02236D1C400D5410B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		62D067A42236D1FB00D5410B /* HealthKitAccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitAccessViewController.swift; sourceTree = "<group>"; };
 		62D067A62236D22000D5410B /* StartDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDateViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				62FE5A30223EC3F0009240C6 /* SettingsTableViewController.swift */,
 				62FE5A32223FE450009240C6 /* SettingsPopupViewController.swift */,
 				625441292245984800A87290 /* SettingsNavigationViewController.swift */,
+				6254413F2249451700A87290 /* SettingsHelper.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				62D067CC2238220700D5410B /* PhotoSelectorViewController.swift in Sources */,
 				B6E210622240500200642274 /* InitialViewController.swift in Sources */,
 				CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */,
+				625441402249451700A87290 /* SettingsHelper.swift in Sources */,
 				B6BD368D224579E900E66A7F /* UserCollectionViewCell.swift in Sources */,
 				CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */,
 				B624ACB22248027D00B5DD2F /* ShareCollectionViewCell.swift in Sources */,

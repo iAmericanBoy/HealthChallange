@@ -11,7 +11,7 @@ import CloudKit
 
 class PointsController {
     //MARK: - Singleton
-    static let shared = GoalController()
+    static let shared = PointsController()
     
     //MARK: - Properties
     ///All the goals a user created.

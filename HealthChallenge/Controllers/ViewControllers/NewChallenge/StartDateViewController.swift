@@ -35,7 +35,7 @@ class StartDateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarController.initializeCurrentCalendar()
-        findDateRange(from: Date())
+        findDateRange(from: Calendar.current.date(bySetting: .day, value: 1, of: Date())!)
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
         previousMonthButton.isHidden = true
@@ -112,7 +112,7 @@ class StartDateViewController: UIViewController {
         var previousDate = startDate
         let emptyCells = startDate.weekday - 1
         
-        while dayRange.count != 35 {
+        while dayRange.count != calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] {
             let date = previousDate.addingTimeInterval(86400)
             dayRange.append(date)
             previousDate = date
