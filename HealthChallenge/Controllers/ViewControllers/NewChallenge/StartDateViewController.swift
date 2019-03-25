@@ -114,7 +114,7 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         let monthIndex = calendarController.currentMonthIndex - 1
         var month = calendarController.shortMonthNames[monthIndex]
         cell.isHidden = false
-        
+
         let date = dateRange[indexPath.row]
         cell.layer.cornerRadius = cell.frame.width / 2
         cell.layer.borderWidth = 1
@@ -122,7 +122,7 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         cell.backgroundColor = .white
         cell.dayLabel.textColor = .black
         cell.cellDate = Date(timeIntervalSince1970: 0)
-        
+
         if date == Date().ignoreDate {
             cell.isHidden = true
         } else {
@@ -132,7 +132,7 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
             month = calendarController.shortMonthNames[index - 1]
             cell.monthLabel.text = "\(month)"
         }
-        
+
         //logic to color cells of the selected date and the 30 days in the challenge
         if let challengeStartDate = challengeStartDate {
             if cell.cellDate! == challengeStartDate {
@@ -141,8 +141,9 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
                 cell.backgroundColor = UIColor.green.withAlphaComponent(0.1)
             }
         }
+        
         return cell
-    }
+   }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? DateCollectionViewCell else {return}
@@ -184,3 +185,7 @@ extension StartDateViewController: UICollectionViewDelegate, UICollectionViewDat
         return CGSize(width: (collectionView.frame.width / 7) - 2, height: (collectionView.frame.width / 7) - 2)
     }
 }
+
+
+
+

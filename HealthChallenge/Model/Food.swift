@@ -12,8 +12,10 @@ class Food {
     
     let name: String
     let ndbno: String
-    var measure: String?
+    var weight: Double?      
+    var measure: String? 
     var nutrients: Nutrients?
+    var scalar: Double?  // need to sav
     
     init?(dictionary: [String: Any]) {
         
@@ -30,6 +32,6 @@ class Food {
     
     static func == (lhs: Food, rhs: Food) -> Bool {
         return lhs.name == rhs.name && lhs.ndbno == rhs.ndbno
-            && lhs.measure == rhs.measure
+            &&  lhs.weight == rhs.weight && lhs.measure == rhs.measure   //*
     }
 }

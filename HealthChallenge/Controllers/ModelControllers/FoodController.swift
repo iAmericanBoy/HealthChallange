@@ -6,6 +6,27 @@
 //  Copyright © 2019 Dominic Lanzillotta. All rights reserved.
 //
 
+
+//MARK: - remove data you dont need !!!
+
+//        guard let servings = food.servings else { return }
+//        let charSet = NSMutableCharacterSet()
+//        charSet.formUnion(with: .letters)
+//        charSet.formUnion(with: .whitespaces)
+//
+//        if let measure = food.measure {
+//         let measureLessLetters =  measure.components(separatedBy: charSet as CharacterSet).joined()
+//            guard let measureAsDouble = Double(measureLessLetters) else { return }
+//            food.measure = "\((measureAsDouble / servings) * 1.25)"
+//        }
+
+
+
+// food.weight += 1
+
+// return food
+
+
 import Foundation
 
 class FoodController {
@@ -92,5 +113,51 @@ class FoodController {
         dataTask.resume()
         
     }
-}
+    
+    func incrementNutrients(for food: Food, scalar: Double){
 
+        food.scalar = scalar
+        
+        guard let nutrients = food.nutrients else { return }
+        if let calories = Double(nutrients.caloriesGM) {
+            nutrients.calories = "\(calories * scalar)"
+        }
+//        if let weight = food.weight {
+//            food.weight = weight * scalar
+//        }
+        if let fats = Double(nutrients.fatsGM) {
+            nutrients.fats = "\(fats * scalar)"
+        }
+        if let carbs = Double(nutrients.carbsGM) {
+            nutrients.carbs = "\(carbs * scalar)"
+        }
+        if let sugar = Double(nutrients.sugarGM) {
+            nutrients.sugar = "\(sugar * scalar)"
+        }
+        if let sodium = Double(nutrients.sodiumGM) {
+            nutrients.sodium = "\(sodium * scalar)"
+        }
+    }
+    
+    func decrementNutrients(for food: Food, scalar: Double) {
+        
+        
+        guard let nutrients = food.nutrients else { return }
+        if let calories = Double(nutrients.caloriesGM) {
+            nutrients.calories = "\(calories * scalar)"
+        }
+        if let fats = Double(nutrients.fatsGM) {
+            nutrients.fats = "\(fats * scalar)"
+        }
+        if let carbs = Double(nutrients.carbsGM) {
+            nutrients.carbs = "\(carbs * scalar)"
+        }
+        if let sugar = Double(nutrients.sugarGM) {
+            nutrients.sugar = "\(sugar * scalar)"
+        }
+        if let sodium = Double(nutrients.sodiumGM) {
+            nutrients.sodium = "\(sodium * scalar)"
+        }
+    }
+
+}
