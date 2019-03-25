@@ -29,9 +29,16 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(photoButtonTapped), for: .touchUpInside)
-        button.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
 
         return button
+    }()
+    
+    lazy var photoImageView: UIImageView = {
+        var imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     fileprivate var userNameTextField: UITextField = {
@@ -69,9 +76,11 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     var delegate: SignUpCollectionViewCellDelegate?
     var profilePhoto: UIImage? {
         didSet {
-            photoButton.setBackgroundImage(profilePhoto, for: .normal)
-            photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
-            self.updateViews()
+            if profilePhoto == nil {
+                photoImageView.image = UIImage(named: "stockPhoto")
+            } else {
+                photoImageView.image = profilePhoto
+            }
         }
     }
     var user: User? {
@@ -110,11 +119,24 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         lifeStyleSegmentedControl.selectedSegmentIndex = user.strengthValue
         userNameTextField.attributedText = NSAttributedString(string: user.userName, attributes: FontController.textFieldFont)
         userNameLabel.attributedText = NSAttributedString(string: "Hello", attributes: FontController.labelTitleFont)
-        photoButton.setBackgroundImage(user.photo, for: .normal)
-        photoButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
+        if profilePhoto == nil {
+            photoImageView.image = user.photo
+        }
     }
     
     func setupViews() {
+        contentView.addSubview(photoImageView)
+        photoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: contentView.frame.height / 16).isActive = true
+        photoImageView.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        photoImageView.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        photoImageView.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor, constant: 0).isActive = true
+        
+        photoImageView.layer.cornerRadius = contentView.safeAreaLayoutGuide.layoutFrame.size.width * 0.25
+        photoImageView.layer.masksToBounds = true
+        photoImageView.backgroundColor = .white
+        
+
+        
         contentView.addSubview(photoButton)
         photoButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: contentView.frame.height / 16).isActive = true
         photoButton.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true

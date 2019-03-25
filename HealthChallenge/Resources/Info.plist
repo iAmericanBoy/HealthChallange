@@ -12,24 +12,18 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleVersion</key>
 	<string>7</string>
-	<key>CKSharingSupported</key>
-	<true/>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>CKSharingSupported</key>
 	<true/>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>Need Acces to update Calories</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Need Acces to update Calories</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Need Access to read Workouts</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -52,19 +46,7 @@
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>UIAppFonts</key>
-	<array>
-		<string>ostrich-regular.ttf</string>
-		<string>JosefinSans-Bold.ttf</string>
-		<string>JosefinSans-BoldItalic.ttf</string>
-		<string>JosefinSans-Italic.ttf</string>
-		<string>JosefinSans-Light.ttf</string>
-		<string>JosefinSans-LightItalic.ttf</string>
-		<string>JosefinSans-Regular.ttf</string>
-		<string>JosefinSans-SemiBold.ttf</string>
-		<string>JosefinSans-SemiBoldItalic.ttf</string>
-		<string>JosefinSans-Thin.ttf</string>
-		<string>JosefinSans-ThinItalic.ttf</string>
-	</array>
+	<array/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>CFBundleDisplayName</key>
