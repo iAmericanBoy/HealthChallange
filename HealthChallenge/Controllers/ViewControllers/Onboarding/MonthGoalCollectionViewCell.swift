@@ -204,21 +204,21 @@ extension MonthGoalCollectionViewCell: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
+        
         cell.selectionStyle = .none
-        
-        cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFont)
-        
-        if selectedWeekGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
-            cell.textLabel?.textColor = .gray
-        }
         
         if selectedGoal == GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row] {
             cell.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.05)
-            cell.textLabel?.textColor = UIColor.lushGreenColor
+            cell.textLabel?.backgroundColor = .clear
+            cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFontGREEN)
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else if selectedWeekGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
+            cell.backgroundColor = .white
+            cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFontGRAY)
+            cell.accessoryType = UITableViewCell.AccessoryType.none
         } else {
             cell.backgroundColor = .white
-            cell.textLabel?.textColor = .black
+            cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFont)
             cell.accessoryType = UITableViewCell.AccessoryType.none
         }
         

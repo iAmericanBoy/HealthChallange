@@ -243,6 +243,7 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
         if selectedGoals.contains(GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row]) {
             cell.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.05)
             cell.textLabel?.attributedText = NSAttributedString(string: GoalController.shared.allGoalsFromCK[indexPath.section][indexPath.row].name, attributes: FontController.tableViewRowFontGREEN)
+            cell.textLabel?.backgroundColor = .clear
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
             cell.backgroundColor = .white
