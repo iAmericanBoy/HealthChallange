@@ -14,7 +14,8 @@ class NewUserCollectionViewCell: UICollectionViewCell {
     var userImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     var nameLabel: UILabel = {
@@ -54,9 +55,13 @@ class NewUserCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(userImageView)
         userImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         userImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        userImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.7).isActive = true
-        userImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+        userImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.6).isActive = true
+        userImageView.widthAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.6).isActive = true
 
+        userImageView.layer.cornerRadius = contentView.safeAreaLayoutGuide.layoutFrame.size.height * 0.3
+        userImageView.layer.masksToBounds = true
+        userImageView.backgroundColor = .white
+        
         contentView.addSubview(nameLabel)
         nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
