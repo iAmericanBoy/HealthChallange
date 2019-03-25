@@ -45,6 +45,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
             pageControl.numberOfPages = screenCount
         }
     }
+    
     var profilePicture: UIImage? = UserController.shared.loggedInUser?.photo
     var challengeState = ChallengeState.noActiveChallenge
 
@@ -214,12 +215,8 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "signUpCell", for: indexPath) as? SignUpCollectionViewCell
             
             cell?.delegate = self
-            profilePicture = UserController.shared.loggedInUser?.photo
-            if let profilePicture = profilePicture {
-                cell?.profilePhoto = profilePicture
-            } else {
-                cell?.profilePhoto = UIImage(named: "stockPhoto")
-            }
+            cell?.profilePhoto = profilePicture
+            
             cell?.user = UserController.shared.loggedInUser
             
             return cell ?? UICollectionViewCell()
@@ -342,7 +339,7 @@ extension NewOnboardingViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profilePicture = pickedImage
-            collectionView?.reloadItems(at: [IndexPath(item: 0, section: 0)])
+            collectionView?.reloadData()
         }
         picker.dismiss(animated: true, completion: nil)
     }
