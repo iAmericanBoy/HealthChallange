@@ -7,20 +7,23 @@
 //
 
 import Foundation
-
-
-struct Nutrients {
+//MARK: - saving the constant macros in 100 grams and the multiplier
+ //MARK: - SugarGM is the amount of each macro for 100 grams
+class Nutrients {
     
     var sugar: String
     var carbs: String
     var calories: String
     var fats: String
-    var sodium: String  
+    var sodium: String
     
-}
-extension Nutrients {
+    var sugarGM: String
+    var carbsGM: String
+    var caloriesGM: String
+    var fatsGM: String
+    var sodiumGM: String
     
-    init?(dictionary: [[String: Any]]) {
+    init?(dictionary: [[String: Any]] , weight:Double) {
         
         
         var sugar: String = ""
@@ -28,41 +31,67 @@ extension Nutrients {
         var calories: String = ""
         var fats: String = ""
         var sodium: String = ""
+        var sugarGM: String = ""
+        var carbsGM: String = ""
+        var carloriesGM: String = ""
+        var fatsGM: String = ""
+        var sodiumGM: String = ""
         
-        print("-------")
-        print(dictionary)
-        print("-------")
+//        print("-------")
+//        print(dictionary)
+//        print("-------")
         
         var count = 0
         
         for js in dictionary{
-            guard let value = js["value"] as? String
+            dump(js)
+            if let value = js["gm"] as? Double  {
+           
+                if count == 0 {
+                    calories = String (value * (weight/100))
+                    carloriesGM = String(value)
+                } else if count == 1{
+                    sodium = String(value * (weight/100))
+                    sodiumGM = String(value)
+                }else if count == 2 {
+                    sugar = String(value * (weight/100))
+                    sugarGM = String(value)
+                }else if count == 3 {
+                    fats = String(value * (weight/100))
+                    fatsGM = String(value)
+                } else if count == 4 {
+                    carbs = String(value * (weight/100))
+                    carbsGM = String(value)
+                }
                 
-                else {
-                    print("value is wrong")
-                    return nil
-            }
-            
-            if count == 0 {
-                calories = value
-            } else if count == 1{
-                sugar = value
-            }else if count == 2 {
-                fats = value
-            }else if count == 3 {
-                carbs = value
-            } else if count == 4 {
-              sodium = value
+            } else {
+                
+                if count == 0 {
+                    calories = "0"
+                } else if count == 1{
+                    sodium = "0"
+                }else if count == 2 {
+                    sugar = "0"
+                }else if count == 3 {
+                    fats = "0"
+                } else if count == 4 {
+                    carbs = "0"
+                }
+              
             }
             count += 1
         }
-        
         
         self.sugar = sugar
         self.carbs = carbs
         self.calories = calories
         self.fats = fats
         self.sodium = sodium
+        self.sugarGM = sugarGM
+        self.carbsGM = carbsGM
+        self.caloriesGM = carloriesGM
+        self.fatsGM = fatsGM
+        self.sodiumGM = sodiumGM
     }
     
     static func == (lhs: Nutrients, rhs: Nutrients) -> Bool {
@@ -70,5 +99,5 @@ extension Nutrients {
             && lhs.calories == rhs.calories && lhs.fats == rhs.fats
             && lhs.sodium == rhs.sodium
     }
+    
 }
-

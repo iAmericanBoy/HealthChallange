@@ -8,10 +8,7 @@
 
 import UIKit
 
-
-
 class DishTableViewCell: UITableViewCell {
-    
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
@@ -36,13 +33,19 @@ class DishTableViewCell: UITableViewCell {
         guard let fats = ingredient.nutrients?.fats else {return}
         guard let sodium = ingredient.nutrients?.sodium else {return}
         
+        let roundedCalories = Double(round(10 * Double(calories)!)/10)
+        let roundedSugars = Double(round(10 * Double(sugar)!)/10)
+        let roundedCarbs = Double(round(10 * Double(carbs)!)/10)
+        let roundedFats = Double(round(10 * Double(fats)!)/10)
+        let roundedSodium = Double(round(10 * Double(sodium)!)/10)
+
         nameLabel.text = ingredient.name
         amountLabel.text = ingredient.measure
-        caloriesLabel.text = "calories: \(calories) cal"
-        sugarsLabel.text = "sugar: \(sugar) g"
-        carbsLabel.text = "carbs: \(carbs) g"
-        fatsLabel.text = "fats: \(fats) g"
-        sodiumLabel.text = "sodium: \(sodium) mg"
+        caloriesLabel.text = "cal:\(roundedCalories) cal"
+        sugarsLabel.text = "sugar: \(roundedSugars) g"
+        carbsLabel.text = "carbs: \(roundedCarbs) g"
+        fatsLabel.text = "fats: \(roundedFats) g"
+        sodiumLabel.text = "sodium: \(roundedSodium) mg"
     }
 }
 

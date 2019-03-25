@@ -20,7 +20,6 @@ class DishController {
         "Dinner" : [],
         "Snack" : []
     ]
-
     
     func createDish(name: String, index: Int, ingredients: [Food]) {
         var dishType: DishType?
@@ -38,6 +37,10 @@ class DishController {
         }
         
         let dish = Dish(dishName: name, ingredients: ingredients, dishType: dishType!, timeStamp: Date())
+        
+        print("😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛")
+        dump(dish)
+   
         dishes[dishType!.rawValue]?.append(dish)
      
     }

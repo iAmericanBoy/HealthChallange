@@ -72,17 +72,27 @@ class NutrientsController {
             guard let jsonFoods :[[String: Any]] = jsonReport["foods"] as? [[String: Any]] else {print("got foods"); return}
             
             for foodDictionary in jsonFoods {
-                if let measure = foodDictionary["measure"] as? String {
+                if let weight = foodDictionary["weight"] as? Double,   //*
+                let measure = foodDictionary["measure"] as? String
+                    
+                    
+                    {
+                        
                     food.measure = measure
+                    food.weight = weight
                     //print(measure)
                 }
                 
                 guard let jsonNutrients = foodDictionary["nutrients"] as? [[String: Any]] else {print("got jsonNutrients"); return}
-                print(jsonNutrients)
+                //print(jsonNutrients)
                 
-                if let nutrient = Nutrients( dictionary: jsonNutrients) {
+                if let nutrient = Nutrients( dictionary: jsonNutrients, weight : food.weight ?? 0) {
+                    guard let weight = food.weight else {return}
                     print("=====nutrient======")
                     print("food: \(food.name)")
+                    print("NDBNO: \(food.ndbno)")
+                    //print("weight: \(String(describing: food.weight))")     //*
+                    print("weight: \(weight)")
                     print("measure: \(String(describing: food.measure))")
                     print("calories: \(nutrient.calories)")
                     print("sugar: \(nutrient.sugar)")
@@ -90,12 +100,22 @@ class NutrientsController {
                     print("carbs: \(nutrient.carbs)")
                     print("sodium: \(nutrient.sodium)")
                     print("=====nutrient======")
+                    print("😫😫😫😫😫😫😫😫😫😫NutrientGM😫😫😫😫😫😫😫😫😫😫😫")
+                    print("NDBNO: \(food.ndbno)")
+                    print("calories: \(nutrient.caloriesGM)")
+                    print("sugar: \(nutrient.sugarGM)")
+                    print("fats: \(nutrient.fatsGM)")
+                    print("carbs: \(nutrient.carbsGM)")
+                    print("sodium: \(nutrient.sodiumGM)")
+                    print("😫😫😫😫😫😫😫😫😫😫NutrientGM😫😫😫😫😫😫😫😫😫😫😫")
+      
+                    
                     food.nutrients = nutrient
                 }
             }
             
             completion(true)
-           // dump(jsonFoods)
+            //dump(jsonFoods)
         }
         dataTask.resume()
     }
