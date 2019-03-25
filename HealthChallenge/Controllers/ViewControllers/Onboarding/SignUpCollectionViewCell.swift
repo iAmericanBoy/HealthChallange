@@ -46,7 +46,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
         var segmentedControl = UISegmentedControl(items: ["Sedentary","Moderate","Active"])
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.setTitleTextAttributes(FontController.labelTitleFont, for: .normal)
-        segmentedControl.setEnabled(true, forSegmentAt: 1)
+        segmentedControl.selectedSegmentIndex = 1
         segmentedControl.tintColor = UIColor.lushGreenColor
         return segmentedControl
     }()
@@ -107,7 +107,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     //MARK: - Private Functions
     func updateViews() {
         guard let user = user else {return}
-        lifeStyleSegmentedControl.setEnabled(true, forSegmentAt: user.strengthValue)
+        lifeStyleSegmentedControl.selectedSegmentIndex = user.strengthValue
         userNameTextField.attributedText = NSAttributedString(string: user.userName, attributes: FontController.textFieldFont)
         userNameLabel.attributedText = NSAttributedString(string: "Hello", attributes: FontController.labelTitleFont)
         photoButton.setBackgroundImage(user.photo, for: .normal)
