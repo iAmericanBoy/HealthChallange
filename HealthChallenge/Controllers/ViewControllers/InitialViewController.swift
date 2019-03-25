@@ -51,12 +51,19 @@ class InitialViewController: UIViewController {
                                 if isSuccess {
                                     print("Share Found.")
                                     ChallengeController.shared.currentShare = share
+                                    let dispatchGroup = DispatchGroup()
                                     ChallengeController.shared.currentShare?.participants.forEach({ (participant) in
+                                        dispatchGroup.enter()
                                         guard let userRecordID = participant.userIdentity.userRecordID else {return}
                                         UserController.shared.fetch(userWithRecordID: userRecordID, completion: { (isSuccess) in
                                             if isSuccess {
+                                                dispatchGroup.leave()
                                             }
                                         })
+                                    })
+                                    dispatchGroup.notify(queue: .main, execute: {
+                                        let useresFound = Notification(name: Notification.Name(rawValue: NotificationStrings.allUsersOfChallengeFound), object: nil, userInfo: nil)
+                                        NotificationCenter.default.post(useresFound)
                                     })
                                 } else {
                                     print("No share Found.")
@@ -73,13 +80,13 @@ class InitialViewController: UIViewController {
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
 
                                 if startDay! > Date() {
-                                    //before StartDay
-                                    print("Challenge's StartDay before Today")
+                                    //after StartDay
+                                    print("Challenge's StartDay after Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.currentChallenge()
                                 } else {
-                                    //after startDay
-                                    print("Challenge's StartDay after Today")
+                                    //before startDay
+                                    print("Challenge's StartDay before Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.activeChallenge()
                                 }
@@ -130,14 +137,14 @@ class InitialViewController: UIViewController {
                                 print("Checking for Start Day...")
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
 
-                                if startDay! < Date() {
-                                    //before StartDay
+                                if startDay! > Date() {
+                                    //after StartDay
                                     print("Challenge's StartDay after Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.currentChallenge()
                                 } else {
-                                    //after startDay
-                                    print("Challenge's StartDay after Today")
+                                    //before startDay
+                                    print("Challenge's StartDay before Today")
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.activeChallenge()
                                 }
@@ -292,8 +299,11 @@ class InitialViewController: UIViewController {
     func createNewUser() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "SignUpParentViewController")
-            self.present(viewController, animated: true, completion: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 1
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
@@ -301,8 +311,11 @@ class InitialViewController: UIViewController {
     func createNewChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "NewChallengeParentViewController")
-            self.present(viewController, animated: true, completion: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 2
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
@@ -310,15 +323,25 @@ class InitialViewController: UIViewController {
     func currentChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "onboardingV2")
-            self.present(viewController, animated: true, completion: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 5
+            
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
     ///Segue to addMonthGoal VC
     func addMonthGoal() {
         //TODO: Add logic to segue directly to the monthGoal screen
-        currentChallenge()
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            
+            onboarding.screenCount = 4
+            
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
     
     ///Segue to activeChallenge VC its after StartDate

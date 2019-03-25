@@ -11,8 +11,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
-	<string>6</string>
+	<string>7</string>
 	<key>CKSharingSupported</key>
 	<true/>
 	<key>LSApplicationCategoryType</key>

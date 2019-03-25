@@ -35,7 +35,11 @@ class ShareCollectionViewCell: UICollectionViewCell {
     }()
     
     //MARK: - Properties
-    var delegate: ShareCollectionViewCellDelegate?
+    var delegate: ShareCollectionViewCellDelegate? {
+        didSet {
+            self.updateViews()
+        }
+    }
     var userCollectionView: UICollectionView?
     
     //MARK: - LifeCycle
@@ -63,7 +67,7 @@ class ShareCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Private Functions
     func updateViews() {
-        
+        userCollectionView?.reloadData()
     }
     
     func setupViews() {
