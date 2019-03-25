@@ -25,7 +25,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     lazy var saveButton: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.buttonFont), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.enabledButtonFont), for: .normal)
         button.setTitleColor(UIColor.green, for: .normal)
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
@@ -33,14 +33,14 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     
     lazy var previousMonthButton: UIButton = {
         var button = UIButton(type: .system)
-        button.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.buttonFont), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
         button.addTarget(self, action: #selector(previousMonthButtonTapped), for: .touchUpInside)
         return button
     }()
     
     lazy var nextMonthButton: UIButton = {
         var button = UIButton(type: .system)
-        button.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.buttonFont), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
         button.addTarget(self, action: #selector(nextMonthButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -151,9 +151,9 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         
         if challengeStartDate == nil {
             saveButton.isEnabled = false
-            saveButton.setAttributedTitle(NSAttributedString(string: "Select A Start Day", attributes: FontController.labelTitleFont), for: .normal)
+            saveButton.setAttributedTitle(NSAttributedString(string: "Select A Start Day", attributes: FontController.disabledButtonFont), for: .normal)
         } else {
-            saveButton.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.buttonFont), for: .normal)
+            saveButton.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.enabledButtonFont), for: .normal)
             saveButton.isEnabled = true
         }
         

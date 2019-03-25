@@ -37,14 +37,14 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     lazy var addButton: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setAttributedTitle(NSAttributedString(string: "Add", attributes: FontController.buttonFont), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: "Add", attributes: FontController.enabledButtonFont), for: .normal)
         button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         return button
     }()
     lazy var saveButton: UIButton = {
         var button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.buttonFont), for: .normal)
+        button.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.enabledButtonFont), for: .normal)
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -105,6 +105,20 @@ class WeeklyGoalsCollectionViewCell: UICollectionViewCell {
     //MARK: - Private Functions
     func updateViews() {
         tableView?.reloadData()
+        
+        if selectedGoals.count == 4 {
+            saveButton.setAttributedTitle(NSAttributedString(string: "Save", attributes: FontController.enabledButtonFont), for: .normal)
+            saveButton.isEnabled = true
+        } else if selectedGoals.count == 3 {
+            let selectedCount = selectedGoals.count
+            saveButton.setAttributedTitle(NSAttributedString(string: "Select \(4 - selectedCount) goal", attributes: FontController.disabledButtonFont), for: .normal)
+            saveButton.isEnabled = false
+        } else {
+            let selectedCount = selectedGoals.count
+            saveButton.setAttributedTitle(NSAttributedString(string: "Select \(4 - selectedCount) goals", attributes: FontController.disabledButtonFont), for: .normal)
+
+            saveButton.isEnabled = false
+        }
     }
     
     func setupViews() {
@@ -232,7 +246,6 @@ extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSou
             guard let index = selectedGoals.index(of: selectedGoal) else {return}
             selectedGoals.remove(at: index)
         }
-        
-        tableView.reloadData()
+        updateViews()
     }
 }
