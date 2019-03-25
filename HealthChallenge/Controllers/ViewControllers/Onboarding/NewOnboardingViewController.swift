@@ -214,7 +214,7 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
             //weeklyGoals
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weeklyGoalsCell", for: indexPath) as? WeeklyGoalsCollectionViewCell
             cell?.delegate = self
-            cell?.challengeState = challengeState
+            cell?.challengeState = ChallengeState.isParticipantChallenge
             cell?.selectedGoals = GoalController.shared.weeklyGoals
             return cell ?? UICollectionViewCell()
         case 3:

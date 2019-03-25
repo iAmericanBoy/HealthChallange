@@ -220,7 +220,14 @@ extension WeeklyGoalsCollectionViewCell: UITextFieldDelegate {
 extension WeeklyGoalsCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return GoalController.shared.allGoalsFromCK.count
+        switch challengeState {
+        case .isOwnerChallenge:
+            return GoalController.shared.allGoalsFromCK.count
+        case .isParticipantChallenge:
+            return 1
+        case .noActiveChallenge:
+            return GoalController.shared.allGoalsFromCK.count
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
