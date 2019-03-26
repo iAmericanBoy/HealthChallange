@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WKL-77-GBe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WKL-77-GBe">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,7 +47,7 @@
                                                         <constraint firstAttribute="width" secondItem="qC7-S9-WfA" secondAttribute="height" multiplier="1:1" id="85b-Qk-nKe"/>
                                                     </constraints>
                                                     <connections>
-                                                        <segue destination="gmp-LP-Xmh" kind="embed" id="Rn0-zW-HXG"/>
+                                                        <segue destination="gmp-LP-Xmh" kind="embed" identifier="photoSelectSegue" id="Rn0-zW-HXG"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
@@ -70,17 +70,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7c-zB-mgl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <rect key="frame" x="4" y="4" width="367" height="35.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="K7c-zB-mgl" secondAttribute="trailing" id="92Z-3g-5Lm"/>
-                                                <constraint firstItem="K7c-zB-mgl" firstAttribute="leading" secondItem="dmO-A9-slS" secondAttribute="leading" id="DOU-O5-55A"/>
-                                                <constraint firstAttribute="bottom" secondItem="K7c-zB-mgl" secondAttribute="bottom" id="IEM-h7-xPP"/>
-                                                <constraint firstItem="K7c-zB-mgl" firstAttribute="top" secondItem="dmO-A9-slS" secondAttribute="top" id="lkt-ae-Neo"/>
+                                                <constraint firstAttribute="trailing" secondItem="K7c-zB-mgl" secondAttribute="trailing" constant="4" id="92Z-3g-5Lm"/>
+                                                <constraint firstItem="K7c-zB-mgl" firstAttribute="leading" secondItem="dmO-A9-slS" secondAttribute="leading" constant="4" id="DOU-O5-55A"/>
+                                                <constraint firstAttribute="bottom" secondItem="K7c-zB-mgl" secondAttribute="bottom" constant="4" id="IEM-h7-xPP"/>
+                                                <constraint firstItem="K7c-zB-mgl" firstAttribute="top" secondItem="dmO-A9-slS" secondAttribute="top" constant="4" id="lkt-ae-Neo"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -174,7 +174,10 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="deleteChallengeButton" destination="Mos-VP-80P" id="0QG-SL-ikl"/>
+                        <outlet property="deleteProfileButton" destination="Ygs-cz-nVj" id="JIX-iW-KIr"/>
                         <outlet property="lifestyleSegmentedControl" destination="ozc-Gs-TYq" id="8w6-DI-1yS"/>
+                        <outlet property="saveButton" destination="Ai9-Mo-VgH" id="0WR-nX-SfX"/>
                         <outlet property="usernameTextField" destination="K7c-zB-mgl" id="sEz-hK-zsK"/>
                     </connections>
                 </tableViewController>
@@ -206,7 +209,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vMj-G8-e5P" firstAttribute="top" secondItem="Qed-i9-jiF" secondAttribute="top" id="2aa-v5-z5t"/>
+                            <constraint firstItem="vMj-G8-e5P" firstAttribute="top" secondItem="pc7-3b-Yw7" secondAttribute="top" id="2aa-v5-z5t"/>
                             <constraint firstItem="pc7-3b-Yw7" firstAttribute="leading" secondItem="Qed-i9-jiF" secondAttribute="leading" id="BAP-U5-cur"/>
                             <constraint firstAttribute="bottom" secondItem="vMj-G8-e5P" secondAttribute="bottom" id="IEb-Zb-kt1"/>
                             <constraint firstItem="pc7-3b-Yw7" firstAttribute="top" secondItem="Qed-i9-jiF" secondAttribute="top" id="J5M-E6-39k"/>
@@ -224,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nhe-nV-pcJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="314" y="-123"/>
+            <point key="canvasLocation" x="356" y="-27"/>
         </scene>
     </scenes>
     <resources>

@@ -17,6 +17,8 @@ struct FontController {
     static let tableViewRowFontGRAY = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 17),NSAttributedString.Key.foregroundColor: UIColor.gray]
 
     static let tableViewRowFontGREEN = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 17),NSAttributedString.Key.foregroundColor: UIColor.lushGreenColor]
+    
+    static let tableViewRowFontRED = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 17),NSAttributedString.Key.foregroundColor: UIColor.red]
 
     static let textFieldFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.semibold]]), size: 17),NSAttributedString.Key.foregroundColor: UIColor.black]
     
@@ -27,6 +29,4 @@ struct FontController {
     static let enabledButtonFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.bold]]), size: 30),NSAttributedString.Key.foregroundColor: UIColor.lushGreenColor]
     
     static let disabledButtonFont = [NSAttributedString.Key.font: UIFont(descriptor: UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family: "Avenir Next Condensed",UIFontDescriptor.AttributeName.traits : [UIFontDescriptor.TraitKey.weight : UIFont.Weight.bold]]), size: 30),NSAttributedString.Key.foregroundColor: UIColor.purple]
-    
-
 }

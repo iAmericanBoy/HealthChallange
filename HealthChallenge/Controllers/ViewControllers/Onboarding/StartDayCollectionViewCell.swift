@@ -113,7 +113,6 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .white
         let components = Calendar.current.dateComponents([.month, .year], from: Date())
         findDateRange(from: Calendar.current.date(from: components)!)
-        print(Calendar.current.date(from: components))
         setupViews()
         updateViews()
     }
@@ -224,7 +223,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.topAnchor.constraint(equalTo: topRowStackView.bottomAnchor).isActive = true
         calendarCollectionView?.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         calendarCollectionView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.95).isActive = true
-        calendarCollectionView?.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4).isActive = true
+        calendarCollectionView?.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.6).isActive = true
         
         contentView.addSubview(saveButton)
         saveButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -309,6 +308,12 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
                 cell.contentView.backgroundColor = UIColor.lushGreenColor.withAlphaComponent(0.1)
             }
         }
+        
+        // Make only current and future days selectable
+        if date.day < Date().day && monthIndex == calendarController.currentMonthIndex - 1 {
+            cell.isUserInteractionEnabled = false
+        }
+        
         return cell
     }
     

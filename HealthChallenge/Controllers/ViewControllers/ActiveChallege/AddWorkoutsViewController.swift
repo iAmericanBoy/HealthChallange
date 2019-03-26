@@ -29,11 +29,12 @@ class AddWorkoutsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let dateToSet = sourceDate else { return }
-        date = dateToSet
         queryWorkouts()
         nextDayButton.isEnabled = false
         currentDayLabel.text = DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)
+        nextDayButton.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
+        previousDayButton.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
+        currentDayLabel.attributedText = NSAttributedString(string: "\(date.month)/\(date.day)", attributes: FontController.labelTitleFont)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +84,7 @@ class AddWorkoutsViewController: UIViewController {
             } else {
                 self.previousDayButton.isEnabled = true
             }
-            self.currentDayLabel.text = DateFormatter.localizedString(from: self.date, dateStyle: .short, timeStyle: .none)
+            self.currentDayLabel.attributedText = NSAttributedString(string: "\(self.date.month)/\(self.date.day)", attributes: FontController.labelTitleFont)
         }
     }
     

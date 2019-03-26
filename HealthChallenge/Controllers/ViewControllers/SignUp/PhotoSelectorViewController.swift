@@ -22,6 +22,8 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
         imagePicker.delegate = self
         guard let photo = user?.photo else { return }
         profileImageView.image = photo
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +89,8 @@ extension PhotoSelectorViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            guard let delegate = delegate else { return }
+            guard let delegate = delegate
+                else { return }
             delegate.photoSelectorViewControllerSelected(image: pickedImage)
             profileImageView.image = pickedImage
         }

@@ -28,23 +28,42 @@ class WorkoutViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sunLabel: UILabel!
+    @IBOutlet weak var monLabel: UILabel!
+    @IBOutlet weak var tueLabel: UILabel!
+    @IBOutlet weak var wedLabel: UILabel!
+    @IBOutlet weak var thuLabel: UILabel!
+    @IBOutlet weak var friLabel: UILabel!
+    @IBOutlet weak var satLabel: UILabel!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let challenge = ChallengeController.shared.currentChallenge else { return }
         workouts = WorkoutController.shared.workouts
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
-        calendarCollectionView.backgroundColor = .clear
-        calendarController.initializeCurrentCalendar()
+        // call class functions
         findDateRange(from: challenge.startDay)
         setPoints()
         setSettingsButton()
+        // set delegates etc.
+        calendarController.initializeCurrentCalendar()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         calendarCollectionView.delegate = self
         calendarCollectionView.dataSource = self
+        // set fonts, text, etc
+        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
         monthLabel.text = "\(challenge.name)"
+        monthLabel.attributedText = NSAttributedString(string: "\(challenge.name)", attributes: FontController.labelTitleFont)
+        calendarCollectionView.backgroundColor = .clear
+        sunLabel.attributedText = NSAttributedString(string: "Sun", attributes: FontController.labelTitleFont)
+        monLabel.attributedText = NSAttributedString(string: "Mon", attributes: FontController.labelTitleFont)
+        tueLabel.attributedText = NSAttributedString(string: "Tue", attributes: FontController.labelTitleFont)
+        wedLabel.attributedText = NSAttributedString(string: "Wed", attributes: FontController.labelTitleFont)
+        thuLabel.attributedText = NSAttributedString(string: "Thu", attributes: FontController.labelTitleFont)
+        friLabel.attributedText = NSAttributedString(string: "Fri", attributes: FontController.labelTitleFont)
+        satLabel.attributedText = NSAttributedString(string: "Sat", attributes: FontController.labelTitleFont)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,33 +101,6 @@ class WorkoutViewController: UIViewController {
             }
         }
         dateRange = dayRange
-    }
-    
-    func setSettingsButton() {
-        guard let navBar = self.navigationController?.navigationBar else { return }
-        let button = UIButton()
-        let image = Settings.shared.imageView.image
-        button.setImage(image, for: .normal)
-        button.layer.cornerRadius = button.frame.height / 2
-        button.clipsToBounds = true
-        self.navigationController?.navigationBar.addSubview(button)
-        button.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            button.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
-            button.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
-            button.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
-            button.widthAnchor.constraint(equalTo: button.heightAnchor)
-            ])
-    }
-    
-    @objc func showSettingsView() {
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "Settings")
-            self.present(viewController, animated: true, completion: nil)
-        }
     }
     
     func setPoints() {
@@ -169,6 +161,8 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.backgroundColor = .white
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.layer.cornerRadius).cgPath
         cell.isHidden = false
+        cell.dayLabel.textColor = .black
+        cell.monthLabel.textColor = .black
         
         let date = dateRange[indexPath.row]
         let today = Date()
@@ -179,26 +173,25 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         if date == Date().ignoreDate {
             cell.isHidden = true 
         } else {
-            cell.dayLabel.text = "\(date.day)"
+            cell.dayLabel.attributedText = NSAttributedString(string: "\(date.day)", attributes: FontController.labelTitleFont)
             cell.cellDate = dateRange[indexPath.row]
             let index = date.month
             month = calendarController.shortMonthNames[index - 1]
-            cell.monthLabel.text = "\(month)"
+            cell.monthLabel.attributedText = NSAttributedString(string: "\(month)", attributes: FontController.subTitleLabelFont)
         }
         
+        // Change color of dates with a workout
         if workouts.filter({ $0.end.stripTimestamp().format() == date.stripTimestamp().format() }).count > 0 {
-            cell.backgroundColor = .green
+            cell.backgroundColor = .lushGreenColor
         }
         
         if date.stripTimestamp() == today.stripTimestamp() {
-            cell.dayLabel.textColor = Color.darkText.value
-            cell.monthLabel.textColor = Color.darkText.value
-        } else {
-            cell.dayLabel.textColor = .black
-            cell.monthLabel.textColor = .black
+            cell.dayLabel.textColor = .green
+            cell.monthLabel.textColor = .green
         }
+        
         // Allows users to only edit workouts for past week.
-        if date.day < today.day && monthIndex == calendarController.presentMonthIndex - 1{
+        if date.day < today.day && monthIndex == calendarController.presentMonthIndex - 1 {
             cell.isUserInteractionEnabled = false
         } else if date.day > today.day && monthIndex == calendarController.presentMonthIndex - 1 {
             cell.isUserInteractionEnabled = false
@@ -227,9 +220,9 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as? WorkoutDetailTableViewCell
         cell?.delegate = self
         let workout = dayWorkouts[indexPath.row]
-        cell?.activityLabel.text = workout.activity
-        cell?.durationLabel.text = "\(workout.duration)"
-        cell?.dateLabel.text = "\(workout.end.month)/\(workout.end.day)"
+        cell?.activityLabel.attributedText = NSAttributedString(string: "\(workout.activity)", attributes: FontController.tableViewRowFont)
+        cell?.durationLabel.attributedText = NSAttributedString(string: "\(workout.duration)", attributes: FontController.tableViewRowFont)
+        cell?.dateLabel.attributedText = NSAttributedString(string: "\(workout.end.month)/\(workout.end.day)", attributes: FontController.tableViewRowFont)
         
         return cell ?? UITableViewCell()
     }
@@ -263,4 +256,47 @@ extension WorkoutViewController: DateCollectionViewCellDelegate, WorkoutDetailTa
         self.selectedDay = dateCell.cellDate!
         updateViews()
     }
+}
+
+// MARK: - Set settings view, fonts, and colors
+extension WorkoutViewController {
+    
+    func setSettingsButton() {
+        guard let navBar = self.navigationController?.navigationBar else { return }
+        let button = UIButton()
+        let image = Settings.shared.imageView
+        button.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        image.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        
+        self.navigationController?.navigationBar.addSubview(image)
+        NSLayoutConstraint.activate([
+            image.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
+            image.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
+            image.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
+            image.widthAnchor.constraint(equalTo: image.heightAnchor)
+            ])
+        
+        self.navigationController?.navigationBar.addSubview(button)
+        NSLayoutConstraint.activate([
+            button.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
+            button.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
+            button.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
+            button.widthAnchor.constraint(equalTo: button.heightAnchor)
+            ])
+        
+        image.layer.cornerRadius = navBar.frame.height / 4
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+    }
+    
+    @objc func showSettingsView() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "Settings")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+
 }

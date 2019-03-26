@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c1X-ya-8VH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c1X-ya-8VH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fxM-Zu-PAx">
-                                <rect key="frame" x="12" y="223" width="351" height="272"/>
+                                <rect key="frame" x="12" y="221.5" width="351" height="273.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="na8-7f-cQY">
                                     <size key="itemSize" width="66" height="71"/>
@@ -50,7 +50,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSf-Jj-SxJ">
-                                                    <rect key="frame" x="6" y="23" width="54.5" height="25"/>
+                                                    <rect key="frame" x="2.5" y="21" width="61.5" height="29.5"/>
                                                     <fontDescription key="fontDescription" name="JosefinSans-Bold" family="Josefin Sans" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -89,55 +89,55 @@
                                 </cells>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hw0-it-XSg">
-                                <rect key="frame" x="12" y="182" width="351" height="17"/>
+                                <rect key="frame" x="12" y="179.5" width="351" height="18"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9h-rH-Crz">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="17"/>
-                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="18"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FxN-W2-fNN">
-                                        <rect key="frame" x="50" y="0.0" width="50.5" height="17"/>
-                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <rect key="frame" x="50" y="0.0" width="50.5" height="18"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMM-5K-cKM">
-                                        <rect key="frame" x="100.5" y="0.0" width="50" height="17"/>
-                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <rect key="frame" x="100.5" y="0.0" width="50" height="18"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojc-ZX-PHP">
-                                        <rect key="frame" x="150.5" y="0.0" width="50" height="17"/>
-                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <rect key="frame" x="150.5" y="0.0" width="50" height="18"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uH6-oA-e9Z">
-                                        <rect key="frame" x="200.5" y="0.0" width="50" height="17"/>
-                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <rect key="frame" x="200.5" y="0.0" width="50" height="18"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmZ-SI-XBx">
-                                        <rect key="frame" x="250.5" y="0.0" width="50.5" height="17"/>
-                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <rect key="frame" x="250.5" y="0.0" width="50.5" height="18"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQL-qq-FxB">
-                                        <rect key="frame" x="301" y="0.0" width="50" height="17"/>
-                                        <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="17"/>
+                                        <rect key="frame" x="301" y="0.0" width="50" height="18"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqV-II-fuy">
-                                <rect key="frame" x="155" y="128" width="65" height="30"/>
-                                <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="30"/>
+                                <rect key="frame" x="167" y="128" width="41" height="27.5"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                                 <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -159,16 +159,16 @@
                                                     <rect key="frame" x="10" y="0.0" width="355" height="93.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5CX-Ps-Wzq">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="35"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8A-MP-edS">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="253.5" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="241" height="35"/>
                                                                     <fontDescription key="fontDescription" name="JosefinSans-BoldItalic" family="Josefin Sans" pointSize="30"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLo-xZ-v8W">
-                                                                    <rect key="frame" x="253.5" y="0.0" width="101.5" height="30"/>
+                                                                    <rect key="frame" x="241" y="0.0" width="114" height="35"/>
                                                                     <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="30"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -176,7 +176,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZY-D5-Kee">
-                                                            <rect key="frame" x="0.0" y="30" width="355" height="63.5"/>
+                                                            <rect key="frame" x="0.0" y="35" width="355" height="58.5"/>
                                                             <fontDescription key="fontDescription" name="JosefinSans" family="Josefin Sans" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -222,8 +222,15 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="calendarCollectionView" destination="fxM-Zu-PAx" id="2uc-Z9-MCH"/>
+                        <outlet property="friLabel" destination="cmZ-SI-XBx" id="Sxa-Xc-7Fy"/>
+                        <outlet property="monLabel" destination="FxN-W2-fNN" id="5pS-ey-Yhd"/>
                         <outlet property="monthLabel" destination="hqV-II-fuy" id="924-MF-0bj"/>
+                        <outlet property="satLabel" destination="EQL-qq-FxB" id="MMg-Lg-LMP"/>
+                        <outlet property="sunLabel" destination="m9h-rH-Crz" id="cSP-Qy-HTM"/>
                         <outlet property="tableView" destination="aq0-jx-lza" id="nks-gm-ukW"/>
+                        <outlet property="thuLabel" destination="uH6-oA-e9Z" id="QKa-i1-ljQ"/>
+                        <outlet property="tueLabel" destination="DMM-5K-cKM" id="JeH-MP-4Ty"/>
+                        <outlet property="wedLabel" destination="ojc-ZX-PHP" id="4x6-Fq-Gv7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jze-QG-kaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -239,19 +246,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cn1-kE-7Bx">
-                                <rect key="frame" x="24" y="274" width="327" height="325"/>
+                                <rect key="frame" x="24" y="299" width="327" height="300"/>
                                 <connections>
                                     <segue destination="aE5-3C-0ua" kind="embed" identifier="workoutDetailVC" id="AJ7-G0-Rgx"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZv-jN-Hz2">
-                                <rect key="frame" x="169" y="141.5" width="37" height="17"/>
+                                <rect key="frame" x="166.5" y="163.5" width="42" height="20"/>
                                 <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDR-O0-nB5">
-                                <rect key="frame" x="317" y="135.5" width="34" height="29"/>
+                                <rect key="frame" x="315" y="157.5" width="36" height="32"/>
                                 <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="17"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -261,7 +268,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgc-D7-toC">
-                                <rect key="frame" x="24" y="135.5" width="56" height="29"/>
+                                <rect key="frame" x="24" y="157.5" width="66" height="32"/>
                                 <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="17"/>
                                 <state key="normal" title="Previous">
                                     <color key="titleColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -305,10 +312,10 @@
                     <tabBarItem key="tabBarItem" title="Workouts" id="EBW-q0-q5N"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8c0-Je-vAU">
-                        <rect key="frame" x="0.0" y="20" width="375" height="97.5"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="119.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
-                            <fontDescription key="fontDescription" name="JosefinSans-Bold" family="Josefin Sans" pointSize="50"/>
+                            <fontDescription key="fontDescription" name="AvenirNextCondensed-Heavy" family="Avenir Next Condensed" pointSize="55"/>
                             <color key="textColor" red="0.58039215686274503" green="0.12941176470588234" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -326,11 +333,11 @@
             <objects>
                 <viewController id="aE5-3C-0ua" customClass="WorkoutDetailViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wbE-dw-fba">
-                        <rect key="frame" x="0.0" y="0.0" width="327" height="325"/>
+                        <rect key="frame" x="0.0" y="0.0" width="327" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYY-f6-Sj2">
-                                <rect key="frame" x="3.5" y="103.5" width="320" height="162"/>
+                                <rect key="frame" x="3.5" y="69" width="320" height="162"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Liu-Dy-gqg">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
@@ -345,10 +352,10 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-nr-ram">
-                                <rect key="frame" x="62" y="289.5" width="203" height="29"/>
+                                <rect key="frame" x="57.5" y="255" width="212" height="32"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pK9-9s-oTz">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="29"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="32"/>
                                         <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="17"/>
                                         <state key="normal" title="End">
                                             <color key="titleColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -358,7 +365,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5a-bR-KiP">
-                                        <rect key="frame" x="80" y="0.0" width="40" height="29"/>
+                                        <rect key="frame" x="80" y="0.0" width="45" height="32"/>
                                         <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="17"/>
                                         <state key="normal" title="Finish">
                                             <color key="titleColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -368,7 +375,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQW-EG-pKt">
-                                        <rect key="frame" x="170" y="0.0" width="33" height="29"/>
+                                        <rect key="frame" x="175" y="0.0" width="37" height="32"/>
                                         <fontDescription key="fontDescription" name="JosefinSans-SemiBold" family="Josefin Sans" pointSize="17"/>
                                         <state key="normal" title="Start">
                                             <color key="titleColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -380,7 +387,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sUV-N0-m0H">
-                                <rect key="frame" x="3.5" y="37.5" width="320" height="41"/>
+                                <rect key="frame" x="3.5" y="3" width="320" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XP-9H-LJf">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="41"/>

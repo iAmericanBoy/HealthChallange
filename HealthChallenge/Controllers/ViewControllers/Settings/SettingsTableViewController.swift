@@ -13,52 +13,82 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
     var user = UserController.shared.loggedInUser
     var profilePhoto: UIImage?
     
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteChallengeButton: UIButton!
+    @IBOutlet weak var deleteProfileButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var lifestyleSegmentedControl: UISegmentedControl!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let user = user else { return }
         profilePhoto = user.photo
-        usernameTextField.text = user.userName
+        saveButton.setAttributedTitle(NSAttributedString(string: "Save Changes", attributes: FontController.tableViewRowFontGREEN), for: .normal)
+        deleteProfileButton.setAttributedTitle(NSAttributedString(string: "Delete Profile", attributes: FontController.tableViewRowFontRED), for: .normal)
+        deleteChallengeButton.setAttributedTitle(NSAttributedString(string: "Leave Challenge", attributes: FontController.tableViewRowFontRED), for: .normal)
+        usernameTextField.attributedText = NSAttributedString(string: "\(user.userName)", attributes: FontController.tableViewRowFont)
     }
     
     
     @IBAction func saveChangesButtonTapped(_ sender: Any) {
         guard let user = user,
             let username = usernameTextField.text, !username.isEmpty,
-            let profilePhoto = profilePhoto else { return }
+            let profilePhoto = profilePhoto
+            else { return }
         
         let strengthValue = lifestyleSegmentedControl.selectedSegmentIndex
         UserController.shared.update(user: user, withNewName: username, andWithNewPhoto: profilePhoto, newStrengthValue: strengthValue) { (success) in
             if success {
-                self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }
     
     @IBAction func deleteProfileButtonTapped(_ sender: Any) {
         guard let user = user else { return }
-        UserController.shared.delete(User: user) { (success) in
-            if success {
-                self.restartApp()
+        let alert = UIAlertController(title: "Delete Profile?", message: "Deleting your profile will remove all asociated data. Do you wish to proceed?", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+            UserController.shared.delete(User: user) { (success) in
+                if success {
+                    self.restartApp()
+                }
             }
         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+        
     }
     
     @IBAction func deleteChallengeButtonTapped(_ sender: Any) {
         guard let challenge = ChallengeController.shared.currentChallenge else { return }
-        ChallengeController.shared.delete(challenge: challenge) { (success) in
-            DispatchQueue.main.async {
-                self.restartApp()
+        let alert = UIAlertController(title: "Leave Challenge?", message: "Leaving the challenge will delete all current progress. Do you wish to proceed?", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Leave", style: .destructive) { (_) in
+            ChallengeController.shared.delete(challenge: challenge) { (success) in
+                DispatchQueue.main.async {
+                    self.restartApp()
+                }
             }
         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        
+        alert.addAction(confirmAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
-//        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
     }
     
