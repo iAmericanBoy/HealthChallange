@@ -35,6 +35,12 @@ class WorkoutDetailViewController: UIViewController {
         endButton.isEnabled = false
         workoutPickerView.delegate = self
         workoutPickerView.dataSource = self
+        millisecondsLabel.attributedText = NSAttributedString(string: "00", attributes: FontController.labelTitleFont)
+        secondsLabel.attributedText = NSAttributedString(string: "00", attributes: FontController.labelTitleFont)
+        minutesLabel.attributedText = NSAttributedString(string: "00", attributes: FontController.labelTitleFont)
+        startButton.setAttributedTitle(NSAttributedString(string: "Start", attributes: FontController.enabledButtonFont), for: .normal)
+        endButton.setAttributedTitle(NSAttributedString(string: "End", attributes: FontController.enabledButtonFont), for: .normal)
+        finishButton.setAttributedTitle(NSAttributedString(string: "Finish Workout", attributes: FontController.enabledButtonFont), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,9 +100,9 @@ class WorkoutDetailViewController: UIViewController {
         let millString = String(format: "%02d", milliseconds)
         
         //Set labels
-        minutesLabel.text = minString
-        secondsLabel.text = secString
-        millisecondsLabel.text = millString
+        minutesLabel.attributedText = NSAttributedString(string: "\(minString)", attributes: FontController.labelTitleFont)
+        secondsLabel.attributedText = NSAttributedString(string: "\(secString)", attributes: FontController.labelTitleFont)
+        millisecondsLabel.attributedText = NSAttributedString(string: "\(millString)", attributes: FontController.labelTitleFont)
     }
     
     func createWorkout() {
