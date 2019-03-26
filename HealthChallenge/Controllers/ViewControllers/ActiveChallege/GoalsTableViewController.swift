@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum GoalType {
+    case week
+    case month
+}
 class GoalsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
@@ -33,7 +37,7 @@ class GoalsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalTableViewCell
         
         cell?.goal = GoalController.shared.challengeGoals[indexPath.section][indexPath.row]
-
+        cell?.current = true
         return cell ?? UITableViewCell()
     }
     

@@ -22,6 +22,16 @@ class GoalTableViewCell: UITableViewCell {
         }
     }
     
+    var current: Bool?{
+        didSet {
+            self.updateViews()
+        }
+    }
+    var gradient =  CAGradientLayer()
+
+    var dateRangeCount: Double = 30.0
+    var dateposition: Double = 15.0
+    
     //MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +41,30 @@ class GoalTableViewCell: UITableViewCell {
     
     //MARK: - Private Functions
     func updateViews() {
+        if let current = current {
+            if current {
+                gradient = CAGradientLayer()
+                gradient.frame = contentView.bounds
+                contentView.layer.insertSublayer(gradient, at: 0)
+
+                gradient.locations = [0.0, NSNumber(value: (dateposition/dateRangeCount)) ]
+                gradient.colors = [UIColor.lushGreenColor.cgColor, UIColor.white.cgColor]
+                gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+                gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+                
+                
+                let gradientAnimation = CABasicAnimation(keyPath: "locations")
+                
+                gradientAnimation.fromValue = [0.0, 0.0]
+                gradientAnimation.toValue = [0.0, NSNumber(value: (dateposition/dateRangeCount))]
+                gradientAnimation.duration = 1.0
+                gradient.add(gradientAnimation, forKey: nil)
+                
+
+              
+            }
+        }
+
         guard let goal = goal else {return}
         goalNameLabel.text = goal.name
     }

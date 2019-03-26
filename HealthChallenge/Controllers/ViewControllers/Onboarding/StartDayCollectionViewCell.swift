@@ -113,7 +113,6 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .white
         let components = Calendar.current.dateComponents([.month, .year], from: Date())
         findDateRange(from: Calendar.current.date(from: components)!)
-        print(Calendar.current.date(from: components))
         setupViews()
         updateViews()
     }

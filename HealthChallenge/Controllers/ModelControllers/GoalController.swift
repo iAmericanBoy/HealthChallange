@@ -138,7 +138,9 @@ class GoalController {
     func fetchGoals(withChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
         
         let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.challengeReferencesKey,challengeReference])
+        let sortByName = NSSortDescriptor(key: Goal.nameKey, ascending: true)
         let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+        query.sortDescriptors = [sortByName]
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
             if isSuccess {
                 if isSuccess {

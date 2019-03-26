@@ -430,6 +430,7 @@
 				TargetAttributes = {
 					B6E332B72236B8650088D6FF = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
 								enabled = 1;
