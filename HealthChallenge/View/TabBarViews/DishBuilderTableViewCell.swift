@@ -39,10 +39,12 @@ class DishBuilderTableViewCell: UITableViewCell {
     func updateViews() {
         guard let food = dishBuilderLandingPad else {return}
         guard let weight = food.weight else {return}
-        nameLabel.text = food.name
-        amountLabel.text = "\(String(describing: weight)) g"
-        diffLabel.text = "\(String(describing: weight)) g"
+        nameLabel.attributedText = NSAttributedString(string: food.name, attributes: FontController.tableViewRowFont)
+        amountLabel.attributedText = NSAttributedString(string: "\(String(describing: weight)) g", attributes: FontController.subTitleLabelFont)
+        diffLabel.attributedText = NSAttributedString(string: "\(String(describing: weight)) g", attributes: FontController.subTitleLabelFont)
         
+        reduceAmountButton.setAttributedTitle(NSAttributedString(string: "-", attributes: FontController.enabledButtonFont), for: .normal)
+        addAmountButtonTaped.setAttributedTitle(NSAttributedString(string: "+", attributes: FontController.enabledButtonFont), for: .normal)
     }
 }
 protocol DishBuilderTableViewCellDelegate: class {

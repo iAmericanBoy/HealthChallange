@@ -31,7 +31,7 @@ class FoodTableViewCell: UITableViewCell {
     func updateViews() {
         guard let unwrappedItem = itemLandingPad else {return}
 
-        nameLabel.text = unwrappedItem.name
+        nameLabel.attributedText = NSAttributedString(string: unwrappedItem.name, attributes: FontController.tableViewRowFont)
       
     }
     
@@ -49,8 +49,8 @@ class FoodTableViewCell: UITableViewCell {
             let measure = food.measure
             else { return }
         
-        amountLabel.text = "\(weight) g"
-        servingSizeLabel.text = "\(String(describing: measure))"
+        amountLabel.attributedText = NSAttributedString(string: "\(weight) g", attributes: FontController.subTitleLabelFont)
+        servingSizeLabel.attributedText = NSAttributedString(string: "\(String(describing: measure))", attributes: FontController.subTitleLabelFont)
         
         let roundedCalories = Double(round(10 * Double(nutrientItem.calories)!)/10)
         let roundedSugars = Double(round(10 * Double(nutrientItem.sugar)!)/10)
@@ -58,12 +58,11 @@ class FoodTableViewCell: UITableViewCell {
         let roundedFats = Double(round(10 * Double(nutrientItem.fats)!)/10)
         let roundedSodium = Double(round(10 * Double(nutrientItem.sodium)!)/10)
         
-        
-        caloriesLabel.text = "cal: \(roundedCalories) cal"
-        sugarLabel.text = "sugar: \(roundedSugars) g"
-        carbLabel.text = "carbs: \(roundedCarbs) g"
-        fatLabel.text = "fats: \(roundedFats) g"
-        sodiumLabel.text = "sodium: \(roundedSodium) mg"
+        caloriesLabel.attributedText = NSAttributedString(string: "Calories: \(roundedCalories) cal", attributes: FontController.subTitleLabelFont)
+        sugarLabel.attributedText = NSAttributedString(string: "Sugar: \(roundedSugars) g", attributes: FontController.subTitleLabelFont)
+        carbLabel.attributedText = NSAttributedString(string: "Carbs: \(roundedCarbs) g", attributes: FontController.subTitleLabelFont)
+        fatLabel.attributedText = NSAttributedString(string: "Fats: \(roundedFats) g", attributes: FontController.subTitleLabelFont)
+        sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) g", attributes: FontController.subTitleLabelFont)
     }
     
     @IBOutlet weak var servingSizeLabel: UILabel!

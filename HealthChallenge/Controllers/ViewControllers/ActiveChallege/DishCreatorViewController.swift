@@ -52,6 +52,8 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var ingredientTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mealSegment: UISegmentedControl!
+    @IBOutlet weak var saveButton: UIButton!
+    
     
     @IBOutlet weak var noDishConstraint: NSLayoutConstraint!
     @IBOutlet weak var oneDishConstraint: NSLayoutConstraint!
@@ -70,7 +72,10 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
         self.dishTableView.tableFooterView = UIView()
         self.ingredientTableView.tableFooterView = UIView()
         dishTableView.reloadData()
-        
+        // sets fonts
+        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
+        saveButton.setAttributedTitle(NSAttributedString(string: "Save Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
+        dishName.attributedText = NSAttributedString(string: "", attributes: FontController.tableViewRowFont)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -206,6 +211,3 @@ extension DishCreatorViewController: UISearchBarDelegate {
         }
     }
 }
-
-
-

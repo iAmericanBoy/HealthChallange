@@ -18,12 +18,15 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
     var date = Date()
     var dishTimeReference: Date = Date().stripTimestamp() {
         didSet {
-            dishDateLabel.text = dishTimeReference.format()
+            dishDateLabel.attributedText = NSAttributedString(string: "\(dishTimeReference.format())", attributes: FontController.disabledButtonFont)
         }
     }
     
     @IBOutlet weak var dishDateLabel: UILabel!
     @IBOutlet weak var foodTrackerTableView: UITableView!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var addMealButton: UIButton!
     
     var dishesKeys = {
         DishController.shared.dishes.keys.map { $0 }
@@ -32,9 +35,15 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         self.foodTrackerTableView.reloadData()
+        setSettingsButton()
+        // Sets fonts
+        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
+        nextButton.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
+        previousButton.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
+        addMealButton.setAttributedTitle(NSAttributedString(string: "Add Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
     }
     override func viewWillAppear(_ animated: Bool) {
-        dishDateLabel.text = dishTimeReference.format()
+        dishDateLabel.attributedText = NSAttributedString(string: "\(dishTimeReference.format())", attributes: FontController.disabledButtonFont)
         self.foodTrackerTableView.reloadData()
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
@@ -120,4 +129,42 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
     }
 }
 
-
+extension FoodTrackerViewController {
+    func setSettingsButton() {
+        guard let navBar = self.navigationController?.navigationBar else { return }
+        let button = UIButton()
+        let image = Settings.shared.imageView
+        button.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        image.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        
+        self.navigationController?.navigationBar.addSubview(image)
+        NSLayoutConstraint.activate([
+            image.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
+            image.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
+            image.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
+            image.widthAnchor.constraint(equalTo: image.heightAnchor)
+            ])
+        
+        self.navigationController?.navigationBar.addSubview(button)
+        NSLayoutConstraint.activate([
+            button.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
+            button.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
+            button.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
+            button.widthAnchor.constraint(equalTo: button.heightAnchor)
+            ])
+        
+        image.layer.cornerRadius = navBar.frame.height / 4
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+    }
+    
+    @objc func showSettingsView() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "Settings")
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
+}
