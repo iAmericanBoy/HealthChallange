@@ -1,48 +1,36 @@
 //
-//  GoalsViewController.swift
+//  GoalsTableViewController.swift
 //  HealthChallenge
 //
-//  Created by RYAN GREENBURG on 3/14/19.
+//  Created by Dominic Lanzillotta on 3/26/19.
 //  Copyright © 2019 Dominic Lanzillotta. All rights reserved.
 //
 
 import UIKit
 
 class GoalsTableViewController: UITableViewController {
-    
-    @IBOutlet weak var optionsButton: UIBarButtonItem!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsImage()
+        tableView.dataSource = self
+        tableView.delegate = self
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
-            print("Second Notification Accepted")
-            self.presentAlert()
-        }
+
+    // MARK: - Table view data source
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return GoalController.shared.challengeGoals.count
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return GoalController.shared.challengeGoals[section].count
     }
+
     
-    @IBAction func optionsButtonTapped(_ sender: Any) {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalTableViewCell
         
-    }
-    
-    func settingsImage() {
-        if let image = UserController.shared.loggedInUser?.photo {
-            optionsButton.image = image
-        } else {
-            guard let image = UIImage(named: "stockPhoto"),
-                let imageAsData = image.pngData()
-                else { return }
-            optionsButton.image = UIImage(data: imageAsData, scale: 10)
-        }
+        cell?.goal = GoalController.shared.challengeGoals[indexPath.section][indexPath.row]
+
+        return cell ?? UITableViewCell()
     }
 }

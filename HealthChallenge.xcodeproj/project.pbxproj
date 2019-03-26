@@ -23,7 +23,6 @@
 		62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FC22397F3600D5410B /* HealthKitController.swift */; };
 		62D067FF223AB68100D5410B /* DishCreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D067FE223AB68100D5410B /* DishCreatorViewController.swift */; };
 		62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06800223AB68E00D5410B /* WorkoutViewController.swift */; };
-		62D06803223AB69900D5410B /* GoalsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06802223AB69900D5410B /* GoalsTableViewController.swift */; };
 		62D06805223AB6A900D5410B /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06804223AB6A900D5410B /* LeaderboardViewController.swift */; };
 		62D06808223AC65A00D5410B /* AddWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */; };
 		62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FE5A17223E94A3009240C6 /* ColorController.swift */; };
@@ -61,6 +60,9 @@
 		B6EBA60E22386CD30001F5BF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60D22386CD30001F5BF /* CloudKit.framework */; };
 		B6EBA61022396D730001F5BF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6EBA60F22396D730001F5BF /* HealthKit.framework */; };
 		B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA6112239DA400001F5BF /* MagicStrings.swift */; };
+		B6F4A84B224AA4CD00080F61 /* GoalsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F4A84A224AA4CD00080F61 /* GoalsTableViewController.swift */; };
+		B6F4A84D224AA61500080F61 /* UserImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F4A84C224AA61500080F61 /* UserImageCollectionViewCell.swift */; };
+		B6F4A84F224AB48A00080F61 /* GoalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F4A84E224AB48A00080F61 /* GoalTableViewCell.swift */; };
 		B6FD98CC2246E75F00A6522E /* SignUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */; };
 		B6FD98CE2246ED1100A6522E /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CD2246ED1100A6522E /* UIColor+Extension.swift */; };
 		B6FD98D02246F97800A6522E /* FontController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD98CF2246F97700A6522E /* FontController.swift */; };
@@ -99,7 +101,6 @@
 		62D067FC22397F3600D5410B /* HealthKitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitController.swift; sourceTree = "<group>"; };
 		62D067FE223AB68100D5410B /* DishCreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCreatorViewController.swift; sourceTree = "<group>"; };
 		62D06800223AB68E00D5410B /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
-		62D06802223AB69900D5410B /* GoalsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableViewController.swift; sourceTree = "<group>"; };
 		62D06804223AB6A900D5410B /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutsViewController.swift; sourceTree = "<group>"; };
 		62FE5A17223E94A3009240C6 /* ColorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorController.swift; sourceTree = "<group>"; };
@@ -140,6 +141,9 @@
 		B6EBA60D22386CD30001F5BF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B6EBA60F22396D730001F5BF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		B6EBA6112239DA400001F5BF /* MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicStrings.swift; sourceTree = "<group>"; };
+		B6F4A84A224AA4CD00080F61 /* GoalsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableViewController.swift; sourceTree = "<group>"; };
+		B6F4A84C224AA61500080F61 /* UserImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6F4A84E224AB48A00080F61 /* GoalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTableViewCell.swift; sourceTree = "<group>"; };
 		B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCollectionViewCell.swift; sourceTree = "<group>"; };
 		B6FD98CD2246ED1100A6522E /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		B6FD98CF2246F97700A6522E /* FontController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontController.swift; sourceTree = "<group>"; };
@@ -280,8 +284,10 @@
 				62D06800223AB68E00D5410B /* WorkoutViewController.swift */,
 				62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */,
 				62FE5A6422429C11009240C6 /* WorkoutDetailViewController.swift */,
-				62D06802223AB69900D5410B /* GoalsTableViewController.swift */,
 				62D06804223AB6A900D5410B /* LeaderboardViewController.swift */,
+				B6F4A84A224AA4CD00080F61 /* GoalsTableViewController.swift */,
+				B6F4A84C224AA61500080F61 /* UserImageCollectionViewCell.swift */,
+				B6F4A84E224AB48A00080F61 /* GoalTableViewCell.swift */,
 			);
 			path = ActiveChallege;
 			sourceTree = "<group>";
@@ -492,6 +498,7 @@
 				62FE5A692242BC7E009240C6 /* Workout+MagicStrings.swift in Sources */,
 				6254412A2245984800A87290 /* SettingsNavigationViewController.swift in Sources */,
 				CEB299B7223C0B240089DA63 /* NutrientsController.swift in Sources */,
+				B6F4A84D224AA61500080F61 /* UserImageCollectionViewCell.swift in Sources */,
 				62D067FD22397F3600D5410B /* HealthKitController.swift in Sources */,
 				62D067C3223718F600D5410B /* UserController.swift in Sources */,
 				B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */,
@@ -526,7 +533,6 @@
 				62FE5A672242BA67009240C6 /* Workout.swift in Sources */,
 				B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */,
 				62D067FF223AB68100D5410B /* DishCreatorViewController.swift in Sources */,
-				62D06803223AB69900D5410B /* GoalsTableViewController.swift in Sources */,
 				B6FD98CC2246E75F00A6522E /* SignUpCollectionViewCell.swift in Sources */,
 				B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */,
 				CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */,
@@ -536,11 +542,13 @@
 				CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */,
 				625441402249451700A87290 /* SettingsHelper.swift in Sources */,
 				CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */,
+				B6F4A84F224AB48A00080F61 /* GoalTableViewCell.swift in Sources */,
 				B624ACB22248027D00B5DD2F /* ShareCollectionViewCell.swift in Sources */,
 				CE60FC60224038390029386F /* DishController.swift in Sources */,
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
 				62FE5A6522429C11009240C6 /* WorkoutDetailViewController.swift in Sources */,
 				62FE5A6B2242C80E009240C6 /* WorkoutController.swift in Sources */,
+				B6F4A84B224AA4CD00080F61 /* GoalsTableViewController.swift in Sources */,
 				CEF56F5E2245485D0075BBE5 /* DishBuilderTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

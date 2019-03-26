@@ -26,6 +26,17 @@ class GoalController {
     ///The month goal of the current Challenge for the current User
     var monthGoal: Goal?
     
+    /// The week Goals of the current challenge and the monthGoal of the user for the current Challenge
+    var challengeGoals: [[Goal]] {
+        get {
+            if let monthGoal = monthGoal {
+                return [weeklyGoals,[monthGoal]]
+            } else {
+                return [weeklyGoals,[]]
+            }
+        }
+    }
+    
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
