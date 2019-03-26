@@ -39,9 +39,9 @@
 		B624ACAE2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACAD2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift */; };
 		B624ACB02248026B00B5DD2F /* MonthGoalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACAF2248026B00B5DD2F /* MonthGoalCollectionViewCell.swift */; };
 		B624ACB22248027D00B5DD2F /* ShareCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACB12248027D00B5DD2F /* ShareCollectionViewCell.swift */; };
-		B624ACB422487BF100B5DD2F /* NewUserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACB322487BF100B5DD2F /* NewUserCollectionViewCell.swift */; };
-		B66C81D422473C0500FDACC8 /* NewDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66C81D322473C0500FDACC8 /* NewDateCollectionViewCell.swift */; };
-		B6823FAF2246DD0500D2E23B /* NewOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6823FAE2246DD0500D2E23B /* NewOnboardingViewController.swift */; };
+		B624ACB422487BF100B5DD2F /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B624ACB322487BF100B5DD2F /* UserCollectionViewCell.swift */; };
+		B66C81D422473C0500FDACC8 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66C81D322473C0500FDACC8 /* DateCollectionViewCell.swift */; };
+		B6823FAF2246DD0500D2E23B /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6823FAE2246DD0500D2E23B /* OnboardingViewController.swift */; };
 		B6BD36872243EB2000E66A7F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD36862243EB2000E66A7F /* AppStates.swift */; };
 		B6BD368B224440DA00E66A7F /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */; };
 		B6BD368F2245892D00E66A7F /* Points.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD368E2245892D00E66A7F /* Points.swift */; };
@@ -115,9 +115,9 @@
 		B624ACAD2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyGoalsCollectionViewCell.swift; sourceTree = "<group>"; };
 		B624ACAF2248026B00B5DD2F /* MonthGoalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGoalCollectionViewCell.swift; sourceTree = "<group>"; };
 		B624ACB12248027D00B5DD2F /* ShareCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCollectionViewCell.swift; sourceTree = "<group>"; };
-		B624ACB322487BF100B5DD2F /* NewUserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserCollectionViewCell.swift; sourceTree = "<group>"; };
-		B66C81D322473C0500FDACC8 /* NewDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDateCollectionViewCell.swift; sourceTree = "<group>"; };
-		B6823FAE2246DD0500D2E23B /* NewOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingViewController.swift; sourceTree = "<group>"; };
+		B624ACB322487BF100B5DD2F /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		B66C81D322473C0500FDACC8 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6823FAE2246DD0500D2E23B /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		B6BD36862243EB2000E66A7F /* AppStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStates.swift; sourceTree = "<group>"; };
 		B6BD368A224440DA00E66A7F /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		B6BD368E2245892D00E66A7F /* Points.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Points.swift; sourceTree = "<group>"; };
@@ -316,14 +316,14 @@
 		B6823FB02246DD0F00D2E23B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				B6823FAE2246DD0500D2E23B /* NewOnboardingViewController.swift */,
+				B6823FAE2246DD0500D2E23B /* OnboardingViewController.swift */,
 				B6FD98CB2246E75F00A6522E /* SignUpCollectionViewCell.swift */,
 				B6FD98D122472E4E00A6522E /* StartDayCollectionViewCell.swift */,
-				B66C81D322473C0500FDACC8 /* NewDateCollectionViewCell.swift */,
+				B66C81D322473C0500FDACC8 /* DateCollectionViewCell.swift */,
 				B624ACAD2247FE4400B5DD2F /* WeeklyGoalsCollectionViewCell.swift */,
 				B624ACAF2248026B00B5DD2F /* MonthGoalCollectionViewCell.swift */,
 				B624ACB12248027D00B5DD2F /* ShareCollectionViewCell.swift */,
-				B624ACB322487BF100B5DD2F /* NewUserCollectionViewCell.swift */,
+				B624ACB322487BF100B5DD2F /* UserCollectionViewCell.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -510,12 +510,12 @@
 				B6BD369122458A5D00E66A7F /* Points+Extension.swift in Sources */,
 				B6EBA6122239DA400001F5BF /* MagicStrings.swift in Sources */,
 				CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */,
-				B66C81D422473C0500FDACC8 /* NewDateCollectionViewCell.swift in Sources */,
+				B66C81D422473C0500FDACC8 /* DateCollectionViewCell.swift in Sources */,
 				62FE5A18223E94A3009240C6 /* ColorController.swift in Sources */,
 				62D06801223AB68E00D5410B /* WorkoutViewController.swift in Sources */,
-				B6823FAF2246DD0500D2E23B /* NewOnboardingViewController.swift in Sources */,
+				B6823FAF2246DD0500D2E23B /* OnboardingViewController.swift in Sources */,
 				62D067BD2237182300D5410B /* User.swift in Sources */,
-				B624ACB422487BF100B5DD2F /* NewUserCollectionViewCell.swift in Sources */,
+				B624ACB422487BF100B5DD2F /* UserCollectionViewCell.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
 				B6BD368F2245892D00E66A7F /* Points.swift in Sources */,
 				62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */,

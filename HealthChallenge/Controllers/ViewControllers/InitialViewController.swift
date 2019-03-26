@@ -302,7 +302,7 @@ class InitialViewController: UIViewController {
     func createNewUser() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 1
             
@@ -314,7 +314,7 @@ class InitialViewController: UIViewController {
     func createNewChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 2
             
@@ -326,7 +326,7 @@ class InitialViewController: UIViewController {
     func currentChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 5
             
@@ -339,7 +339,7 @@ class InitialViewController: UIViewController {
         //TODO: Add logic to segue directly to the monthGoal screen
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 4
             

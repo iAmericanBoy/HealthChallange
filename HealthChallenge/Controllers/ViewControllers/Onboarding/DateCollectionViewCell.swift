@@ -9,7 +9,7 @@
 import UIKit
 
 
-class NewDateCollectionViewCell: UICollectionViewCell {
+class DateCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
     var dayLabel: UILabel = {

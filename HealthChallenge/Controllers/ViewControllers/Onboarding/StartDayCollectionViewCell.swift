@@ -241,7 +241,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.backgroundColor = .clear
         calendarCollectionView?.showsHorizontalScrollIndicator = false
         calendarCollectionView?.clipsToBounds = true
-        calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
+        calendarCollectionView?.register(DateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
         calendarCollectionView?.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -277,7 +277,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? NewDateCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
             else { return UICollectionViewCell() }
         let monthIndex = calendarController.currentMonthIndex - 1
         var month = calendarController.shortMonthNames[monthIndex]
@@ -313,7 +313,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? NewDateCollectionViewCell else {return}
+        guard let cell = collectionView.cellForItem(at: indexPath) as? DateCollectionViewCell else {return}
         challengeStartDate = cell.cellDate
         cell.contentView.backgroundColor = .lushGreenColor
         updateViews()

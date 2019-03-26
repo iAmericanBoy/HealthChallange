@@ -99,10 +99,10 @@
             </objects>
             <point key="canvasLocation" x="-271" y="958"/>
         </scene>
-        <!--New Onboarding View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="VEB-22-P98">
             <objects>
-                <viewController id="YOZ-cJ-cQQ" customClass="NewOnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YOZ-cJ-cQQ" customClass="OnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Si-yX-D1K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
