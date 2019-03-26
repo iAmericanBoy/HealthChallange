@@ -241,7 +241,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.backgroundColor = .clear
         calendarCollectionView?.showsHorizontalScrollIndicator = false
         calendarCollectionView?.clipsToBounds = true
-        calendarCollectionView?.register(DateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
+        calendarCollectionView?.register(StartDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
         calendarCollectionView?.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -277,7 +277,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? DateCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? StartDateCollectionViewCell
             else { return UICollectionViewCell() }
         let monthIndex = calendarController.currentMonthIndex - 1
         var month = calendarController.shortMonthNames[monthIndex]

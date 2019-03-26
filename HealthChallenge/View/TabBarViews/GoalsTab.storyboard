@@ -6,36 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Goals-->
-        <scene sceneID="A5O-9e-DtL">
-            <objects>
-                <viewController id="P4n-DL-MRE" customClass="GoalsViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VBR-4F-Z4h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="SFo-PL-vcj"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Goals" largeTitleDisplayMode="always" id="WTV-Y0-jPr">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="swa-cp-Wa7">
-                            <color key="tintColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="optionsButtonTapped:" destination="P4n-DL-MRE" id="3JI-dv-xLa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="optionsButton" destination="swa-cp-Wa7" id="qR4-Dn-Iwd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xlu-yo-6ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4364" y="653.52323838080963"/>
-        </scene>
         <!--Goals-->
         <scene sceneID="iZt-Ee-oxL">
             <objects>
@@ -52,12 +25,51 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="P4n-DL-MRE" kind="relationship" relationship="rootViewController" id="v5W-sG-4KC"/>
+                        <segue destination="9KI-BW-fRn" kind="relationship" relationship="rootViewController" id="7Vd-rK-3kU"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWL-8z-Rd6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3638" y="654"/>
+        </scene>
+        <!--GOALS-->
+        <scene sceneID="gvd-bP-T0l">
+            <objects>
+                <tableViewController id="9KI-BW-fRn" customClass="GoalsTableViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="leQ-d3-jqB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="goalCell" rowHeight="106" id="ZNz-p4-xAT">
+                                <rect key="frame" x="0.0" y="28" width="375" height="106"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZNz-p4-xAT" id="ViZ-EO-oGs">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="105.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUS-Qc-asr">
+                                            <rect key="frame" x="33" y="11" width="42" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="9KI-BW-fRn" id="WUE-w1-q2u"/>
+                            <outlet property="delegate" destination="9KI-BW-fRn" id="luu-mP-M0w"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="GOALS" id="QIn-lD-f88"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xL2-ac-agh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4632.8000000000002" y="653.52323838080963"/>
         </scene>
     </scenes>
 </document>
