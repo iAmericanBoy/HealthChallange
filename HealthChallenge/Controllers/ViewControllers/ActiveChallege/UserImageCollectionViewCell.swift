@@ -23,11 +23,16 @@ class UserImageCollectionViewCell: UICollectionViewCell {
     //MARK: - LifeCycle
     override func awakeFromNib() {
         super.awakeFromNib()
+        userImageView.layer.cornerRadius = contentView.frame.width / 2
+
+        userImageView.clipsToBounds = true
      }
     
     //MARK: - Private Functions
     func updateViews() {
         guard let user = user else {return}
         userImageView.image = user.photo
+
+        
     }
 }

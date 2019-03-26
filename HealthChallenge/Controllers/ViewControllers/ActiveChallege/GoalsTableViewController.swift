@@ -24,7 +24,10 @@ class GoalsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return GoalController.shared.challengeGoals[section].count
     }
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "Week Goals" : "Month Goal"
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalTableViewCell
@@ -32,5 +35,9 @@ class GoalsTableViewController: UITableViewController {
         cell?.goal = GoalController.shared.challengeGoals[indexPath.section][indexPath.row]
 
         return cell ?? UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.height / 10
     }
 }
