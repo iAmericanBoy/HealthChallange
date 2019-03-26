@@ -32,7 +32,8 @@ class FoodTrackerCell: UITableViewCell {
     
     func addDish() {
         guard let dish = dishLanding else {return}
-        mealName.text = dish.dishName
+        mealName.attributedText = NSAttributedString(string: "\(dish.dishName)", attributes: FontController.labelTitleFont)
+        mealName.textColor = .purple
         
         let roundedCalories = Double(round(10*dish.totalcal)/10)
         let roundedSugars = Double(round(10*dish.totalsugars)/10)
@@ -40,11 +41,11 @@ class FoodTrackerCell: UITableViewCell {
         let roundedFats = Double(round(10*dish.totalfats)/10)
         let roundedSodium = Double(round(10*dish.totalsodium)/10)
         
-        caloriesLabel.text = "Calories: \(roundedCalories) kcal"
-        sugarsLabel.text = "Sugar: \(roundedSugars) g"
-        carbsLabel.text = "Carbs: \(roundedCarbs) g"
-        fatsLabel.text = "Fat: \(roundedFats) g"
-        sodiumLabel.text = "Sodium: \(roundedSodium) mg"
+        caloriesLabel.attributedText = NSAttributedString(string: "Calories: \(roundedCalories) kcal", attributes: FontController.subTitleLabelFont)
+        sugarsLabel.attributedText = NSAttributedString(string: "Sugar: \(roundedSugars) g", attributes: FontController.subTitleLabelFont)
+        carbsLabel.attributedText = NSAttributedString(string: "Carbs: \(roundedCarbs) g", attributes: FontController.subTitleLabelFont)
+        fatsLabel.attributedText = NSAttributedString(string: "Fat: \(roundedFats) g", attributes: FontController.subTitleLabelFont)
+        sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) mg", attributes: FontController.subTitleLabelFont)
         
     }
 }
