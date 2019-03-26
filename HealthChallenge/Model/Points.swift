@@ -23,7 +23,7 @@ class Points {
     var recordID:CKRecord.ID
     
     var totalPoints: Int {
-        return workOutPoints + weeklyGoalPoints + monthlyGoalPoints + foodTrackingPoints
+        return workOutPoints + goalOnePoints + goalTwoPoints + goalThreePoints + goalFourPoints + monthlyGoalPoints + foodTrackingPoints
     }
     
     init(appleUserRef: CKRecord.Reference, challengeRef: CKRecord.Reference, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), workOutPoints: Int = 0, monthlyGoalPoints: Int = 0, foodTrackingPoints: Int = 0, goalOnePoints: Int = 0, goalTwoPoints: Int = 0, goalThreePoints: Int = 0, goalFourPoints: Int = 0) {

@@ -111,8 +111,19 @@ class PointsController {
     /// - parameter points: The points that have new weeklyGoalPoints now.
     /// - parameter completion: Handler for when the points where updated.
     /// - parameter isSuccess: Confirms that points where updated.
-    func set(weeklyGoalPoints: Int, toPoints points: Points, completion: @escaping (_ isSuccess:Bool) -> Void) {
-        points.weeklyGoalPoints = weeklyGoalPoints
+    func set(weeklyGoalPoints: Int, forGoalWeek goalWeek: GoalWeek, toPoints points: Points, completion: @escaping (_ isSuccess:Bool) -> Void) {
+        
+        switch goalWeek {
+        case .weekOne:
+            points.goalOnePoints = weeklyGoalPoints
+        case .weekTwo:
+            points.goalTwoPoints = weeklyGoalPoints
+        case .weekThree:
+            points.goalThreePoints = weeklyGoalPoints
+        case .weekFour:
+            points.goalFourPoints = weeklyGoalPoints
+        }
+        
         
         let record = CKRecord(points: points)
         
@@ -145,4 +156,11 @@ class PointsController {
             }
         }
     }
+}
+
+enum GoalWeek {
+    case weekOne
+    case weekTwo
+    case weekThree
+    case weekFour
 }
