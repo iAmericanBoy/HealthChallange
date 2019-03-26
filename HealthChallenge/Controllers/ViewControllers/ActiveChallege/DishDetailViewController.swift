@@ -10,7 +10,8 @@ import UIKit
 
 class DishDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-      @IBOutlet weak var dishTableView: UITableView!
+    @IBOutlet weak var totalCaloriesLabel: UILabel!
+    @IBOutlet weak var dishTableView: UITableView!
     
     //MARK: - sending ingredient names
     var dish: Dish? 
@@ -18,11 +19,12 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = dish?.dishName
-      
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         updateTotalCalories()
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
             self.presentAlert()
@@ -32,6 +34,13 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
+    }
+    
+    func updateTotalCalories() {
+        guard let dishCal = dish?.totalcal else {return}
+        let roundedCalories = Double(round(10 * dishCal)/10)
+        totalCaloriesLabel.text = "Total Calories: \(roundedCalories) cal"
+        
     }
     
     

@@ -7,26 +7,6 @@
 //
 
 
-//MARK: - remove data you dont need !!!
-
-//        guard let servings = food.servings else { return }
-//        let charSet = NSMutableCharacterSet()
-//        charSet.formUnion(with: .letters)
-//        charSet.formUnion(with: .whitespaces)
-//
-//        if let measure = food.measure {
-//         let measureLessLetters =  measure.components(separatedBy: charSet as CharacterSet).joined()
-//            guard let measureAsDouble = Double(measureLessLetters) else { return }
-//            food.measure = "\((measureAsDouble / servings) * 1.25)"
-//        }
-
-
-
-// food.weight += 1
-
-// return food
-
-
 import Foundation
 
 class FoodController {

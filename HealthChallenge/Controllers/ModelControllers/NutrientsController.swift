@@ -72,7 +72,7 @@ class NutrientsController {
             guard let jsonFoods :[[String: Any]] = jsonReport["foods"] as? [[String: Any]] else {print("got foods"); return}
             
             for foodDictionary in jsonFoods {
-                if let weight = foodDictionary["weight"] as? Double,   //*
+                if let weight = foodDictionary["weight"] as? Double,   
                 let measure = foodDictionary["measure"] as? String
                     
                     
