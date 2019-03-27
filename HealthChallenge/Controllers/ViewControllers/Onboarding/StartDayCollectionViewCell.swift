@@ -175,7 +175,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         let monthLabelText =  "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
         monthLabel.attributedText = NSAttributedString(string: monthLabelText, attributes: FontController.labelTitleFont)
         
-        if calendarController.currentMonthIndex == challengeStartDate?.month || calendarController.currentMonthIndex == Date().month {
+        if calendarController.currentMonthIndex == Date().month {
             previousMonthButton.isEnabled = false
         } else {
             previousMonthButton.isEnabled = true
@@ -226,7 +226,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.topAnchor.constraint(equalTo: topRowStackView.bottomAnchor).isActive = true
         calendarCollectionView?.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
         calendarCollectionView?.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.95).isActive = true
-        calendarCollectionView?.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.6).isActive = true
+        calendarCollectionView?.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.55).isActive = true
         
         contentView.addSubview(saveButton)
         saveButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -312,20 +312,18 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
             }
         }
         
-        // Make only current and future days selectable
-        if date.day < Date().day && monthIndex == calendarController.currentMonthIndex - 1 {
-            cell.isUserInteractionEnabled = false
-        }
+
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? StartDateCollectionViewCell else {return}
-        challengeStartDate = cell.cellDate
-        cell.contentView.backgroundColor = .lushGreenColor
-        updateViews()
-        
+        guard let cellDate = cell.cellDate, cellDate.stripTimestamp() >= Date().stripTimestamp() else {return}
+            challengeStartDate = cell.cellDate
+            cell.contentView.backgroundColor = .lushGreenColor
+            updateViews()
+            
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

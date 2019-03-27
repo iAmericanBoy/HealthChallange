@@ -62,9 +62,9 @@ class GoalsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let currentPoints = PointsController.shared.usersPoints else {return UITableViewCell()}
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalTableViewCell
-        
+        cell?.selectionStyle = .none
         cell?.goal = GoalController.shared.challengeGoals[indexPath.section][indexPath.row]
         
         switch indexPath.section {
@@ -142,60 +142,71 @@ class GoalsTableViewController: UITableViewController {
             //Week
             switch indexPath.row {
             case 0:
-                if usersPoints.goalOnePoints == 0 {
-                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
-                        
-                    }
-                } else {
-                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
-                        
+                if  let index = weekOne.index(of: Date().day) {
+                    if usersPoints.goalOnePoints == 0 {
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
+                    } else {
+                        PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
                     }
                 }
+
             case 1:
-                if usersPoints.goalTwoPoints == 0 {
-                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
-                        
-                    }
-                } else {
-                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
-                        
+                if  let index = weekTwo.index(of: Date().day) {
+                    if usersPoints.goalTwoPoints == 0 {
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
+                    } else {
+                        PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
                     }
                 }
+
    
             case 2:
-                if usersPoints.goalThreePoints == 0 {
-                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
-                        
-                    }
-                } else {
-                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
-                        
+                if  let index = weekThree.index(of: Date().day) {
+                    if usersPoints.goalThreePoints == 0 {
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
+                    } else {
+                        PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
                     }
                 }
-
             case 3:
-                if usersPoints.goalFourPoints == 0 {
-                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
-                        
-                    }
-                } else {
-                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
-                        
+                if  let index = weekFour.index(of: Date().day) {
+                    if usersPoints.goalFourPoints == 0 {
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
+                    } else {
+                        PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
+                            
+                        }
                     }
                 }
-
             default:
                 break
             }
         case 1:
             //Month
-            if usersPoints.goalOnePoints == 0 {
-                PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
-                    
-                }
-            } else {
-                PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
-                    
+            if  let index = monthIntRange.index(of: Date().day) {
+                
+                if usersPoints.goalOnePoints == 0 {
+                    PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                } else {
+                    PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
                 }
             }
         default:
