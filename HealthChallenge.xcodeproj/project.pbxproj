@@ -52,6 +52,8 @@
 		B6E332C12236B8650088D6FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332BF2236B8650088D6FF /* Main.storyboard */; };
 		B6E332C32236B8680088D6FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C22236B8680088D6FF /* Assets.xcassets */; };
 		B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C42236B8680088D6FF /* LaunchScreen.storyboard */; };
+		B6E99EC5224C22640032FAA2 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E99EC4224C22640032FAA2 /* FoodEntry.swift */; };
+		B6E99EC7224C23E50032FAA2 /* FoodEntry+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E99EC6224C23E50032FAA2 /* FoodEntry+Extension.swift */; };
 		B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA5FB22380F970001F5BF /* Challenge.swift */; };
 		B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA5FD22380FE10001F5BF /* Goal.swift */; };
 		B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */; };
@@ -135,6 +137,8 @@
 		B6E332C22236B8680088D6FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6E332C52236B8680088D6FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6E332C72236B8680088D6FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6E99EC4224C22640032FAA2 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
+		B6E99EC6224C23E50032FAA2 /* FoodEntry+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodEntry+Extension.swift"; sourceTree = "<group>"; };
 		B6EBA5FB22380F970001F5BF /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		B6EBA5FD22380FE10001F5BF /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+MagicStrings.swift"; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				62D067BC2237182300D5410B /* User.swift */,
 				B6EBA5FB22380F970001F5BF /* Challenge.swift */,
 				B6EBA5FD22380FE10001F5BF /* Goal.swift */,
+				B6E99EC4224C22640032FAA2 /* FoodEntry.swift */,
 				62FE5A662242BA67009240C6 /* Workout.swift */,
 				62D067C1223718D400D5410B /* MagicStrings */,
 			);
@@ -238,6 +243,7 @@
 				B6BD369022458A5D00E66A7F /* Points+Extension.swift */,
 				CEE08C91224A8E0A0043F863 /* Dish+MagicStrings.swift */,
 				CEE08C93224A9FDC0043F863 /* Food+MagicStrings.swift */,
+				B6E99EC6224C23E50032FAA2 /* FoodEntry+Extension.swift */,
 			);
 			path = MagicStrings;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 				B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */,
 				B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */,
 				CEB299B1223C09250089DA63 /* Nutrients.swift in Sources */,
+				B6E99EC5224C22640032FAA2 /* FoodEntry.swift in Sources */,
 				B6BD368B224440DA00E66A7F /* UIViewController+Extension.swift in Sources */,
 				62FE5A692242BC7E009240C6 /* Workout+MagicStrings.swift in Sources */,
 				62EE2D95224AE1AB00836D34 /* LeaderboardTableViewCell.swift in Sources */,
@@ -514,6 +521,7 @@
 				62D067C3223718F600D5410B /* UserController.swift in Sources */,
 				B6EBA60A22384F6E0001F5BF /* ChallengeController.swift in Sources */,
 				CE60FC6222403B260029386F /* FoodTrackerViewController.swift in Sources */,
+				B6E99EC7224C23E50032FAA2 /* FoodEntry+Extension.swift in Sources */,
 				CE60FC6422416E180029386F /* FoodTrackerCell.swift in Sources */,
 				62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */,
 				62FE5A6D2244193C009240C6 /* WorkoutDetailTableViewCell.swift in Sources */,
