@@ -65,6 +65,9 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector("dismissKeyboard")))
+//
         searchBar.delegate = self
         dishTableView.dataSource = self
         self.ingredientTableView.delegate = self
@@ -109,12 +112,16 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
             
             ingredients.count > 0
             else { return }
-        DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients)
-        navigationController?.popViewController(animated: true)
         
-       
-        
+        DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients) { (success) in
+            if success {
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //MARK: - top tableView
         
@@ -123,9 +130,9 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
             return FoodController.food.count
             
         //MARK: - bottom tableView
+        }else {
+            return ingredients.count
         }
-        _ = dishTableView
-        return ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -136,14 +143,6 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
             let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath) as? FoodTableViewCell
             cell?.delegate = self
             let foodItem = FoodController.food[indexPath.row]
-            
-            NutrientsController.instance.getNutrients(food: foodItem, completion: { (success) in
-                if success {
-                    DispatchQueue.main.async {
-                        cell?.nutrientLandingPad = foodItem.nutrients
-                    }
-                }
-            })
             
             cell?.itemLandingPad = foodItem
             return cell ?? UITableViewCell()
@@ -176,6 +175,8 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
         
         if indexPath.row >= FoodController.food.count - 1 {
             
+            searchTerm1 = searchBar.text ?? ""
+            
             let preFetchCount = FoodController.food.count
             
             FoodController.getFood(query: self.searchTerm1) { (success) in
@@ -200,16 +201,43 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
 
 //MARK: - SearchBar
 extension DishCreatorViewController: UISearchBarDelegate {
+//
+//    @objc func dismissKeyBoard() {
+//        searchBar.resignFirstResponder()
+//
+//    }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
+        searchBar.resignFirstResponder()
+//        self.ingredientTableView.reloadData()
+        FoodController.food = []
         FoodController.getFood(query: searchTerm) { (success) in
             if success {
-                
+     
                 DispatchQueue.main.async {
+  
                     self.ingredientTableView.reloadData()
                 }
             }
         }
     }
+    
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
+//
+//        FoodController.getFood(query: searchTerm) { (success) in
+//            if success {
+//
+//
+//
+//                DispatchQueue.main.async {
+//
+//
+//                    self.ingredientTableView.reloadData()
+//                }
+//            }
+//        }
+//    }
 }

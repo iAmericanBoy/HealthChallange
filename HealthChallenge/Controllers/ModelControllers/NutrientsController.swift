@@ -10,7 +10,7 @@ import Foundation
 
 class NutrientsController {
     
-    var nutrient: [Nutrients] = []
+//    var nutrient: [Nutrients] = []
     static let instance = NutrientsController()
     let apiKey = "GpyZeJCsTfea56Jcwwkd5lXGYyqpG2nFC0MQNtZx"
     let format = "json"
@@ -73,11 +73,7 @@ class NutrientsController {
             
             for foodDictionary in jsonFoods {
                 if let weight = foodDictionary["weight"] as? Double,   
-                let measure = foodDictionary["measure"] as? String
-                    
-                    
-                    {
-                        
+                let measure = foodDictionary["measure"] as? String {
                     food.measure = measure
                     food.weight = weight
                     //print(measure)
@@ -88,28 +84,27 @@ class NutrientsController {
                 
                 if let nutrient = Nutrients( dictionary: jsonNutrients, weight : food.weight ?? 0) {
                     guard let weight = food.weight else {return}
-                    print("=====nutrient======")
-                    print("food: \(food.name)")
-                    print("NDBNO: \(food.ndbno)")
-                    //print("weight: \(String(describing: food.weight))")     //*
-                    print("weight: \(weight)")
-                    print("measure: \(String(describing: food.measure))")
-                    print("calories: \(nutrient.calories)")
-                    print("sugar: \(nutrient.sugar)")
-                    print("fats: \(nutrient.fats)")
-                    print("carbs: \(nutrient.carbs)")
-                    print("sodium: \(nutrient.sodium)")
-                    print("=====nutrient======")
-                    print("😫😫😫😫😫😫😫😫😫😫NutrientGM😫😫😫😫😫😫😫😫😫😫😫")
-                    print("NDBNO: \(food.ndbno)")
-                    print("calories: \(nutrient.caloriesGM)")
-                    print("sugar: \(nutrient.sugarGM)")
-                    print("fats: \(nutrient.fatsGM)")
-                    print("carbs: \(nutrient.carbsGM)")
-                    print("sodium: \(nutrient.sodiumGM)")
-                    print("😫😫😫😫😫😫😫😫😫😫NutrientGM😫😫😫😫😫😫😫😫😫😫😫")
-      
-                    
+//                    print("=====nutrient======")
+//                    print("food: \(food.name)")
+//                    print("NDBNO: \(food.ndbno)")
+//                    //print("weight: \(String(describing: food.weight))")     //*
+//                    print("weight: \(weight)")
+//                    print("measure: \(String(describing: food.measure))")
+//                    print("calories: \(nutrient.calories)")
+//                    print("sugar: \(nutrient.sugar)")
+//                    print("fats: \(nutrient.fats)")
+//                    print("carbs: \(nutrient.carbs)")
+//                    print("sodium: \(nutrient.sodium)")
+//                    print("=====nutrient======")
+//                    print("😫😫😫😫😫😫😫😫😫😫NutrientGM😫😫😫😫😫😫😫😫😫😫😫")
+//                    print("NDBNO: \(food.ndbno)")
+//                    print("calories: \(nutrient.caloriesGM)")
+//                    print("sugar: \(nutrient.sugarGM)")
+//                    print("fats: \(nutrient.fatsGM)")
+//                    print("carbs: \(nutrient.carbsGM)")
+//                    print("sodium: \(nutrient.sodiumGM)")
+//                    print("😫😫😫😫😫😫😫😫😫😫NutrientGM😫😫😫😫😫😫😫😫😫😫😫")
+              
                     food.nutrients = nutrient
                 }
             }

@@ -22,7 +22,7 @@ class DishController {
         "Snack" : []
     ]
     
-    func createDish(name: String, index: Int, ingredients: [Food]) {
+    func createDish(name: String, index: Int, ingredients: [Food], completion: @escaping (Bool) -> Void) {
         var dishType: DishType?
         switch index {
         case 0:
@@ -41,33 +41,32 @@ class DishController {
         
         saveDishToCloudKit(dish: dish) { (success) in
             if success {
+                print("😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛")
                 print("saved To CloudKit saved Successfully")
+                completion(true)
             } else {
-                print("not saved to cloudkitd")
+                print("not saved to cloudkit")
+                completion(false)
             }
         }
         
-        
-        print("😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛")
         dump(dish)
-       
         dishes[dishType!.rawValue]?.append(dish)
-        
 
-     
     }
     
     func saveDishToCloudKit(dish: Dish, completion: @escaping (Bool) -> Void) {
         var recordsToSave: [CKRecord] = []
         
-        dish.ingredients?.forEach({ (food) in
+        dish.ingredients.forEach({ (food) in
             let dishRef = CKRecord.Reference(recordID: dish.ckRecordID, action: .none)
             food.dishRef = dishRef
             let recordToSave = CKRecord(food: food)
             recordsToSave.append(recordToSave)
         })
         
-        let dishToSave = CKRecord(dish: dish)
+        let dishToSave = CKRecord(dish: dish) //< Freezes
+        print("Break points Suck")
         recordsToSave.append(dishToSave)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: recordsToSave, purchasesToDelete: []) { (success, records, _) in

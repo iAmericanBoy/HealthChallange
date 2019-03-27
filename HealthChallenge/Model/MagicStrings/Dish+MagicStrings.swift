@@ -15,7 +15,7 @@ extension Dish {
         static let dishNameKey = "dishName"
         static let creatorReferenceKey = "creatorReference"
         static let ingredientsKey = "ingredients"
-        static let photoKey = "photo"
+        static let photoKey = "imageAsset"
         static let dishTypeKey = "dishType"
         static let timeStampKey = "timeStamp"
         static let totalCalKey = "totalcal"

@@ -54,9 +54,9 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath) as? DishTableViewCell
-        guard let dish = dish,
+        guard let dish = dish else {return UITableViewCell()}
             let ingredients = dish.ingredients
-            else { return UITableViewCell() }
+//            else { return UITableViewCell() }
         let ingredient = ingredients[indexPath.row]
         cell?.ingredientLandingPad = ingredient
   

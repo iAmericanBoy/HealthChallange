@@ -59,7 +59,6 @@ class Nutrients {
         var count = 0
         
         for js in dictionary{
-            dump(js)
             if let value = js["gm"] as? Double  {
            
                 if count == 0 {
