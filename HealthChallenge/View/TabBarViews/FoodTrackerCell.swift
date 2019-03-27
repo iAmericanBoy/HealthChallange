@@ -35,7 +35,7 @@ class FoodTrackerCell: UITableViewCell {
         mealName.attributedText = NSAttributedString(string: "\(dish.dishName)", attributes: FontController.labelTitleFont)
         mealName.textColor = .purple
         
-        let roundedCalories = Double(round(10*dish.totalcal)/10)
+        let roundedCalories = Double(round(10*dish.totalcarbs)/10)
         let roundedSugars = Double(round(10*dish.totalsugars)/10)
         let roundedCarbs = Double(round(10*dish.totalfats)/10)
         let roundedFats = Double(round(10*dish.totalfats)/10)

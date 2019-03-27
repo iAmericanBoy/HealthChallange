@@ -10,54 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--SignUp-->
-        <scene sceneID="jJw-Tc-M9N">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="SignUp" storyboardName="SignUp" referencedIdentifier="SignUp" id="lom-LN-WOH" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7ag-aa-dBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1186" y="-164"/>
-        </scene>
-        <!--HealthKitAccess-->
-        <scene sceneID="EiW-Ve-qjg">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="HealthKitAccess" storyboardName="HealthKitAccess" referencedIdentifier="HealthKitAccess" id="zC9-Wp-Ldd" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xJl-0V-lpc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1378" y="-165"/>
-        </scene>
-        <!--StartDate-->
-        <scene sceneID="irY-sN-aK4">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="StartDate" storyboardName="StartDate" referencedIdentifier="StartDate" id="WpB-K2-oNa" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LvT-YZ-TUX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1198" y="-112"/>
-        </scene>
-        <!--WeeklyGoals-->
-        <scene sceneID="9bZ-ht-iEa">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="WeeklyGoals" storyboardName="WeeklyGoals" referencedIdentifier="WeeklyGoals" id="gNk-kP-Qjv" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9kf-sd-rnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1395" y="-112"/>
-        </scene>
-        <!--MonthlyGoals-->
-        <scene sceneID="fPN-iq-OWW">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="MonthlyGoals" storyboardName="MonthlyGoals" referencedIdentifier="MonthlyGoals" id="bCh-ZE-2f4" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qMS-Ig-S0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1594" y="-112"/>
-        </scene>
-        <!--InviteOthers-->
-        <scene sceneID="QKG-Ua-WuQ">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="InviteOthers" storyboardName="InviteOthers" referencedIdentifier="InviteOthers" id="IFl-eF-he3" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UuM-vo-Twm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1836" y="-112"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="PYh-Wl-MEq">
             <objects>
@@ -148,10 +100,10 @@
             </objects>
             <point key="canvasLocation" x="-271" y="958"/>
         </scene>
-        <!--New Onboarding View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="VEB-22-P98">
             <objects>
-                <viewController id="YOZ-cJ-cQQ" customClass="NewOnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YOZ-cJ-cQQ" customClass="OnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Si-yX-D1K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -164,106 +116,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mv0-Dq-1N6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1671.2" y="957.57121439280365"/>
-        </scene>
-        <!--Sign Up Parent View Controller-->
-        <scene sceneID="cb2-YW-Q01">
-            <objects>
-                <viewController storyboardIdentifier="SignUpParentViewController" automaticallyAdjustsScrollViewInsets="NO" id="iya-QT-8rm" customClass="SignUpParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="KWw-HN-bhr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhI-9b-I1L">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <connections>
-                                    <segue destination="z1e-O7-sQP" kind="embed" id="mLW-Hk-Wkc"/>
-                                </connections>
-                            </containerView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="b7T-9T-oxe">
-                                <rect key="frame" x="137.5" y="610" width="100" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="xra-nz-z6I"/>
-                                </constraints>
-                                <color key="pageIndicatorTintColor" red="0.62705955049999995" green="1" blue="0.55446983029999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="currentPageIndicatorTintColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="CDV-eK-EI6" firstAttribute="bottom" secondItem="b7T-9T-oxe" secondAttribute="bottom" constant="20" id="4aT-nM-bD8"/>
-                            <constraint firstItem="CDV-eK-EI6" firstAttribute="trailing" secondItem="PhI-9b-I1L" secondAttribute="trailing" id="64g-HK-Hcr"/>
-                            <constraint firstItem="CDV-eK-EI6" firstAttribute="bottom" secondItem="PhI-9b-I1L" secondAttribute="bottom" id="CLy-tM-4zP"/>
-                            <constraint firstItem="PhI-9b-I1L" firstAttribute="leading" secondItem="CDV-eK-EI6" secondAttribute="leading" id="DwS-nU-Z4q"/>
-                            <constraint firstItem="b7T-9T-oxe" firstAttribute="centerX" secondItem="KWw-HN-bhr" secondAttribute="centerX" id="sGo-nj-lCg"/>
-                            <constraint firstItem="PhI-9b-I1L" firstAttribute="top" secondItem="CDV-eK-EI6" secondAttribute="top" id="zNB-Y2-NVg"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="CDV-eK-EI6"/>
-                    </view>
-                    <connections>
-                        <outlet property="pageControl" destination="b7T-9T-oxe" id="V23-th-VLC"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Nnc-x4-RgE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2375.1999999999998" y="957.57121439280365"/>
-        </scene>
-        <!--Onboarding View Controller-->
-        <scene sceneID="wkM-hQ-rYj">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="z1e-O7-sQP" customClass="OnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yhY-ZQ-Smm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3112.8000000000002" y="957.57121439280365"/>
-        </scene>
-        <!--New Challenge Parent View Controller-->
-        <scene sceneID="acq-aT-oYI">
-            <objects>
-                <viewController storyboardIdentifier="NewChallengeParentViewController" id="Hae-4L-kyx" customClass="NewChallengeParentViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dwh-Zx-P5e">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIB-Mh-QQM">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <connections>
-                                    <segue destination="T59-Id-EQD" kind="embed" id="UPn-mc-zTC"/>
-                                </connections>
-                            </containerView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="i1w-OV-RJt">
-                                <rect key="frame" x="137.5" y="610" width="100" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="arb-1P-QLA"/>
-                                </constraints>
-                                <color key="pageIndicatorTintColor" red="0.1136469148" green="0.59002590669999999" blue="0.047805252450000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="currentPageIndicatorTintColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="LIB-Mh-QQM" firstAttribute="leading" secondItem="5Fv-xu-U1w" secondAttribute="leading" id="EdR-xP-vdE"/>
-                            <constraint firstItem="LIB-Mh-QQM" firstAttribute="top" secondItem="5Fv-xu-U1w" secondAttribute="top" id="GpO-gf-inh"/>
-                            <constraint firstItem="5Fv-xu-U1w" firstAttribute="bottom" secondItem="LIB-Mh-QQM" secondAttribute="bottom" id="OS8-CA-wq6"/>
-                            <constraint firstItem="5Fv-xu-U1w" firstAttribute="trailing" secondItem="LIB-Mh-QQM" secondAttribute="trailing" id="bsa-4m-F6o"/>
-                            <constraint firstItem="5Fv-xu-U1w" firstAttribute="bottom" secondItem="i1w-OV-RJt" secondAttribute="bottom" constant="20" id="eOu-Sd-yLi"/>
-                            <constraint firstItem="i1w-OV-RJt" firstAttribute="centerX" secondItem="dwh-Zx-P5e" secondAttribute="centerX" id="tZU-Qg-Nyb"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="5Fv-xu-U1w"/>
-                    </view>
-                    <connections>
-                        <outlet property="pageControl" destination="i1w-OV-RJt" id="ZAs-Id-fhh"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6sZ-jA-glx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1436" y="1628"/>
-        </scene>
-        <!--Challenge Onboarding View Controller-->
-        <scene sceneID="dvB-Dr-G5G">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="T59-Id-EQD" customClass="ChallengeOnboardingViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vay-D1-cV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2174" y="1628"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cLt-7k-xDn">

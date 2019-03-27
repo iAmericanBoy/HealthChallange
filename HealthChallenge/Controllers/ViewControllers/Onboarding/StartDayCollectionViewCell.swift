@@ -101,7 +101,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     var dateRange: [Date] = []
     var delegate: StartDayCollectionViewCellDelegate?
     
-    var challengeState = ChallengeState.noActiveChallenge {
+    var challengeState: ChallengeState? {
         didSet {
             self.updateViews()
         }
@@ -160,14 +160,17 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     }
     
     func updateViews() {
-        switch challengeState {
-        case .isOwnerChallenge:
-            updateViewsForOwner()
-        case .isParticipantChallenge:
-            updateViewsForParticipant()
-        case .noActiveChallenge:
-            updateViewsForOwner()
+        if  challengeState != nil{
+            switch challengeState! {
+            case .isOwnerChallenge:
+                updateViewsForOwner()
+            case .isParticipantChallenge:
+                updateViewsForParticipant()
+            case .noActiveChallenge:
+                updateViewsForOwner()
+            }
         }
+
         previousMonthButton.isEnabled = false
         let monthLabelText =  "\(calendarController.monthsArray[calendarController.currentMonthIndex - 1]) \(calendarController.currentYear)"
         monthLabel.attributedText = NSAttributedString(string: monthLabelText, attributes: FontController.labelTitleFont)
@@ -240,7 +243,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         calendarCollectionView?.backgroundColor = .clear
         calendarCollectionView?.showsHorizontalScrollIndicator = false
         calendarCollectionView?.clipsToBounds = true
-        calendarCollectionView?.register(NewDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
+        calendarCollectionView?.register(StartDateCollectionViewCell.self, forCellWithReuseIdentifier: "dateCell")
         calendarCollectionView?.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -276,7 +279,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? NewDateCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? StartDateCollectionViewCell
             else { return UICollectionViewCell() }
         let monthIndex = calendarController.currentMonthIndex - 1
         var month = calendarController.shortMonthNames[monthIndex]
@@ -318,7 +321,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? NewDateCollectionViewCell else {return}
+        guard let cell = collectionView.cellForItem(at: indexPath) as? StartDateCollectionViewCell else {return}
         challengeStartDate = cell.cellDate
         cell.contentView.backgroundColor = .lushGreenColor
         updateViews()

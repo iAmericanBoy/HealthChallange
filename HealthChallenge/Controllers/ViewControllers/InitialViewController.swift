@@ -39,6 +39,14 @@ class InitialViewController: UIViewController {
 
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
+                        
+                        PointsController.shared.fetchPoints(ofUserWith: UserController.shared.appleUserID!, forChallenge: ChallengeController.shared.currentChallenge!, completion: { (isSuccess, usersPoints) in
+                            if isSuccess {
+                                PointsController.shared.usersPoints = usersPoints
+                            } else {
+                                print("No points found")
+                            }
+                        })
 
                         self.fetchWeekGoalsForCurrentChallenge()
 
@@ -105,7 +113,15 @@ class InitialViewController: UIViewController {
 
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
-
+                        
+                        PointsController.shared.fetchPoints(ofUserWith: UserController.shared.appleUserID!, forChallenge: ChallengeController.shared.currentChallenge!, completion: { (isSuccess, usersPoints) in
+                            if isSuccess {
+                                PointsController.shared.usersPoints = usersPoints
+                            } else {
+                                print("No points found")
+                            }
+                        })
+                        
                         //Fetch The Share for the current Challenge
                         let currentChallenge = ChallengeController.shared.currentChallenge
                         if let stringURL = currentChallenge?.urlString {
@@ -302,7 +318,7 @@ class InitialViewController: UIViewController {
     func createNewUser() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 1
             
@@ -314,7 +330,7 @@ class InitialViewController: UIViewController {
     func createNewChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 2
             
@@ -326,7 +342,7 @@ class InitialViewController: UIViewController {
     func currentChallenge() {
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 5
             
@@ -339,7 +355,7 @@ class InitialViewController: UIViewController {
         //TODO: Add logic to segue directly to the monthGoal screen
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? NewOnboardingViewController else {return}
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
             
             onboarding.screenCount = 4
             

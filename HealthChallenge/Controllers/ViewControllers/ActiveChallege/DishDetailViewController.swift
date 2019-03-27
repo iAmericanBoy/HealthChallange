@@ -38,7 +38,7 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func updateTotalCalories() {
-        guard let dishCal = dish?.totalcal else {return}
+        guard let dishCal = dish?.totalcarbs else {return}
         let roundedCalories = Double(round(10 * dishCal)/10)
         totalCaloriesLabel.text = "Total Calories: \(roundedCalories) cal"
         

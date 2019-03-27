@@ -26,6 +26,17 @@ class GoalController {
     ///The month goal of the current Challenge for the current User
     var monthGoal: Goal?
     
+    /// The week Goals of the current challenge and the monthGoal of the user for the current Challenge
+    var challengeGoals: [[Goal]] {
+        get {
+            if let monthGoal = monthGoal {
+                return [weeklyGoals,[monthGoal]]
+            } else {
+                return [weeklyGoals,[]]
+            }
+        }
+    }
+    
     ///All Goals from CK
     var allGoalsFromCK: [[Goal]] {
         get {
@@ -127,7 +138,9 @@ class GoalController {
     func fetchGoals(withChallengeReference challengeReference: CKRecord.Reference, completion: @escaping (_ isSuccess:Bool) -> Void) {
         
         let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Goal.challengeReferencesKey,challengeReference])
+        let sortByName = NSSortDescriptor(key: Goal.nameKey, ascending: true)
         let query = CKQuery(recordType: Goal.typeKey, predicate: predicate)
+        query.sortDescriptors = [sortByName]
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
             if isSuccess {
                 if isSuccess {

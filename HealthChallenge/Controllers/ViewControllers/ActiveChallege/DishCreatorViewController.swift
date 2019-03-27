@@ -112,6 +112,8 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
         DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients)
         navigationController?.popViewController(animated: true)
         
+       
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //MARK: - top tableView

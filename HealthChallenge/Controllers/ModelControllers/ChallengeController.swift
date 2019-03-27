@@ -37,7 +37,14 @@ class ChallengeController {
             if isSuccess {
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let newChallenge = Challenge(record: record) else {completion(false); return}
                 self.currentChallenge = newChallenge
-                completion(true)
+                guard let userID = UserController.shared.appleUserID else {completion(false); return}
+                PointsController.shared.createPoints(forUserWith: userID, inChallenge: newChallenge, completion: { (isSuccess) in
+                    if isSuccess {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
             } else {
                 completion(false)
             }

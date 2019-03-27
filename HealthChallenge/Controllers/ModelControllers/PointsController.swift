@@ -17,7 +17,6 @@ class PointsController {
     ///All the goals a user created.
     var usersPoints: Points?
     
-    
     //MARK: - CRUD
     ///Creates a points instance for a user in a specific challenge.
     /// - parameter userID: RecordID of the User.
@@ -111,8 +110,37 @@ class PointsController {
     /// - parameter points: The points that have new weeklyGoalPoints now.
     /// - parameter completion: Handler for when the points where updated.
     /// - parameter isSuccess: Confirms that points where updated.
-    func set(weeklyGoalPoints: Int, toPoints points: Points, completion: @escaping (_ isSuccess:Bool) -> Void) {
-        points.weeklyGoalPoints = weeklyGoalPoints
+    func set(weeklyGoalPoints: Int, forGoalWeek goalWeek: GoalType, toPoints points: Points, completion: @escaping (_ isSuccess:Bool) -> Void) {
+        
+        switch goalWeek {
+        case .weekOne:
+            points.goalOnePoints = weeklyGoalPoints
+            if weeklyGoalPoints == 0 {
+                points.goalOneDate = Date()
+            } else {
+                points.goalOneDate = Date().ignoreDate
+            }
+        case .weekTwo:
+            points.goalTwoPoints = weeklyGoalPoints
+            if weeklyGoalPoints == 0 {
+                points.goalTwoDate = Date()
+            } else {
+                points.goalTwoDate = Date().ignoreDate
+            }        case .weekThree:
+            points.goalThreePoints = weeklyGoalPoints
+            if weeklyGoalPoints == 0 {
+                points.goalThreeDate = Date()
+            } else {
+                points.goalThreeDate = Date().ignoreDate
+            }
+        case .weekFour:
+            points.goalFourPoints = weeklyGoalPoints
+            if weeklyGoalPoints == 0 {
+                points.goalFourDate = Date()
+            } else {
+                points.goalFourDate = Date().ignoreDate
+            }
+        }
         
         let record = CKRecord(points: points)
         
@@ -134,6 +162,12 @@ class PointsController {
     func set(monthlyGoalPoints: Int, toPoints points: Points, completion: @escaping (_ isSuccess:Bool) -> Void) {
         points.monthlyGoalPoints = monthlyGoalPoints
         
+        if monthlyGoalPoints == 0 {
+            points.monthGoalDate = Date()
+        } else {
+            points.monthGoalDate = Date().ignoreDate
+        }
+        
         let record = CKRecord(points: points)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
@@ -145,4 +179,11 @@ class PointsController {
             }
         }
     }
+}
+
+enum GoalType {
+    case weekOne
+    case weekTwo
+    case weekThree
+    case weekFour
 }
