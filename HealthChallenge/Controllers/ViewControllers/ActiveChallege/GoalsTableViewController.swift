@@ -72,56 +72,58 @@ class GoalsTableViewController: UITableViewController {
             //Week
             switch indexPath.row {
             case 0:
-                if  let index = weekOne.index(of: Date().day) {
-                    cell?.dateRangeCount = Double(weekOne.count)
-                    cell?.current = true
-                    
-                    cell?.dateposition = Double(index)
+                cell?.dateRangeCount = Double(weekOne.count)
 
+                if  let index = weekOne.index(of: Date().day) {
+                    cell?.dateposition = Double(index + 1)
+                    cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
+                    cell?.gradientColor = .purple
+                    cell?.dateposition = 8
                 }
             case 1:
-
-                if let index = weekTwo.index(of: Date().day) {
-                    cell?.dateRangeCount = Double(weekTwo.count)
-                    cell?.current = true
-                    cell?.dateposition = Double(index)
-
+                cell?.dateRangeCount = Double(weekOne.count)
+                
+                if  let index = weekTwo.index(of: Date().day) {
+                    cell?.dateposition = Double(index + 1)
+                    cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
+                    cell?.gradientColor = .purple
+                    cell?.dateposition = 7
                 }
             case 2:
+                cell?.dateRangeCount = Double(weekThree.count)
 
                 if let index = weekThree.index(of: Date().day) {
-                    cell?.dateRangeCount = Double(weekThree.count)
-                    cell?.current = true
-                    cell?.dateposition = Double(index)
-
+                    cell?.dateposition = Double(index + 1)
+                    cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
+                    cell?.gradientColor = .purple
+                    cell?.dateposition = 7
                 }
             case 3:
+                cell?.dateRangeCount = Double(weekFour.count)
 
                 if let index = weekFour.index(of: Date().day) {
-                    cell?.dateRangeCount = Double(weekFour.count)
-                    cell?.current = true
-                    cell?.dateposition = Double(index)
+                    cell?.dateposition = Double(index + 1)
+                    cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
+                    cell?.gradientColor = .purple
+                    cell?.dateposition = 8
                 }
             default:
                 break
             }
         case 1:
             //Month
+            cell?.dateRangeCount = Double(monthIntRange.count)
 
             if  let index = monthIntRange.index(of: Date().day) {
-                cell?.dateRangeCount = Double(monthIntRange.count)
-                cell?.current = true
-                cell?.dateposition = Double(index)
+                cell?.dateposition = Double(index + 1)
+                cell?.gradientColor = .lushGreenColor
             } else {
-                cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
+                cell?.gradientColor = .purple
+                cell?.dateposition = 30
             }
         default:
             break
