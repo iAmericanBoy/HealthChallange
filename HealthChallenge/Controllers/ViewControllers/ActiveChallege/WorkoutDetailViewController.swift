@@ -112,8 +112,8 @@ class WorkoutDetailViewController: UIViewController {
         let endDate = Date(timeInterval: duration, since: startDate)
         var activity = HKWorkoutActivityType.other
         // Edit for coreMotion
-        var calories = 0.0
-        var totalEnergyBurned = HKQuantity(unit: HKUnit.largeCalorie(), doubleValue: calories)
+        let calories = 0.0
+        let totalEnergyBurned = HKQuantity(unit: HKUnit.largeCalorie(), doubleValue: calories)
         
         // Set HKWorkoutActivityType from string value
         if currentExersize == exercises.first {

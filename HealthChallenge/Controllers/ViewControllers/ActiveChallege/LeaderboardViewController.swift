@@ -10,12 +10,20 @@ import UIKit
 
 class LeaderboardViewController: UIViewController {
     
-    @IBOutlet weak var optionsButton: UIBarButtonItem!
+    var users: [User] = []
+    var points: [Points] = []
     
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsImage()
+        tableView.delegate = self
+        tableView.dataSource = self
+        users = UserController.shared.currentUsers
+        points = UserController.shared.currentPoints
+        points.sort { (leader, trailer) -> Bool in
+            leader.totalPoints > trailer.totalPoints
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,30 +38,81 @@ class LeaderboardViewController: UIViewController {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
-    
-    @IBAction func optionsButtonTapped(_ sender: Any) {
-        
+}
+
+extension LeaderboardViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
     }
     
-    func settingsImage() {
-        if let image = UserController.shared.loggedInUser?.photo {
-            optionsButton.image = image
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as? LeaderboardTableViewCell
+        let leader = points[indexPath.row]
+        cell?.pointsLabel.text = "0"
+        
+        if indexPath.row == 0 {
+            cell?.placeLabel.text = "1st Place"
+        } else if indexPath.row == 1 {
+            cell?.placeLabel.text = "2nd Place"
+        } else if indexPath.row == 2 {
+            cell?.placeLabel.text = "3rd Place"
         } else {
-            guard let image = UIImage(named: "stockPhoto"),
-                let imageAsData = image.pngData()
-                else { return }
-            optionsButton.image = UIImage(data: imageAsData, scale: 10)
+            cell?.placeLabel.text = ""
+        }
+        
+        for _ in points {
+            var index = 0
+            if leader.appleUserRef == users[index].appleUserRef {
+                cell?.user = users[index]
+                cell?.pointsLabel.attributedText = NSAttributedString(string: "\(points[indexPath.row].totalPoints)", attributes: FontController.labelTitleFont)
+            } else {
+                index += 1
+            }
+        }
+        
+        return cell ?? UITableViewCell()
+    }
+}
+
+// MARK: - Set settings view, fonts, and colors
+extension LeaderboardViewController {
+    
+    func setSettingsButton() {
+        guard let navBar = self.navigationController?.navigationBar else { return }
+        let button = UIButton()
+        let image = Settings.shared.imageView
+        button.addTarget(self, action: #selector(showSettingsView), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        image.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        
+        self.navigationController?.navigationBar.addSubview(image)
+        NSLayoutConstraint.activate([
+            image.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
+            image.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
+            image.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
+            image.widthAnchor.constraint(equalTo: image.heightAnchor)
+            ])
+        
+        self.navigationController?.navigationBar.addSubview(button)
+        NSLayoutConstraint.activate([
+            button.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -10),
+            button.topAnchor.constraint(equalTo: navBar.topAnchor, constant: 10),
+            button.heightAnchor.constraint(equalToConstant: navBar.frame.height / 2),
+            button.widthAnchor.constraint(equalTo: button.heightAnchor)
+            ])
+        
+        image.layer.cornerRadius = navBar.frame.height / 4
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+    }
+    
+    @objc func showSettingsView() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "Settings")
+            self.present(viewController, animated: true, completion: nil)
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

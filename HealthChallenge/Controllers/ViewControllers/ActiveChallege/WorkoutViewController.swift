@@ -55,7 +55,7 @@ class WorkoutViewController: UIViewController {
         // set fonts, text, etc
         self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
         monthLabel.text = "\(challenge.name)"
-        monthLabel.attributedText = NSAttributedString(string: "\(challenge.name)", attributes: FontController.labelTitleFont)
+        monthLabel.attributedText = NSAttributedString(string: "\(challenge.name)", attributes: FontController.disabledButtonFont)
         calendarCollectionView.backgroundColor = .clear
         sunLabel.attributedText = NSAttributedString(string: "Sun", attributes: FontController.labelTitleFont)
         monLabel.attributedText = NSAttributedString(string: "Mon", attributes: FontController.labelTitleFont)
@@ -210,6 +210,8 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
+
+// MARK: - TableView DataSource/Delegate
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -220,8 +222,9 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "workoutCell", for: indexPath) as? WorkoutDetailTableViewCell
         cell?.delegate = self
         let workout = dayWorkouts[indexPath.row]
-        cell?.activityLabel.attributedText = NSAttributedString(string: "\(workout.activity)", attributes: FontController.tableViewRowFont)
-        cell?.durationLabel.attributedText = NSAttributedString(string: "\(workout.duration)", attributes: FontController.tableViewRowFont)
+        
+        cell?.activityLabel.attributedText = NSAttributedString(string: "\(workout.activity)", attributes: FontController.labelTitleFont)
+        cell?.durationLabel.attributedText = NSAttributedString(string: format(duration: workout.duration), attributes: FontController.tableViewRowFont)
         cell?.dateLabel.attributedText = NSAttributedString(string: "\(workout.end.month)/\(workout.end.day)", attributes: FontController.tableViewRowFont)
         
         return cell ?? UITableViewCell()
@@ -239,6 +242,14 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+    }
+    
+    func format(duration: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+        
+        return formatter.string(from: duration) ?? "No Duration Available"
     }
 }
 

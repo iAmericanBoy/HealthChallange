@@ -20,6 +20,9 @@ class UserController {
     ///The useres of the current Chaallenge
     var currentUsers: [User] = []
     
+    ///The users points
+    var currentPoints: [Points] = []
+    
     ///The ID of the icloudUser
     var appleUserID: CKRecord.ID?
     
@@ -102,6 +105,13 @@ class UserController {
             if isSuccess {
                 guard let record = records.first, let user = User(record: record) else {completion(false); return }
                 self.currentUsers.append(user)
+                guard let challenge = ChallengeController.shared.currentChallenge else { return }
+                PointsController.shared.fetchPoints(ofUserWith: recordID, forChallenge: challenge, completion: { (success, points) in
+                    if success {
+                        guard let points = points else { return }
+                        self.currentPoints.append(points)
+                    }
+                })
                 completion(true)
             } else {
                 //no public user found in the database.
