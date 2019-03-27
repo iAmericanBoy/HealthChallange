@@ -17,11 +17,12 @@ class FoodTableViewCell: UITableViewCell {
             updateViews()
         }
     }
-    var nutrientLandingPad: Nutrients? {
-        didSet {
-            updateNutrients()
-        }
-    }
+//    var nutrientLandingPad: Nutrients? {
+//        didSet {
+//            updateNutrients()
+//        }
+//    }
+//
     //MARK: - CheckBox Button Image Change (Currently not being used)
     private func updateButton(isComplete: Bool) {
         let imageName = isComplete ? "complete" : "incomplete"
@@ -32,6 +33,7 @@ class FoodTableViewCell: UITableViewCell {
         guard let unwrappedItem = itemLandingPad else {return}
 
         nameLabel.attributedText = NSAttributedString(string: unwrappedItem.name, attributes: FontController.tableViewRowFont)
+        updateNutrients(for: unwrappedItem)
       
     }
     
@@ -41,28 +43,35 @@ class FoodTableViewCell: UITableViewCell {
         delegate?.buttonCellButtontapped(self)
         
     }
-    func updateNutrients() {
+    func updateNutrients(for food: Food) {
         
-        guard let nutrientItem = nutrientLandingPad,
-            let food = itemLandingPad,
-            let weight = food.weight,
-            let measure = food.measure
-            else { return }
+        NutrientsController.instance.getNutrients(food: food, completion: { (success) in
+            if success {
+                DispatchQueue.main.async {
+                    guard let nutrientItem = food.nutrients,
+                        let weight = food.weight,
+                        let measure = food.measure
+                        else { return }
+                    
+                    self.amountLabel.attributedText = NSAttributedString(string: "\(weight) g", attributes: FontController.subTitleLabelFont)
+                    self.servingSizeLabel.attributedText = NSAttributedString(string: "\(String(describing: measure))", attributes: FontController.subTitleLabelFont)
+                    
+                    let roundedCalories = Double(round(10 * Double(nutrientItem.calories)!)/10)
+                    let roundedSugars = Double(round(10 * Double(nutrientItem.sugar)!)/10)
+                    let roundedCarbs = Double(round(10 * Double(nutrientItem.carbs)!)/10)
+                    let roundedFats = Double(round(10 * Double(nutrientItem.fats)!)/10)
+                    let roundedSodium = Double(round(10 * Double(nutrientItem.sodium)!)/10)
+                    
+                    self.caloriesLabel.attributedText = NSAttributedString(string: "Calories: \(roundedCalories) cal", attributes: FontController.subTitleLabelFont)
+                    self.sugarLabel.attributedText = NSAttributedString(string: "Sugar: \(roundedSugars) g", attributes: FontController.subTitleLabelFont)
+                    self.carbLabel.attributedText = NSAttributedString(string: "Carbs: \(roundedCarbs) g", attributes: FontController.subTitleLabelFont)
+                    self.fatLabel.attributedText = NSAttributedString(string: "Fats: \(roundedFats) g", attributes: FontController.subTitleLabelFont)
+                    self.sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) g", attributes: FontController.subTitleLabelFont)
+                }
+            }
+        })
         
-        amountLabel.attributedText = NSAttributedString(string: "\(weight) g", attributes: FontController.subTitleLabelFont)
-        servingSizeLabel.attributedText = NSAttributedString(string: "\(String(describing: measure))", attributes: FontController.subTitleLabelFont)
         
-        let roundedCalories = Double(round(10 * Double(nutrientItem.calories)!)/10)
-        let roundedSugars = Double(round(10 * Double(nutrientItem.sugar)!)/10)
-        let roundedCarbs = Double(round(10 * Double(nutrientItem.carbs)!)/10)
-        let roundedFats = Double(round(10 * Double(nutrientItem.fats)!)/10)
-        let roundedSodium = Double(round(10 * Double(nutrientItem.sodium)!)/10)
-        
-        caloriesLabel.attributedText = NSAttributedString(string: "Calories: \(roundedCalories) cal", attributes: FontController.subTitleLabelFont)
-        sugarLabel.attributedText = NSAttributedString(string: "Sugar: \(roundedSugars) g", attributes: FontController.subTitleLabelFont)
-        carbLabel.attributedText = NSAttributedString(string: "Carbs: \(roundedCarbs) g", attributes: FontController.subTitleLabelFont)
-        fatLabel.attributedText = NSAttributedString(string: "Fats: \(roundedFats) g", attributes: FontController.subTitleLabelFont)
-        sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) g", attributes: FontController.subTitleLabelFont)
     }
     
     @IBOutlet weak var servingSizeLabel: UILabel!

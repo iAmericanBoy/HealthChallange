@@ -86,7 +86,8 @@ class FoodController {
                     //print(food)
                 }
             }
-            self.food = foodFromJson
+            
+            self.food.append(contentsOf: foodFromJson)
             completion(true)
             
         }
@@ -102,9 +103,7 @@ class FoodController {
         if let calories = Double(nutrients.caloriesGM) {
             nutrients.calories = "\(calories * scalar)"
         }
-//        if let weight = food.weight {
-//            food.weight = weight * scalar
-//        }
+
         if let fats = Double(nutrients.fatsGM) {
             nutrients.fats = "\(fats * scalar)"
         }

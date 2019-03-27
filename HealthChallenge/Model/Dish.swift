@@ -5,7 +5,8 @@
 //  Created by Ben Huggins on 3/15/19.
 //  Copyright © 2019 Dominic Lanzillotta. All rights reserved.
 //
-
+// save imageAsset and
+//ingredientRef cant save custom objects to CK
 
 
 import Foundation
@@ -16,8 +17,20 @@ class Dish {
     
     var dishName: String
     var creatorReference: CKRecord.Reference?
-    var ingredients: [Food]?
-    var photoData: Data?
+    var ingredients: [Food] = []
+    var photoData: Data? {
+        didSet {
+            let tempDirectory = NSTemporaryDirectory()
+            let tempDirecotryURL = URL(fileURLWithPath: tempDirectory)
+            let fileURL = tempDirecotryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+            do {
+                try photoData?.write(to: fileURL)
+            } catch let error {
+                print("Error writing to temp url \(error) \(error.localizedDescription)")
+            }
+            imageAsset = CKAsset(fileURL: fileURL)
+        }
+    }
     var dishType: DishType
     var timeStamp: Date = Date()
     var totalcal:Double = 0
@@ -29,26 +42,27 @@ class Dish {
     
     var ingredientRefs: [CKRecord.Reference] {
         var returnArray: [CKRecord.Reference] = []
-        ingredients?.forEach({ (food) in
+        ingredients.forEach({ (food) in
             let ckreference = CKRecord.Reference(recordID: food.recordID, action: .deleteSelf)
             returnArray.append(ckreference)
         })
         return returnArray
     }
     
-    var imageAsset: CKAsset? {
-        get {
-            let tempDirectory = NSTemporaryDirectory()
-            let tempDirecotryURL = URL(fileURLWithPath: tempDirectory)
-            let fileURL = tempDirecotryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
-            do {
-                try photoData?.write(to: fileURL)
-            } catch let error {
-                print("Error writing to temp url \(error) \(error.localizedDescription)")
-            }
-            return CKAsset(fileURL: fileURL)
-        }
-    }
+    var imageAsset: CKAsset?
+//    {
+//        get {
+//            let tempDirectory = NSTemporaryDirectory()
+//            let tempDirecotryURL = URL(fileURLWithPath: tempDirectory)
+//            let fileURL = tempDirecotryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
+//            do {
+//                try photoData?.write(to: fileURL)
+//            } catch let error {
+//                print("Error writing to temp url \(error) \(error.localizedDescription)")
+//            }
+//            return CKAsset(fileURL: fileURL)
+//        }
+//    }
     
     var photo: UIImage? {
         get{
@@ -110,7 +124,7 @@ class Dish {
             let totalfats = record[Dish.totalfatKey] as? Double,
             let totalsodium = record[Dish.totalSodiumKey] as? Double else {return nil}
         
-        var dishTypeEnum = DishType(rawValue: dishType)
+        let dishTypeEnum = DishType(rawValue: dishType)
         
         self.init(dishName: dishName, creator: record[Goal.creatorReferenceKey] as? CKRecord.Reference, ingredients: [], dishType: dishTypeEnum!, timeStamp: timeStamp)
         
@@ -122,7 +136,7 @@ class Dish {
         self.ckRecordID = record.recordID
         
         do {
-            try self.photoData = Data(contentsOf: (imageAsset?.fileURL)!)
+            try self.photoData = Data(contentsOf: ((imageAsset?.fileURL)!))
         } catch {
             print("unable to unwrap photoData from the CKAsset. This is the error:  \(error), \(error.localizedDescription)")
         }
@@ -135,22 +149,27 @@ enum DishType: String {
     case Dinner
     case Snack
 }
+
+// save ingredients as an array of non-objects and save images of type ckAssets not UIImage
 // build a record for the cloud
 extension CKRecord {
     convenience init(dish: Dish) {
         self.init(recordType: Dish.typeKey, recordID: dish.ckRecordID)
         
         self.setValue(dish.dishName, forKey: Dish.dishNameKey)
-        self.setValue(dish.ingredients, forKey: Dish.ingredientRefsKey)
-        self.setValue(dish.photo, forKey: Dish.photoKey)
+        self.setValue(dish.ingredientRefs, forKey: Dish.ingredientRefsKey)
         self.setValue(dish.creatorReference, forKey: Dish.creatorReferenceKey)
-        self.setValue(dish.dishType, forKey: Dish.dishTypeKey)
+        self.setValue(dish.dishType.rawValue, forKey: Dish.dishTypeKey)
         self.setValue(dish.timeStamp, forKey: Dish.timeStampKey)
         self.setValue(dish.totalcal, forKey: Dish.totalCalKey)
         self.setValue(dish.totalcarbs, forKey: Dish.totalCarbKey)
         self.setValue(dish.totalsugars, forKey: Dish.totalsugarKey)
         self.setValue(dish.totalfats, forKey: Dish.totalfatKey)
         self.setValue(dish.totalsodium, forKey: Dish.totalSodiumKey)
+        
+        if dish.imageAsset != nil {
+            self.setValue(dish.imageAsset, forKey: Dish.photoKey)
+        }
     }
 }
 
