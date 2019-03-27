@@ -76,27 +76,69 @@ class GoalsTableViewController: UITableViewController {
 
                 if  let index = weekOne.index(of: Date().day) {
                     cell?.dateposition = Double(index + 1)
-                    cell?.gradientColor = .lushGreenColor
+                    if currentPoints.goalOnePoints == nil {
+                        //check if points are nil if yes make points two
+                        cell?.gradientColor = .lushGreenColor
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekOne, toPoints: currentPoints) { (isSuccess) in
+                            if isSuccess {
+                                print("Points for current Week Set")
+                            }
+                        }
+                    } else {
+                        if currentPoints.goalOnePoints == 0 {
+                            cell?.gradientColor = .purple
+                        } else {
+                            cell?.gradientColor = .lushGreenColor
+                        }
+                    }
+                    //check if points are nil if yes make points two
+                    //if points are 0 make purple
                 } else {
                     cell?.gradientColor = .white
                 }
             case 1:
-                cell?.dateRangeCount = Double(weekOne.count)
+                cell?.dateRangeCount = Double(weekTwo.count)
                 
                 if  let index = weekTwo.index(of: Date().day) {
                     cell?.dateposition = Double(index + 1)
-                    cell?.gradientColor = .lushGreenColor
+                    if currentPoints.goalTwoPoints == nil {
+                        //check if points are nil if yes make points two
+                        cell?.gradientColor = .lushGreenColor
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekTwo, toPoints: currentPoints) { (isSuccess) in
+                            if isSuccess {
+                                print("Points for current Week Set")
+                            }
+                        }
+                    } else {
+                        if currentPoints.goalTwoPoints == 0 {
+                            cell?.gradientColor = .purple
+                        } else {
+                            cell?.gradientColor = .lushGreenColor
+                        }
+                    }
                 } else {
                     cell?.gradientColor = .white
-
                 }
             case 2:
                 cell?.dateRangeCount = Double(weekThree.count)
 
                 if let index = weekThree.index(of: Date().day) {
                     cell?.dateposition = Double(index + 1)
-                    cell?.gradientColor = .lushGreenColor
-                } else {
+                    if currentPoints.goalThreePoints == nil {
+                        //check if points are nil if yes make points two
+                        cell?.gradientColor = .lushGreenColor
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekThree, toPoints: currentPoints) { (isSuccess) in
+                            if isSuccess {
+                                print("Points for current Week Set")
+                            }
+                        }
+                    } else {
+                        if currentPoints.goalThreePoints == 0 {
+                            cell?.gradientColor = .purple
+                        } else {
+                            cell?.gradientColor = .lushGreenColor
+                        }
+                    }                } else {
                     cell?.gradientColor = .white
                 }
             case 3:
@@ -104,8 +146,21 @@ class GoalsTableViewController: UITableViewController {
 
                 if let index = weekFour.index(of: Date().day) {
                     cell?.dateposition = Double(index + 1)
-                    cell?.gradientColor = .lushGreenColor
-                } else {
+                    if currentPoints.goalFourPoints == nil {
+                        //check if points are nil if yes make points two
+                        cell?.gradientColor = .lushGreenColor
+                        PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekFour, toPoints: currentPoints) { (isSuccess) in
+                            if isSuccess {
+                                print("Points for current Week Set")
+                            }
+                        }
+                    } else {
+                        if currentPoints.goalFourPoints == 0 {
+                            cell?.gradientColor = .purple
+                        } else {
+                            cell?.gradientColor = .lushGreenColor
+                        }
+                    }                } else {
                     cell?.gradientColor = .white
 
                 }
@@ -118,8 +173,21 @@ class GoalsTableViewController: UITableViewController {
 
             if  let index = monthIntRange.index(of: Date().day) {
                 cell?.dateposition = Double(index + 1)
-                cell?.gradientColor = .lushGreenColor
-            } else {
+                if currentPoints.monthlyGoalPoints == nil {
+                    //check if points are nil if yes make points two
+                    cell?.gradientColor = .lushGreenColor
+                    PointsController.shared.set(monthlyGoalPoints: 10, toPoints: currentPoints) { (isSuccess) in
+                        if isSuccess {
+                            print("Points for current Week Set")
+                        }
+                    }
+                } else {
+                    if currentPoints.monthlyGoalPoints == 0 {
+                        cell?.gradientColor = .purple
+                    } else {
+                        cell?.gradientColor = .lushGreenColor
+                    }
+                }            } else {
                 cell?.gradientColor = .white
             }
         default:
@@ -145,11 +213,19 @@ class GoalsTableViewController: UITableViewController {
                 if  let index = weekOne.index(of: Date().day) {
                     if usersPoints.goalOnePoints == 0 {
                         PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     } else {
                         PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     }
                 }
@@ -158,11 +234,19 @@ class GoalsTableViewController: UITableViewController {
                 if  let index = weekTwo.index(of: Date().day) {
                     if usersPoints.goalTwoPoints == 0 {
                         PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     } else {
                         PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     }
                 }
