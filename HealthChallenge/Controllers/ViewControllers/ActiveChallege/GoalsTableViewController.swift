@@ -75,6 +75,7 @@ class GoalsTableViewController: UITableViewController {
                 cell?.dateRangeCount = Double(weekOne.count)
 
                 if  let index = weekOne.index(of: Date().day) {
+                    //CURENTWEEK
                     cell?.dateposition = Double(index + 1)
                     if currentPoints.goalOnePoints == nil {
                         //check if points are nil if yes make points two
@@ -94,7 +95,24 @@ class GoalsTableViewController: UITableViewController {
                     //check if points are nil if yes make points two
                     //if points are 0 make purple
                 } else {
-                    cell?.gradientColor = .white
+                    //check for points
+                    if currentPoints.goalOnePoints != nil {
+                        if currentPoints.goalOnePoints == 2 {
+                            //SUCCESSFUL GOAL
+                            cell?.gradientColor = .lushGreenColor
+                        } else {
+                            //UNSUCCESSFUL GOAL
+                            if let date = currentPoints.goalOneDate {
+                                cell?.dateposition = Double(weekOne.index(of: date.day) ?? 8)
+                            } else {
+                                cell?.dateposition = 8
+                            }
+                            cell?.gradientColor = .purple
+                        }
+                    } else {
+                        //FUTURE GOAL
+                        cell?.gradientColor = .white
+                    }
                 }
             case 1:
                 cell?.dateRangeCount = Double(weekTwo.count)
@@ -117,7 +135,24 @@ class GoalsTableViewController: UITableViewController {
                         }
                     }
                 } else {
-                    cell?.gradientColor = .white
+                    //check for points
+                    if currentPoints.goalTwoPoints != nil {
+                        if currentPoints.goalTwoPoints == 2 {
+                            //SUCCESSFUL GOAL
+                            cell?.gradientColor = .lushGreenColor
+                        } else {
+                            //UNSUCCESSFUL GOAL
+                            if let date = currentPoints.goalTwoDate {
+                                cell?.dateposition = Double(weekTwo.index(of: date.day) ?? 7)
+                            } else {
+                                cell?.dateposition = 7
+                            }
+                            cell?.gradientColor = .purple
+                        }
+                    } else {
+                        //FUTURE GOAL
+                        cell?.gradientColor = .white
+                    }
                 }
             case 2:
                 cell?.dateRangeCount = Double(weekThree.count)
@@ -138,8 +173,26 @@ class GoalsTableViewController: UITableViewController {
                         } else {
                             cell?.gradientColor = .lushGreenColor
                         }
-                    }                } else {
-                    cell?.gradientColor = .white
+                    }
+                } else {
+                    //check for points
+                    if currentPoints.goalThreePoints != nil {
+                        if currentPoints.goalThreePoints == 2 {
+                            //SUCCESSFUL GOAL
+                            cell?.gradientColor = .lushGreenColor
+                        } else {
+                            //UNSUCCESSFUL GOAL
+                            if let date = currentPoints.goalThreeDate {
+                                cell?.dateposition = Double(weekThree.index(of: date.day) ?? 7)
+                            } else {
+                                cell?.dateposition = 7
+                            }
+                            cell?.gradientColor = .purple
+                        }
+                    } else {
+                        //FUTURE GOAL
+                        cell?.gradientColor = .white
+                    }
                 }
             case 3:
                 cell?.dateRangeCount = Double(weekFour.count)
@@ -160,9 +213,26 @@ class GoalsTableViewController: UITableViewController {
                         } else {
                             cell?.gradientColor = .lushGreenColor
                         }
-                    }                } else {
-                    cell?.gradientColor = .white
-
+                    }
+                } else {
+                    //check for points
+                    if currentPoints.goalFourPoints != nil {
+                        if currentPoints.goalFourPoints == 2 {
+                            //SUCCESSFUL GOAL
+                            cell?.gradientColor = .lushGreenColor
+                        } else {
+                            //UNSUCCESSFUL GOAL
+                            if let date = currentPoints.goalFourDate {
+                                cell?.dateposition = Double(weekFour.index(of: date.day) ?? 7)
+                            } else {
+                                cell?.dateposition = 7
+                            }
+                            cell?.gradientColor = .purple
+                        }
+                    } else {
+                        //FUTURE GOAL
+                        cell?.gradientColor = .white
+                    }
                 }
             default:
                 break
@@ -187,8 +257,26 @@ class GoalsTableViewController: UITableViewController {
                     } else {
                         cell?.gradientColor = .lushGreenColor
                     }
-                }            } else {
-                cell?.gradientColor = .white
+                }
+            } else {
+                //check for points
+                if currentPoints.monthlyGoalPoints != nil {
+                    if currentPoints.monthlyGoalPoints == 2 {
+                        //SUCCESSFUL GOAL
+                        cell?.gradientColor = .lushGreenColor
+                    } else {
+                        //UNSUCCESSFUL GOAL
+                        if let date = currentPoints.monthGoalDate {
+                            cell?.dateposition = Double(weekFour.index(of: date.day) ?? 7)
+                        } else {
+                            cell?.dateposition = 7
+                        }
+                        cell?.gradientColor = .purple
+                    }
+                } else {
+                    //FUTURE GOAL
+                    cell?.gradientColor = .white
+                }
             }
         default:
             break
@@ -256,11 +344,19 @@ class GoalsTableViewController: UITableViewController {
                 if  let index = weekThree.index(of: Date().day) {
                     if usersPoints.goalThreePoints == 0 {
                         PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     } else {
                         PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     }
                 }
@@ -268,11 +364,19 @@ class GoalsTableViewController: UITableViewController {
                 if  let index = weekFour.index(of: Date().day) {
                     if usersPoints.goalFourPoints == 0 {
                         PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     } else {
                         PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
-                            
+                            if isSuccess {
+                                DispatchQueue.main.async {
+                                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                                }
+                            }
                         }
                     }
                 }
@@ -282,14 +386,21 @@ class GoalsTableViewController: UITableViewController {
         case 1:
             //Month
             if  let index = monthIntRange.index(of: Date().day) {
-                
-                if usersPoints.goalOnePoints == 0 {
+                if usersPoints.monthlyGoalPoints == 0 {
                     PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
-                        
+                        if isSuccess {
+                            DispatchQueue.main.async {
+                                tableView.reloadRows(at: [indexPath], with: .automatic)
+                            }
+                        }
                     }
                 } else {
-                    PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
-                        
+                    PointsController.shared.set(monthlyGoalPoints: 0, toPoints: usersPoints) { (isSuccess) in
+                        if isSuccess {
+                            DispatchQueue.main.async {
+                                tableView.reloadRows(at: [indexPath], with: .automatic)
+                            }
+                        }
                     }
                 }
             }
