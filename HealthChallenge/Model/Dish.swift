@@ -16,7 +16,7 @@ import CloudKit
 class Dish {
     
     var dishName: String
-    var creatorReference: CKRecord.Reference?
+    var creatorReference: CKRecord.Reference
     var ingredients: [Food] = []
     var photoData: Data? {
         didSet {
@@ -39,7 +39,8 @@ class Dish {
     var totalfats:Double = 0
     var totalsodium:Double = 0
     var ckRecordID: CKRecord.ID
-    //
+    var foodEntryRefs: [CKRecord.Reference] = []
+    
     var ingredientRefs: [CKRecord.Reference] {
         var returnArray: [CKRecord.Reference] = []
         ingredients.forEach({ (food) in
@@ -73,14 +74,16 @@ class Dish {
             photoData = newValue?.jpegData(compressionQuality: 0.5)
         }
     }
-    init(dishName: String, creator: CKRecord.Reference?, ingredients: [Food], dishType: DishType, timeStamp: Date, ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    
+    init(dishName: String, creator: CKRecord.Reference, ingredients: [Food], dishType: DishType, timeStamp: Date = Date(), foodEntryReference: [CKRecord.Reference],ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.dishName = dishName
         self.ingredients = ingredients
         self.dishType = dishType
         self.timeStamp = timeStamp
         self.ckRecordID = ckRecordID
         self.creatorReference = creator
-        //
+        self.foodEntryRefs += foodEntryRefs
+
         var totalcal:Double = 0
         var totalcarbs:Double = 0
         var totalsugars:Double = 0
@@ -118,6 +121,8 @@ class Dish {
             let photo = record[Dish.photoKey] as? CKAsset,
             let dishType = record[Dish.dishTypeKey] as? String,
             let timeStamp = record[Dish.timeStampKey] as? Date,
+            let foodEntryRefs = record[Dish.foodEntriesRefsKey] as? [CKRecord.Reference],
+            let creatorRef = record[Dish.creatorReferenceKey] as? CKRecord.Reference,
             let totalcal = record[Dish.totalCalKey] as? Double,
             let totalcarbs = record[Dish.totalCarbKey] as? Double,
             let totalsugars = record[Dish.totalsugarKey] as? Double,
@@ -125,8 +130,7 @@ class Dish {
             let totalsodium = record[Dish.totalSodiumKey] as? Double else {return nil}
         
         let dishTypeEnum = DishType(rawValue: dishType)
-        
-        self.init(dishName: dishName, creator: record[Goal.creatorReferenceKey] as? CKRecord.Reference, ingredients: [], dishType: dishTypeEnum!, timeStamp: timeStamp)
+        self.init(dishName: dishName, creator: creatorRef, ingredients: [], dishType: dishTypeEnum!, timeStamp: timeStamp, foodEntryReference: foodEntryRefs, ckRecordID: record.recordID)
         
         self.totalcal = totalcal
         self.totalcarbs = totalcarbs
@@ -134,7 +138,7 @@ class Dish {
         self.totalfats = totalfats
         self.totalsodium = totalsodium
         self.ckRecordID = record.recordID
-        //
+
         do {
             try self.photoData = Data(contentsOf: ((imageAsset?.fileURL)!))
         } catch {
@@ -159,6 +163,7 @@ extension CKRecord {
         self.setValue(dish.dishName, forKey: Dish.dishNameKey)
         self.setValue(dish.ingredientRefs, forKey: Dish.ingredientRefsKey)
         self.setValue(dish.creatorReference, forKey: Dish.creatorReferenceKey)
+        self.setValue(dish.foodEntryRefs, forKey: Dish.foodEntriesRefsKey)
         self.setValue(dish.dishType.rawValue, forKey: Dish.dishTypeKey)
         self.setValue(dish.timeStamp, forKey: Dish.timeStampKey)
         self.setValue(dish.totalcal, forKey: Dish.totalCalKey)
@@ -166,7 +171,7 @@ extension CKRecord {
         self.setValue(dish.totalsugars, forKey: Dish.totalsugarKey)
         self.setValue(dish.totalfats, forKey: Dish.totalfatKey)
         self.setValue(dish.totalsodium, forKey: Dish.totalSodiumKey)
-        //
+
         if dish.imageAsset != nil {
             self.setValue(dish.imageAsset, forKey: Dish.photoKey)
         }

@@ -28,9 +28,7 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var addMealButton: UIButton!
     
-    var dishesKeys = {
-        DishController.shared.dishes.keys.map { $0 }
-    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,16 +96,13 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
         let type = dishesKeys[indexPath.section]
         guard let dish = DishController.shared.dishes[type]?[indexPath.row] else { return UITableViewCell() }
         
-//        let foodName = dish.dishName
-//        let nutrients = dish.ingredients
+
         
         if dish.timeStamp.stripTimestamp() == dishTimeReference {
             cell?.dishLanding = dish
-            //cell?.nutrientLandingPad = nutrients
         }
         
-        //print("============FoodName===========")
-        //dump(foodName)
+
         
         return cell ?? UITableViewCell()
     }
@@ -120,9 +115,8 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
             if let index = foodTrackerTableView.indexPathForSelectedRow  {
                 guard let destVC = segue.destination as? DishDetailViewController else {return}
                 
-                let type = dishesKeys[index.section]
+//                let type = dishesKeys[index.section]
                 let dishToSend = DishController.shared.dishes[type]?[index.row]
-                //destVC.bulletinBoard = sender as? String
                 destVC.dish = dishToSend
             }
         }

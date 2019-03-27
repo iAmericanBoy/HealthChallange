@@ -13,14 +13,7 @@ class DishController {
     
     static let shared = DishController()
     
-    //MARK: - place this mock Data inside either meal array below to test whether date is working:     Dish(dishName: "dfsfds", ingredients: [], dishType: .Breakfast, timeStamp: Date().addingTimeInterval(24*60*60))
-    
-    var dishes: [String : [Dish]] = [
-        "Breakfast" : [],
-        "Lunch" : [],
-        "Dinner" : [],
-        "Snack" : []
-    ]
+    var dishes: [String : [Dish]] = [:]
     
     func createDish(name: String, index: Int, ingredients: [Food], completion: @escaping (Bool) -> Void) {
         var dishType: DishType?
@@ -36,8 +29,9 @@ class DishController {
             default:
             return
         }
+        guard let userID = UserController.shared.appleUserID, let todaysFoodEntry = FoodEntryController.shared.currentEntries[Date().stripTimestamp()] else {completion(false);return}
         
-        let dish = Dish(dishName: name, creator: nil, ingredients: ingredients, dishType: dishType!, timeStamp: Date())
+        let dish = Dish(dishName: name, creator: CKRecord.Reference(recordID: userID, action: .none), ingredients: ingredients, dishType: dishType!, foodEntryReference: [CKRecord.Reference(recordID: todaysFoodEntry.recordID, action: .none)])
         
         saveDishToCloudKit(dish: dish) { (success) in
             if success {
@@ -73,6 +67,32 @@ class DishController {
             if success {
                 completion(true)
             } else {
+                completion(false)
+            }
+        }
+    }
+    
+    //Fetches all the Dishes of a Food Entry and appendes them to the dishes dictionary.
+    func fetchDishes(forFoodEntry foodEntry: FoodEntry, completion: @escaping (Bool) -> Void) {
+        let foodReference = CKRecord.Reference(recordID: foodEntry.recordID, action: .none)
+        
+        let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Dish.foodEntriesRefsKey,foodReference])
+        let query = CKQuery(recordType: Dish.typeKey, predicate: predicate)
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
+            if isSuccess {
+                let dispachGroup = DispatchGroup()
+                foundRecords.forEach({ (record) in
+                    dispachGroup.enter()
+                    guard let dish = Dish(record: record) else {completion(false);return}
+                    
+                    self.dishes[foodEntry.recordID.recordName]?.append(dish)
+                    dispachGroup.leave()
+                })
+                dispachGroup.notify(queue: .main, execute: {
+                    completion(true)
+                })
+            } else {
+                //no dishes found in the database.
                 completion(false)
             }
         }
