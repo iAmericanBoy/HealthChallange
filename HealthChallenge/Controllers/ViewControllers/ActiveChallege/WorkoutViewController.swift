@@ -23,6 +23,7 @@ class WorkoutViewController: UIViewController {
     }
     var dayWorkouts: [Workout] = []
     var dateRange: [Date] = []
+    var challengeDates: [Date] = []
 
     // MARK: - Outlets
     @IBOutlet weak var monthLabel: UILabel!
@@ -84,12 +85,14 @@ class WorkoutViewController: UIViewController {
     // MARK: - Class functions
     func findDateRange(from startDate: Date) {
         var dayRange = [startDate]
+        var dates = [startDate]
         var previousDate = startDate
         let emptyCells = startDate.weekday - 1
         
         while dayRange.count != 30 {
             let date = previousDate.addingTimeInterval(86400)
             dayRange.append(date)
+            dates.append(date)
             previousDate = date
         }
         
@@ -100,16 +103,18 @@ class WorkoutViewController: UIViewController {
                 dayRange.insert(Date().ignoreDate, at: 0)
             }
         }
+        challengeDates = dates
         dateRange = dayRange
     }
     
     func setPoints() {
         guard let userPoints = PointsController.shared.usersPoints else { return }
         var totalPoints: Int = 0
-        let weekOne = dateRange[0].day...dateRange[7].day
-        let weekTwo = dateRange[8].day...dateRange[14].day
-        let weekThree = dateRange[15].day...dateRange[21].day
-        let weekFour = dateRange[22].day...dateRange[30].day
+        
+        let weekOne = challengeDates[0].day...challengeDates[7].day
+        let weekTwo = challengeDates[8].day...challengeDates[13].day
+        let weekThree = challengeDates[14].day...challengeDates[20].day
+        let weekFour = challengeDates[21].day...challengeDates[29].day
 
         let weekOneWorkouts = workouts.filter({ weekOne.contains($0.end.day) }).count
         let weekTwoWorkouts = workouts.filter({ weekTwo.contains($0.end.day) }).count
@@ -137,9 +142,17 @@ class WorkoutViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // only perform segue if selected day workouts is empty, and the selected day is within the past week.
-        if segue.identifier == "toWorkoutsVC" && dayWorkouts.count == 0 {
+        if segue.identifier == "toWorkoutsVC" {
             let destinationVC = segue.destination as? AddWorkoutsViewController
             destinationVC?.sourceDate = selectedDay
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "toWorkoutsVC"{
+            return dayWorkouts.count == 0
+        }else {
+            return true
         }
     }
 }
@@ -186,18 +199,17 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         
         if date.stripTimestamp() == today.stripTimestamp() {
-            cell.dayLabel.textColor = .green
-            cell.monthLabel.textColor = .green
+            cell.dayLabel.textColor = .purple
+            cell.monthLabel.textColor = .purple
         }
         
-        // Allows users to only edit workouts for past week.
-        if date.day < today.day && monthIndex == calendarController.presentMonthIndex - 1 {
-            cell.isUserInteractionEnabled = false
-        } else if date.day > today.day && monthIndex == calendarController.presentMonthIndex - 1 {
-            cell.isUserInteractionEnabled = false
-        } else {
+        // Allow user to select past days to see their workouts.
+        if date.day <= today.day {
             cell.isUserInteractionEnabled = true
+        } else {
+            cell.isUserInteractionEnabled = false
         }
+        
         return cell
     }
     
@@ -263,6 +275,13 @@ extension WorkoutViewController: DateCollectionViewCellDelegate, WorkoutDetailTa
                 }
             }
         }
+        
+//        if dayWorkouts.count == 0 {
+//            newWorkoutButton.isHidden = false
+//        } else {
+//            newWorkoutButton.isHidden = true
+//        }
+        
         let dateCell = cell as! DateCollectionViewCell
         self.selectedDay = dateCell.cellDate!
         updateViews()

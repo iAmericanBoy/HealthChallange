@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fxM-Zu-PAx">
-                                <rect key="frame" x="12" y="221.5" width="351" height="268.5"/>
+                                <rect key="frame" x="12" y="245" width="351" height="245"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="na8-7f-cQY">
                                     <size key="itemSize" width="66" height="71"/>
@@ -89,7 +89,7 @@
                                 </cells>
                             </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Hw0-it-XSg">
-                                <rect key="frame" x="12" y="179.5" width="351" height="18"/>
+                                <rect key="frame" x="12" y="203" width="351" height="18"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9h-rH-Crz">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="18"/>
@@ -136,7 +136,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqV-II-fuy">
-                                <rect key="frame" x="167" y="128" width="41" height="27.5"/>
+                                <rect key="frame" x="167" y="151.5" width="41" height="27.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="20"/>
                                 <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -217,6 +217,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Rz-Mw-4zy"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Workout" image="workout" id="O3v-If-hE4"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Workouts" largeTitleDisplayMode="always" id="eC1-yT-0Sl"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -312,7 +313,7 @@
                     <tabBarItem key="tabBarItem" title="Workouts" id="EBW-q0-q5N"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8c0-Je-vAU">
-                        <rect key="frame" x="0.0" y="20" width="375" height="119.5"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-Heavy" family="Avenir Next Condensed" pointSize="55"/>
@@ -449,4 +450,7 @@
             <point key="canvasLocation" x="5197.6000000000004" y="514.99250374812596"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="workout" width="50" height="50"/>
+    </resources>
 </document>
