@@ -267,9 +267,9 @@ class GoalsTableViewController: UITableViewController {
                     } else {
                         //UNSUCCESSFUL GOAL
                         if let date = currentPoints.monthGoalDate {
-                            cell?.dateposition = Double(weekFour.index(of: date.day) ?? 7)
+                            cell?.dateposition = Double(monthIntRange.index(of: date.day) ?? 30)
                         } else {
-                            cell?.dateposition = 7
+                            cell?.dateposition = 30
                         }
                         cell?.gradientColor = .purple
                     }
