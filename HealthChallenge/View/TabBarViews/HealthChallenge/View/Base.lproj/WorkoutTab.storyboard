@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fxM-Zu-PAx">
-                                <rect key="frame" x="12" y="221.5" width="351" height="273.5"/>
+                                <rect key="frame" x="12" y="221.5" width="351" height="268.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="na8-7f-cQY">
                                     <size key="itemSize" width="66" height="71"/>
@@ -142,7 +142,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aq0-jx-lza">
-                                <rect key="frame" x="0.0" y="495" width="375" height="128"/>
+                                <rect key="frame" x="0.0" y="490" width="375" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="Aoi-ym-XHq"/>
@@ -219,7 +219,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Workouts" largeTitleDisplayMode="always" id="eC1-yT-0Sl"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="calendarCollectionView" destination="fxM-Zu-PAx" id="2uc-Z9-MCH"/>
                         <outlet property="friLabel" destination="cmZ-SI-XBx" id="Sxa-Xc-7Fy"/>
@@ -246,7 +246,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cn1-kE-7Bx">
-                                <rect key="frame" x="24" y="299" width="327" height="300"/>
+                                <rect key="frame" x="24" y="299" width="327" height="295"/>
                                 <connections>
                                     <segue destination="aE5-3C-0ua" kind="embed" identifier="workoutDetailVC" id="AJ7-G0-Rgx"/>
                                 </connections>
@@ -333,11 +333,11 @@
             <objects>
                 <viewController id="aE5-3C-0ua" customClass="WorkoutDetailViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wbE-dw-fba">
-                        <rect key="frame" x="0.0" y="0.0" width="327" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="327" height="295"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uYY-f6-Sj2">
-                                <rect key="frame" x="3.5" y="69" width="320" height="162"/>
+                                <rect key="frame" x="3.5" y="66.5" width="320" height="162"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Liu-Dy-gqg">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
@@ -352,7 +352,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="S4j-nr-ram">
-                                <rect key="frame" x="57.5" y="255" width="212" height="32"/>
+                                <rect key="frame" x="57.5" y="252.5" width="212" height="32"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pK9-9s-oTz">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="32"/>
@@ -387,7 +387,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="sUV-N0-m0H">
-                                <rect key="frame" x="3.5" y="3" width="320" height="41"/>
+                                <rect key="frame" x="3.5" y="0.5" width="320" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XP-9H-LJf">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="41"/>

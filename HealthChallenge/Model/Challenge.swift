@@ -31,7 +31,7 @@ class Challenge {
         let finishMonth = Calendar.current.monthSymbols[Calendar.current.component(.month, from: finishDay) - 1]
         
         if startMonth != finishMonth {
-            newName = "\(startMonth)/\(finishMonth) Challange"
+            newName = "\(startMonth)/\(finishMonth) Challenge"
         } else {
             newName = "\(startMonth) Challange"
         }
