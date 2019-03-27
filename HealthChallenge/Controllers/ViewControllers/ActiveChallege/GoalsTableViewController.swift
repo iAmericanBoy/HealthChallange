@@ -78,12 +78,7 @@ class GoalsTableViewController: UITableViewController {
                     cell?.dateposition = Double(index + 1)
                     cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.gradientColor = .purple
-                    if let dayInt = currentPoints.goalOneDate?.day {
-                        cell?.dateposition =  Double(weekOne.index(of: dayInt ) ?? 8)
-                    } else {
-                        cell?.dateposition =  8
-                    }
+                    cell?.gradientColor = .white
                 }
             case 1:
                 cell?.dateRangeCount = Double(weekOne.count)
@@ -92,8 +87,8 @@ class GoalsTableViewController: UITableViewController {
                     cell?.dateposition = Double(index + 1)
                     cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.gradientColor = .purple
-                    cell?.dateposition = 7
+                    cell?.gradientColor = .white
+
                 }
             case 2:
                 cell?.dateRangeCount = Double(weekThree.count)
@@ -102,8 +97,7 @@ class GoalsTableViewController: UITableViewController {
                     cell?.dateposition = Double(index + 1)
                     cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.gradientColor = .purple
-                    cell?.dateposition = 7
+                    cell?.gradientColor = .white
                 }
             case 3:
                 cell?.dateRangeCount = Double(weekFour.count)
@@ -112,8 +106,8 @@ class GoalsTableViewController: UITableViewController {
                     cell?.dateposition = Double(index + 1)
                     cell?.gradientColor = .lushGreenColor
                 } else {
-                    cell?.gradientColor = .purple
-                    cell?.dateposition = 8
+                    cell?.gradientColor = .white
+
                 }
             default:
                 break
@@ -126,8 +120,7 @@ class GoalsTableViewController: UITableViewController {
                 cell?.dateposition = Double(index + 1)
                 cell?.gradientColor = .lushGreenColor
             } else {
-                cell?.gradientColor = .purple
-                cell?.dateposition = 30
+                cell?.gradientColor = .white
             }
         default:
             break
