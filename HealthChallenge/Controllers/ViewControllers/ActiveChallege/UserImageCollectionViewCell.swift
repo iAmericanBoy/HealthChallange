@@ -24,6 +24,7 @@ class UserImageCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         userImageView.layer.cornerRadius = contentView.frame.width / 2
+        userImageView.backgroundColor = .clear
 
         userImageView.clipsToBounds = true
      }

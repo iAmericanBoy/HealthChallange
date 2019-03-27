@@ -39,6 +39,14 @@ class InitialViewController: UIViewController {
 
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
+                        
+                        PointsController.shared.fetchPoints(ofUserWith: UserController.shared.appleUserID!, forChallenge: ChallengeController.shared.currentChallenge!, completion: { (isSuccess, usersPoints) in
+                            if isSuccess {
+                                PointsController.shared.usersPoints = usersPoints
+                            } else {
+                                print("No points found")
+                            }
+                        })
 
                         self.fetchWeekGoalsForCurrentChallenge()
 
@@ -105,7 +113,15 @@ class InitialViewController: UIViewController {
 
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
-
+                        
+                        PointsController.shared.fetchPoints(ofUserWith: UserController.shared.appleUserID!, forChallenge: ChallengeController.shared.currentChallenge!, completion: { (isSuccess, usersPoints) in
+                            if isSuccess {
+                                PointsController.shared.usersPoints = usersPoints
+                            } else {
+                                print("No points found")
+                            }
+                        })
+                        
                         //Fetch The Share for the current Challenge
                         let currentChallenge = ChallengeController.shared.currentChallenge
                         if let stringURL = currentChallenge?.urlString {

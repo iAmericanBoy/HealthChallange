@@ -286,8 +286,8 @@
 				62FE5A6422429C11009240C6 /* WorkoutDetailViewController.swift */,
 				62D06804223AB6A900D5410B /* LeaderboardViewController.swift */,
 				B6F4A84A224AA4CD00080F61 /* GoalsTableViewController.swift */,
-				B6F4A84C224AA61500080F61 /* UserImageCollectionViewCell.swift */,
 				B6F4A84E224AB48A00080F61 /* GoalTableViewCell.swift */,
+				B6F4A84C224AA61500080F61 /* UserImageCollectionViewCell.swift */,
 			);
 			path = ActiveChallege;
 			sourceTree = "<group>";

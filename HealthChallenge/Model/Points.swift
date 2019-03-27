@@ -54,10 +54,12 @@ class Points {
         self.appleUserRef = appleUserRef
         self.challengeRef = challengeRef
         self.workOutPoints = workOutPoints
+        
         self.goalOnePoints = goalOnePoints
         self.goalTwoPoints = goalTwoPoints
         self.goalThreePoints = goalThreePoints
         self.goalFourPoints = goalFourPoints
+        
         self.monthlyGoalPoints = monthlyGoalPoints
         self.foodTrackingPoints = foodTrackingPoints
     }
@@ -74,6 +76,7 @@ extension CKRecord {
         self.setValue(points.goalThreePoints, forKey: Points.goalThreePointsKey)
         self.setValue(points.goalFourPoints, forKey: Points.goalFourPointsKey)
         self.setValue(points.monthlyGoalPoints, forKey: Points.monthlyGoalPointsKey)
+        self.setValue(points.workOutPoints, forKey: Points.workOutPointsKey)
         self.setValue(points.foodTrackingPoints, forKey: Points.foodTrackingPointsKey)
     }
 }

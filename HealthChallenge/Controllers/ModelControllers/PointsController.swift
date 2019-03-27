@@ -17,7 +17,6 @@ class PointsController {
     ///All the goals a user created.
     var usersPoints: Points?
     
-    
     //MARK: - CRUD
     ///Creates a points instance for a user in a specific challenge.
     /// - parameter userID: RecordID of the User.
