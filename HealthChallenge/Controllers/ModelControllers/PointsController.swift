@@ -115,15 +115,32 @@ class PointsController {
         switch goalWeek {
         case .weekOne:
             points.goalOnePoints = weeklyGoalPoints
+            if weeklyGoalPoints == 0 {
+                points.goalOneDate = Date()
+            } else {
+                points.goalOneDate = Date().ignoreDate
+            }
         case .weekTwo:
             points.goalTwoPoints = weeklyGoalPoints
-        case .weekThree:
+            if weeklyGoalPoints == 0 {
+                points.goalTwoDate = Date()
+            } else {
+                points.goalTwoDate = Date().ignoreDate
+            }        case .weekThree:
             points.goalThreePoints = weeklyGoalPoints
+            if weeklyGoalPoints == 0 {
+                points.goalThreeDate = Date()
+            } else {
+                points.goalThreeDate = Date().ignoreDate
+            }
         case .weekFour:
             points.goalFourPoints = weeklyGoalPoints
+            if weeklyGoalPoints == 0 {
+                points.goalFourDate = Date()
+            } else {
+                points.goalFourDate = Date().ignoreDate
+            }
         }
-        
-        
         
         let record = CKRecord(points: points)
         
@@ -144,6 +161,12 @@ class PointsController {
     /// - parameter isSuccess: Confirms that points where updated.
     func set(monthlyGoalPoints: Int, toPoints points: Points, completion: @escaping (_ isSuccess:Bool) -> Void) {
         points.monthlyGoalPoints = monthlyGoalPoints
+        
+        if monthlyGoalPoints == 0 {
+            points.monthGoalDate = Date()
+        } else {
+            points.monthGoalDate = Date().ignoreDate
+        }
         
         let record = CKRecord(points: points)
         
