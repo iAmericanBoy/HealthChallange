@@ -201,43 +201,36 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
 
 //MARK: - SearchBar
 extension DishCreatorViewController: UISearchBarDelegate {
-//
-//    @objc func dismissKeyBoard() {
-//        searchBar.resignFirstResponder()
-//
-//    }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
-        searchBar.resignFirstResponder()
-//        self.ingredientTableView.reloadData()
-        FoodController.food = []
-        FoodController.getFood(query: searchTerm) { (success) in
-            if success {
-     
-                DispatchQueue.main.async {
-  
-                    self.ingredientTableView.reloadData()
-                }
-            }
-        }
-    }
-    
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
-//
+//        searchBar.resignFirstResponder()
+//        FoodController.food = []
 //        FoodController.getFood(query: searchTerm) { (success) in
 //            if success {
 //
-//
-//
 //                DispatchQueue.main.async {
-//
 //
 //                    self.ingredientTableView.reloadData()
 //                }
 //            }
 //        }
 //    }
+    
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
+        //searchBar.resignFirstResponder()
+        FoodController.food = []
+        FoodController.getFood(query: searchTerm) { (success) in
+            if success {
+                
+                DispatchQueue.main.async {
+                    //searchBar.resignFirstResponder()
+                    self.ingredientTableView.reloadData()
+                
+            }
+        }
+    }
+}
 }
