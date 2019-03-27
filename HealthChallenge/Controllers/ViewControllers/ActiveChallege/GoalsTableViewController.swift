@@ -79,7 +79,11 @@ class GoalsTableViewController: UITableViewController {
                     cell?.gradientColor = .lushGreenColor
                 } else {
                     cell?.gradientColor = .purple
-                    cell?.dateposition = 8
+                    if let dayInt = currentPoints.goalOneDate?.day {
+                        cell?.dateposition =  Double(weekOne.index(of: dayInt ) ?? 8)
+                    } else {
+                        cell?.dateposition =  8
+                    }
                 }
             case 1:
                 cell?.dateRangeCount = Double(weekOne.count)
