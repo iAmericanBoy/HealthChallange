@@ -281,6 +281,7 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dateCell", for: indexPath) as? StartDateCollectionViewCell
             else { return UICollectionViewCell() }
+        let today = Date()
         let monthIndex = calendarController.currentMonthIndex - 1
         var month = calendarController.shortMonthNames[monthIndex]
         cell.isHidden = false
@@ -312,7 +313,12 @@ extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionView
             }
         }
         
-
+        // change background color of cells for past days.
+        if date.day < today.day && date.month == today.month {
+            cell.dayLabel.textColor = .lightGray
+            cell.monthLabel.textColor = .lightGray
+            cell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+        }
         
         return cell
     }
