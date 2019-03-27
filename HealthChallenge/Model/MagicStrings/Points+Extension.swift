@@ -28,4 +28,15 @@ extension Points {
     static let monthlyGoalPointsKey = "monthlyGoalPoints"
     /// "foodTrackingPoints"
     static let foodTrackingPointsKey = "foodTrackingPoints"
+    
+    /// "goalOneDate"
+    static let goalOneDateKey = "goalOneDate"
+    /// "goalTwoDate"
+    static let goalTwoDateKey = "goalTwoDate"
+    /// "goalThreeDate"
+    static let goalThreeDateKey = "goalThreeDate"
+    /// "goalFourDate"
+    static let goalFourDateKey = "goalFourDate"
+    /// "monthGoalDate"
+    static let monthGoalDateKey = "monthGoalDate"
 }

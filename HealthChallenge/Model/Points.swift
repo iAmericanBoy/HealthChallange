@@ -14,13 +14,25 @@ class Points {
     let appleUserRef: CKRecord.Reference
     let challengeRef: CKRecord.Reference
     var workOutPoints: Int
-    var goalOnePoints: Int
-    var goalTwoPoints: Int
-    var goalThreePoints: Int
-    var goalFourPoints: Int
-    var monthlyGoalPoints: Int
     var foodTrackingPoints: Int
     var recordID:CKRecord.ID
+    
+    var goalOnePoints: Int
+    var goalOneDate: Date?
+    
+    var goalTwoPoints: Int
+    var goalTwoDate: Date?
+
+    var goalThreePoints: Int
+    var goalThreeDate: Date?
+
+    var goalFourPoints: Int
+    var goalFourDate: Date?
+
+    var monthlyGoalPoints: Int
+    var monthGoalDate: Date?
+    
+
     
     var totalPoints: Int {
         return workOutPoints + goalOnePoints + goalTwoPoints + goalThreePoints + goalFourPoints + monthlyGoalPoints + foodTrackingPoints
@@ -60,6 +72,12 @@ class Points {
         self.goalThreePoints = goalThreePoints
         self.goalFourPoints = goalFourPoints
         
+        self.goalOneDate = record[Points.goalOneDateKey] as? Date
+        self.goalTwoDate = record[Points.goalTwoDateKey] as? Date
+        self.goalThreeDate = record[Points.goalThreeDateKey] as? Date
+        self.goalFourDate = record[Points.goalFourDateKey] as? Date
+        self.monthGoalDate = record[Points.monthGoalDateKey] as? Date
+
         self.monthlyGoalPoints = monthlyGoalPoints
         self.foodTrackingPoints = foodTrackingPoints
     }
@@ -71,12 +89,18 @@ extension CKRecord {
         
         self.setValue(points.appleUserRef, forKey: Points.appleUserRefKey)
         self.setValue(points.challengeRef, forKey: Points.challengeRefKey)
+        self.setValue(points.workOutPoints, forKey: Points.workOutPointsKey)
+        self.setValue(points.foodTrackingPoints, forKey: Points.foodTrackingPointsKey)
         self.setValue(points.goalOnePoints, forKey: Points.goalOnePointsKey)
         self.setValue(points.goalTwoPoints, forKey: Points.goalTwoPointsKey)
         self.setValue(points.goalThreePoints, forKey: Points.goalThreePointsKey)
         self.setValue(points.goalFourPoints, forKey: Points.goalFourPointsKey)
         self.setValue(points.monthlyGoalPoints, forKey: Points.monthlyGoalPointsKey)
-        self.setValue(points.workOutPoints, forKey: Points.workOutPointsKey)
-        self.setValue(points.foodTrackingPoints, forKey: Points.foodTrackingPointsKey)
+        
+        self.setValue(points.goalOneDate, forKey: Points.goalOneDateKey)
+        self.setValue(points.goalTwoDate, forKey: Points.goalTwoDateKey)
+        self.setValue(points.goalThreeDate, forKey: Points.goalThreeDateKey)
+        self.setValue(points.goalFourDate, forKey: Points.goalFourDateKey)
+        self.setValue(points.monthGoalDate, forKey: Points.monthGoalDateKey)
     }
 }
