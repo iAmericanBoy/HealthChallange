@@ -96,6 +96,8 @@
 		CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B4223C0AAB0089DA63 /* FoodController.swift */; };
 		CEB299B7223C0B240089DA63 /* NutrientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B6223C0B240089DA63 /* NutrientsController.swift */; };
 		CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */; };
+		CEE08C92224A8E0A0043F863 /* Dish+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE08C91224A8E0A0043F863 /* Dish+MagicStrings.swift */; };
+		CEE08C94224A9FDC0043F863 /* Food+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE08C93224A9FDC0043F863 /* Food+MagicStrings.swift */; };
 		CEF56F5E2245485D0075BBE5 /* DishBuilderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF56F5D2245485D0075BBE5 /* DishBuilderTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +194,8 @@
 		CEB299B4223C0AAB0089DA63 /* FoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodController.swift; sourceTree = "<group>"; };
 		CEB299B6223C0B240089DA63 /* NutrientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientsController.swift; sourceTree = "<group>"; };
 		CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
+		CEE08C91224A8E0A0043F863 /* Dish+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dish+MagicStrings.swift"; sourceTree = "<group>"; };
+		CEE08C93224A9FDC0043F863 /* Food+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+MagicStrings.swift"; sourceTree = "<group>"; };
 		CEF56F5D2245485D0075BBE5 /* DishBuilderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishBuilderTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,6 +291,8 @@
 				B6EBA603223812810001F5BF /* Goal+MagicStreaks.swift */,
 				62FE5A682242BC7E009240C6 /* Workout+MagicStrings.swift */,
 				B6BD369022458A5D00E66A7F /* Points+Extension.swift */,
+				CEE08C91224A8E0A0043F863 /* Dish+MagicStrings.swift */,
+				CEE08C93224A9FDC0043F863 /* Food+MagicStrings.swift */,
 			);
 			path = MagicStrings;
 			sourceTree = "<group>";
@@ -614,6 +620,7 @@
 				62D067BD2237182300D5410B /* User.swift in Sources */,
 				B624ACB422487BF100B5DD2F /* NewUserCollectionViewCell.swift in Sources */,
 				B6E332BC2236B8650088D6FF /* AppDelegate.swift in Sources */,
+				CEE08C94224A9FDC0043F863 /* Food+MagicStrings.swift in Sources */,
 				B6BD368F2245892D00E66A7F /* Points.swift in Sources */,
 				62D067D32238474700D5410B /* DateCollectionViewCell.swift in Sources */,
 				B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */,
@@ -639,6 +646,7 @@
 				B624ACB22248027D00B5DD2F /* ShareCollectionViewCell.swift in Sources */,
 				CE60FC60224038390029386F /* DishController.swift in Sources */,
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
+				CEE08C92224A8E0A0043F863 /* Dish+MagicStrings.swift in Sources */,
 				62FE5A6522429C11009240C6 /* WorkoutDetailViewController.swift in Sources */,
 				62FE5A6B2242C80E009240C6 /* WorkoutController.swift in Sources */,
 				CEF56F5E2245485D0075BBE5 /* DishBuilderTableViewCell.swift in Sources */,
@@ -837,13 +845,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J6B8ZX28ZW;
+				DEVELOPMENT_TEAM = 3DMFD3YYQW;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = oskman.HealthChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = huggins.HealthChallenge.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -856,13 +864,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J6B8ZX28ZW;
+				DEVELOPMENT_TEAM = 3DMFD3YYQW;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = oskman.HealthChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = huggins.HealthChallenge.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
