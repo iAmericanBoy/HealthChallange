@@ -10,7 +10,7 @@ import UIKit
 import CloudKit
 
 
-class NewOnboardingViewController: UIViewController, UINavigationControllerDelegate {
+class OnboardingViewController: UIViewController, UINavigationControllerDelegate {
     
     //MARK: - Outlets
     var collectionView: UICollectionView?
@@ -178,7 +178,7 @@ class NewOnboardingViewController: UIViewController, UINavigationControllerDeleg
 }
 
 //MARK: - UICollectionViewFlowLayout
-extension NewOnboardingViewController: UICollectionViewDelegateFlowLayout {
+extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
@@ -189,7 +189,7 @@ extension NewOnboardingViewController: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: - UICollectionViewDataSource, UICollectionViewDelegate
-extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension OnboardingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let x = targetContentOffset.pointee.x
         
@@ -262,7 +262,7 @@ extension NewOnboardingViewController: UICollectionViewDataSource, UICollectionV
 }
 
 //MARK: - SignUpCollectionViewCellDelegate
-extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
+extension OnboardingViewController: SignUpCollectionViewCellDelegate {
     func save(user: User?, withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int) {
         let userPhoto = photo ?? UIImage(named: "stockPhoto")!
 
@@ -310,7 +310,7 @@ extension NewOnboardingViewController: SignUpCollectionViewCellDelegate {
 }
 
 //MARK: - UIImagePickerControllerDelegate
-extension NewOnboardingViewController: UIImagePickerControllerDelegate {
+extension OnboardingViewController: UIImagePickerControllerDelegate {
     func openCamera() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
@@ -347,7 +347,7 @@ extension NewOnboardingViewController: UIImagePickerControllerDelegate {
 }
 
 //MARK: - StartDayCollectionViewCellDelegate
-extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
+extension OnboardingViewController: StartDayCollectionViewCellDelegate {
     func save(challenge: Challenge?, withDate date: Date?) {
         guard let date = date else {return}
         
@@ -396,7 +396,7 @@ extension NewOnboardingViewController: StartDayCollectionViewCellDelegate {
 }
 
 //MARK: - GoalsCollectionViewCellDelegate
-extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
+extension OnboardingViewController: GoalsCollectionViewCellDelegate {
     func save(monthGoal: Goal) {
         guard let userID = UserController.shared.appleUserID, let challengeID = ChallengeController.shared.currentChallenge?.recordID else {return}
         let dispatchGroup = DispatchGroup()
@@ -460,7 +460,7 @@ extension NewOnboardingViewController: GoalsCollectionViewCellDelegate {
 }
 
 //MARK: - ShareCollectionViewCellDelegate
-extension NewOnboardingViewController: ShareCollectionViewCellDelegate {
+extension OnboardingViewController: ShareCollectionViewCellDelegate {
     func shareCurrentChallenge() {
         switch challengeState {
         case .isOwnerChallenge:
@@ -513,7 +513,7 @@ extension NewOnboardingViewController: ShareCollectionViewCellDelegate {
 }
 
 //MARK: - UICloudSharingControllerDelegate
-extension NewOnboardingViewController: UICloudSharingControllerDelegate {
+extension OnboardingViewController: UICloudSharingControllerDelegate {
     func cloudSharingControllerDidSaveShare(_ csc: UICloudSharingController) {
         guard let url = csc.share?.url, let challenge = ChallengeController.shared.currentChallenge else {return}
         ChallengeController.shared.add(stringURL: url.absoluteString, toChallenge: challenge) { (isSuccess) in

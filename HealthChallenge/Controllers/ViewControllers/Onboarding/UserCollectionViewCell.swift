@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewUserCollectionViewCell: UICollectionViewCell {
+class UserCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
     var userImageView: UIImageView = {

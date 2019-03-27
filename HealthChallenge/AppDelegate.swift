@@ -61,6 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                         
                                         UserDefaults.standard.set(share?.recordID.recordName, forKey: UserDefaultStrings.ShareRecordName)
                                         
+                                        guard let userID = UserController.shared.appleUserID, let sharedChallenge = ChallengeController.shared.currentChallenge else {return}
+                                        PointsController.shared.createPoints(forUserWith: userID, inChallenge: sharedChallenge, completion: { (_) in
+                                        })
+                                        
                                         let challengeReference = CKRecord.Reference(recordID: ChallengeController.shared.currentChallenge!.recordID, action: .none)
                                         GoalController.shared.fetchGoals(withChallengeReference: challengeReference, completion: { (isSuccess) in
                                             if isSuccess {

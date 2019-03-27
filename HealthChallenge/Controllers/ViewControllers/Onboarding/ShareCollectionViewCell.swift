@@ -103,7 +103,7 @@ class ShareCollectionViewCell: UICollectionViewCell {
         userCollectionView?.backgroundColor = .clear
         userCollectionView?.showsHorizontalScrollIndicator = false
         userCollectionView?.clipsToBounds = true
-        userCollectionView?.register(NewUserCollectionViewCell.self, forCellWithReuseIdentifier: "userCell")
+        userCollectionView?.register(UserCollectionViewCell.self, forCellWithReuseIdentifier: "userCell")
         userCollectionView?.translatesAutoresizingMaskIntoConstraints = false
     }
 }
@@ -115,7 +115,7 @@ extension ShareCollectionViewCell: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as? NewUserCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "userCell", for: indexPath) as? UserCollectionViewCell
         
         cell?.user = UserController.shared.currentUsers[indexPath.row]
         
