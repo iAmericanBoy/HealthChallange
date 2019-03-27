@@ -14,7 +14,7 @@ class FoodEntry {
     let date: Date
     let recordID: CKRecord.ID
     
-    init(appleUserRef: CKRecord.Reference, date: Date = Date(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(appleUserRef: CKRecord.Reference, date: Date = Date().stripTimestamp(), recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.appleUserRef = appleUserRef
         self.date = date
         self.recordID = recordID

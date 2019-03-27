@@ -54,6 +54,7 @@
 		B6E332C62236B8680088D6FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6E332C42236B8680088D6FF /* LaunchScreen.storyboard */; };
 		B6E99EC5224C22640032FAA2 /* FoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E99EC4224C22640032FAA2 /* FoodEntry.swift */; };
 		B6E99EC7224C23E50032FAA2 /* FoodEntry+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E99EC6224C23E50032FAA2 /* FoodEntry+Extension.swift */; };
+		B6E99EC9224C25F10032FAA2 /* FoodEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E99EC8224C25F10032FAA2 /* FoodEntryController.swift */; };
 		B6EBA5FC22380F970001F5BF /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA5FB22380F970001F5BF /* Challenge.swift */; };
 		B6EBA5FE22380FE10001F5BF /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA5FD22380FE10001F5BF /* Goal.swift */; };
 		B6EBA602223812550001F5BF /* Challenge+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */; };
@@ -139,6 +140,7 @@
 		B6E332C72236B8680088D6FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6E99EC4224C22640032FAA2 /* FoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntry.swift; sourceTree = "<group>"; };
 		B6E99EC6224C23E50032FAA2 /* FoodEntry+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodEntry+Extension.swift"; sourceTree = "<group>"; };
+		B6E99EC8224C25F10032FAA2 /* FoodEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntryController.swift; sourceTree = "<group>"; };
 		B6EBA5FB22380F970001F5BF /* Challenge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		B6EBA5FD22380FE10001F5BF /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		B6EBA601223812550001F5BF /* Challenge+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+MagicStrings.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				CE57AD2722402B1200712975 /* FoodTrackerController.swift */,
 				62FE5A6A2242C80E009240C6 /* WorkoutController.swift */,
 				B6BD369222458E7500E66A7F /* PointsController.swift */,
+				B6E99EC8224C25F10032FAA2 /* FoodEntryController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 				62D067CE2238302800D5410B /* CalendarController.swift in Sources */,
 				CEE08C92224A8E0A0043F863 /* Dish+MagicStrings.swift in Sources */,
 				62FE5A6522429C11009240C6 /* WorkoutDetailViewController.swift in Sources */,
+				B6E99EC9224C25F10032FAA2 /* FoodEntryController.swift in Sources */,
 				62FE5A6B2242C80E009240C6 /* WorkoutController.swift in Sources */,
 				B6F4A84B224AA4CD00080F61 /* GoalsTableViewController.swift in Sources */,
 				CEF56F5E2245485D0075BBE5 /* DishBuilderTableViewCell.swift in Sources */,
