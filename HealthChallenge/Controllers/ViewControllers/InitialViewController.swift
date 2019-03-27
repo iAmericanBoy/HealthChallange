@@ -22,6 +22,7 @@ class InitialViewController: UIViewController {
         //TODO: CHECK if network Available
 
         _ = GoalController.shared
+        _ = FoodEntryController.shared
 
         //fetch User
         fetchUser { userState in

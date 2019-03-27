@@ -18,6 +18,15 @@ class FoodEntryController {
     /// An Array of FoodEntries of the user
     var currentEntries: [Date:FoodEntry] = [:]
     
+    //MARK: -INIT
+    init() {
+        fetchAllFoodEntries { (isSuccess) in
+            if isSuccess {
+                print("\(self.currentEntries) Food Entires Found")
+            }
+        }
+    }
+    
     //MARK: - CRUD
     /// creates a new Food Entry for today. also adds the foodEntry to the currentEntries Dictionary
     /// - parameter completion: Handler for when the foodEntry was created and added.
