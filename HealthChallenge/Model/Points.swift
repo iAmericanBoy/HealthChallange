@@ -35,8 +35,13 @@ class Points {
 
     
     var totalPoints: Int {
-//        return workOutPoints + goalOnePoints + goalTwoPoints + goalThreePoints + goalFourPoints + monthlyGoalPoints + foodTrackingPoints
-        return 10
+        let goalOne = goalOnePoints ?? 0
+        let goalTwo = goalTwoPoints ?? 0
+        let goalThree = goalThreePoints ?? 0
+        let goalFour = goalFourPoints ?? 0
+        let monthGoal = monthlyGoalPoints ?? 0
+        
+        return workOutPoints + goalOne + goalTwo + goalThree + goalFour + monthGoal + foodTrackingPoints
     }
     
     init(appleUserRef: CKRecord.Reference, challengeRef: CKRecord.Reference, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), workOutPoints: Int = 0, foodTrackingPoints: Int = 0) {
