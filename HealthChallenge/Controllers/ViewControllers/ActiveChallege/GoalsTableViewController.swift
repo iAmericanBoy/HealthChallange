@@ -8,10 +8,7 @@
 
 import UIKit
 
-enum GoalType {
-    case week
-    case month
-}
+
 class GoalsTableViewController: UITableViewController {
     
     //MARK: - Properties
@@ -69,56 +66,62 @@ class GoalsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalTableViewCell
         
         cell?.goal = GoalController.shared.challengeGoals[indexPath.section][indexPath.row]
-
         
         switch indexPath.section {
         case 0:
             //Week
-            
             switch indexPath.row {
             case 0:
                 if  let index = weekOne.index(of: Date().day) {
                     cell?.dateRangeCount = Double(weekOne.count)
                     cell?.current = true
+                    
                     cell?.dateposition = Double(index)
+
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 2 ? UIColor.purple.withAlphaComponent(0.1) : UIColor.lushGreenColor.withAlphaComponent(0.1)
+                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
                 }
             case 1:
+
                 if let index = weekTwo.index(of: Date().day) {
                     cell?.dateRangeCount = Double(weekTwo.count)
                     cell?.current = true
                     cell?.dateposition = Double(index)
+
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 2 ? UIColor.purple.withAlphaComponent(0.1) : UIColor.lushGreenColor.withAlphaComponent(0.1)
+                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
                 }
             case 2:
+
                 if let index = weekThree.index(of: Date().day) {
                     cell?.dateRangeCount = Double(weekThree.count)
                     cell?.current = true
                     cell?.dateposition = Double(index)
+
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 2 ? UIColor.purple.withAlphaComponent(0.1) : UIColor.lushGreenColor.withAlphaComponent(0.1)
+                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
                 }
             case 3:
+
                 if let index = weekFour.index(of: Date().day) {
                     cell?.dateRangeCount = Double(weekFour.count)
                     cell?.current = true
                     cell?.dateposition = Double(index)
                 } else {
-                    cell?.backgroundColor = currentPoints.goalOnePoints == 2 ? UIColor.purple.withAlphaComponent(0.1) : UIColor.lushGreenColor.withAlphaComponent(0.1)
+                    cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
                 }
             default:
                 break
             }
         case 1:
             //Month
+
             if  let index = monthIntRange.index(of: Date().day) {
                 cell?.dateRangeCount = Double(monthIntRange.count)
                 cell?.current = true
                 cell?.dateposition = Double(index)
             } else {
-                cell?.backgroundColor = currentPoints.goalOnePoints == 2 ? UIColor.purple.withAlphaComponent(0.1) : UIColor.lushGreenColor.withAlphaComponent(0.1)
+                cell?.backgroundColor = currentPoints.goalOnePoints == 0 ? UIColor.purple.withAlphaComponent(0.2) : UIColor.lushGreenColor.withAlphaComponent(0.2)
             }
         default:
             break
@@ -129,5 +132,75 @@ class GoalsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.height / 10
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let usersPoints = PointsController.shared.usersPoints else {return}
+
+        
+        switch indexPath.section {
+        case 0:
+            //Week
+            switch indexPath.row {
+            case 0:
+                if usersPoints.goalOnePoints == 0 {
+                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                } else {
+                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekOne, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                }
+            case 1:
+                if usersPoints.goalTwoPoints == 0 {
+                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                } else {
+                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekTwo, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                }
+   
+            case 2:
+                if usersPoints.goalThreePoints == 0 {
+                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                } else {
+                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekThree, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                }
+
+            case 3:
+                if usersPoints.goalFourPoints == 0 {
+                    PointsController.shared.set(weeklyGoalPoints: 2, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                } else {
+                    PointsController.shared.set(weeklyGoalPoints: 0, forGoalWeek: .weekFour, toPoints: usersPoints) { (isSuccess) in
+                        
+                    }
+                }
+
+            default:
+                break
+            }
+        case 1:
+            //Month
+            if usersPoints.goalOnePoints == 0 {
+                PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
+                    
+                }
+            } else {
+                PointsController.shared.set(monthlyGoalPoints: 10, toPoints: usersPoints) { (isSuccess) in
+                    
+                }
+            }
+        default:
+            break
+        }
     }
 }

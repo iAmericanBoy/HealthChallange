@@ -32,7 +32,11 @@ class GoalTableViewCell: UITableViewCell {
             self.updateViews()
         }
     }
-    
+    var gradientColor: UIColor? {
+        didSet {
+            self.updateViews()
+        }
+    }
     var gradient =  CAGradientLayer()
 
     var dateRangeCount: Double? {
@@ -64,7 +68,7 @@ class GoalTableViewCell: UITableViewCell {
                     contentView.layer.insertSublayer(gradient, at: 0)
                     
                     gradient.locations = [0.0, NSNumber(value: (position/dateRangeCount!)) ]
-                    gradient.colors = [UIColor.lushGreenColor.cgColor, UIColor.white.cgColor]
+                    gradient.colors = [gradientColor?.cgColor ?? UIColor.lushGreenColor.cgColor, UIColor.white.cgColor]
                     gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
                     gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
                     
