@@ -39,7 +39,7 @@ class Dish {
     var totalfats:Double = 0
     var totalsodium:Double = 0
     var ckRecordID: CKRecord.ID
-    
+    //
     var ingredientRefs: [CKRecord.Reference] {
         var returnArray: [CKRecord.Reference] = []
         ingredients.forEach({ (food) in
@@ -80,7 +80,7 @@ class Dish {
         self.timeStamp = timeStamp
         self.ckRecordID = ckRecordID
         self.creatorReference = creator
-        
+        //
         var totalcal:Double = 0
         var totalcarbs:Double = 0
         var totalsugars:Double = 0
@@ -134,7 +134,7 @@ class Dish {
         self.totalfats = totalfats
         self.totalsodium = totalsodium
         self.ckRecordID = record.recordID
-        
+        //
         do {
             try self.photoData = Data(contentsOf: ((imageAsset?.fileURL)!))
         } catch {
@@ -166,7 +166,7 @@ extension CKRecord {
         self.setValue(dish.totalsugars, forKey: Dish.totalsugarKey)
         self.setValue(dish.totalfats, forKey: Dish.totalfatKey)
         self.setValue(dish.totalsodium, forKey: Dish.totalSodiumKey)
-        
+        //
         if dish.imageAsset != nil {
             self.setValue(dish.imageAsset, forKey: Dish.photoKey)
         }
