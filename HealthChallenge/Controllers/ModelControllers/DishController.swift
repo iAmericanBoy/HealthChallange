@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CloudKit
 
 class DishController {
     
@@ -36,12 +37,45 @@ class DishController {
             return
         }
         
-        let dish = Dish(dishName: name, ingredients: ingredients, dishType: dishType!, timeStamp: Date())
+        let dish = Dish(dishName: name, creator: nil, ingredients: ingredients, dishType: dishType!, timeStamp: Date())
+        
+        saveDishToCloudKit(dish: dish) { (success) in
+            if success {
+                print("saved To CloudKit saved Successfully")
+            } else {
+                print("not saved to cloudkitd")
+            }
+        }
+        
         
         print("😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛")
         dump(dish)
-   
+       
         dishes[dishType!.rawValue]?.append(dish)
+        
+
      
+    }
+    
+    func saveDishToCloudKit(dish: Dish, completion: @escaping (Bool) -> Void) {
+        var recordsToSave: [CKRecord] = []
+        
+        dish.ingredients?.forEach({ (food) in
+            let dishRef = CKRecord.Reference(recordID: dish.ckRecordID, action: .none)
+            food.dishRef = dishRef
+            let recordToSave = CKRecord(food: food)
+            recordsToSave.append(recordToSave)
+        })
+        
+        let dishToSave = CKRecord(dish: dish)
+        recordsToSave.append(dishToSave)
+        
+        CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: recordsToSave, purchasesToDelete: []) { (success, records, _) in
+            if success {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
     }
 }

@@ -16,12 +16,27 @@ class Nutrients {
     var calories: String
     var fats: String
     var sodium: String
-    
     var sugarGM: String
     var carbsGM: String
     var caloriesGM: String
     var fatsGM: String
     var sodiumGM: String
+    
+    
+    init(sugar: String, carbs: String, calories: String, fats: String, sodium: String, sugarGM: String,
+                     carbsGM: String, caloriesGM: String, fatsGM: String, sodiumGM: String) {
+        
+        self.sugar = sugar
+        self.carbs = carbs
+        self.calories = calories
+        self.fats = fats
+        self.sodium = sodium
+        self.sugarGM = sugarGM
+        self.carbsGM = carbsGM
+        self.caloriesGM = caloriesGM
+        self.fatsGM = fatsGM
+        self.sodiumGM = sodiumGM
+    }
     
     init?(dictionary: [[String: Any]] , weight:Double) {
         
