@@ -6,38 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Goals-->
-        <scene sceneID="A5O-9e-DtL">
-            <objects>
-                <viewController id="P4n-DL-MRE" customClass="GoalsViewController" customModule="HealthChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VBR-4F-Z4h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="SFo-PL-vcj"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Goals" image="goal" id="A9J-Uh-wPb"/>
-                    <navigationItem key="navigationItem" title="Goals" largeTitleDisplayMode="always" id="WTV-Y0-jPr">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="swa-cp-Wa7">
-                            <color key="tintColor" red="0.24313725489999999" green="0.6588235294" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="optionsButtonTapped:" destination="P4n-DL-MRE" id="3JI-dv-xLa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="optionsButton" destination="swa-cp-Wa7" id="qR4-Dn-Iwd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xlu-yo-6ve" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4364" y="653.52323838080963"/>
-        </scene>
         <!--Goals-->
         <scene sceneID="iZt-Ee-oxL">
             <objects>
@@ -160,7 +131,4 @@
             <point key="canvasLocation" x="4632.8000000000002" y="653.52323838080963"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="goal" width="50" height="50"/>
-    </resources>
 </document>

@@ -24,6 +24,7 @@ class LeaderboardViewController: UIViewController {
         points.sort { (leader, trailer) -> Bool in
             leader.totalPoints > trailer.totalPoints
         }
+        setSettingsButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
