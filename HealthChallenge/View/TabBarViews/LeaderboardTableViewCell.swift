@@ -25,7 +25,8 @@ class LeaderboardTableViewCell: UITableViewCell {
     func updateViews() {
         guard let user = user else { return }
         userPhoto.image = user.photo
-        userPhoto.layer.cornerRadius = userPhoto.frame.width / 2
+        userPhoto.contentMode = .scaleAspectFill
+        userPhoto.layer.cornerRadius = userPhoto.frame.width * 0.5
         nameLabel.attributedText = NSAttributedString(string: user.userName, attributes: FontController.labelTitleFont)
     }
 }

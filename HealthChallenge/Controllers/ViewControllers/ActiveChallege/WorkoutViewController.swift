@@ -111,15 +111,15 @@ class WorkoutViewController: UIViewController {
         guard let userPoints = PointsController.shared.usersPoints else { return }
         var totalPoints: Int = 0
         
-        let weekOne = challengeDates[0].day...challengeDates[7].day
-        let weekTwo = challengeDates[8].day...challengeDates[13].day
-        let weekThree = challengeDates[14].day...challengeDates[20].day
-        let weekFour = challengeDates[21].day...challengeDates[29].day
+        let weekOne = challengeDates[0]...challengeDates[7]
+        let weekTwo = challengeDates[8]...challengeDates[13]
+        let weekThree = challengeDates[14]...challengeDates[20]
+        let weekFour = challengeDates[21]...challengeDates[29]
 
-        let weekOneWorkouts = workouts.filter({ weekOne.contains($0.end.day) }).count
-        let weekTwoWorkouts = workouts.filter({ weekTwo.contains($0.end.day) }).count
-        let weekThreeWorkouts = workouts.filter({ weekThree.contains($0.end.day) }).count
-        let weekFourWorkouts = workouts.filter({ weekFour.contains($0.end.day) }).count
+        let weekOneWorkouts = workouts.filter({ weekOne.contains($0.end) }).count
+        let weekTwoWorkouts = workouts.filter({ weekTwo.contains($0.end) }).count
+        let weekThreeWorkouts = workouts.filter({ weekThree.contains($0.end) }).count
+        let weekFourWorkouts = workouts.filter({ weekFour.contains($0.end) }).count
         
         totalPoints += min(3, weekOneWorkouts)
         totalPoints += min(3, weekTwoWorkouts)

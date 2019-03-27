@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bvA-SD-ul5">
-                                <rect key="frame" x="0.0" y="139.5" width="375" height="478.5"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userCell" rowHeight="91" id="z7d-bE-iWq" customClass="LeaderboardTableViewCell" customModule="HealthChallenge" customModuleProvider="target">
@@ -30,26 +30,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VR6-Hw-TyB">
-                                                    <rect key="frame" x="328" y="32.5" width="48" height="21"/>
+                                                    <rect key="frame" x="296" y="17.5" width="48" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BLh-00-fuV">
-                                                    <rect key="frame" x="16" y="8" width="70" height="70"/>
+                                                    <rect key="frame" x="36" y="8" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="BLh-00-fuV" secondAttribute="height" multiplier="1:1" id="Wzz-8z-Zbh"/>
-                                                        <constraint firstAttribute="width" constant="70" id="g93-UF-7s1"/>
+                                                        <constraint firstAttribute="width" constant="40" id="g93-UF-7s1"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUR-Yn-EPl">
-                                                    <rect key="frame" x="162" y="32.5" width="45" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hN3-mq-Kj1">
+                                                    <rect key="frame" x="238" y="17.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hN3-mq-Kj1">
-                                                    <rect key="frame" x="104" y="32.5" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUR-Yn-EPl">
+                                                    <rect key="frame" x="92" y="17.5" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -57,15 +57,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="BLh-00-fuV" firstAttribute="centerY" secondItem="hxq-xx-h62" secondAttribute="centerY" id="4hZ-sF-ASP"/>
-                                                <constraint firstItem="hN3-mq-Kj1" firstAttribute="centerY" secondItem="BLh-00-fuV" secondAttribute="centerY" id="N72-mS-Iqb"/>
+                                                <constraint firstItem="VR6-Hw-TyB" firstAttribute="leading" secondItem="hN3-mq-Kj1" secondAttribute="trailing" constant="16" id="5Vb-n0-3OA"/>
+                                                <constraint firstItem="dUR-Yn-EPl" firstAttribute="leading" secondItem="BLh-00-fuV" secondAttribute="trailing" constant="16" id="Ecd-0K-hkO"/>
                                                 <constraint firstItem="VR6-Hw-TyB" firstAttribute="centerY" secondItem="BLh-00-fuV" secondAttribute="centerY" id="OAa-3O-3YP"/>
-                                                <constraint firstItem="VR6-Hw-TyB" firstAttribute="trailing" secondItem="hxq-xx-h62" secondAttribute="trailingMargin" constant="16" id="fhy-5V-OlF"/>
-                                                <constraint firstItem="hN3-mq-Kj1" firstAttribute="leading" secondItem="BLh-00-fuV" secondAttribute="trailing" constant="18" id="lUK-F5-CYw"/>
+                                                <constraint firstItem="hN3-mq-Kj1" firstAttribute="centerY" secondItem="VR6-Hw-TyB" secondAttribute="centerY" id="P75-Nn-WPu"/>
+                                                <constraint firstItem="VR6-Hw-TyB" firstAttribute="trailing" secondItem="hxq-xx-h62" secondAttribute="trailingMargin" constant="-16" id="fhy-5V-OlF"/>
+                                                <constraint firstItem="dUR-Yn-EPl" firstAttribute="centerY" secondItem="BLh-00-fuV" secondAttribute="centerY" id="nJ7-tB-LgQ"/>
                                                 <constraint firstItem="BLh-00-fuV" firstAttribute="top" secondItem="hxq-xx-h62" secondAttribute="top" constant="8" id="oOY-LU-S3i"/>
-                                                <constraint firstItem="dUR-Yn-EPl" firstAttribute="leading" secondItem="hN3-mq-Kj1" secondAttribute="trailing" constant="16" id="r49-mH-t0Y"/>
                                                 <constraint firstAttribute="bottom" secondItem="BLh-00-fuV" secondAttribute="bottom" constant="8" id="siA-rJ-zZU"/>
-                                                <constraint firstItem="BLh-00-fuV" firstAttribute="leading" secondItem="hxq-xx-h62" secondAttribute="leading" constant="16" id="xSQ-85-XYO"/>
-                                                <constraint firstItem="dUR-Yn-EPl" firstAttribute="centerY" secondItem="hN3-mq-Kj1" secondAttribute="centerY" id="z7n-de-9Jq"/>
+                                                <constraint firstItem="BLh-00-fuV" firstAttribute="leading" secondItem="hxq-xx-h62" secondAttribute="leading" constant="36" id="xSQ-85-XYO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -105,7 +105,7 @@
                     <tabBarItem key="tabBarItem" title="Leaderboard" id="sV6-Dc-r6g"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="1Eb-C9-hAn">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="119.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="55"/>
@@ -123,6 +123,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="leaderboard" width="50" height="50"/>
+        <image name="leaderboard" width="30" height="30"/>
     </resources>
 </document>

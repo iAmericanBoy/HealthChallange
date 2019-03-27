@@ -506,7 +506,6 @@
 				CEB299B1223C09250089DA63 /* Nutrients.swift in Sources */,
 				B6BD368B224440DA00E66A7F /* UIViewController+Extension.swift in Sources */,
 				62FE5A692242BC7E009240C6 /* Workout+MagicStrings.swift in Sources */,
-				62D067AB2236D24A00D5410B /* MonthlyGoalsViewController.swift in Sources */,
 				62EE2D95224AE1AB00836D34 /* LeaderboardTableViewCell.swift in Sources */,
 				6254412A2245984800A87290 /* SettingsNavigationViewController.swift in Sources */,
 				CEB299B7223C0B240089DA63 /* NutrientsController.swift in Sources */,
@@ -727,13 +726,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J6B8ZX28ZW;
+				DEVELOPMENT_TEAM = H8C27D6HU3;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = oskman.HealthChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = RG.HealthChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -746,13 +745,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HealthChallenge/HealthChallenge.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J6B8ZX28ZW;
+				DEVELOPMENT_TEAM = H8C27D6HU3;
 				INFOPLIST_FILE = "$(SRCROOT)/HealthChallenge/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = oskman.HealthChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = RG.HealthChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

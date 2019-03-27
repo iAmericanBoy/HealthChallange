@@ -19,8 +19,16 @@ class LeaderboardViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        users = UserController.shared.currentUsers
-        points = UserController.shared.currentPoints
+        if (ChallengeController.shared.currentShare != nil) {
+            users = UserController.shared.currentUsers
+            points = UserController.shared.currentPoints
+        } else {
+            guard let user = UserController.shared.loggedInUser,
+                let userPoints = PointsController.shared.usersPoints else { return }
+            users.append(user)
+            points.append(userPoints)
+        }
+        tableView.tableFooterView = UIView()
         points.sort { (leader, trailer) -> Bool in
             leader.totalPoints > trailer.totalPoints
         }
@@ -63,7 +71,7 @@ extension LeaderboardViewController: UITableViewDataSource, UITableViewDelegate 
         
         for _ in points {
             var index = 0
-            if leader.appleUserRef == users[index].appleUserRef {
+            if leader.appleUserRef.recordID.recordName == users[index].appleUserRef.recordID.recordName {
                 cell?.user = users[index]
                 cell?.pointsLabel.attributedText = NSAttributedString(string: "\(points[indexPath.row].totalPoints)", attributes: FontController.labelTitleFont)
             } else {

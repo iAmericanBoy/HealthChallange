@@ -21,9 +21,10 @@ class PhotoSelectorViewController: UIViewController, UINavigationControllerDeleg
         super.viewDidLoad()
         imagePicker.delegate = self
         guard let photo = user?.photo else { return }
+        profileImageView.contentMode = .scaleAspectFill
         profileImageView.image = photo
         profileImageView.clipsToBounds = true
-        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
     }
     
     override func viewWillAppear(_ animated: Bool) {
