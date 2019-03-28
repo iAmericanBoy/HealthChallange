@@ -30,6 +30,7 @@ class FoodTrackerViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.foodTrackerTableView.tableFooterView = UIView()
         date = Date()
         yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date().stripTimestamp())!
 
