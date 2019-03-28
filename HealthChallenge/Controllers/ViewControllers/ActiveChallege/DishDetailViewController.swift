@@ -24,6 +24,7 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dishTableView.tableFooterView = UIView()
         setSettingsButton()
         self.title = dish?.dishName
         setSettingsButton()
