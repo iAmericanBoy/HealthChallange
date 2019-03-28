@@ -226,9 +226,10 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
         case 1:
             //startDay
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "startDateCell", for: indexPath) as? StartDayCollectionViewCell
-            cell?.challengeState = challengeState
             cell?.delegate = self
             cell?.activeChallenge = ChallengeController.shared.currentChallenge
+            cell?.challengeState = challengeState
+
             
             return cell ?? UICollectionViewCell()
         case 2:
