@@ -208,6 +208,8 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let rawValue = UserDefaults.standard.value(forKey: "ChallengeState") as? Int
+        challengeState = ChallengeState(rawValue: rawValue ?? 0)!
         
         switch indexPath.item {
         case 0:

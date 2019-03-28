@@ -35,6 +35,12 @@ class ChallengeController {
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [record], purchasesToDelete: []) { (isSuccess, updatedRecords, _) in
             if isSuccess {
+                
+                UserDefaults.standard.set(ChallengeState.isOwnerChallenge.rawValue, forKey: "ChallengeState")
+                let finishDay = ChallengeController.shared.currentChallenge?.finishDay
+                
+                UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
+                
                 guard let updatedRecord = updatedRecords?.first, updatedRecord.recordID == record.recordID, let newChallenge = Challenge(record: record) else {completion(false); return}
                 self.currentChallenge = newChallenge
                 guard let userID = UserController.shared.appleUserID else {completion(false); return}
