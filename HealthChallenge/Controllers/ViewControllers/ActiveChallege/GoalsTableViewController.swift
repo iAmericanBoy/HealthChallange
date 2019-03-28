@@ -30,6 +30,8 @@ class GoalsTableViewController: UITableViewController {
         
         //MARK: - Set Label Style titleFont
         
+        navigationController?.navigationBar.largeTitleTextAttributes = FontController.titleFont
+        
         rowFailLabel.attributedText = NSAttributedString(string: "Tap on row if you failed your goal.", attributes: FontController.tableViewRowFont)
         
         findDateRange(from: ChallengeController.shared.currentChallenge!.startDay)
