@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import Network
 
 class InitialViewController: UIViewController {
     //MARK: - Outlet
@@ -19,8 +20,8 @@ class InitialViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: CHECK if network Available
-
+        monitorNetwork()
+        
         _ = GoalController.shared
 
         //fetch User
@@ -351,6 +352,22 @@ class InitialViewController: UIViewController {
     
     
     //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
     //MARK: Fetch
     
     ///Fetches the User if it exists

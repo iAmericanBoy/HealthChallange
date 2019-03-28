@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class SettingsTableViewController: UITableViewController, PhotoSelectorViewControllerDelegate {
     
@@ -25,11 +26,12 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         saveButton.setAttributedTitle(NSAttributedString(string: "Save Changes", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         deleteProfileButton.setAttributedTitle(NSAttributedString(string: "Delete Profile", attributes: FontController.tableViewRowFontRED), for: .normal)
         deleteChallengeButton.setAttributedTitle(NSAttributedString(string: "Leave Challenge", attributes: FontController.tableViewRowFontRED), for: .normal)
-        
+        monitorNetwork()
         if let user = user {
             profilePhoto = user.photo
             usernameTextField.attributedText = NSAttributedString(string: "\(user.userName)", attributes: FontController.tableViewRowFont)
         }
+        
     }
     
     
@@ -132,6 +134,24 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
                 window.rootViewController = navControl
             }
         }
+    }
+    
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }
 

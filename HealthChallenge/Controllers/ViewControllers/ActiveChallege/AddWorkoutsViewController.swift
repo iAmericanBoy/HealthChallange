@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import Network
 
 class AddWorkoutsViewController: UIViewController {
     
@@ -35,6 +36,7 @@ class AddWorkoutsViewController: UIViewController {
         nextDayButton.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
         previousDayButton.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
         currentDayLabel.attributedText = NSAttributedString(string: "\(date.month)/\(date.day)", attributes: FontController.labelTitleFont)
+        monitorNetwork()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +95,24 @@ class AddWorkoutsViewController: UIViewController {
             let embedVC = segue.destination as? WorkoutDetailViewController
             embedVC?.delegate = self
         }
+    }
+    
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }
 

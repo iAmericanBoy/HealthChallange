@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class FoodTrackerViewController: UIViewController {
     
@@ -38,6 +39,7 @@ class FoodTrackerViewController: UIViewController {
         setSettingsButton()
         setupViews()
         updateViews()
+        monitorNetwork()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +90,23 @@ class FoodTrackerViewController: UIViewController {
     }
     
     //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+    
     func updateViews() {
         guard let dateNotNil = date else {return}
         

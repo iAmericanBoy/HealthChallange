@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class DishDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -27,7 +28,7 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         setSettingsButton()
         self.title = dish?.dishName
         setSettingsButton()
-
+        monitorNetwork()
   
     }
     
@@ -64,6 +65,24 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         cell?.ingredientLandingPad = ingredients[indexPath.row]
   
         return cell ?? UITableViewCell()
+    }
+    
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
     
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import Network
 
 
 class OnboardingViewController: UIViewController, UINavigationControllerDelegate {
@@ -67,6 +68,9 @@ class OnboardingViewController: UIViewController, UINavigationControllerDelegate
         collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
         pageControl.currentPage = screenCount - 1
         setTitle()
+        
+        monitorNetwork()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,6 +126,23 @@ class OnboardingViewController: UIViewController, UINavigationControllerDelegate
     }
     
     //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+    
     fileprivate func setTitle() {
         switch pageControl.currentPage {
         case 0:

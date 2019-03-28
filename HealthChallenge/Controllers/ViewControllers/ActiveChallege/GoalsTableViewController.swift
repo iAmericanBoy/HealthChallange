@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 
 class GoalsTableViewController: UITableViewController {
@@ -27,8 +28,7 @@ class GoalsTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-        
-        //MARK: - Set Label Style titleFont
+        monitorNetwork()
         
         rowFailLabel.attributedText = NSAttributedString(string: "Tap on row if you failed your goal.", attributes: FontController.tableViewRowFont)
         
@@ -54,6 +54,23 @@ class GoalsTableViewController: UITableViewController {
         }
         
         monthIntRange = dayRange
+    }
+    
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
     
 

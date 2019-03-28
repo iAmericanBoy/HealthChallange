@@ -28,13 +28,32 @@ extension UIViewController {
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.style = UIActivityIndicatorView.Style.gray
         loadingIndicator.startAnimating();
-        
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
     }
+    
     func dismissAlert() {
         if let vc = self.presentedViewController, vc is UIAlertController {
+            print(vc.title)
             dismiss(animated: false, completion: nil)
         }
+    }
+    func dismissNetworkAlert() {
+        if let vc = self.presentedViewController, vc is UIAlertController {
+            guard let title = vc.title , title == "No Internet Connection" else {return}
+            dismiss(animated: false, completion: nil)
+        }
+    }
+    
+    func presentNoNetworkAlert() {
+        let alert = UIAlertController(title: "No Internet Connection", message: nil, preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
     }
 }

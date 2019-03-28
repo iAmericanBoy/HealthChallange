@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import Network
 
 class WorkoutDetailViewController: UIViewController {
 
@@ -32,6 +33,7 @@ class WorkoutDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        monitorNetwork()
         endButton.isEnabled = false
         workoutPickerView.delegate = self
         workoutPickerView.dataSource = self
@@ -142,6 +144,24 @@ class WorkoutDetailViewController: UIViewController {
                 self.delegate?.finishedWorkout(success: true)
             }
         }
+    }
+    
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }
 
