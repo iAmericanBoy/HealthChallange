@@ -127,6 +127,20 @@ class ChallengeController {
     func delete(challenge: Challenge, completion: @escaping (_ isSuccess:Bool) -> Void) {
         guard let recordID = CKRecord(challenge: challenge)?.recordID else {completion(false);return}
 
+        if let shareID = currentShare?.recordID {
+            CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.shareDB, recordsToUpdate: [], purchasesToDelete: [shareID]) { (isSuccess, _, deletedRecords) in
+                if isSuccess {
+                    guard let deletedRecordID = deletedRecords?.first, deletedRecordID == shareID else {completion(false); return}
+                    self.currentChallenge = nil
+                    self.currentShare = nil
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+
+        
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.privateDB, recordsToUpdate: [], purchasesToDelete: [recordID]) { (isSuccess, _, deletedRecords) in
             if isSuccess {
                 guard let deletedRecordID = deletedRecords?.first, deletedRecordID == recordID else {completion(false); return}
