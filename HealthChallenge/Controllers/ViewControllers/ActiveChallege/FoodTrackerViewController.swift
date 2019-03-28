@@ -77,7 +77,10 @@ class FoodTrackerViewController: UIViewController {
                 destinationVC.foodEntry = dateFoodEntry
             }
         } else if segue.identifier == "toDetailVC" {
-            
+            guard let index = foodTrackerTableView.indexPathForSelectedRow, let cell = foodTrackerTableView.cellForRow(at: index) as? FoodTrackerCell else {return}
+            if let destinationVC = segue.destination as? DishDetailViewController {
+                destinationVC.dish = cell.dishLanding
+            }
         }
     }
     
