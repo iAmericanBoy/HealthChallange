@@ -17,6 +17,7 @@ class FoodTrackerViewController: UIViewController {
             dishDateLabel.attributedText = NSAttributedString(string: date.format(), attributes: FontController.disabledButtonFont)
         }
     }
+    var yesterday : Date?
     var dateFoodEntry: FoodEntry?
     
     //MARK: - Outlets
@@ -30,6 +31,8 @@ class FoodTrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         date = Date()
+        yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date().stripTimestamp())!
+
         foodTrackerTableView.delegate = self
         foodTrackerTableView.dataSource = self
         setSettingsButton()
@@ -89,8 +92,7 @@ class FoodTrackerViewController: UIViewController {
         }
         
         //Only allow food to be entered for today or yesterday
-        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: dateNotNil)!
-        if dateNotNil.stripTimestamp() < yesterday.stripTimestamp() {
+        if dateNotNil.stripTimestamp() < yesterday!.stripTimestamp() {
             addMealButton.isHidden = true
         } else {
             addMealButton.isHidden = false
