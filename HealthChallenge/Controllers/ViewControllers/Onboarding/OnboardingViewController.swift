@@ -454,6 +454,7 @@ extension OnboardingViewController: GoalsCollectionViewCellDelegate {
         }
         
         dispatchGroup.notify(queue: .main) {
+            self.screenCount = max(4,self.screenCount)
             self.handelNext()
         }
     }
