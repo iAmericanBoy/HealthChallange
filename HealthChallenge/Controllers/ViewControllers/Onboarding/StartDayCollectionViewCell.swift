@@ -273,9 +273,8 @@ class StartDayCollectionViewCell: UICollectionViewCell {
 extension StartDayCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //TODO: Fix crash when currenday is sunday
-        let sectionItems = calendarController.numOfDaysInMonth[calendarController.currentMonthIndex - 1] + calendarController.firstWeekDayOfMonth - 1
-        return sectionItems
+        //TODO: Fix crash when currenday is s
+        return dateRange.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

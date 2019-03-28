@@ -19,6 +19,27 @@ class LeaderboardViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        updateViews()
+        setSettingsButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
+    }
+    
+    func updateViews() {
         if (ChallengeController.shared.currentShare != nil) {
             users = UserController.shared.currentUsers
             points = UserController.shared.currentPoints
@@ -32,20 +53,6 @@ class LeaderboardViewController: UIViewController {
         points.sort { (leader, trailer) -> Bool in
             leader.totalPoints > trailer.totalPoints
         }
-        setSettingsButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
-            print("Second Notification Accepted")
-            self.presentAlert()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
 }
 
