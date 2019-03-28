@@ -34,7 +34,6 @@ extension UIViewController {
     
     func dismissAlert() {
         if let vc = self.presentedViewController, vc is UIAlertController {
-            print(vc.title)
             dismiss(animated: false, completion: nil)
         }
     }
