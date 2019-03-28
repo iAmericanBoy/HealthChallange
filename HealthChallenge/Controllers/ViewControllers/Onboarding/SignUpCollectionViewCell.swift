@@ -104,6 +104,7 @@ class SignUpCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Actions
     @objc func saveButtonTapped() {
+        print("save user")
         userNameTextField.resignFirstResponder()
         guard let name = userNameTextField.text else {return}
         delegate?.save(user: user, withName: name, andUserPhoto: profilePhoto, andLifeStyleValue: lifeStyleSegmentedControl.selectedSegmentIndex)

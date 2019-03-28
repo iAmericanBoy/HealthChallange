@@ -32,6 +32,8 @@ class LeaderboardViewController: UIViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+        setSettingsButton()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {

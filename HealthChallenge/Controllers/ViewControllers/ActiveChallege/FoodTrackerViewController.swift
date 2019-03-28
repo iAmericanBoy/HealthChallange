@@ -49,6 +49,8 @@ class FoodTrackerViewController: UIViewController {
             self.foodTrackerTableView.reloadData()
         }
         foodTrackerTableView.reloadData()
+        setSettingsButton()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {

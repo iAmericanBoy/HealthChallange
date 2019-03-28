@@ -21,26 +21,39 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = user else { return }
-        profilePhoto = user.photo
+        usernameTextField.delegate = self
         saveButton.setAttributedTitle(NSAttributedString(string: "Save Changes", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         deleteProfileButton.setAttributedTitle(NSAttributedString(string: "Delete Profile", attributes: FontController.tableViewRowFontRED), for: .normal)
         deleteChallengeButton.setAttributedTitle(NSAttributedString(string: "Leave Challenge", attributes: FontController.tableViewRowFontRED), for: .normal)
-        usernameTextField.attributedText = NSAttributedString(string: "\(user.userName)", attributes: FontController.tableViewRowFont)
+        
+        if let user = user {
+            profilePhoto = user.photo
+            usernameTextField.attributedText = NSAttributedString(string: "\(user.userName)", attributes: FontController.tableViewRowFont)
+        }
     }
     
     
     @IBAction func saveChangesButtonTapped(_ sender: Any) {
-        guard let user = user,
-            let username = usernameTextField.text, !username.isEmpty,
-            let profilePhoto = profilePhoto
-            else { return }
+        guard let username = usernameTextField.text, !username.isEmpty, let profilePhoto = profilePhoto else { return }
         
         let strengthValue = lifestyleSegmentedControl.selectedSegmentIndex
-        UserController.shared.update(user: user, withNewName: username, andWithNewPhoto: profilePhoto, newStrengthValue: strengthValue) { (success) in
-            if success {
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+
+        if let user = user {
+            //update
+            UserController.shared.update(user: user, withNewName: username, andWithNewPhoto: profilePhoto, newStrengthValue: strengthValue) { (isSuccess) in
+                if isSuccess {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
+        } else {
+            //save new user
+            UserController.shared.createUserWith(userName: username, userPhoto: profilePhoto, strengthValue: strengthValue) { (isSuccess) in
+                if isSuccess {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         }
@@ -52,8 +65,8 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         
         let confirmAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
             UserController.shared.delete(User: user) { (success) in
-                if success {
-                    self.restartApp()
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         }
@@ -119,5 +132,13 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
                 window.rootViewController = navControl
             }
         }
+    }
+}
+
+//MARK: - UITextViewDelegate
+extension SettingsTableViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

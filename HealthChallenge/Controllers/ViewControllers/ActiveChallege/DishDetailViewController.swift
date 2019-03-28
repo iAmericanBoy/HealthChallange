@@ -26,6 +26,8 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         setSettingsButton()
         self.title = dish?.dishName
+        setSettingsButton()
+
   
     }
     

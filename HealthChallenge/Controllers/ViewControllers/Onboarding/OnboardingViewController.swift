@@ -274,8 +274,18 @@ extension OnboardingViewController: SignUpCollectionViewCellDelegate {
                 
                 if isSuccess {
                     DispatchQueue.main.async {
-                        self.screenCount = max(2,self.screenCount)
-                        self.handelNext()
+                        
+                        switch self.challengeState {
+                        case .isOwnerChallenge:
+                            self.screenCount = max(5,self.screenCount)
+                            self.handelNext()
+                        case .isParticipantChallenge:
+                            self.screenCount = max(5,self.screenCount)
+                            self.handelNext()
+                        case .noActiveChallenge:
+                            self.screenCount = max(2,self.screenCount)
+                            self.handelNext()
+                        }
                     }
                 }
             }
@@ -284,8 +294,18 @@ extension OnboardingViewController: SignUpCollectionViewCellDelegate {
             UserController.shared.createUserWith(userName: name, userPhoto: userPhoto, strengthValue: value) { (isSuccess) in
                 if isSuccess {
                     DispatchQueue.main.async {
-                        self.screenCount = max(2,self.screenCount)
-                        self.handelNext()
+                        
+                        switch self.challengeState {
+                        case .isOwnerChallenge:
+                            self.screenCount = max(5,self.screenCount)
+                            self.handelNext()
+                        case .isParticipantChallenge:
+                            self.screenCount = max(5,self.screenCount)
+                            self.handelNext()
+                        case .noActiveChallenge:
+                            self.screenCount = max(2,self.screenCount)
+                            self.handelNext()
+                        }
                     }
                 }
             }

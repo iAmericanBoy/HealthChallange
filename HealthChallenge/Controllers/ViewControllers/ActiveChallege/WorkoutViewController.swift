@@ -69,6 +69,7 @@ class WorkoutViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         updateViews()
+        setSettingsButton()
         // animations?
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
