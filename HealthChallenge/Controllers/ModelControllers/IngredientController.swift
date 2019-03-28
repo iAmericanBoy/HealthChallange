@@ -9,11 +9,11 @@
 
 import Foundation
 
-class FoodController {
+class IngredientController {
     
     
     static var food: [Ingredient] = []
-    static let sharedInstance = FoodController()
+    static let sharedInstance = IngredientController()
     static let format = "json"
     static let sort = "r"   // n 
     static let max = 20

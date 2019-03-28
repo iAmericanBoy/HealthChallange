@@ -80,7 +80,7 @@
 		CEB299AF223C08D30089DA63 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299AE223C08D30089DA63 /* Ingredient.swift */; };
 		CEB299B1223C09250089DA63 /* Nutrients.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B0223C09250089DA63 /* Nutrients.swift */; };
 		CEB299B3223C09740089DA63 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B2223C09740089DA63 /* Dish.swift */; };
-		CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B4223C0AAB0089DA63 /* FoodController.swift */; };
+		CEB299B5223C0AAB0089DA63 /* IngredientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B4223C0AAB0089DA63 /* IngredientController.swift */; };
 		CEB299B7223C0B240089DA63 /* NutrientsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B6223C0B240089DA63 /* NutrientsController.swift */; };
 		CEB299B9223C0CD20089DA63 /* FoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */; };
 		CEE08C92224A8E0A0043F863 /* Dish+MagicStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE08C91224A8E0A0043F863 /* Dish+MagicStrings.swift */; };
@@ -165,7 +165,7 @@
 		CEB299AE223C08D30089DA63 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		CEB299B0223C09250089DA63 /* Nutrients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nutrients.swift; sourceTree = "<group>"; };
 		CEB299B2223C09740089DA63 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
-		CEB299B4223C0AAB0089DA63 /* FoodController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodController.swift; sourceTree = "<group>"; };
+		CEB299B4223C0AAB0089DA63 /* IngredientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientController.swift; sourceTree = "<group>"; };
 		CEB299B6223C0B240089DA63 /* NutrientsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientsController.swift; sourceTree = "<group>"; };
 		CEB299B8223C0CD20089DA63 /* FoodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTableViewCell.swift; sourceTree = "<group>"; };
 		CEE08C91224A8E0A0043F863 /* Dish+MagicStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dish+MagicStrings.swift"; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 				CE60FC5F224038390029386F /* DishController.swift */,
 				B6EBA607223822810001F5BF /* GoalController.swift */,
 				B6EBA60922384F6E0001F5BF /* ChallengeController.swift */,
-				CEB299B4223C0AAB0089DA63 /* FoodController.swift */,
+				CEB299B4223C0AAB0089DA63 /* IngredientController.swift */,
 				CEB299B6223C0B240089DA63 /* NutrientsController.swift */,
 				62FE5A6A2242C80E009240C6 /* WorkoutController.swift */,
 				B6BD369222458E7500E66A7F /* PointsController.swift */,
@@ -501,7 +501,7 @@
 			files = (
 				CE178FBE2242E73500C3EEB3 /* DishTableViewCell.swift in Sources */,
 				CEB299B3223C09740089DA63 /* Dish.swift in Sources */,
-				CEB299B5223C0AAB0089DA63 /* FoodController.swift in Sources */,
+				CEB299B5223C0AAB0089DA63 /* IngredientController.swift in Sources */,
 				B624ACB02248026B00B5DD2F /* MonthGoalCollectionViewCell.swift in Sources */,
 				B6FD98D222472E4E00A6522E /* StartDayCollectionViewCell.swift in Sources */,
 				B6EBA604223812810001F5BF /* Goal+MagicStreaks.swift in Sources */,

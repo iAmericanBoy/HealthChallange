@@ -78,8 +78,8 @@ extension DishCreatorViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
         //searchBar.resignFirstResponder()
-        FoodController.food = []
-        FoodController.getFood(query: searchTerm) { (success) in
+        IngredientController.food = []
+        IngredientController.getFood(query: searchTerm) { (success) in
             if success {
                 DispatchQueue.main.async {
                     //searchBar.resignFirstResponder()
@@ -100,7 +100,7 @@ extension DishCreatorViewController: UITableViewDelegate, UITableViewDataSource 
         //top tableView
         if tableView == ingredientTableView {
             
-            return FoodController.food.count
+            return IngredientController.food.count
             
             //bottom tableView
         }else {
@@ -115,7 +115,7 @@ extension DishCreatorViewController: UITableViewDelegate, UITableViewDataSource 
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "foodCell", for: indexPath) as? FoodTableViewCell
             cell?.delegate = self
-            let foodItem = FoodController.food[indexPath.row]
+            let foodItem = IngredientController.food[indexPath.row]
             
             cell?.itemLandingPad = foodItem
             return cell ?? UITableViewCell()
@@ -144,18 +144,18 @@ extension DishCreatorViewController: UITableViewDelegate, UITableViewDataSource 
     //Pagination tableView protocol method
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row >= FoodController.food.count - 1 {
+        if indexPath.row >= IngredientController.food.count - 1 {
             
             searchTerm1 = searchBar.text ?? ""
             
-            let preFetchCount = FoodController.food.count
+            let preFetchCount = IngredientController.food.count
             
-            FoodController.getFood(query: self.searchTerm1) { (success) in
+            IngredientController.getFood(query: self.searchTerm1) { (success) in
                 if success {
                     self.count += 1
-                    FoodController.offset = self.count * 10  // incrementing offset
+                    IngredientController.offset = self.count * 10  // incrementing offset
                     
-                    let postFetchCount = FoodController.food.count
+                    let postFetchCount = IngredientController.food.count
                     if preFetchCount != postFetchCount {
                         DispatchQueue.main.async {
                             self.ingredientTableView.reloadData()
