@@ -395,6 +395,7 @@ class InitialViewController: UIViewController {
         print("Looking for Zones in SharedDB...")
         CloudKitController.shared.fetchRecordZonesInTheSharedDataBase { (isSuccess, foundZones) in
             if isSuccess {
+                var challengeState = ChallengeState.noActiveChallenge
                 print("Zones found")
                 let dispachGroup = DispatchGroup()
                 foundZones?.forEach({ (zone) in
@@ -403,7 +404,8 @@ class InitialViewController: UIViewController {
                     ChallengeController.shared.fetchCurrentChallenge(inDataBase: CloudKitController.shared.shareDB, inZoneWithID: zone.zoneID, { (isSuccess) in
                         if isSuccess {
                             print("Challenge in ZoneFound")
-                            completion(.isParticipantChallenge)
+                            challengeState = .isParticipantChallenge
+                            completion(challengeState)
                         } else {
                             print("No Challenge in Zone Found")
                         }
@@ -412,7 +414,7 @@ class InitialViewController: UIViewController {
                 })
                 dispachGroup.notify(queue: .main, execute: {
                     if self.isNoChallengeFound {
-                        completion(.noActiveChallenge)
+                        completion(challengeState)
                     } else {
                         print("No Challenge Found")
                         self.isNoChallengeFound = true
@@ -502,7 +504,6 @@ class InitialViewController: UIViewController {
     
     ///Segue to addMonthGoal VC
     func addMonthGoal() {
-        //TODO: Add logic to segue directly to the monthGoal screen
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}
