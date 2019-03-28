@@ -169,6 +169,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
                 window.rootViewController = navController
             }
         }
+    }
 
     //MARK: - Private Functions
     func monitorNetwork() {
@@ -197,3 +198,4 @@ extension SettingsTableViewController : UITextFieldDelegate {
         return true
     }
 }
+

@@ -40,6 +40,7 @@ class FoodTrackerViewController: UIViewController {
         setSettingsButton()
         setupViews()
         updateViews()
+        monitorNetwork()
 
         NotificationCenter.default.addObserver(self, selector: #selector(setProfileImage), name: NotificationStrings.profileImageChanged, object: nil)
     }
