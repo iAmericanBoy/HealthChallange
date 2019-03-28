@@ -618,22 +618,13 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yP2-2G-FJN">
                                                                     <rect key="frame" x="0.0" y="0.0" width="112.5" height="53"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(amount)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gh-nB-fiv">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="112.5" height="21.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(calories)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDU-lJ-lma">
-                                                                            <rect key="frame" x="0.0" y="31.5" width="112.5" height="21.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(calories)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDU-lJ-lma">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="112.5" height="53"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="4gh-nB-fiv" firstAttribute="centerX" secondItem="nDU-lJ-lma" secondAttribute="centerX" id="jRX-Gs-201"/>
-                                                                    </constraints>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4aE-e4-lAi">
                                                                     <rect key="frame" x="112.5" y="0.0" width="112" height="53"/>
@@ -682,7 +673,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="amountLabel" destination="4gh-nB-fiv" id="zFu-0A-9Lc"/>
                                             <outlet property="caloriesLabel" destination="nDU-lJ-lma" id="ft0-N0-6Ki"/>
                                             <outlet property="carbsLabel" destination="zno-TN-Lnu" id="OTs-pb-vR9"/>
                                             <outlet property="fatsLabel" destination="5CV-d8-EAI" id="mTN-xt-aoQ"/>

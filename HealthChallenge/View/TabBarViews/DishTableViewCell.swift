@@ -40,7 +40,7 @@ class DishTableViewCell: UITableViewCell {
         let roundedSodium = Double(round(10 * Double(sodium)!)/10)
 
         nameLabel.text = ingredient.name
-        amountLabel.text = ingredient.measure
+        //amountLabel.text = ingredient.measure
         caloriesLabel.text = "cal:\(roundedCalories) cal"
         sugarsLabel.text = "sugar: \(roundedSugars) g"
         carbsLabel.text = "carbs: \(roundedCarbs) g"
