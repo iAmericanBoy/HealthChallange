@@ -26,7 +26,7 @@ class FoodEntryController {
                 self.currentEntries.forEach({ (entry) in
                     DishController.shared.fetchDishes(forFoodEntry: entry.value, completion: { (isSuccess) in
                         if isSuccess {
-                            print("Dishes  Found")
+                            print("Dishes Found")
 
                         }
                     })
@@ -68,17 +68,12 @@ class FoodEntryController {
         let query = CKQuery(recordType: FoodEntry.typeKey, predicate: predicate)
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
             if isSuccess {
-                let dispachGroup = DispatchGroup()
                 foundRecords.forEach({ (record) in
-                    dispachGroup.enter()
                     guard let foodEntry = FoodEntry(record: record) else {completion(false);return}
                     
                     self.currentEntries[foodEntry.date.stripTimestamp()] = foodEntry
-                    dispachGroup.leave()
                 })
-                dispachGroup.notify(queue: .main, execute: {
-                    completion(true)
-                })
+                completion(true)
             } else {
                 //no food Entries found in the database.
                 completion(false)

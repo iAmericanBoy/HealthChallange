@@ -22,7 +22,6 @@ class InitialViewController: UIViewController {
         //TODO: CHECK if network Available
 
         _ = GoalController.shared
-        _ = FoodEntryController.shared
 
         //fetch User
         fetchUser { userState in
@@ -211,6 +210,7 @@ class InitialViewController: UIViewController {
     func fetchUser(_ completion: @escaping (_ userState: UserState) -> Void) {
         print("Looking for User...")
         UserController.shared.fetchUserLoggedInUser { (isSuccess) in
+            _ = FoodEntryController.shared
             if isSuccess {
                 print("User found")
                 WorkoutController.shared.fetchUsersWorkouts { (success) in

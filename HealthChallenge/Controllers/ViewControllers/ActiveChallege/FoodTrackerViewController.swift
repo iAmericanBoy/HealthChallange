@@ -91,9 +91,9 @@ class FoodTrackerViewController: UIViewController {
         } else {
             addMealButton.isHidden = false
         }
-        
-        if FoodEntryController.shared.currentEntries.keys.contains(dateNotNil) {
-            //display dishes
+        if let entry = FoodEntryController.shared.currentEntries[dateNotNil.stripTimestamp()] {
+            //display food
+
         } else {
             //create entry
             FoodEntryController.shared.createFoodEntry { (isSuccess) in

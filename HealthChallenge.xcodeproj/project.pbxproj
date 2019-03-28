@@ -74,8 +74,6 @@
 		CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FB92242B2D800C3EEB3 /* Extensions.swift */; };
 		CE178FBC2242E68000C3EEB3 /* DishDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */; };
 		CE178FBE2242E73500C3EEB3 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */; };
-		CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57AD2722402B1200712975 /* FoodTrackerController.swift */; };
-		CE57AD2A22402B2800712975 /* FoodTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57AD2922402B2800712975 /* FoodTracker.swift */; };
 		CE60FC60224038390029386F /* DishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FC5F224038390029386F /* DishController.swift */; };
 		CE60FC6222403B260029386F /* FoodTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FC6122403B260029386F /* FoodTrackerViewController.swift */; };
 		CE60FC6422416E180029386F /* FoodTrackerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60FC6322416E180029386F /* FoodTrackerCell.swift */; };
@@ -161,8 +159,6 @@
 		CE178FB92242B2D800C3EEB3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishDetailViewController.swift; sourceTree = "<group>"; };
 		CE178FBD2242E73500C3EEB3 /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
-		CE57AD2722402B1200712975 /* FoodTrackerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerController.swift; sourceTree = "<group>"; };
-		CE57AD2922402B2800712975 /* FoodTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTracker.swift; sourceTree = "<group>"; };
 		CE60FC5F224038390029386F /* DishController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishController.swift; sourceTree = "<group>"; };
 		CE60FC6122403B260029386F /* FoodTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerViewController.swift; sourceTree = "<group>"; };
 		CE60FC6322416E180029386F /* FoodTrackerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTrackerCell.swift; sourceTree = "<group>"; };
@@ -221,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				CEB299B2223C09740089DA63 /* Dish.swift */,
-				CE57AD2922402B2800712975 /* FoodTracker.swift */,
 				CEB299B0223C09250089DA63 /* Nutrients.swift */,
 				CEB299AE223C08D30089DA63 /* Food.swift */,
 				B6BD368E2245892D00E66A7F /* Points.swift */,
@@ -259,7 +254,6 @@
 				B6EBA60922384F6E0001F5BF /* ChallengeController.swift */,
 				CEB299B4223C0AAB0089DA63 /* FoodController.swift */,
 				CEB299B6223C0B240089DA63 /* NutrientsController.swift */,
-				CE57AD2722402B1200712975 /* FoodTrackerController.swift */,
 				62FE5A6A2242C80E009240C6 /* WorkoutController.swift */,
 				B6BD369222458E7500E66A7F /* PointsController.swift */,
 				B6E99EC8224C25F10032FAA2 /* FoodEntryController.swift */,
@@ -529,7 +523,6 @@
 				62FE5A31223EC3F0009240C6 /* SettingsTableViewController.swift in Sources */,
 				62FE5A6D2244193C009240C6 /* WorkoutDetailTableViewCell.swift in Sources */,
 				B6FD98CE2246ED1100A6522E /* UIColor+Extension.swift in Sources */,
-				CE57AD2A22402B2800712975 /* FoodTracker.swift in Sources */,
 				62FE5A33223FE450009240C6 /* SettingsPopupViewController.swift in Sources */,
 				62D067C8223719A700D5410B /* CloudKitController.swift in Sources */,
 				B6EBA608223822810001F5BF /* GoalController.swift in Sources */,
@@ -564,7 +557,6 @@
 				B6E210622240500200642274 /* InitialViewController.swift in Sources */,
 				CE178FBA2242B2D800C3EEB3 /* Extensions.swift in Sources */,
 				625441402249451700A87290 /* SettingsHelper.swift in Sources */,
-				CE57AD2822402B1200712975 /* FoodTrackerController.swift in Sources */,
 				B6F4A84F224AB48A00080F61 /* GoalTableViewCell.swift in Sources */,
 				B624ACB22248027D00B5DD2F /* ShareCollectionViewCell.swift in Sources */,
 				CE60FC60224038390029386F /* DishController.swift in Sources */,
