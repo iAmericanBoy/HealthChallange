@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PJd-gt-d7B">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PJd-gt-d7B">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -124,29 +124,38 @@
                                             <outlet property="mealName" destination="HnQ-rf-Obu" id="bjT-ge-TPR"/>
                                             <outlet property="sodiumLabel" destination="DZz-pD-BJR" id="TBA-Az-AwM"/>
                                             <outlet property="sugarsLabel" destination="eSj-CI-dPV" id="9O9-Mw-KKi"/>
-                                            <segue destination="PPC-aD-DMH" kind="show" identifier="toDetailVC" id="gwl-dY-oO8"/>
+                                            <segue destination="PPC-aD-DMH" kind="show" identifier="toDetailVC" id="e5y-zc-c3o"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="B52-fV-RcW">
-                                <rect key="frame" x="0.0" y="116" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="116" width="374" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woa-d5-ili">
-                                        <rect key="frame" x="0.0" y="0.0" width="116.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="cHo-69-z6k"/>
+                                        </constraints>
                                         <state key="normal" title="Previous"/>
                                         <connections>
                                             <action selector="previousDayTapped:" destination="dbP-ZY-3Em" eventType="touchUpInside" id="mf4-rm-QQu"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(date)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4g3-l4-umb">
-                                        <rect key="frame" x="129.5" y="0.0" width="116" height="30"/>
+                                        <rect key="frame" x="129" y="0.0" width="116" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="Yh0-bA-zM6"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3T-1p-qri">
-                                        <rect key="frame" x="258.5" y="0.0" width="116.5" height="30"/>
+                                        <rect key="frame" x="258" y="0.0" width="116" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="DuO-HX-XKD"/>
+                                        </constraints>
                                         <state key="normal" title="Next"/>
                                         <connections>
                                             <action selector="nextDayTapped:" destination="dbP-ZY-3Em" eventType="touchUpInside" id="OZr-vR-T9l"/>
@@ -166,12 +175,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Voi-d4-gDE" firstAttribute="top" secondItem="CjA-6h-48c" secondAttribute="bottom" constant="17" id="AOa-AH-sk6"/>
-                            <constraint firstItem="B52-fV-RcW" firstAttribute="leading" secondItem="ZNj-rt-7p4" secondAttribute="leading" id="Ask-1n-jEe"/>
                             <constraint firstItem="Voi-d4-gDE" firstAttribute="leading" secondItem="ZNj-rt-7p4" secondAttribute="leading" id="KMA-vw-d5r"/>
-                            <constraint firstItem="ZNj-rt-7p4" firstAttribute="trailing" secondItem="B52-fV-RcW" secondAttribute="trailing" id="Unc-nL-qxK"/>
                             <constraint firstAttribute="trailing" secondItem="CjA-6h-48c" secondAttribute="trailing" id="Y5A-MZ-WDE"/>
                             <constraint firstItem="CjA-6h-48c" firstAttribute="top" secondItem="B52-fV-RcW" secondAttribute="bottom" constant="2" id="Yij-Ed-8dS"/>
                             <constraint firstItem="B52-fV-RcW" firstAttribute="top" secondItem="ZNj-rt-7p4" secondAttribute="top" id="bQ8-N6-JZk"/>
+                            <constraint firstItem="B52-fV-RcW" firstAttribute="leading" secondItem="Voi-d4-gDE" secondAttribute="leading" id="fQY-Hb-aXR"/>
                             <constraint firstItem="ZNj-rt-7p4" firstAttribute="trailing" secondItem="Voi-d4-gDE" secondAttribute="trailing" id="seH-uH-9XI"/>
                             <constraint firstItem="ZNj-rt-7p4" firstAttribute="bottom" secondItem="Voi-d4-gDE" secondAttribute="bottom" id="v73-ES-tf6"/>
                         </constraints>
@@ -682,6 +690,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="slO-bI-HhA"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Ingredients" largeTitleDisplayMode="always" id="cHU-xQ-uWD"/>
                     <connections>
                         <outlet property="dishTableView" destination="Z8w-oF-r5C" id="zYn-aQ-rTE"/>
                         <outlet property="totalCaloriesLabel" destination="DjY-sU-ljS" id="cTW-KI-PUL"/>
@@ -700,6 +709,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="tzW-yn-0fi">
                         <rect key="frame" x="0.0" y="20" width="375" height="119.5"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="25"/>
+                            <color key="textColor" red="0.53336125612258911" green="0.17066627740859985" blue="0.55296820402145386" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="55"/>
                             <color key="textColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
