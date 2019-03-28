@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import Network
 
 class InitialViewController: UIViewController {
     //MARK: - Outlet
@@ -19,10 +20,36 @@ class InitialViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: CHECK if network Available
-
+        monitorNetwork()
+        
+        CKContainer.default().accountStatus { (accountStatus, error) in
+            if case .available = accountStatus {
+                print("iCloud Available")
+                self.dismissNoiCloudAlert()
+            } else {
+                print("iCloud Unavailable")
+                self.presentNoiCloudAlert()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        CKContainer.default().accountStatus { (accountStatus, error) in
+            if case .available = accountStatus {
+                print("iCloud Available")
+                self.dismissNoiCloudAlert()
+            } else {
+                print("iCloud Unavailable")
+                self.presentNoiCloudAlert()
+            }
+        }
+        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
+            print("Second Notification Accepted")
+            self.presentAlert()
+        }
         _ = GoalController.shared
-
+        
         //fetch User
         fetchUser { userState in
             switch userState {
@@ -34,9 +61,9 @@ class InitialViewController: UIViewController {
                     case .isOwnerChallenge:
                         UserDefaults.standard.set(ChallengeState.isOwnerChallenge.rawValue, forKey: "ChallengeState")
                         let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-
+                        
                         UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
-
+                        
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
                         
@@ -47,9 +74,9 @@ class InitialViewController: UIViewController {
                                 print("No points found")
                             }
                         })
-
+                        
                         self.fetchWeekGoalsForCurrentChallenge()
-
+                        
                         //Fetch The Share for the current Challenge
                         let currentChallenge = ChallengeController.shared.currentChallenge
                         if let stringURL = currentChallenge?.urlString {
@@ -78,7 +105,7 @@ class InitialViewController: UIViewController {
                                 }
                             })
                         }
-
+                        
                         //can Edit Week Goals
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
                             switch monthGoalState {
@@ -86,7 +113,7 @@ class InitialViewController: UIViewController {
                                 //check StartDate
                                 print("Checking for Start Day...")
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
-
+                                
                                 if startDay! > Date() {
                                     //after StartDay
                                     print("Challenge's StartDay after Today")
@@ -98,8 +125,8 @@ class InitialViewController: UIViewController {
                                     print("Current Challenge's StartDay:\(startDay!)")
                                     self.activeChallenge()
                                 }
-
-
+                                
+                                
                             case .noMonthGoal:
                                 self.addMonthGoal()
                             }
@@ -108,9 +135,9 @@ class InitialViewController: UIViewController {
                     case .isParticipantChallenge:
                         UserDefaults.standard.set(ChallengeState.isParticipantChallenge.rawValue, forKey: "ChallengeState")
                         let finishDay = ChallengeController.shared.currentChallenge?.finishDay
-
+                        
                         UserDefaults.standard.set(finishDay, forKey: "currentChallengeFinishDay")
-
+                        
                         let challengeFound = Notification(name: Notification.Name(rawValue: NotificationStrings.challengeFound), object: nil, userInfo: nil)
                         NotificationCenter.default.post(challengeFound)
                         
@@ -143,16 +170,16 @@ class InitialViewController: UIViewController {
                                 }
                             })
                         }
-
+                        
                         self.fetchWeekGoalsForCurrentChallenge()
-
+                        
                         //check StartDate
                         self.fetchUsersMonthGoalforActiveChallenge({ monthGoalState in
                             switch monthGoalState {
                             case .isMonthGoal:
                                 print("Checking for Start Day...")
                                 let startDay = ChallengeController.shared.currentChallenge?.startDay
-
+                                
                                 if startDay! > Date() {
                                     //after StartDay
                                     print("Challenge's StartDay after Today")
@@ -175,12 +202,12 @@ class InitialViewController: UIViewController {
                         UserDefaults.standard.set(nil, forKey: UserDefaultStrings.ShareRecordName)
                         UserDefaults.standard.set(0, forKey: UserDefaultStrings.ChallengeState)
                         self.createNewChallenge()
-
+                        
                     }
                 })
             case .noUser:
                 UserDefaults.standard.set(UserState.noUser.hashValue, forKey: "UserState")
-
+                
                 //create new User
                 self.createNewUser()
                 self.fetchChallenge({ challengeState in
@@ -336,14 +363,6 @@ class InitialViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
-            print("Second Notification Accepted")
-            self.presentAlert()
-        }
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
@@ -351,6 +370,22 @@ class InitialViewController: UIViewController {
     
     
     //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
     //MARK: Fetch
     
     ///Fetches the User if it exists
@@ -395,6 +430,7 @@ class InitialViewController: UIViewController {
         print("Looking for Zones in SharedDB...")
         CloudKitController.shared.fetchRecordZonesInTheSharedDataBase { (isSuccess, foundZones) in
             if isSuccess {
+                var challengeState = ChallengeState.noActiveChallenge
                 print("Zones found")
                 let dispachGroup = DispatchGroup()
                 foundZones?.forEach({ (zone) in
@@ -403,7 +439,8 @@ class InitialViewController: UIViewController {
                     ChallengeController.shared.fetchCurrentChallenge(inDataBase: CloudKitController.shared.shareDB, inZoneWithID: zone.zoneID, { (isSuccess) in
                         if isSuccess {
                             print("Challenge in ZoneFound")
-                            completion(.isParticipantChallenge)
+                            challengeState = .isParticipantChallenge
+                            completion(challengeState)
                         } else {
                             print("No Challenge in Zone Found")
                         }
@@ -412,7 +449,7 @@ class InitialViewController: UIViewController {
                 })
                 dispachGroup.notify(queue: .main, execute: {
                     if self.isNoChallengeFound {
-                        completion(.noActiveChallenge)
+                        completion(challengeState)
                     } else {
                         print("No Challenge Found")
                         self.isNoChallengeFound = true
@@ -502,7 +539,6 @@ class InitialViewController: UIViewController {
     
     ///Segue to addMonthGoal VC
     func addMonthGoal() {
-        //TODO: Add logic to segue directly to the monthGoal screen
         DispatchQueue.main.async {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             guard let navigationController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController, let onboarding = navigationController.viewControllers.first as? OnboardingViewController else {return}

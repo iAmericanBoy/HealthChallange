@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class DishCreatorViewController: UIViewController {
     
@@ -42,6 +43,7 @@ class DishCreatorViewController: UIViewController {
 //        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
         saveButton.setAttributedTitle(NSAttributedString(string: "Save Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         dishName.attributedText = NSAttributedString(string: "", attributes: FontController.tableViewRowFont)
+        monitorNetwork()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +72,24 @@ class DishCreatorViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }
 

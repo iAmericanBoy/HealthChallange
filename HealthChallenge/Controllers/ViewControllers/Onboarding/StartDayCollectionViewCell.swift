@@ -97,6 +97,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     //MARK: - Properties
     var activeChallenge: Challenge?
     var challengeStartDate = ChallengeController.shared.currentChallenge?.startDay
+    
     var calendarController = CalendarController()
     var dateRange: [Date] = []
     var delegate: StartDayCollectionViewCellDelegate?
@@ -153,10 +154,12 @@ class StartDayCollectionViewCell: UICollectionViewCell {
     
     func updateViewsForOwner() {
         calendarCollectionView?.allowsSelection = true
+        saveButton.isHidden = false
     }
     
     func updateViewsForParticipant() {
         calendarCollectionView?.allowsSelection = false
+        saveButton.isHidden = true
     }
     
     func updateViews() {

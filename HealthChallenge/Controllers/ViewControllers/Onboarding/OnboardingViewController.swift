@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import Network
 
 
 class OnboardingViewController: UIViewController, UINavigationControllerDelegate {
@@ -67,10 +68,14 @@ class OnboardingViewController: UIViewController, UINavigationControllerDelegate
         collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
         pageControl.currentPage = screenCount - 1
         setTitle()
+        
+        monitorNetwork()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        collectionView?.reloadData()
 
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
@@ -110,6 +115,7 @@ class OnboardingViewController: UIViewController, UINavigationControllerDelegate
         pageControl.currentPage = nextIndex
         setTitle()
         collectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        self.dismissAlert()
     }
     @objc fileprivate func handelPrevious() {
         let nextIndex = max(pageControl.currentPage - 1, 0)
@@ -120,6 +126,23 @@ class OnboardingViewController: UIViewController, UINavigationControllerDelegate
     }
     
     //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+    
     fileprivate func setTitle() {
         switch pageControl.currentPage {
         case 0:
@@ -226,9 +249,10 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
         case 1:
             //startDay
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "startDateCell", for: indexPath) as? StartDayCollectionViewCell
-            cell?.challengeState = challengeState
             cell?.delegate = self
             cell?.activeChallenge = ChallengeController.shared.currentChallenge
+            cell?.challengeState = challengeState
+
             
             return cell ?? UICollectionViewCell()
         case 2:
@@ -267,7 +291,7 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
 extension OnboardingViewController: SignUpCollectionViewCellDelegate {
     func save(user: User?, withName name: String, andUserPhoto photo: UIImage?, andLifeStyleValue value: Int) {
         let userPhoto = photo ?? UIImage(named: "stockPhoto")!
-
+        self.presentLoadingScreen()
         if let user = user {
             //update
             UserController.shared.update(user: user, withNewName: name, andWithNewPhoto: userPhoto, newStrengthValue: value) { (isSuccess) in
@@ -372,7 +396,7 @@ extension OnboardingViewController: UIImagePickerControllerDelegate {
 extension OnboardingViewController: StartDayCollectionViewCellDelegate {
     func save(challenge: Challenge?, withDate date: Date?) {
         guard let date = date else {return}
-        
+        self.presentLoadingScreen()
         if let currentChallenge = ChallengeController.shared.currentChallenge {
             //update the date
             ChallengeController.shared.update(challenge: currentChallenge, withNewStartDate: date) { (isSuccess) in
@@ -422,6 +446,7 @@ extension OnboardingViewController: GoalsCollectionViewCellDelegate {
     func save(monthGoal: Goal) {
         guard let userID = UserController.shared.appleUserID, let challengeID = ChallengeController.shared.currentChallenge?.recordID else {return}
         let dispatchGroup = DispatchGroup()
+        self.presentLoadingScreen()
         if let oldGoal = GoalController.shared.monthGoal {
             dispatchGroup.enter()
             GoalController.shared.remove(userRef: CKRecord.Reference(recordID: userID, action: .none), fromGoal: oldGoal ) { (isSuccess) in
@@ -445,6 +470,7 @@ extension OnboardingViewController: GoalsCollectionViewCellDelegate {
     }
     
     func save(newGoalWithName name: String, toReviewForPublic: Bool) {
+        self.presentLoadingScreen()
         GoalController.shared.createGoalWith(goalName: name, reviewForPublic: toReviewForPublic) { (isSuccess) in
             if isSuccess {
                 DispatchQueue.main.async {
@@ -457,6 +483,7 @@ extension OnboardingViewController: GoalsCollectionViewCellDelegate {
     func save(weeklyGoals: [Goal]) {
         guard let challenge = ChallengeController.shared.currentChallenge else {return}
         let dispatchGroup = DispatchGroup()
+        self.presentLoadingScreen()
         GoalController.shared.weeklyGoals.forEach { (goal) in
             dispatchGroup.enter()
             GoalController.shared.remove(challenge: challenge, fromGoal: goal, { (isSuccess) in
