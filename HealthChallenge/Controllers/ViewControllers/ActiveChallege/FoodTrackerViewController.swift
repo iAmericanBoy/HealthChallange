@@ -101,11 +101,14 @@ class FoodTrackerViewController: UIViewController {
             foodTrackerTableView.reloadData()
         } else {
             //create entry
-            FoodEntryController.shared.createFoodEntry { (isSuccess) in
+            FoodEntryController.shared.createFoodEntry(forDate: dateNotNil.stripTimestamp()) { (isSuccess) in
                 if isSuccess {
                     if let entry = FoodEntryController.shared.currentEntries[dateNotNil.stripTimestamp()] {
                         //display food
-                        self.dateFoodEntry = entry
+                        DispatchQueue.main.async {
+                            self.dateFoodEntry = entry
+                            self.foodTrackerTableView.reloadData()
+                        }
                     }
                 }
             }

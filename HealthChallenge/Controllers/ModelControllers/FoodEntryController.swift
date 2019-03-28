@@ -39,11 +39,12 @@ class FoodEntryController {
     
     //MARK: - CRUD
     /// creates a new Food Entry for today. also adds the foodEntry to the currentEntries Dictionary
+    /// - parameter date: The date of the new Food Entry
     /// - parameter completion: Handler for when the foodEntry was created and added.
     /// - parameter isSuccess: Confirms that the foodEntry was created and added.
-    func createFoodEntry(completion: @escaping (_ isSuccess: Bool) -> Void) {
+    func createFoodEntry(forDate date: Date,completion: @escaping (_ isSuccess: Bool) -> Void) {
         guard let userID = UserController.shared.appleUserID else {completion(false);return}
-        let newFoodEntry = FoodEntry(appleUserRef: CKRecord.Reference(recordID: userID, action: .deleteSelf))
+        let newFoodEntry = FoodEntry(appleUserRef: CKRecord.Reference(recordID: userID, action: .deleteSelf), date: date)
         
         let record = CKRecord(foodEntry: newFoodEntry)
         
