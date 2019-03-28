@@ -43,7 +43,7 @@ class Ingredient {
         self.ndbno = ndbno
         self.recordID = CKRecord.ID(recordName: UUID().uuidString)
     }
-    //build coming back from cloudkit
+    //record coming back from cloudkit
     init?(record: CKRecord){
      guard let name = record[Ingredient.nameKey] as? String,
         let ndbno = record[Ingredient.ndbnoKey] as? String,

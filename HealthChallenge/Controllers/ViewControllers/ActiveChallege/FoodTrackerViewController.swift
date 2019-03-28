@@ -80,6 +80,7 @@ class FoodTrackerViewController: UIViewController {
             guard let index = foodTrackerTableView.indexPathForSelectedRow, let cell = foodTrackerTableView.cellForRow(at: index) as? FoodTrackerCell else {return}
             if let destinationVC = segue.destination as? DishDetailViewController {
                 destinationVC.dish = cell.dishLanding
+                destinationVC.ingredients = cell.ingredients
             }
         }
     }
@@ -172,13 +173,29 @@ extension FoodTrackerViewController: UITableViewDataSource, UITableViewDelegate 
         
         switch indexPath.section {
         case 0:
-            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Breakfast})[indexPath.row]
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Breakfast})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
         case 1:
-            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Snack})[indexPath.row]
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Snack})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
         case 2:
-            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Lunch})[indexPath.row]
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Lunch})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
         case 3:
-            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Dinner})[indexPath.row]
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Dinner})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
         default:
             break
         }

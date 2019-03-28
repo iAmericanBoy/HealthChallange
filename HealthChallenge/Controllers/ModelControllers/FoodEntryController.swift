@@ -24,7 +24,7 @@ class FoodEntryController {
             if isSuccess {
                 print("\(self.currentEntries.count) Food Entires Found")
                 self.currentEntries.forEach({ (entry) in
-                    DishController.shared.fetchDishes(forFoodEntry: entry.value, completion: { (isSuccess) in
+                    DishController.shared.fetchDishes(forFoodEntry: entry.value, { (isSuccess) in
                         if isSuccess {
                             let notification = Notification(name: Notification.Name(NotificationStrings.dishesFound))
                             NotificationCenter.default.post(notification)

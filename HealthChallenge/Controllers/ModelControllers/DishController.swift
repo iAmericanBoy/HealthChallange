@@ -77,7 +77,7 @@ class DishController {
     }
     
     //Fetches all the Dishes of a Food Entry and appendes them to the dishes dictionary.
-    func fetchDishes(forFoodEntry foodEntry: FoodEntry, completion: @escaping (Bool) -> Void) {
+    func fetchDishes(forFoodEntry foodEntry: FoodEntry, _ completion: @escaping (Bool) -> Void) {
         let foodReference = CKRecord.Reference(recordID: foodEntry.recordID, action: .none)
         
         let predicate = NSPredicate(format: "%K CONTAINS %@", argumentArray: [Dish.foodEntriesRefsKey,foodReference])
@@ -96,6 +96,22 @@ class DishController {
             } else {
                 //no dishes found in the database.
                 completion(false)
+            }
+        }
+    }
+    
+    func fetchIngredients(forDish dish: Dish,_ completion: @escaping (_ isSuccess:Bool, _ foundIngredients: [Ingredient]) -> Void) {
+        let dishRef = CKRecord.Reference(recordID: dish.ckRecordID, action: .deleteSelf)
+        
+        let prdicate = NSPredicate(format: "%K == %@", argumentArray: [Ingredient.dishRefKey,dishRef])
+        let query = CKQuery(recordType: Ingredient.typeKey, predicate: prdicate)
+        CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
+            if isSuccess {
+                let ingredients = foundRecords.compactMap({ Ingredient(record: $0) })
+                completion(true, ingredients)
+            } else {
+                //no Ingredients found in the database.
+                completion(false,[])
             }
         }
     }
