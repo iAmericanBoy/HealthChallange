@@ -8,45 +8,9 @@
 
 import UIKit
 
-class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FoodTableViewCellDelegate, DishBuilderTableViewCellDelegate {
+class DishCreatorViewController: UIViewController {
     
-    //MARK: - Change measure Buttons
-    func addAmountButtonTapped(_ sender: DishBuilderTableViewCell) {
-        print("cell delegate made it to DishCreaterVC add")
-        guard let food = sender.dishBuilderLandingPad else { return }
-        guard let weight = food.weight else {return}
-        
-        sender.diffAmount += 1
-        let change = weight + sender.diffAmount
-        sender.diffLabel.text = "\(change) g"
-        let scalar = (change / 100)
-        if change >= 1 {
-            sender.reduceAmountButton.isEnabled = true
-        }
-        FoodController.sharedInstance.incrementNutrients(for: food, scalar: scalar)
-        //sender.updateViews()
-        
-    }
-    func reduceAmountButtonTapped(_ sender: DishBuilderTableViewCell) {
-        guard let food = sender.dishBuilderLandingPad else { return }
-        guard let weight = food.weight else {return}
-        
-        
-        
-        let change = weight + sender.diffAmount
-        if change < 0 {
-            sender.reduceAmountButton.isEnabled = false
-            return
-        } else {
-            sender.diffAmount -= 1
-        }
-        
-        sender.diffLabel.text = "\(change) g"
-        let scalar = (change / 100)
-        FoodController.sharedInstance.decrementNutrients(for: food, scalar: scalar)
-        //sender.updateViews()
-    }
-    
+    //MARK: - Outlets
     @IBOutlet weak var dishTableView: UITableView!
     @IBOutlet weak var dishName: UITextField!
     @IBOutlet weak var ingredientTableView: UITableView!
@@ -54,20 +18,17 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var mealSegment: UISegmentedControl!
     @IBOutlet weak var saveButton: UIButton!
     
-    
-    @IBOutlet weak var noDishConstraint: NSLayoutConstraint!
-    @IBOutlet weak var oneDishConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mutliDishConstraint: NSLayoutConstraint!
+    //MARK: - Properties
     var ingredients: [Food] = []
     var count = 0
     var searchTerm1 = ""  // paginate with same searchTerm
     let foods: [Food] = []
+    var foodEntry: FoodEntry?
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector("dismissKeyboard")))
-//
         searchBar.delegate = self
         dishTableView.dataSource = self
         self.ingredientTableView.delegate = self
@@ -75,11 +36,13 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
         self.dishTableView.tableFooterView = UIView()
         self.ingredientTableView.tableFooterView = UIView()
         dishTableView.reloadData()
+        
         // sets fonts
         self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
         saveButton.setAttributedTitle(NSAttributedString(string: "Save Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         dishName.attributedText = NSAttributedString(string: "", attributes: FontController.tableViewRowFont)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.ingredientTableView.reloadData()
@@ -94,16 +57,7 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
-    func buttonCellButtontapped(_ sender: FoodTableViewCell) {
-        guard let item = sender.itemLandingPad else {return}
-        //sender.itemLandingPad?.nutrients?.calories
-        ingredients.append(item)
-        dishTableView.reloadData()
-        
-        
-        //dump(ingredients)
-    }
-    
+    //MARK: - Actions
     @IBAction func saveButtonTapped1(_ sender: Any) {
         print("save button tapped")
         
@@ -121,22 +75,41 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
-    
+}
+
+//MARK: - UISearchBarDelegate
+extension DishCreatorViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
+        //searchBar.resignFirstResponder()
+        FoodController.food = []
+        FoodController.getFood(query: searchTerm) { (success) in
+            if success {
+                DispatchQueue.main.async {
+                    //searchBar.resignFirstResponder()
+                    self.ingredientTableView.reloadData()
+                }
+            }
+        }
+    }
+}
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+extension DishCreatorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //MARK: - top tableView
-        
+        //top tableView
         if tableView == ingredientTableView {
             
             return FoodController.food.count
             
-        //MARK: - bottom tableView
+            //bottom tableView
         }else {
             return ingredients.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //MARK: - bottom tableView
+        //bottom tableView
         
         if tableView == ingredientTableView {
             
@@ -148,20 +121,17 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
             return cell ?? UITableViewCell()
             
         }
-        //MARK: - Top tableView
-        
+        //Top tableView
         let dishCell = tableView.dequeueReusableCell(withIdentifier: "dishBuilderCell") as? DishBuilderTableViewCell
         
-        
-        let ingredientName1 = ingredients[indexPath.row] 
+        let ingredientName1 = ingredients[indexPath.row]
         dishCell?.delegate = self
         dishCell?.dishBuilderLandingPad = ingredientName1
         
         return dishCell ?? UITableViewCell()
         
     }
-    //MARK: - delete rows for top tableView DishContructor tableView
-    
+    //delete rows for top tableView DishContructor tableView
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
@@ -170,7 +140,8 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    //MARK: - Pagination tableView protocol method
+    
+    //Pagination tableView protocol method
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         if indexPath.row >= FoodController.food.count - 1 {
@@ -199,38 +170,48 @@ class DishCreatorViewController: UIViewController, UITableViewDelegate, UITableV
     }
 }
 
-//MARK: - SearchBar
-extension DishCreatorViewController: UISearchBarDelegate {
-    
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
-//        searchBar.resignFirstResponder()
-//        FoodController.food = []
-//        FoodController.getFood(query: searchTerm) { (success) in
-//            if success {
-//
-//                DispatchQueue.main.async {
-//
-//                    self.ingredientTableView.reloadData()
-//                }
-//            }
-//        }
-//    }
-    
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
-        //searchBar.resignFirstResponder()
-        FoodController.food = []
-        FoodController.getFood(query: searchTerm) { (success) in
-            if success {
-                
-                DispatchQueue.main.async {
-                    //searchBar.resignFirstResponder()
-                    self.ingredientTableView.reloadData()
-                
-            }
+//MARK: - FoodTableViewCellDelegate
+extension DishCreatorViewController: DishBuilderTableViewCellDelegate {
+    func addAmountButtonTapped(_ sender: DishBuilderTableViewCell) {
+        print("cell delegate made it to DishCreaterVC add")
+        guard let food = sender.dishBuilderLandingPad else { return }
+        guard let weight = food.weight else {return}
+        
+        sender.diffAmount += 1
+        let change = weight + sender.diffAmount
+        sender.diffLabel.text = "\(change) g"
+        let scalar = (change / 100)
+        if change >= 1 {
+            sender.reduceAmountButton.isEnabled = true
         }
+        FoodController.sharedInstance.incrementNutrients(for: food, scalar: scalar)
+        //sender.updateViews()
+        
+    }
+    func reduceAmountButtonTapped(_ sender: DishBuilderTableViewCell) {
+        guard let food = sender.dishBuilderLandingPad else { return }
+        guard let weight = food.weight else {return}
+        
+        let change = weight + sender.diffAmount
+        if change < 0 {
+            sender.reduceAmountButton.isEnabled = false
+            return
+        } else {
+            sender.diffAmount -= 1
+        }
+        
+        sender.diffLabel.text = "\(change) g"
+        let scalar = (change / 100)
+        FoodController.sharedInstance.decrementNutrients(for: food, scalar: scalar)
     }
 }
+
+//MARK: - FoodTableViewCellDelegate
+extension DishCreatorViewController: FoodTableViewCellDelegate {
+    func buttonCellButtontapped(_ sender: FoodTableViewCell) {
+        guard let item = sender.itemLandingPad else {return}
+        ingredients.append(item)
+        dishTableView.reloadData()
+    }
 }
+

@@ -17,6 +17,7 @@ class FoodTrackerViewController: UIViewController {
             dishDateLabel.attributedText = NSAttributedString(string: date.format(), attributes: FontController.disabledButtonFont)
         }
     }
+    var dateFoodEntry: FoodEntry?
     
     //MARK: - Outlets
     @IBOutlet weak var dishDateLabel: UILabel!
@@ -62,15 +63,13 @@ class FoodTrackerViewController: UIViewController {
     
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toDishVC" {
+        if segue.identifier == "toNewVC" {
+            if let destinationVC = segue.destination as? DishCreatorViewController {
+                destinationVC.foodEntry = dateFoodEntry
+            }
+
+        } else if segue.identifier == "toDetailVC" {
             
-//            if let index = foodTrackerTableView.indexPathForSelectedRow  {
-//                guard let destVC = segue.destination as? DishDetailViewController else {return}
-            
-                //                let type = dishesKeys[index.section]
-//                let dishToSend = DishController.shared.dishes[type]?[index.row]
-//                destVC.dish = dishToSend
-//            }
         }
     }
     
@@ -93,11 +92,16 @@ class FoodTrackerViewController: UIViewController {
         }
         if let entry = FoodEntryController.shared.currentEntries[dateNotNil.stripTimestamp()] {
             //display food
-
+            dateFoodEntry = entry
         } else {
             //create entry
             FoodEntryController.shared.createFoodEntry { (isSuccess) in
-                
+                if isSuccess {
+                    if let entry = FoodEntryController.shared.currentEntries[dateNotNil.stripTimestamp()] {
+                        //display food
+                        self.dateFoodEntry = entry
+                    }
+                }
             }
         }
     }

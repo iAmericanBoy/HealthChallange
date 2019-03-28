@@ -124,7 +124,7 @@
                                             <outlet property="mealName" destination="HnQ-rf-Obu" id="bjT-ge-TPR"/>
                                             <outlet property="sodiumLabel" destination="DZz-pD-BJR" id="TBA-Az-AwM"/>
                                             <outlet property="sugarsLabel" destination="eSj-CI-dPV" id="9O9-Mw-KKi"/>
-                                            <segue destination="PPC-aD-DMH" kind="show" identifier="toDishVC" id="gwl-dY-oO8"/>
+                                            <segue destination="PPC-aD-DMH" kind="show" identifier="toDetailVC" id="gwl-dY-oO8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -159,7 +159,7 @@
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="Add Meal"/>
                                 <connections>
-                                    <segue destination="CV6-Gf-aeX" kind="show" id="Iiy-5W-JLl"/>
+                                    <segue destination="CV6-Gf-aeX" kind="show" identifier="toNewVC" id="Iiy-5W-JLl"/>
                                 </connections>
                             </button>
                         </subviews>
