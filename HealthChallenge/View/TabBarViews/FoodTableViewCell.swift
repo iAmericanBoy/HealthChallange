@@ -17,12 +17,12 @@ class FoodTableViewCell: UITableViewCell {
             updateViews()
         }
     }
-//    var nutrientLandingPad: Nutrients? {
-//        didSet {
-//            updateNutrients()
-//        }
-//    }
-//
+    //    var nutrientLandingPad: Nutrients? {
+    //        didSet {
+    //            updateNutrients()
+    //        }
+    //    }
+    //
     //MARK: - CheckBox Button Image Change (Currently not being used)
     private func updateButton(isComplete: Bool) {
         let imageName = isComplete ? "complete" : "incomplete"
@@ -31,10 +31,10 @@ class FoodTableViewCell: UITableViewCell {
     
     func updateViews() {
         guard let unwrappedItem = itemLandingPad else {return}
-
+        
         nameLabel.attributedText = NSAttributedString(string: unwrappedItem.name, attributes: FontController.tableViewRowFont)
         updateNutrients(for: unwrappedItem)
-      
+        
     }
     
     @IBAction func ingredientCheckTapped1(_ sender: Any) {
@@ -66,7 +66,7 @@ class FoodTableViewCell: UITableViewCell {
                     self.sugarLabel.attributedText = NSAttributedString(string: "Sugar: \(roundedSugars) g", attributes: FontController.subTitleLabelFont)
                     self.carbLabel.attributedText = NSAttributedString(string: "Carbs: \(roundedCarbs) g", attributes: FontController.subTitleLabelFont)
                     self.fatLabel.attributedText = NSAttributedString(string: "Fats: \(roundedFats) g", attributes: FontController.subTitleLabelFont)
-                    self.sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) g", attributes: FontController.subTitleLabelFont)
+                    self.sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) mg", attributes: FontController.subTitleLabelFont)
                 }
             }
         })

@@ -42,7 +42,7 @@ class FoodTrackerCell: UITableViewCell {
         let roundedFats = Double(round(10*dish.totalfats)/10)
         let roundedSodium = Double(round(10*dish.totalsodium)/10)
         
-        caloriesLabel.attributedText = NSAttributedString(string: "Calories: \(roundedCalories) kcal", attributes: FontController.subTitleLabelFont)
+        caloriesLabel.attributedText = NSAttributedString(string: "Calories: \(roundedCalories) cal", attributes: FontController.subTitleLabelFont)
         sugarsLabel.attributedText = NSAttributedString(string: "Sugar: \(roundedSugars) g", attributes: FontController.subTitleLabelFont)
         carbsLabel.attributedText = NSAttributedString(string: "Carbs: \(roundedCarbs) g", attributes: FontController.subTitleLabelFont)
         fatsLabel.attributedText = NSAttributedString(string: "Fat: \(roundedFats) g", attributes: FontController.subTitleLabelFont)

@@ -8,6 +8,7 @@
 
 import UIKit
 import HealthKit
+import Network
 
 class WorkoutViewController: UIViewController {
     
@@ -46,6 +47,7 @@ class WorkoutViewController: UIViewController {
         findDateRange(from: challenge.startDay)
         setPoints()
         setSettingsButton()
+        monitorNetwork()
         // set delegates etc.
         calendarController.initializeCurrentCalendar()
         tableView.delegate = self
@@ -158,6 +160,24 @@ class WorkoutViewController: UIViewController {
         }else {
             return true
         }
+    }
+    
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }
 

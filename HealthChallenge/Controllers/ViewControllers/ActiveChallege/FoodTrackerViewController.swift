@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class FoodTrackerViewController: UIViewController {
     
@@ -30,6 +31,7 @@ class FoodTrackerViewController: UIViewController {
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.foodTrackerTableView.tableFooterView = UIView()
         date = Date()
         yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date().stripTimestamp())!
 
@@ -38,15 +40,19 @@ class FoodTrackerViewController: UIViewController {
         setSettingsButton()
         setupViews()
         updateViews()
+
         NotificationCenter.default.addObserver(self, selector: #selector(setProfileImage), name: NotificationStrings.profileImageChanged, object: nil)
     }
     
     @objc func setProfileImage() {
         let button = navigationItem.rightBarButtonItem?.customView as! UIButton
         button.setBackgroundImage(Settings.shared.imageView.image, for: .normal)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.foodTrackerTableView.contentInsetAdjustmentBehavior = .never
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
             self.presentAlert()
@@ -92,6 +98,23 @@ class FoodTrackerViewController: UIViewController {
     }
     
     //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+    
     func updateViews() {
         guard let dateNotNil = date else {return}
         
@@ -128,7 +151,7 @@ class FoodTrackerViewController: UIViewController {
     }
     
     func setupViews() {
-        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
+//        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
         nextButton.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
         previousButton.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
         addMealButton.setAttributedTitle(NSAttributedString(string: "Add Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
@@ -156,6 +179,35 @@ extension FoodTrackerViewController: UITableViewDataSource, UITableViewDelegate 
             return ""
         }
     }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 17, y: 13, width: tableView.frame.size.width, height: 18))
+        view.backgroundColor = #colorLiteral(red: 0.9753531814, green: 0.9753531814, blue: 0.9753531814, alpha: 1)
+        let label = UILabel(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: tableView.frame.size.width, height: view.frame.height))
+        var text = ""
+        
+        if section == 0 {
+            text = "Breakfast"
+        } else if section == 1 {
+            text = "Lunch"
+        } else if section == 2 {
+            text = "Dinner"
+        } else if section == 3 {
+            text = "Snack"
+        }
+        
+        
+        label.attributedText = NSAttributedString(string: text, attributes: FontController.labelTitleFont)
+        label.textColor = UIColor.black
+        view.addSubview(label)
+    
+       return view
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let recordName = dateFoodEntry?.recordID.recordName else {return 0}
         switch section {

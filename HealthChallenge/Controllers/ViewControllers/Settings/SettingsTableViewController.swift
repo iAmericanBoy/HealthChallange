@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class SettingsTableViewController: UITableViewController, PhotoSelectorViewControllerDelegate {
     
@@ -29,11 +30,13 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         deleteChallengeButton.setAttributedTitle(NSAttributedString(string: "Leave Challenge", attributes: FontController.tableViewRowFontRED), for: .normal)
         challengeOptionsButton.setAttributedTitle(NSAttributedString(string: "Challenge Options", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         shareButton.setAttributedTitle(NSAttributedString(string: "Share Challenge", attributes: FontController.tableViewRowFontGREEN), for: .normal)
-        
+
+        monitorNetwork()
         if let user = user {
             profilePhoto = user.photo
             usernameTextField.attributedText = NSAttributedString(string: "\(user.userName)", attributes: FontController.tableViewRowFont)
         }
+        
     }
     
     @IBAction func challengeOptionsButtonTapped(_ sender: Any) {
@@ -147,6 +150,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         }
     }
     
+
     func jumpToOnboarding(screen: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let navController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController,
@@ -165,6 +169,24 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
                 window.rootViewController = navController
             }
         }
+
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+
     }
 }
 

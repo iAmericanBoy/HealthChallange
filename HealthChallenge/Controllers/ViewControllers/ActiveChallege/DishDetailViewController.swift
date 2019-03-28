@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class DishDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -24,12 +25,20 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.dishTableView.tableFooterView = UIView()
         setSettingsButton()
         self.title = dish?.dishName
+
+        setSettingsButton()
+        monitorNetwork()
+  
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        self.dishTableView.contentInsetAdjustmentBehavior = .never     
          updateTotalCalories()
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
@@ -61,6 +70,24 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         cell?.ingredientLandingPad = ingredients[indexPath.row]
   
         return cell ?? UITableViewCell()
+    }
+    
+    //MARK: - Private Functions
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
     
 

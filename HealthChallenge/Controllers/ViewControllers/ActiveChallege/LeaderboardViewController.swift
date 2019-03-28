@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Network
 
 class LeaderboardViewController: UIViewController {
     
@@ -45,6 +46,7 @@ class LeaderboardViewController: UIViewController {
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
+    //MARK: - Private Functions
     func updateViews() {
         if (ChallengeController.shared.currentShare != nil) {
             users = UserController.shared.currentUsers
@@ -59,6 +61,23 @@ class LeaderboardViewController: UIViewController {
         points.sort { (leader, trailer) -> Bool in
             leader.totalPoints > trailer.totalPoints
         }
+    }
+    
+    func monitorNetwork() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+                self.dismissNetworkAlert()
+            } else {
+                print("No connection.")
+                self.presentNoNetworkAlert()
+            }
+            
+            print(path.isExpensive)
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }
 

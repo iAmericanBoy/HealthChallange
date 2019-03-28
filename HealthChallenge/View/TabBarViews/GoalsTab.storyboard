@@ -44,8 +44,8 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Tap row if you failed your goal)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37h-dq-GXr">
-                                    <rect key="frame" x="50" y="14" width="275" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Tap row if you failed your goal)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37h-dq-GXr">
+                                    <rect key="frame" x="0.0" y="14.5" width="375" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -54,8 +54,8 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="37h-dq-GXr" firstAttribute="centerY" secondItem="uK6-TM-1hV" secondAttribute="centerY" id="DoX-aV-fAr"/>
-                                <constraint firstAttribute="trailing" secondItem="37h-dq-GXr" secondAttribute="trailing" constant="50" id="UYe-ul-G77"/>
-                                <constraint firstItem="37h-dq-GXr" firstAttribute="leading" secondItem="uK6-TM-1hV" secondAttribute="leading" constant="50" id="lJ0-Ar-YoP"/>
+                                <constraint firstItem="37h-dq-GXr" firstAttribute="leading" secondItem="uK6-TM-1hV" secondAttribute="leading" id="InA-bs-TTe"/>
+                                <constraint firstAttribute="trailing" secondItem="37h-dq-GXr" secondAttribute="trailing" id="TEZ-fB-2V7"/>
                             </constraints>
                         </view>
                         <prototypes>

@@ -83,7 +83,7 @@ class NutrientsController {
                 //print(jsonNutrients)
                 
                 if let nutrient = Nutrients( dictionary: jsonNutrients, weight : ingredient.weight ?? 0) {
-                    guard let weight = ingredient.weight else {return}
+                    //guard let weight = ingredient.weight else {return}
 //                    print("=====nutrient======")
 //                    print("food: \(food.name)")
 //                    print("NDBNO: \(food.ndbno)")
