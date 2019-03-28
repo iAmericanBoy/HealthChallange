@@ -30,6 +30,8 @@ class FoodTrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         date = Date()
+        foodTrackerTableView.delegate = self
+        foodTrackerTableView.dataSource = self
         setSettingsButton()
         setupViews()
         updateViews()
@@ -40,6 +42,10 @@ class FoodTrackerViewController: UIViewController {
             print("Second Notification Accepted")
             self.presentAlert()
         }
+        NotificationCenter.default.addObserver(forName: Notification.Name(NotificationStrings.dishesFound), object: nil, queue: .main) { (_) in
+            self.foodTrackerTableView.reloadData()
+        }
+        foodTrackerTableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,6 +98,7 @@ class FoodTrackerViewController: UIViewController {
         if let entry = FoodEntryController.shared.currentEntries[dateNotNil.stripTimestamp()] {
             //display food
             dateFoodEntry = entry
+            foodTrackerTableView.reloadData()
         } else {
             //create entry
             FoodEntryController.shared.createFoodEntry { (isSuccess) in
@@ -113,6 +120,64 @@ class FoodTrackerViewController: UIViewController {
         dishDateLabel.attributedText = NSAttributedString(string: date!.format(), attributes: FontController.disabledButtonFont)
 
     }
+}
+
+//MARK: - UITableViewDataSource, UITableViewDelegate
+extension FoodTrackerViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Breakfast"
+        case 1:
+            return "Snack"
+        case 2:
+            return "Lunch"
+        case 3:
+            return "Dinner"
+        default:
+            return ""
+        }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let recordName = dateFoodEntry?.recordID.recordName else {return 0}
+        switch section {
+        case 0:
+            let breakfastDishes = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Breakfast})
+            return breakfastDishes?.count ?? 0
+        case 1:
+            return DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Snack}).count ?? 0
+        case 2:
+            return DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Lunch}).count ?? 0
+        case 3:
+            return DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Dinner}).count ?? 0
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let recordName = dateFoodEntry?.recordID.recordName else {return UITableViewCell()}
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dishCell", for: indexPath) as? FoodTrackerCell
+        
+        switch indexPath.section {
+        case 0:
+            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Breakfast})[indexPath.row]
+        case 1:
+            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Snack})[indexPath.row]
+        case 2:
+            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Lunch})[indexPath.row]
+        case 3:
+            cell?.dishLanding =  DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Dinner})[indexPath.row]
+        default:
+            break
+        }
+        return cell ?? UITableViewCell()
+    }
+    
+    
 }
 
 //MARK: - NavigationBarSupport
@@ -155,3 +220,4 @@ extension FoodTrackerViewController {
         }
     }
 }
+

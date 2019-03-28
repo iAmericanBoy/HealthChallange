@@ -33,7 +33,7 @@ class DishController {
         
         let dish = Dish(dishName: name, creator: CKRecord.Reference(recordID: userID, action: .none), ingredients: ingredients, dishType: dishType!, foodEntryReference: [CKRecord.Reference(recordID: foodEntry.recordID, action: .none)])
         
-        saveDishToCloudKit(dish: dish) { (success) in
+        saveDishToCloudKit(dish: dish, forFoodEntry: foodEntry) { (success) in
             if success {
                 print("😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛😛")
                 print("saved To CloudKit saved Successfully")
@@ -49,7 +49,7 @@ class DishController {
 
     }
     
-    func saveDishToCloudKit(dish: Dish, completion: @escaping (Bool) -> Void) {
+    func saveDishToCloudKit(dish: Dish, forFoodEntry foodEntry: FoodEntry, completion: @escaping (Bool) -> Void) {
         var recordsToSave: [CKRecord] = []
         
         dish.ingredients.forEach({ (ingredient) in
@@ -64,6 +64,11 @@ class DishController {
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: recordsToSave, purchasesToDelete: []) { (success, records, _) in
             if success {
+                if self.dishes[foodEntry.recordID.recordName]  == nil {
+                    self.dishes[foodEntry.recordID.recordName] = [dish]
+                } else {
+                    self.dishes[foodEntry.recordID.recordName]! += [dish]
+                }
                 completion(true)
             } else {
                 completion(false)
@@ -79,17 +84,15 @@ class DishController {
         let query = CKQuery(recordType: Dish.typeKey, predicate: predicate)
         CloudKitController.shared.findRecords(withQuery: query, inDataBase: CloudKitController.shared.publicDB) { (isSuccess, foundRecords) in
             if isSuccess {
-                let dispachGroup = DispatchGroup()
                 foundRecords.forEach({ (record) in
-                    dispachGroup.enter()
                     guard let dish = Dish(record: record) else {completion(false);return}
-                    
-                    self.dishes[foodEntry.recordID.recordName]?.append(dish)
-                    dispachGroup.leave()
+                    if self.dishes[foodEntry.recordID.recordName]  == nil {
+                        self.dishes[foodEntry.recordID.recordName] = [dish]
+                    } else {
+                        self.dishes[foodEntry.recordID.recordName]! += [dish]
+                    }
                 })
-                dispachGroup.notify(queue: .main, execute: {
-                    completion(true)
-                })
+                completion(true)
             } else {
                 //no dishes found in the database.
                 completion(false)

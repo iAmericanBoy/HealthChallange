@@ -19,6 +19,8 @@ class NotificationStrings {
     static let secondChallengeAccepted = "secondChallengeAccepted"
     /// "allUsersOfChallengeFound"
     static let allUsersOfChallengeFound = "allUsersOfChallengeFound"
+    /// "dishesFound"
+    static let dishesFound = "dishesFound"
 }
 
 class UserDefaultStrings {

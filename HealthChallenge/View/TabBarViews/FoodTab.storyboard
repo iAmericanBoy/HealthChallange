@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="183" width="375" height="435"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodTrackerCell" rowHeight="122" id="rEk-Qm-OKX" customClass="FoodTrackerCell" customModule="HealthChallenge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishCell" rowHeight="122" id="rEk-Qm-OKX" customClass="FoodTrackerCell" customModule="HealthChallenge" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="122"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rEk-Qm-OKX" id="zBd-Vx-q13">
@@ -183,6 +183,7 @@
                     <connections>
                         <outlet property="addMealButton" destination="CjA-6h-48c" id="oav-Lp-hrc"/>
                         <outlet property="dishDateLabel" destination="4g3-l4-umb" id="Xxv-jk-8Yy"/>
+                        <outlet property="foodTrackerTableView" destination="Voi-d4-gDE" id="z46-Ae-9Ws"/>
                         <outlet property="nextButton" destination="v3T-1p-qri" id="wrq-uF-LsN"/>
                         <outlet property="previousButton" destination="woa-d5-ili" id="NB0-Gt-PTL"/>
                     </connections>

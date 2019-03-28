@@ -111,7 +111,6 @@ class Dish {
     //MARK: - failable init() // builds record coming back from iCloud
     convenience init?(record: CKRecord) {
         guard let dishName = record[Dish.dishNameKey] as? String,
-            let photo = record[Dish.photoKey] as? CKAsset,
             let dishType = record[Dish.dishTypeKey] as? String,
             let timeStamp = record[Dish.timeStampKey] as? Date,
             let foodEntryRefs = record[Dish.foodEntriesRefsKey] as? [CKRecord.Reference],
@@ -132,11 +131,11 @@ class Dish {
         self.totalsodium = totalsodium
         self.ckRecordID = record.recordID
 
-        do {
-            try self.photoData = Data(contentsOf: ((imageAsset?.fileURL)!))
-        } catch {
-            print("unable to unwrap photoData from the CKAsset. This is the error:  \(error), \(error.localizedDescription)")
-        }
+//        do {
+//            try self.photoData = Data(contentsOf: ((imageAsset?.fileURL)!))
+//        } catch {
+//            print("unable to unwrap photoData from the CKAsset. This is the error:  \(error), \(error.localizedDescription)")
+//        }
     }
 }
 // save raw value to CK
