@@ -18,11 +18,19 @@ class FoodEntryController {
     /// An Array of FoodEntries of the user
     var currentEntries: [Date:FoodEntry] = [:]
     
-    //MARK: -INIT
+    //MARK: - init
     init() {
         fetchAllFoodEntries { (isSuccess) in
             if isSuccess {
-                print("\(self.currentEntries) Food Entires Found")
+                print("\(self.currentEntries.count) Food Entires Found")
+                self.currentEntries.forEach({ (entry) in
+                    DishController.shared.fetchDishes(forFoodEntry: entry.value, completion: { (isSuccess) in
+                        if isSuccess {
+                            print("Dishes  Found")
+
+                        }
+                    })
+                })
             }
         }
     }
