@@ -39,7 +39,7 @@ class DishCreatorViewController: UIViewController {
         dishTableView.reloadData()
         
         // sets fonts
-        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
+//        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
         saveButton.setAttributedTitle(NSAttributedString(string: "Save Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         dishName.attributedText = NSAttributedString(string: "", attributes: FontController.tableViewRowFont)
     }
