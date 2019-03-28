@@ -126,7 +126,7 @@ class FoodTrackerViewController: UIViewController {
     }
     
     func setupViews() {
-        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
+//        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
         nextButton.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
         previousButton.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
         addMealButton.setAttributedTitle(NSAttributedString(string: "Add Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
