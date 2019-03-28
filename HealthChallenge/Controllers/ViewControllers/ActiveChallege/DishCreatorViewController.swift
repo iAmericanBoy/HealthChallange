@@ -35,6 +35,7 @@ class DishCreatorViewController: UIViewController {
         self.ingredientTableView.dataSource = self
         self.dishTableView.tableFooterView = UIView()
         self.ingredientTableView.tableFooterView = UIView()
+        self.dishName.delegate = self
         dishTableView.reloadData()
         
         // sets fonts
@@ -60,15 +61,10 @@ class DishCreatorViewController: UIViewController {
     //MARK: - Actions
     @IBAction func saveButtonTapped1(_ sender: Any) {
         print("save button tapped")
-        
-        guard let name = dishName.text,
-            !name.isEmpty,
-            
-            ingredients.count > 0
-            else { return }
-        
-        DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients) { (success) in
-            if success {
+        guard let foodEntry = foodEntry else {return}
+        guard let name = dishName.text, !name.isEmpty, ingredients.count > 0 else { return }
+        DishController.shared.createDish(name: name, index: mealSegment.selectedSegmentIndex, ingredients: ingredients, inFoodEntry: foodEntry) { (isSuccess) in
+            if isSuccess {
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -91,6 +87,10 @@ extension DishCreatorViewController: UISearchBarDelegate {
                 }
             }
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -212,6 +212,14 @@ extension DishCreatorViewController: FoodTableViewCellDelegate {
         guard let item = sender.itemLandingPad else {return}
         ingredients.append(item)
         dishTableView.reloadData()
+    }
+}
+
+//MARK: - UITextFieldDelegate
+extension DishCreatorViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

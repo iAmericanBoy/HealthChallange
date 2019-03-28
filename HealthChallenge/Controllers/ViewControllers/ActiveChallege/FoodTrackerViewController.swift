@@ -67,7 +67,6 @@ class FoodTrackerViewController: UIViewController {
             if let destinationVC = segue.destination as? DishCreatorViewController {
                 destinationVC.foodEntry = dateFoodEntry
             }
-
         } else if segue.identifier == "toDetailVC" {
             
         }

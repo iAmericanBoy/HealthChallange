@@ -23,6 +23,6 @@ extension Dish {
         static let totalfatKey = "totalfats"
         static let totalSodiumKey = "totalsodium"
         static let ingredientRefsKey = "ingredientRefs"
-        static let foodEntriesRefsKey = "FoodEntries"
+        static let foodEntriesRefsKey = "foodEntries"
      
     }

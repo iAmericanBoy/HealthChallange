@@ -290,8 +290,8 @@
 		62D06806223AB6B200D5410B /* ActiveChallege */ = {
 			isa = PBXGroup;
 			children = (
-				62D067FE223AB68100D5410B /* DishCreatorViewController.swift */,
 				CE60FC6122403B260029386F /* FoodTrackerViewController.swift */,
+				62D067FE223AB68100D5410B /* DishCreatorViewController.swift */,
 				CE178FBB2242E68000C3EEB3 /* DishDetailViewController.swift */,
 				62D06800223AB68E00D5410B /* WorkoutViewController.swift */,
 				62D06807223AC65A00D5410B /* AddWorkoutsViewController.swift */,

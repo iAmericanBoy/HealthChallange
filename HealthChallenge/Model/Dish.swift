@@ -82,7 +82,7 @@ class Dish {
         self.timeStamp = timeStamp
         self.ckRecordID = ckRecordID
         self.creatorReference = creator
-        self.foodEntryRefs += foodEntryRefs
+        self.foodEntryRefs += foodEntryReference
 
         var totalcal:Double = 0
         var totalcarbs:Double = 0

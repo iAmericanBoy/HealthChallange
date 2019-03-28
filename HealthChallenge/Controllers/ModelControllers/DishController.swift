@@ -15,7 +15,7 @@ class DishController {
     
     var dishes: [String : [Dish]] = [:]
     
-    func createDish(name: String, index: Int, ingredients: [Food], completion: @escaping (Bool) -> Void) {
+    func createDish(name: String, index: Int, ingredients: [Food], inFoodEntry foodEntry: FoodEntry, completion: @escaping (Bool) -> Void) {
         var dishType: DishType?
         switch index {
         case 0:
@@ -29,9 +29,9 @@ class DishController {
             default:
             return
         }
-        guard let userID = UserController.shared.appleUserID, let todaysFoodEntry = FoodEntryController.shared.currentEntries[Date().stripTimestamp()] else {completion(false);return}
+        guard let userID = UserController.shared.appleUserID else {completion(false);return}
         
-        let dish = Dish(dishName: name, creator: CKRecord.Reference(recordID: userID, action: .none), ingredients: ingredients, dishType: dishType!, foodEntryReference: [CKRecord.Reference(recordID: todaysFoodEntry.recordID, action: .none)])
+        let dish = Dish(dishName: name, creator: CKRecord.Reference(recordID: userID, action: .none), ingredients: ingredients, dishType: dishType!, foodEntryReference: [CKRecord.Reference(recordID: foodEntry.recordID, action: .none)])
         
         saveDishToCloudKit(dish: dish) { (success) in
             if success {
