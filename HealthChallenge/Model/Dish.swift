@@ -18,6 +18,7 @@ class Dish {
     var dishName: String
     var creatorReference: CKRecord.Reference
     var ingredients: [Ingredient] = []
+    
     var photoData: Data? {
         didSet {
             let tempDirectory = NSTemporaryDirectory()
@@ -31,6 +32,7 @@ class Dish {
             imageAsset = CKAsset(fileURL: fileURL)
         }
     }
+    
     var dishType: DishType
     var timeStamp: Date = Date()
     var totalcal:Double = 0
@@ -41,14 +43,6 @@ class Dish {
     var ckRecordID: CKRecord.ID
     var foodEntryRefs: [CKRecord.Reference] = []
     
-    var ingredientRefs: [CKRecord.Reference] {
-        var returnArray: [CKRecord.Reference] = []
-        ingredients.forEach({ (food) in
-            let ckreference = CKRecord.Reference(recordID: food.recordID, action: .deleteSelf)
-            returnArray.append(ckreference)
-        })
-        return returnArray
-    }
     
     var imageAsset: CKAsset?
 //    {
@@ -117,7 +111,6 @@ class Dish {
     //MARK: - failable init() // builds record coming back from iCloud
     convenience init?(record: CKRecord) {
         guard let dishName = record[Dish.dishNameKey] as? String,
-            let ingredients = record[Dish.ingredientRefsKey] as? [CKRecord.Reference],
             let photo = record[Dish.photoKey] as? CKAsset,
             let dishType = record[Dish.dishTypeKey] as? String,
             let timeStamp = record[Dish.timeStampKey] as? Date,
@@ -161,7 +154,6 @@ extension CKRecord {
         self.init(recordType: Dish.typeKey, recordID: dish.ckRecordID)
         
         self.setValue(dish.dishName, forKey: Dish.dishNameKey)
-        self.setValue(dish.ingredientRefs, forKey: Dish.ingredientRefsKey)
         self.setValue(dish.creatorReference, forKey: Dish.creatorReferenceKey)
         self.setValue(dish.foodEntryRefs, forKey: Dish.foodEntriesRefsKey)
         self.setValue(dish.dishType.rawValue, forKey: Dish.dishTypeKey)

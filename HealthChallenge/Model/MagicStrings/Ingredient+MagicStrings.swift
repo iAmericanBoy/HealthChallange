@@ -11,6 +11,7 @@ import Foundation
 extension Ingredient {
     static let typeKey = "Ingredient"
     static let nameKey = "name"
+    static let dishRefKey = "dishRef"
     static let ndbnoKey = "ndbno"
     static let weightKey = "weight"
     static let measureKey = "measure"

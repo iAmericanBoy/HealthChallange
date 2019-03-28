@@ -53,14 +53,13 @@ class DishController {
         var recordsToSave: [CKRecord] = []
         
         dish.ingredients.forEach({ (ingredient) in
-            let dishRef = CKRecord.Reference(recordID: dish.ckRecordID, action: .none)
-            ingredient.dishRef = dishRef
+            ingredient.dishRef = CKRecord.Reference(recordID: dish.ckRecordID, action: .deleteSelf)
             let recordToSave = CKRecord(ingredient: ingredient)
             recordsToSave.append(recordToSave)
         })
         
-        let dishToSave = CKRecord(dish: dish) //< Freezes
-        print("Break points Suck")
+        let dishToSave = CKRecord(dish: dish)
+        
         recordsToSave.append(dishToSave)
         
         CloudKitController.shared.saveChangestoCK(inDataBase: CloudKitController.shared.publicDB, recordsToUpdate: recordsToSave, purchasesToDelete: []) { (success, records, _) in

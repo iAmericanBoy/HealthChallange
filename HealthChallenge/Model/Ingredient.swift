@@ -90,7 +90,7 @@ extension CKRecord {
     convenience init(ingredient: Ingredient) {
         self.init(recordType: Ingredient.typeKey, recordID: ingredient.recordID)
         
-        
+        self.setValue(ingredient.dishRef, forKey: Ingredient.dishRefKey)
         self.setValue(ingredient.name, forKey: Ingredient.nameKey)
         self.setValue(ingredient.ndbno, forKey: Ingredient.ndbnoKey)
         self.setValue(ingredient.weight, forKey: Ingredient.weightKey)

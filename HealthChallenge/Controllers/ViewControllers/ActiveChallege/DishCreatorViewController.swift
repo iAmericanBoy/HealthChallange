@@ -184,7 +184,7 @@ extension DishCreatorViewController: DishBuilderTableViewCellDelegate {
         if change >= 1 {
             sender.reduceAmountButton.isEnabled = true
         }
-        FoodController.sharedInstance.incrementNutrients(for: food, scalar: scalar)
+        IngredientController.sharedInstance.incrementNutrients(for: food, scalar: scalar)
         //sender.updateViews()
         
     }
@@ -202,7 +202,7 @@ extension DishCreatorViewController: DishBuilderTableViewCellDelegate {
         
         sender.diffLabel.text = "\(change) g"
         let scalar = (change / 100)
-        FoodController.sharedInstance.decrementNutrients(for: food, scalar: scalar)
+        IngredientController.sharedInstance.decrementNutrients(for: food, scalar: scalar)
     }
 }
 
