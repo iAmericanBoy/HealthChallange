@@ -118,15 +118,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ai9-Mo-VgH">
-                                                    <rect key="frame" x="138" y="7" width="98" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ai9-Mo-VgH">
+                                                    <rect key="frame" x="7" y="7" width="361" height="29.5"/>
                                                     <state key="normal" title="Save Changes"/>
                                                     <connections>
                                                         <action selector="saveChangesButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="8jt-2c-8u4"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Ai9-Mo-VgH" secondAttribute="trailing" constant="7" id="6M6-Ss-yyE"/>
+                                                <constraint firstItem="Ai9-Mo-VgH" firstAttribute="leading" secondItem="9ep-VY-3Tk" secondAttribute="leading" constant="7" id="Lg4-eK-FQp"/>
+                                                <constraint firstItem="Ai9-Mo-VgH" firstAttribute="top" secondItem="9ep-VY-3Tk" secondAttribute="top" constant="7" id="fE1-Zd-jhK"/>
+                                                <constraint firstAttribute="bottom" secondItem="Ai9-Mo-VgH" secondAttribute="bottom" constant="7" id="xV7-hE-qFB"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="cGe-pd-jub">
@@ -136,9 +141,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mos-VP-80P">
-                                                    <rect key="frame" x="129" y="7" width="117" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mos-VP-80P">
+                                                    <rect key="frame" x="7" y="7" width="361" height="29.5"/>
                                                     <state key="normal" title="Delete Challenge"/>
                                                     <connections>
                                                         <action selector="deleteChallengeButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="K09-eZ-IOf"/>
@@ -146,6 +150,12 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Mos-VP-80P" firstAttribute="top" secondItem="HLb-8U-g0Y" secondAttribute="top" constant="7" id="5mi-jX-4LX"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mos-VP-80P" secondAttribute="trailing" constant="7" id="StH-yE-V1g"/>
+                                                <constraint firstItem="Mos-VP-80P" firstAttribute="leading" secondItem="HLb-8U-g0Y" secondAttribute="leading" constant="7" id="U9D-Zu-Jon"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mos-VP-80P" secondAttribute="bottom" constant="7" id="ifh-kd-CZR"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="A2H-fH-RN8">
@@ -155,15 +165,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ygs-cz-nVj">
-                                                    <rect key="frame" x="138" y="7" width="98" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ygs-cz-nVj">
+                                                    <rect key="frame" x="7" y="7" width="361" height="29.5"/>
                                                     <state key="normal" title="Delete Profile"/>
                                                     <connections>
                                                         <action selector="deleteProfileButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="oNP-bQ-9dG"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Ygs-cz-nVj" secondAttribute="bottom" constant="7" id="0g6-kw-YJ7"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ygs-cz-nVj" secondAttribute="trailing" constant="7" id="719-31-am5"/>
+                                                <constraint firstItem="Ygs-cz-nVj" firstAttribute="leading" secondItem="rSs-DS-Ekf" secondAttribute="leading" constant="7" id="R4N-HN-VLa"/>
+                                                <constraint firstItem="Ygs-cz-nVj" firstAttribute="top" secondItem="rSs-DS-Ekf" secondAttribute="top" constant="7" id="xak-2G-H2N"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
