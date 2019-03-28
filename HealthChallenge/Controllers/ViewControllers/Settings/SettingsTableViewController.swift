@@ -23,6 +23,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         super.viewDidLoad()
         guard let user = user else { return }
         profilePhoto = user.photo
+        usernameTextField.delegate = self
         saveButton.setAttributedTitle(NSAttributedString(string: "Save Changes", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         deleteProfileButton.setAttributedTitle(NSAttributedString(string: "Delete Profile", attributes: FontController.tableViewRowFontRED), for: .normal)
         deleteChallengeButton.setAttributedTitle(NSAttributedString(string: "Leave Challenge", attributes: FontController.tableViewRowFontRED), for: .normal)
@@ -119,5 +120,13 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
                 window.rootViewController = navControl
             }
         }
+    }
+}
+
+//MARK: - UITextViewDelegate
+extension SettingsTableViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
