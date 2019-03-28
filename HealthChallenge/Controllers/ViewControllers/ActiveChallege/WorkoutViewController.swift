@@ -204,7 +204,7 @@ extension WorkoutViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         
         // Allow user to select past days to see their workouts.
-        if date.day <= today.day {
+        if date <= today {
             cell.isUserInteractionEnabled = true
         } else {
             cell.isUserInteractionEnabled = false
