@@ -233,7 +233,7 @@ class StartDayCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(saveButton)
         saveButton.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        saveButton.topAnchor.constraint(equalTo: (calendarCollectionView?.bottomAnchor)!).isActive = true
+        saveButton.bottomAnchor.constraint(equalTo: calendarCollectionView!.bottomAnchor).isActive = true
         saveButton.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.9).isActive = true
     }
     
