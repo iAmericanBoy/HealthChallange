@@ -44,6 +44,12 @@ extension UIViewController {
             dismiss(animated: false, completion: nil)
         }
     }
+    func dismissNoiCloudAlert() {
+        if let vc = self.presentedViewController, vc is UIAlertController {
+            guard let title = vc.title , title == "No iCloud Accound Found" else {return}
+            dismiss(animated: false, completion: nil)
+        }
+    }
     
     func presentNoNetworkAlert() {
         let alert = UIAlertController(title: "No Internet Connection", message: nil, preferredStyle: .alert)
@@ -54,6 +60,12 @@ extension UIViewController {
         loadingIndicator.startAnimating();
         
         alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func presentNoiCloudAlert() {
+        let alert = UIAlertController(title: "No iCloud Accound Found", message: "Seams like your not logged into iCloud. Please go to settings and check your iCloud settings", preferredStyle: .alert)
+        
         present(alert, animated: true, completion: nil)
     }
 }
