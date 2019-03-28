@@ -23,6 +23,7 @@ class LeaderboardViewController: UIViewController {
         updateViews()
         setSettingsButton()
         NotificationCenter.default.addObserver(self, selector: #selector(setProfileImage), name: NotificationStrings.profileImageChanged, object: nil)
+        monitorNetwork()
     }
     
     @objc func setProfileImage() {
