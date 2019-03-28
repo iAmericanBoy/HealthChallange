@@ -48,36 +48,26 @@ class Ingredient {
      guard let name = record[Ingredient.nameKey] as? String,
         let ndbno = record[Ingredient.ndbnoKey] as? String,
         let weight = record[Ingredient.weightKey] as? Double,
-        let measure = record[Ingredient.measureKey] as? String,
-        let scalar = record[Ingredient.scalarKey] as? Double,
-        let sugar = record[Ingredient.sugarKey] as? String,
-        let carbs = record[Ingredient.carbsKey] as? String,
-        let calories = record[Ingredient.caloriesKey] as? String,
-        let fats = record[Ingredient.fatsKey] as? String,
-        let sodium = record[Ingredient.sodiumKey] as? String,
-        let sugarGM = record[Ingredient.sugarGMKey] as? String,
-        let carbsGM = record[Ingredient.carbsGMKey] as? String,
-        let caloriesGM = record[Ingredient.caloriesGMKey] as? String,
-        let fatsGM = record[Ingredient.fatsGMKey] as? String,
-        let sodiumGM = record[Ingredient.sodiumGMKey] as? String else {return nil}
+        let measure = record[Ingredient.measureKey] as? String else {return nil}
         
         self.name = name
         self.ndbno = ndbno
         self.weight = weight
         self.measure = measure
-        self.scalar = scalar
-        self.sugar = sugar
-        self.carbs = carbs
-        self.calories = calories
-        self.fats = fats
-        self.sodium = sodium
-        self.sugarGM = sugarGM
-        self.carbsGM = carbsGM
-        self.caloriesGM = caloriesGM
-        self.fatsGM = fatsGM
-        self.sodiumGM = sodiumGM
+        self.scalar = record[Ingredient.scalarKey] as? Double
+        self.sugar = record[Ingredient.sugarKey] as? String
+        self.carbs = record[Ingredient.carbsKey] as? String
+        self.calories = record[Ingredient.caloriesKey] as? String
+        self.fats = record[Ingredient.fatsKey] as? String
+        self.sodium = record[Ingredient.sodiumKey] as? String
+        self.sugarGM = record[Ingredient.sugarGMKey] as? String
+        self.carbsGM = record[Ingredient.carbsGMKey] as? String
+        self.caloriesGM = record[Ingredient.caloriesGMKey] as? String
+        self.fatsGM = record[Ingredient.fatsGMKey] as? String
+        self.sodiumGM = record[Ingredient.sodiumGMKey] as? String
         self.recordID = record.recordID
-        self.nutrients = Nutrients(sugar: sugar, carbs: carbs, calories: calories, fats: fats, sodium: sodium, sugarGM: sugarGM, carbsGM: carbsGM, caloriesGM: caloriesGM, fatsGM: fatsGM, sodiumGM: sodiumGM)
+        
+        self.nutrients = Nutrients(sugar: sugar ?? "", carbs: carbs ?? "", calories: calories ?? "", fats: fats ?? "", sodium: sodium ?? "", sugarGM: sugarGM ?? "", carbsGM: carbsGM ?? "", caloriesGM: caloriesGM ?? "", fatsGM: fatsGM ?? "", sodiumGM: sodiumGM ?? "")
     }
     
     static func == (lhs: Ingredient, rhs: Ingredient) -> Bool {
