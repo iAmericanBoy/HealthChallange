@@ -66,7 +66,7 @@ class FoodTableViewCell: UITableViewCell {
                     self.sugarLabel.attributedText = NSAttributedString(string: "Sugar: \(roundedSugars) g", attributes: FontController.subTitleLabelFont)
                     self.carbLabel.attributedText = NSAttributedString(string: "Carbs: \(roundedCarbs) g", attributes: FontController.subTitleLabelFont)
                     self.fatLabel.attributedText = NSAttributedString(string: "Fats: \(roundedFats) g", attributes: FontController.subTitleLabelFont)
-                    self.sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) g", attributes: FontController.subTitleLabelFont)
+                    self.sodiumLabel.attributedText = NSAttributedString(string: "Sodium: \(roundedSodium) mg", attributes: FontController.subTitleLabelFont)
                 }
             }
         })
