@@ -14,7 +14,13 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var dishTableView: UITableView!
     
     //MARK: - sending ingredient names
-    var dish: Dish? 
+    var dish: Dish?
+    var ingredients: [Ingredient] = [] {
+        didSet{
+            loadViewIfNeeded()
+            self.dishTableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,19 +52,14 @@ class DishDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let ingredients = dish?.ingredients else { return 0 }
         
         return ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
        let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath) as? DishTableViewCell
-        guard let dish = dish else {return UITableViewCell()}
-            let ingredients = dish.ingredients
-//            else { return UITableViewCell() }
-        let ingredient = ingredients[indexPath.row]
-        cell?.ingredientLandingPad = ingredient
+        
+        cell?.ingredientLandingPad = ingredients[indexPath.row]
   
         return cell ?? UITableViewCell()
     }

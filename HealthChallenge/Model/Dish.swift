@@ -16,8 +16,9 @@ import CloudKit
 class Dish {
     
     var dishName: String
-    var creatorReference: CKRecord.Reference?
-    var ingredients: [Food] = []
+    var creatorReference: CKRecord.Reference
+    var ingredients: [Ingredient] = []
+    
     var photoData: Data? {
         didSet {
             let tempDirectory = NSTemporaryDirectory()
@@ -31,6 +32,7 @@ class Dish {
             imageAsset = CKAsset(fileURL: fileURL)
         }
     }
+    
     var dishType: DishType
     var timeStamp: Date = Date()
     var totalcal:Double = 0
@@ -39,15 +41,8 @@ class Dish {
     var totalfats:Double = 0
     var totalsodium:Double = 0
     var ckRecordID: CKRecord.ID
-    //
-    var ingredientRefs: [CKRecord.Reference] {
-        var returnArray: [CKRecord.Reference] = []
-        ingredients.forEach({ (food) in
-            let ckreference = CKRecord.Reference(recordID: food.recordID, action: .deleteSelf)
-            returnArray.append(ckreference)
-        })
-        return returnArray
-    }
+    var foodEntryRefs: [CKRecord.Reference] = []
+    
     
     var imageAsset: CKAsset?
 //    {
@@ -73,14 +68,16 @@ class Dish {
             photoData = newValue?.jpegData(compressionQuality: 0.5)
         }
     }
-    init(dishName: String, creator: CKRecord.Reference?, ingredients: [Food], dishType: DishType, timeStamp: Date, ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    
+    init(dishName: String, creator: CKRecord.Reference, ingredients: [Ingredient], dishType: DishType, timeStamp: Date = Date(), foodEntryReference: [CKRecord.Reference],ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.dishName = dishName
         self.ingredients = ingredients
         self.dishType = dishType
         self.timeStamp = timeStamp
         self.ckRecordID = ckRecordID
         self.creatorReference = creator
-        //
+        self.foodEntryRefs += foodEntryReference
+
         var totalcal:Double = 0
         var totalcarbs:Double = 0
         var totalsugars:Double = 0
@@ -114,10 +111,10 @@ class Dish {
     //MARK: - failable init() // builds record coming back from iCloud
     convenience init?(record: CKRecord) {
         guard let dishName = record[Dish.dishNameKey] as? String,
-            let ingredients = record[Dish.ingredientRefsKey] as? [CKRecord.Reference],
-            let photo = record[Dish.photoKey] as? CKAsset,
             let dishType = record[Dish.dishTypeKey] as? String,
             let timeStamp = record[Dish.timeStampKey] as? Date,
+            let foodEntryRefs = record[Dish.foodEntriesRefsKey] as? [CKRecord.Reference],
+            let creatorRef = record[Dish.creatorReferenceKey] as? CKRecord.Reference,
             let totalcal = record[Dish.totalCalKey] as? Double,
             let totalcarbs = record[Dish.totalCarbKey] as? Double,
             let totalsugars = record[Dish.totalsugarKey] as? Double,
@@ -125,8 +122,7 @@ class Dish {
             let totalsodium = record[Dish.totalSodiumKey] as? Double else {return nil}
         
         let dishTypeEnum = DishType(rawValue: dishType)
-        
-        self.init(dishName: dishName, creator: record[Goal.creatorReferenceKey] as? CKRecord.Reference, ingredients: [], dishType: dishTypeEnum!, timeStamp: timeStamp)
+        self.init(dishName: dishName, creator: creatorRef, ingredients: [], dishType: dishTypeEnum!, timeStamp: timeStamp, foodEntryReference: foodEntryRefs, ckRecordID: record.recordID)
         
         self.totalcal = totalcal
         self.totalcarbs = totalcarbs
@@ -134,12 +130,12 @@ class Dish {
         self.totalfats = totalfats
         self.totalsodium = totalsodium
         self.ckRecordID = record.recordID
-        //
-        do {
-            try self.photoData = Data(contentsOf: ((imageAsset?.fileURL)!))
-        } catch {
-            print("unable to unwrap photoData from the CKAsset. This is the error:  \(error), \(error.localizedDescription)")
-        }
+
+//        do {
+//            try self.photoData = Data(contentsOf: ((imageAsset?.fileURL)!))
+//        } catch {
+//            print("unable to unwrap photoData from the CKAsset. This is the error:  \(error), \(error.localizedDescription)")
+//        }
     }
 }
 // save raw value to CK
@@ -157,8 +153,8 @@ extension CKRecord {
         self.init(recordType: Dish.typeKey, recordID: dish.ckRecordID)
         
         self.setValue(dish.dishName, forKey: Dish.dishNameKey)
-        self.setValue(dish.ingredientRefs, forKey: Dish.ingredientRefsKey)
         self.setValue(dish.creatorReference, forKey: Dish.creatorReferenceKey)
+        self.setValue(dish.foodEntryRefs, forKey: Dish.foodEntriesRefsKey)
         self.setValue(dish.dishType.rawValue, forKey: Dish.dishTypeKey)
         self.setValue(dish.timeStamp, forKey: Dish.timeStampKey)
         self.setValue(dish.totalcal, forKey: Dish.totalCalKey)
@@ -166,7 +162,7 @@ extension CKRecord {
         self.setValue(dish.totalsugars, forKey: Dish.totalsugarKey)
         self.setValue(dish.totalfats, forKey: Dish.totalfatKey)
         self.setValue(dish.totalsodium, forKey: Dish.totalSodiumKey)
-        //
+
         if dish.imageAsset != nil {
             self.setValue(dish.imageAsset, forKey: Dish.photoKey)
         }

@@ -11,7 +11,6 @@ import Foundation
 extension Dish {
     
         static let typeKey = "Dish"
-       // static let DishRecordType = "Dish"
         static let dishNameKey = "dishName"
         static let creatorReferenceKey = "creatorReference"
         static let ingredientsKey = "ingredients"
@@ -23,6 +22,6 @@ extension Dish {
         static let totalsugarKey = "totalsugars"
         static let totalfatKey = "totalfats"
         static let totalSodiumKey = "totalsodium"
-        static let ingredientRefsKey = "ingredientRefs"
+        static let foodEntriesRefsKey = "foodEntries"
      
     }

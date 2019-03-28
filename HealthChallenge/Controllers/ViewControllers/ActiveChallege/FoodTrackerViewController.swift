@@ -6,49 +6,49 @@
 //  Copyright © 2019 Dominic Lanzillotta. All rights reserved.
 //
 
-// For timeStamp add 24hrs (86400 sec) to dishTimeReference VAR WHEN INCREMENT/ DECREMENT BUTTON ARE PRESSED AND GET THE
-//CURRENT TIME FROM STRIPTIMESTAMP THEN FILTER ALL OF THE DISHES BY THEIR TIMESTAMP and hide next day button if we are on the current day .
-
-
 import UIKit
 
-class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FoodTrackerViewController: UIViewController {
     
-    
-    var date = Date()
-    var dishTimeReference: Date = Date().stripTimestamp() {
+    //MARK: - Properties
+    var date: Date? {
         didSet {
-            dishDateLabel.attributedText = NSAttributedString(string: "\(dishTimeReference.format())", attributes: FontController.disabledButtonFont)
+            guard let date = date else {return}
+            dishDateLabel.attributedText = NSAttributedString(string: date.format(), attributes: FontController.disabledButtonFont)
         }
     }
+    var yesterday : Date?
+    var dateFoodEntry: FoodEntry?
     
+    //MARK: - Outlets
     @IBOutlet weak var dishDateLabel: UILabel!
     @IBOutlet weak var foodTrackerTableView: UITableView!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var addMealButton: UIButton!
     
-    var dishesKeys = {
-        DishController.shared.dishes.keys.map { $0 }
-    }()
-    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.foodTrackerTableView.reloadData()
+        date = Date()
+        yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date().stripTimestamp())!
+
+        foodTrackerTableView.delegate = self
+        foodTrackerTableView.dataSource = self
         setSettingsButton()
-        // Sets fonts
-        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
-        nextButton.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
-        previousButton.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
-        addMealButton.setAttributedTitle(NSAttributedString(string: "Add Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
+        setupViews()
+        updateViews()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        dishDateLabel.attributedText = NSAttributedString(string: "\(dishTimeReference.format())", attributes: FontController.disabledButtonFont)
-        self.foodTrackerTableView.reloadData()
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
             self.presentAlert()
         }
+        NotificationCenter.default.addObserver(forName: Notification.Name(NotificationStrings.dishesFound), object: nil, queue: .main) { (_) in
+            self.foodTrackerTableView.reloadData()
+        }
+        foodTrackerTableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,79 +56,156 @@ class FoodTrackerViewController: UIViewController, UITableViewDelegate, UITableV
         NotificationCenter.default.removeObserver(Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted))
     }
     
+    //MARK: - Actions
     @IBAction func previousDayTapped(_ sender: Any) {
-        // remove 86,400 seconds from the current day variable and then filter all of the dishes by this reference
-        dishTimeReference = dishTimeReference.addingTimeInterval(-86400)
-        foodTrackerTableView.reloadData()
+        guard let dateNotNil = date else {return}
+        date = Calendar.current.date(byAdding: .day, value: -1, to: dateNotNil)!
+        updateViews()
+
     }
     
-    // remove/ hide button if we are on the current day
     @IBAction func nextDayTapped(_ sender: Any) {
-        // add 86,400 seconds to current day var and then filter all of the dishes by this reference
-        
-        dishTimeReference = dishTimeReference.addingTimeInterval(86400)
-        
-        foodTrackerTableView.reloadData()
-        
-        
+        guard let dateNotNil = date else {return}
+        date = Calendar.current.date(byAdding: .day, value: 1, to: dateNotNil)
+        updateViews()
     }
     
-    func updateViews() {
-        //if tobenamed = today dont show next button
-        //reload tableview
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dishesKeys.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dishesKeys[section]
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let type = dishesKeys[section]
-        
-        let dishes = DishController.shared.dishes[type]!.filter({ $0.timeStamp.stripTimestamp() == dishTimeReference.stripTimestamp()})
-        return dishes.count
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "foodTrackerCell", for: indexPath) as? FoodTrackerCell
-        let type = dishesKeys[indexPath.section]
-        guard let dish = DishController.shared.dishes[type]?[indexPath.row] else { return UITableViewCell() }
-        
-//        let foodName = dish.dishName
-//        let nutrients = dish.ingredients
-        
-        if dish.timeStamp.stripTimestamp() == dishTimeReference {
-            cell?.dishLanding = dish
-            //cell?.nutrientLandingPad = nutrients
-        }
-        
-        //print("============FoodName===========")
-        //dump(foodName)
-        
-        return cell ?? UITableViewCell()
-    }
-    
+    //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        // iidoo
-        if segue.identifier == "toDishVC" {
-            
-            if let index = foodTrackerTableView.indexPathForSelectedRow  {
-                guard let destVC = segue.destination as? DishDetailViewController else {return}
-                
-                let type = dishesKeys[index.section]
-                let dishToSend = DishController.shared.dishes[type]?[index.row]
-                //destVC.bulletinBoard = sender as? String
-                destVC.dish = dishToSend
+        if segue.identifier == "toNewVC" {
+            if let destinationVC = segue.destination as? DishCreatorViewController {
+                destinationVC.foodEntry = dateFoodEntry
+            }
+        } else if segue.identifier == "toDetailVC" {
+            guard let index = foodTrackerTableView.indexPathForSelectedRow, let cell = foodTrackerTableView.cellForRow(at: index) as? FoodTrackerCell else {return}
+            if let destinationVC = segue.destination as? DishDetailViewController {
+                destinationVC.dish = cell.dishLanding
+                destinationVC.ingredients = cell.ingredients
             }
         }
     }
+    
+    //MARK: - Private Functions
+    func updateViews() {
+        guard let dateNotNil = date else {return}
+        
+        if dateNotNil.stripTimestamp() == Date().stripTimestamp() {
+            nextButton.isHidden = true
+        } else {
+            nextButton.isHidden = false
+        }
+        
+        //Only allow food to be entered for today or yesterday
+        if dateNotNil.stripTimestamp() < yesterday!.stripTimestamp() {
+            addMealButton.isHidden = true
+        } else {
+            addMealButton.isHidden = false
+        }
+        if let entry = FoodEntryController.shared.currentEntries[dateNotNil.stripTimestamp()] {
+            //display food
+            dateFoodEntry = entry
+            foodTrackerTableView.reloadData()
+        } else {
+            //create entry
+            FoodEntryController.shared.createFoodEntry(forDate: dateNotNil.stripTimestamp()) { (isSuccess) in
+                if isSuccess {
+                    if let entry = FoodEntryController.shared.currentEntries[dateNotNil.stripTimestamp()] {
+                        //display food
+                        DispatchQueue.main.async {
+                            self.dateFoodEntry = entry
+                            self.foodTrackerTableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func setupViews() {
+        self.navigationController?.navigationBar.titleTextAttributes = FontController.titleFont
+        nextButton.setAttributedTitle(NSAttributedString(string: ">", attributes: FontController.enabledButtonFont), for: .normal)
+        previousButton.setAttributedTitle(NSAttributedString(string: "<", attributes: FontController.enabledButtonFont), for: .normal)
+        addMealButton.setAttributedTitle(NSAttributedString(string: "Add Meal", attributes: FontController.tableViewRowFontGREEN), for: .normal)
+        dishDateLabel.attributedText = NSAttributedString(string: date!.format(), attributes: FontController.disabledButtonFont)
+
+    }
 }
 
+//MARK: - UITableViewDataSource, UITableViewDelegate
+extension FoodTrackerViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return "Breakfast"
+        case 1:
+            return "Snack"
+        case 2:
+            return "Lunch"
+        case 3:
+            return "Dinner"
+        default:
+            return ""
+        }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let recordName = dateFoodEntry?.recordID.recordName else {return 0}
+        switch section {
+        case 0:
+            let breakfastDishes = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Breakfast})
+            return breakfastDishes?.count ?? 0
+        case 1:
+            return DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Snack}).count ?? 0
+        case 2:
+            return DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Lunch}).count ?? 0
+        case 3:
+            return DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Dinner}).count ?? 0
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let recordName = dateFoodEntry?.recordID.recordName else {return UITableViewCell()}
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dishCell", for: indexPath) as? FoodTrackerCell
+        
+        switch indexPath.section {
+        case 0:
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Breakfast})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
+        case 1:
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Snack})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
+        case 2:
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Lunch})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
+        case 3:
+            let dish = DishController.shared.dishes[recordName]?.filter({ $0.dishType == DishType.Dinner})[indexPath.row]
+            cell?.dishLanding = dish
+            DishController.shared.fetchIngredients(forDish: dish!) { (_, ingredients) in
+                cell?.ingredients = ingredients
+            }
+        default:
+            break
+        }
+        return cell ?? UITableViewCell()
+    }
+    
+    
+}
+
+//MARK: - NavigationBarSupport
 extension FoodTrackerViewController {
     func setSettingsButton() {
         guard let navBar = self.navigationController?.navigationBar else { return }
@@ -168,3 +245,4 @@ extension FoodTrackerViewController {
         }
     }
 }
+

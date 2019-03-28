@@ -29,6 +29,7 @@ class FoodTrackerCell: UITableViewCell {
             addDish()
         }
     }
+    var ingredients: [Ingredient] = []
     
     func addDish() {
         guard let dish = dishLanding else {return}

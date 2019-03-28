@@ -9,11 +9,11 @@
 
 import Foundation
 
-class FoodController {
+class IngredientController {
     
     
-    static var food: [Food] = []
-    static let sharedInstance = FoodController()
+    static var food: [Ingredient] = []
+    static let sharedInstance = IngredientController()
     static let format = "json"
     static let sort = "r"   // n 
     static let max = 20
@@ -66,7 +66,7 @@ class FoodController {
                 return
             }
             
-            var foodFromJson: [Food] = []
+            var foodFromJson: [Ingredient] = []
             
             guard let jsonList :[String : Any] = jsonDictionary?["list"] as? [String : Any] else
             { print("jsonItems");  return }
@@ -80,9 +80,9 @@ class FoodController {
             for item in items {
                // print(items)
                 
-                if let newFood = Food(dictionary: item) {
+                if let newIngredient = Ingredient(dictionary: item) {
                     
-                    foodFromJson.append(newFood)
+                    foodFromJson.append(newIngredient)
                     //print(food)
                 }
             }
@@ -95,11 +95,11 @@ class FoodController {
         
     }
     
-    func incrementNutrients(for food: Food, scalar: Double){
+    func incrementNutrients(for ingredient: Ingredient, scalar: Double){
 
-        food.scalar = scalar
+        ingredient.scalar = scalar
         
-        guard let nutrients = food.nutrients else { return }
+        guard let nutrients = ingredient.nutrients else { return }
         if let calories = Double(nutrients.caloriesGM) {
             nutrients.calories = "\(calories * scalar)"
         }
@@ -118,10 +118,10 @@ class FoodController {
         }
     }
     
-    func decrementNutrients(for food: Food, scalar: Double) {
+    func decrementNutrients(for ingredient: Ingredient, scalar: Double) {
         
         
-        guard let nutrients = food.nutrients else { return }
+        guard let nutrients = ingredient.nutrients else { return }
         if let calories = Double(nutrients.caloriesGM) {
             nutrients.calories = "\(calories * scalar)"
         }

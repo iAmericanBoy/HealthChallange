@@ -19,7 +19,7 @@ class NutrientsController {
     // 204 = total Lipids, 205 = carbs, calories = 208, sugars = 269
     //--> // http://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=DEMO_KEY&nutrients=205&nutrients=204&nutrients=208&nutrients=269&ndbno=01007
     
-    func getNutrients(food: Food, completion: @escaping ((Bool) -> Void)) {
+    func getNutrients(ingredient: Ingredient, completion: @escaping ((Bool) -> Void)) {
         
         guard var url = baseURL else {return}
         
@@ -33,7 +33,7 @@ class NutrientsController {
         let sugars = URLQueryItem(name: "nutrients", value: "269")    // sugars
         let fats = URLQueryItem(name: "nutrients", value: "204")      //fats
         let sodium = URLQueryItem(name: "nutrients", value: "307")    //sodium
-        let ndbno = URLQueryItem(name: "ndbno", value: food.ndbno)
+        let ndbno = URLQueryItem(name: "ndbno", value: ingredient.ndbno)
         
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         
@@ -74,16 +74,16 @@ class NutrientsController {
             for foodDictionary in jsonFoods {
                 if let weight = foodDictionary["weight"] as? Double,   
                 let measure = foodDictionary["measure"] as? String {
-                    food.measure = measure
-                    food.weight = weight
+                    ingredient.measure = measure
+                    ingredient.weight = weight
                     //print(measure)
                 }
                 
                 guard let jsonNutrients = foodDictionary["nutrients"] as? [[String: Any]] else {print("got jsonNutrients"); return}
                 //print(jsonNutrients)
                 
-                if let nutrient = Nutrients( dictionary: jsonNutrients, weight : food.weight ?? 0) {
-                    guard let weight = food.weight else {return}
+                if let nutrient = Nutrients( dictionary: jsonNutrients, weight : ingredient.weight ?? 0) {
+                    guard let weight = ingredient.weight else {return}
 //                    print("=====nutrient======")
 //                    print("food: \(food.name)")
 //                    print("NDBNO: \(food.ndbno)")
@@ -105,7 +105,7 @@ class NutrientsController {
 //                    print("sodium: \(nutrient.sodiumGM)")
 //                    print("😫😫😫😫😫😫😫😫😫😫NutrientGM😫😫😫😫😫😫😫😫😫😫😫")
               
-                    food.nutrients = nutrient
+                    ingredient.nutrients = nutrient
                 }
             }
             

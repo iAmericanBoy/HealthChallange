@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Voi-d4-gDE">
-                                <rect key="frame" x="0.0" y="206.5" width="375" height="411.5"/>
+                                <rect key="frame" x="0.0" y="183" width="375" height="435"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="foodTrackerCell" rowHeight="122" id="rEk-Qm-OKX" customClass="FoodTrackerCell" customModule="HealthChallenge" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishCell" rowHeight="122" id="rEk-Qm-OKX" customClass="FoodTrackerCell" customModule="HealthChallenge" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="122"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rEk-Qm-OKX" id="zBd-Vx-q13">
@@ -124,17 +124,13 @@
                                             <outlet property="mealName" destination="HnQ-rf-Obu" id="bjT-ge-TPR"/>
                                             <outlet property="sodiumLabel" destination="DZz-pD-BJR" id="TBA-Az-AwM"/>
                                             <outlet property="sugarsLabel" destination="eSj-CI-dPV" id="9O9-Mw-KKi"/>
-                                            <segue destination="PPC-aD-DMH" kind="show" identifier="toDishVC" id="gwl-dY-oO8"/>
+                                            <segue destination="PPC-aD-DMH" kind="show" identifier="toDetailVC" id="gwl-dY-oO8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="dbP-ZY-3Em" id="MCd-TP-J6P"/>
-                                    <outlet property="delegate" destination="dbP-ZY-3Em" id="Z9Q-dV-wQt"/>
-                                </connections>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="B52-fV-RcW">
-                                <rect key="frame" x="0.0" y="139.5" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woa-d5-ili">
                                         <rect key="frame" x="0.0" y="0.0" width="116.5" height="30"/>
@@ -159,11 +155,11 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjA-6h-48c">
-                                <rect key="frame" x="290" y="171.5" width="85" height="18"/>
+                                <rect key="frame" x="290" y="148" width="85" height="18"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 <state key="normal" title="Add Meal"/>
                                 <connections>
-                                    <segue destination="CV6-Gf-aeX" kind="show" id="Iiy-5W-JLl"/>
+                                    <segue destination="CV6-Gf-aeX" kind="show" identifier="toNewVC" id="Iiy-5W-JLl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -187,7 +183,7 @@
                     <connections>
                         <outlet property="addMealButton" destination="CjA-6h-48c" id="oav-Lp-hrc"/>
                         <outlet property="dishDateLabel" destination="4g3-l4-umb" id="Xxv-jk-8Yy"/>
-                        <outlet property="foodTrackerTableView" destination="Voi-d4-gDE" id="CJd-LS-QIk"/>
+                        <outlet property="foodTrackerTableView" destination="Voi-d4-gDE" id="z46-Ae-9Ws"/>
                         <outlet property="nextButton" destination="v3T-1p-qri" id="wrq-uF-LsN"/>
                         <outlet property="previousButton" destination="woa-d5-ili" id="NB0-Gt-PTL"/>
                     </connections>
@@ -361,7 +357,7 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WdX-2T-fV4">
                                                                             <rect key="frame" x="0.0" y="0.0" width="300" height="79.5"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(name)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwZ-1f-c0I">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(name)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwZ-1f-c0I">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="37.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="300" id="8AD-82-U3j"/>
@@ -541,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0iL-I0-4Xm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4333.6000000000004" y="-0.44977511244377816"/>
+            <point key="canvasLocation" x="4742" y="18"/>
         </scene>
         <!--Ingredients-->
         <scene sceneID="A0a-QQ-pwB">
@@ -693,7 +689,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EJu-aX-2kl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3693.5999999999999" y="-703.89805097451278"/>
+            <point key="canvasLocation" x="4742" y="-700"/>
         </scene>
         <!--Food-->
         <scene sceneID="L7v-fY-d3L">
@@ -720,6 +716,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="food" width="50" height="50"/>
+        <image name="food" width="30" height="30"/>
     </resources>
 </document>
