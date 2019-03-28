@@ -13,7 +13,7 @@ class GoalTableViewCell: UITableViewCell {
     //MARK: - Outlets
     @IBOutlet weak var userCollectionView: UICollectionView!
     @IBOutlet weak var goalNameLabel: UILabel!
-    @IBOutlet weak var failGoalLabel: UILabel!
+    
     
     //MARK: - Properties
     var goal: Goal? {
@@ -40,6 +40,8 @@ class GoalTableViewCell: UITableViewCell {
         super.awakeFromNib()
         userCollectionView.delegate = self
         userCollectionView.dataSource = self
+        
+        
     }
     
     //MARK: - Private Functions
@@ -63,9 +65,10 @@ class GoalTableViewCell: UITableViewCell {
             gradient.add(gradientAnimation, forKey: nil)
             
         }
-        
         guard let goal = goal else {return}
-        goalNameLabel.text = goal.name
+        
+        goalNameLabel.attributedText = NSAttributedString(string: "\(goal.name)", attributes: FontController.tableViewRowFont)
+        
     }
 }
 

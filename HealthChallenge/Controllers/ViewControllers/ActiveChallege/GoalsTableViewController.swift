@@ -11,6 +11,9 @@ import UIKit
 
 class GoalsTableViewController: UITableViewController {
     
+    //MARK: - Outlets
+    @IBOutlet weak var rowFailLabel: UILabel!
+   
     //MARK: - Properties
     var monthIntRange: [Int] = []
     var weekOne: [Int] = []
@@ -25,12 +28,18 @@ class GoalsTableViewController: UITableViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         
+        //MARK: - Set Label Style titleFont
+        
+        rowFailLabel.attributedText = NSAttributedString(string: "Tap on row if you failed your goal.", attributes: FontController.tableViewRowFont)
+        
         findDateRange(from: ChallengeController.shared.currentChallenge!.startDay)
         
         weekOne = Array(monthIntRange[0...7])
         weekTwo = Array(monthIntRange[8...14])
         weekThree = Array(monthIntRange[15...21])
         weekFour = Array(monthIntRange[22...29])
+        
+        
     }
     
     //MARK: - Private Functions
@@ -46,6 +55,7 @@ class GoalsTableViewController: UITableViewController {
         
         monthIntRange = dayRange
     }
+    
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,8 +66,20 @@ class GoalsTableViewController: UITableViewController {
         return GoalController.shared.challengeGoals[section].count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Week Goals" : "Month Goal"
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 17, y: 17, width: tableView.frame.size.width, height: 18))
+        view.backgroundColor = #colorLiteral(red: 0.9753531814, green: 0.9753531814, blue: 0.9753531814, alpha: 1)
+        let label = UILabel(frame: CGRect(x: view.frame.origin.x, y: view.frame.origin.y, width: tableView.frame.size.width, height: view.frame.height))
+        var text = ""
+        section == 0 ? (text = "Week Goals") : (text = "Month Goals")
+        label.attributedText = NSAttributedString(string: text, attributes: FontController.labelTitleFont)
+        label.textColor = UIColor.black
+        view.addSubview(label)
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
