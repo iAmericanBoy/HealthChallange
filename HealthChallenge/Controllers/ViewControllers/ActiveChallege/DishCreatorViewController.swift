@@ -19,10 +19,10 @@ class DishCreatorViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     //MARK: - Properties
-    var ingredients: [Food] = []
+    var ingredients: [Ingredient] = []
     var count = 0
     var searchTerm1 = ""  // paginate with same searchTerm
-    let foods: [Food] = []
+    let foods: [Ingredient] = []
     var foodEntry: FoodEntry?
     
     //MARK: - LifeCycle

@@ -14,7 +14,7 @@ class DishBuilderTableViewCell: UITableViewCell {
     
     var diffAmount: Double = 0.0
     
-    var dishBuilderLandingPad: Food? {
+    var dishBuilderLandingPad: Ingredient? {
         didSet {
             updateViews()
         }

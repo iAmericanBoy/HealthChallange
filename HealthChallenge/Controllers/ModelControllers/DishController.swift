@@ -15,7 +15,7 @@ class DishController {
     
     var dishes: [String : [Dish]] = [:]
     
-    func createDish(name: String, index: Int, ingredients: [Food], inFoodEntry foodEntry: FoodEntry, completion: @escaping (Bool) -> Void) {
+    func createDish(name: String, index: Int, ingredients: [Ingredient], inFoodEntry foodEntry: FoodEntry, completion: @escaping (Bool) -> Void) {
         var dishType: DishType?
         switch index {
         case 0:
@@ -52,10 +52,10 @@ class DishController {
     func saveDishToCloudKit(dish: Dish, completion: @escaping (Bool) -> Void) {
         var recordsToSave: [CKRecord] = []
         
-        dish.ingredients.forEach({ (food) in
+        dish.ingredients.forEach({ (ingredient) in
             let dishRef = CKRecord.Reference(recordID: dish.ckRecordID, action: .none)
-            food.dishRef = dishRef
-            let recordToSave = CKRecord(food: food)
+            ingredient.dishRef = dishRef
+            let recordToSave = CKRecord(ingredient: ingredient)
             recordsToSave.append(recordToSave)
         })
         

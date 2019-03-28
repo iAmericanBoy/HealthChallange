@@ -17,7 +17,7 @@ class Dish {
     
     var dishName: String
     var creatorReference: CKRecord.Reference
-    var ingredients: [Food] = []
+    var ingredients: [Ingredient] = []
     var photoData: Data? {
         didSet {
             let tempDirectory = NSTemporaryDirectory()
@@ -75,7 +75,7 @@ class Dish {
         }
     }
     
-    init(dishName: String, creator: CKRecord.Reference, ingredients: [Food], dishType: DishType, timeStamp: Date = Date(), foodEntryReference: [CKRecord.Reference],ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(dishName: String, creator: CKRecord.Reference, ingredients: [Ingredient], dishType: DishType, timeStamp: Date = Date(), foodEntryReference: [CKRecord.Reference],ckRecordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         self.dishName = dishName
         self.ingredients = ingredients
         self.dishType = dishType

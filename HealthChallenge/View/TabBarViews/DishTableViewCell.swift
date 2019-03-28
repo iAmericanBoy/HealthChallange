@@ -18,7 +18,7 @@ class DishTableViewCell: UITableViewCell {
     @IBOutlet weak var fatsLabel: UILabel!
     @IBOutlet weak var sodiumLabel: UILabel!
     
-    var ingredientLandingPad: Food? {
+    var ingredientLandingPad: Ingredient? {
         didSet {
             populateCells()
         }

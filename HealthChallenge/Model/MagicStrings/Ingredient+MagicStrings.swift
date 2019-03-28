@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension Food {
-    static let typeKey = "Food"
+extension Ingredient {
+    static let typeKey = "Ingredient"
     static let nameKey = "name"
     static let ndbnoKey = "ndbno"
     static let weightKey = "weight"

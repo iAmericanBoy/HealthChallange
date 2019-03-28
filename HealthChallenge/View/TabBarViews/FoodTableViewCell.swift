@@ -12,7 +12,7 @@ class FoodTableViewCell: UITableViewCell {
     
     weak var delegate: FoodTableViewCellDelegate?
     
-    var itemLandingPad: Food? {
+    var itemLandingPad: Ingredient? {
         didSet {
             updateViews()
         }
@@ -43,14 +43,14 @@ class FoodTableViewCell: UITableViewCell {
         delegate?.buttonCellButtontapped(self)
         
     }
-    func updateNutrients(for food: Food) {
+    func updateNutrients(for ingredient: Ingredient) {
         
-        NutrientsController.instance.getNutrients(food: food, completion: { (success) in
+        NutrientsController.instance.getNutrients(ingredient: ingredient, completion: { (success) in
             if success {
                 DispatchQueue.main.async {
-                    guard let nutrientItem = food.nutrients,
-                        let weight = food.weight,
-                        let measure = food.measure
+                    guard let nutrientItem = ingredient.nutrients,
+                        let weight = ingredient.weight,
+                        let measure = ingredient.measure
                         else { return }
                     
                     self.amountLabel.attributedText = NSAttributedString(string: "\(weight) g", attributes: FontController.subTitleLabelFont)
