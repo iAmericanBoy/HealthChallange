@@ -21,6 +21,8 @@ class NotificationStrings {
     static let allUsersOfChallengeFound = "allUsersOfChallengeFound"
     /// "dishesFound"
     static let dishesFound = "dishesFound"
+    
+    static let profileImageChanged = Notification.Name("profileImageChanged")
 }
 
 class UserDefaultStrings {

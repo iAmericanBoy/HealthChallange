@@ -18,7 +18,7 @@ class Settings {
         return userPhoto
     }
     
-    /// Computed property of user photo into the round and scaled image.
+    // Computed property of user photo into the round and scaled image.
     var imageView: UIImageView {
         return roundImage(photoData)
     }

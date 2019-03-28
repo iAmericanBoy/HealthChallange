@@ -13,6 +13,8 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
     var user = UserController.shared.loggedInUser
     var profilePhoto: UIImage?
     
+    @IBOutlet weak var challengeOptionsButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteChallengeButton: UIButton!
     @IBOutlet weak var deleteProfileButton: UIButton!
@@ -25,6 +27,8 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         saveButton.setAttributedTitle(NSAttributedString(string: "Save Changes", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         deleteProfileButton.setAttributedTitle(NSAttributedString(string: "Delete Profile", attributes: FontController.tableViewRowFontRED), for: .normal)
         deleteChallengeButton.setAttributedTitle(NSAttributedString(string: "Leave Challenge", attributes: FontController.tableViewRowFontRED), for: .normal)
+        challengeOptionsButton.setAttributedTitle(NSAttributedString(string: "Challenge Options", attributes: FontController.tableViewRowFontGREEN), for: .normal)
+        shareButton.setAttributedTitle(NSAttributedString(string: "Share Challenge", attributes: FontController.tableViewRowFontGREEN), for: .normal)
         
         if let user = user {
             profilePhoto = user.photo
@@ -32,6 +36,13 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         }
     }
     
+    @IBAction func challengeOptionsButtonTapped(_ sender: Any) {
+        jumpToOnboarding(screen: 2)
+    }
+    
+    @IBAction func shareButtonTapped(_ sender: Any) {
+        jumpToOnboarding(screen: 5)
+    }
     
     @IBAction func saveChangesButtonTapped(_ sender: Any) {
         guard let username = usernameTextField.text, !username.isEmpty, let profilePhoto = profilePhoto else { return }
@@ -43,6 +54,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
             UserController.shared.update(user: user, withNewName: username, andWithNewPhoto: profilePhoto, newStrengthValue: strengthValue) { (isSuccess) in
                 if isSuccess {
                     DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NotificationStrings.profileImageChanged, object: nil)
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
@@ -52,6 +64,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
             UserController.shared.createUserWith(userName: username, userPhoto: profilePhoto, strengthValue: strengthValue) { (isSuccess) in
                 if isSuccess {
                     DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: NotificationStrings.profileImageChanged, object: nil)
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
@@ -77,7 +90,6 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-        
     }
     
     @IBAction func deleteChallengeButtonTapped(_ sender: Any) {
@@ -107,6 +119,7 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
     
     func photoSelectorViewControllerSelected(image: UIImage) {
         self.profilePhoto = image
+        //SHRINE TO FRANK
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -130,6 +143,26 @@ class SettingsTableViewController: UITableViewController, PhotoSelectorViewContr
         UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil) { (success) in
             if success {
                 window.rootViewController = navControl
+            }
+        }
+    }
+    
+    func jumpToOnboarding(screen: Int) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let navController = storyboard.instantiateViewController(withIdentifier: "onboardingV2") as? UINavigationController,
+            let onboarding = navController.viewControllers.first as? OnboardingViewController,
+            let window = UIApplication.shared.keyWindow,
+            let rootViewController = window.rootViewController else { return }
+        
+        onboarding.position = screen
+        onboarding.screenCount = 5
+        
+        navController.view.frame = rootViewController.view.frame
+        navController.view.layoutIfNeeded()
+    
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil) { (success) in
+            if success {
+                window.rootViewController = navController
             }
         }
     }

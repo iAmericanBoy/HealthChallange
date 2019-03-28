@@ -14,6 +14,7 @@ class OnboardingViewController: UIViewController, UINavigationControllerDelegate
     
     //MARK: - Outlets
     var collectionView: UICollectionView?
+    var position: Int?
     let imagePicker = UIImagePickerController()
     
     private let nextButton: UIButton = {
@@ -63,15 +64,24 @@ class OnboardingViewController: UIViewController, UINavigationControllerDelegate
         setupCollectionView()
         setupBottonControls()
         
-        let currentIndex = IndexPath(item: screenCount - 1, section: 0)
-        collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
+        if let position = position {
+            let currentIndex = IndexPath(item: position - 1, section: 0)
+            collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
+            pageControl.currentPage = screenCount - 1
+        } else {
+            let currentIndex = IndexPath(item: screenCount - 1, section: 0)
+            collectionView?.scrollToItem(at: currentIndex,at: .left,animated: false)
+        }
+
         pageControl.currentPage = screenCount - 1
         setTitle()
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         NotificationCenter.default.addObserver(forName: Notification.Name(rawValue: NotificationStrings.secondChallengeAccepted), object: nil, queue: .main) { (notification) in
             print("Second Notification Accepted")
             self.presentAlert()

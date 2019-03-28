@@ -38,7 +38,7 @@ class User {
             return UIImage(data: photoData)
         }
         set{
-            photoData = newValue?.jpegData(compressionQuality: 0.5)
+            photoData = newValue?.jpegData(compressionQuality: 1)
         }
     }
     
