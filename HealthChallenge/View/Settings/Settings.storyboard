@@ -109,10 +109,63 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="lom-iP-7JI">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Xmz-tP-Qq3">
+                                        <rect key="frame" x="0.0" y="473" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xmz-tP-Qq3" id="Nwz-Id-6UQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjF-pJ-QTs">
+                                                    <rect key="frame" x="7" y="7" width="361" height="29.5"/>
+                                                    <state key="normal" title="Challenge Options"/>
+                                                    <connections>
+                                                        <action selector="challengeOptionsButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="PUy-7A-BLv"/>
+                                                        <action selector="saveChangesButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="E1x-er-4hT"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bjF-pJ-QTs" firstAttribute="top" secondItem="Nwz-Id-6UQ" secondAttribute="top" constant="7" id="7dY-u8-zCK"/>
+                                                <constraint firstAttribute="bottom" secondItem="bjF-pJ-QTs" secondAttribute="bottom" constant="7" id="8j2-Rt-Eg1"/>
+                                                <constraint firstAttribute="trailing" secondItem="bjF-pJ-QTs" secondAttribute="trailing" constant="7" id="Kx1-Nt-GRl"/>
+                                                <constraint firstItem="bjF-pJ-QTs" firstAttribute="leading" secondItem="Nwz-Id-6UQ" secondAttribute="leading" constant="7" id="WD9-YS-JhL"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="jjt-Bg-TPJ">
+                                        <rect key="frame" x="0.0" y="517" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jjt-Bg-TPJ" id="ZIw-bV-Mxd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xqt-Ur-TWY">
+                                                    <rect key="frame" x="7" y="7" width="361" height="29.5"/>
+                                                    <state key="normal" title="Share"/>
+                                                    <connections>
+                                                        <action selector="deleteChallengeButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="mZA-kH-B7u"/>
+                                                        <action selector="deleteProfileButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="l1z-LM-eaR"/>
+                                                        <action selector="shareButtonTapped:" destination="WKL-77-GBe" eventType="touchUpInside" id="cEC-J7-11K"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Xqt-Ur-TWY" secondAttribute="trailing" constant="7" id="EtT-UC-Kyo"/>
+                                                <constraint firstItem="Xqt-Ur-TWY" firstAttribute="leading" secondItem="ZIw-bV-Mxd" secondAttribute="leading" constant="7" id="W8w-jb-5aG"/>
+                                                <constraint firstItem="Xqt-Ur-TWY" firstAttribute="top" secondItem="ZIw-bV-Mxd" secondAttribute="top" constant="7" id="lYh-b8-xy5"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xqt-Ur-TWY" secondAttribute="bottom" constant="7" id="n08-Vg-cxb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="jOG-t6-V3v">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="EuL-ot-wsG">
-                                        <rect key="frame" x="0.0" y="473" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="597" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EuL-ot-wsG" id="9ep-VY-3Tk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -135,7 +188,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="cGe-pd-jub">
-                                        <rect key="frame" x="0.0" y="517" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="641" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cGe-pd-jub" id="HLb-8U-g0Y">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -159,7 +212,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="A2H-fH-RN8">
-                                        <rect key="frame" x="0.0" y="561" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="685" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A2H-fH-RN8" id="rSs-DS-Ekf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -190,10 +243,12 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="challengeOptionsButton" destination="bjF-pJ-QTs" id="CAj-s1-ScU"/>
                         <outlet property="deleteChallengeButton" destination="Mos-VP-80P" id="0QG-SL-ikl"/>
                         <outlet property="deleteProfileButton" destination="Ygs-cz-nVj" id="JIX-iW-KIr"/>
                         <outlet property="lifestyleSegmentedControl" destination="ozc-Gs-TYq" id="8w6-DI-1yS"/>
                         <outlet property="saveButton" destination="Ai9-Mo-VgH" id="0WR-nX-SfX"/>
+                        <outlet property="shareButton" destination="Xqt-Ur-TWY" id="kQp-gr-liZ"/>
                         <outlet property="usernameTextField" destination="K7c-zB-mgl" id="sEz-hK-zsK"/>
                     </connections>
                 </tableViewController>

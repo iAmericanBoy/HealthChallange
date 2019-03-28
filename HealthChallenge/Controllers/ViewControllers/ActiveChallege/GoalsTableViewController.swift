@@ -28,6 +28,10 @@ class GoalsTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+
+        setSettingsButton()
+        
+        //MARK: - Set Label Style titleFont
         monitorNetwork()
         
         navigationController?.navigationBar.largeTitleTextAttributes = FontController.titleFont
@@ -41,7 +45,12 @@ class GoalsTableViewController: UITableViewController {
         weekThree = Array(monthIntRange[15...21])
         weekFour = Array(monthIntRange[22...29])
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(setProfileImage), name: NotificationStrings.profileImageChanged, object: nil)
+    }
+    
+    @objc func setProfileImage() {
+        let button = navigationItem.rightBarButtonItem?.customView as! UIButton
+        button.setBackgroundImage(Settings.shared.imageView.image, for: .normal)
     }
     
     //MARK: - Private Functions
