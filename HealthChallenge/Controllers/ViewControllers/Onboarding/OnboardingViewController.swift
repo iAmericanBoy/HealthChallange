@@ -484,6 +484,7 @@ extension OnboardingViewController: GoalsCollectionViewCellDelegate {
         GoalController.shared.createGoalWith(goalName: name, reviewForPublic: toReviewForPublic) { (isSuccess) in
             if isSuccess {
                 DispatchQueue.main.async {
+                    self.dismissAlert()
                     self.collectionView?.reloadData()
                 }
             }
