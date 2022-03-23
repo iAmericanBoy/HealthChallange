@@ -7,4 +7,4 @@ HealthGoal is a challenge driven iOS app that is on the Appstore. It allows user
 
 
 
-![My Remote Image](https://apps.apple.com/us/app/healthgoal/id1456677451)
+
